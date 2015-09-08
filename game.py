@@ -109,6 +109,7 @@ def clickboost1():
     inctkinter.set("+" + str(inc) + " money!")
     clickboost1.destroy()
 
+#BUTTONS AND LABELS (WIDGETS)
 checklabel1 = Label(master, textvariable=moneytkinter)
 checklabel1.grid(row=0, column=0, sticky=W)
 
@@ -117,6 +118,12 @@ mpslabel.grid(row=0, column=2, sticky=E)
 
 clickbutton = Button(master, textvariable=inctkinter, command=collectmoney)
 clickbutton.grid(row=1, column=1, rowspan=2)
+
+placeholder1 = Label(master, text='', width=3)
+placeholder1.grid(row=1, column=1)
+
+placeholder2 = Label(master, text='', width=3)
+placeholder2.grid(row=1, column=3)
 
 incbutton1 = Button(master, textvariable=autopricetkinter, width=29, command=deduction1)
 incbutton1.grid(row=1, column=0, sticky=W)
