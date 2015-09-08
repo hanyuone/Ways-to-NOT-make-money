@@ -1,6 +1,5 @@
 from Tkinter import *
 import math
-import time
 
 master = Tk()
 master.title("Money Sim")
