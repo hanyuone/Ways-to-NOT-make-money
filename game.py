@@ -110,44 +110,33 @@ def clickboost1():
     clickboost1.destroy()
 
 checklabel1 = Label(master, textvariable=moneytkinter)
-checklabel1.grid(row=0, sticky=W)
-checklabel1.pack()
+checklabel1.grid(row=0, column=0, sticky=W)
 
 mpslabel = Label(master, textvariable=mpstkinter)
-mpslabel.grid(row=0, sticky=E)
-mpslabel.pack()
+mpslabel.grid(row=0, column=2, sticky=E)
 
 clickbutton = Button(master, textvariable=inctkinter, command=collectmoney)
-clickbutton.grid(row=1, column=1)
-clickbutton.pack()
+clickbutton.grid(row=1, column=1, rowspan=2)
 
-incbutton1 = Button(master, textvariable=autopricetkinter, command=deduction1)
-incbutton1.grid(row=1, sticky=W)
-incbutton1.pack()
+incbutton1 = Button(master, textvariable=autopricetkinter, width=29, command=deduction1)
+incbutton1.grid(row=1, column=0, sticky=W)
 
-checklabel2 = Label(master, textvariable=autoclicktkinter)
-checklabel2.grid(row=2, sticky=W)
-checklabel2.pack()
+checklabel2 = Label(master, textvariable=autoclicktkinter, width=29)
+checklabel2.grid(row=2, column=0, sticky=W)
 
-incbutton2 = Button(master, textvariable=printpricetkinter, command=deduction2)
-incbutton2.grid(row=3, sticky=W)
-incbutton2.pack()
+incbutton2 = Button(master, textvariable=printpricetkinter, width=29, command=deduction2)
+incbutton2.grid(row=3, column=0, sticky=W)
 
-checklabel3 = Label(master, textvariable=printmoneytkinter)
-checklabel3.grid(row=4, sticky=W)
-checklabel3.pack()
+checklabel3 = Label(master, textvariable=printmoneytkinter, width=29)
+checklabel3.grid(row=4, column=0, sticky=W)
 
-clickboost1 = Button(master, text="Click Boost (Costs: $2000)", command=clickboost1)
-clickboost1.grid(row=1, sticky=E)
-clickboost1.pack()
+clickboost1 = Button(master, text="Click Boost (Costs: $2000)", width=29, command=clickboost1)
+clickboost1.grid(row=1, column=2, sticky=E)
 
-boostbutton1 = Button(master, text="Auto Clicker Boost (Costs: $5000)", command=boostauto1)
-boostbutton1.grid(row=2, sticky=E)
-boostbutton1.pack()
+boostbutton1 = Button(master, text="Auto Clicker Boost (Costs: $5000)", width=29, command=boostauto1)
+boostbutton1.grid(row=2, column=2, sticky=E)
 
-boostbutton2 = Button(master, text="Money Printer Boost (Costs: $100000)", command=boostauto2)
-boostbutton2.grid(row=3, sticky=E)
-boostbutton2.pack()
+boostbutton2 = Button(master, text="Money Printer Boost (Costs: $100000)", width=29, command=boostauto2)
+boostbutton2.grid(row=3, column=2, sticky=E)
 
 mainloop()
-
