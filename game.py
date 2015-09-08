@@ -58,8 +58,23 @@ def deduction1():
             automoney1()
 
 def automoney1():
-    global money, automoney, autoprice, autoclick
+    global money, automoney, autoprice, autoclick, printmoney
     money = money + autoclick
+    round(money, 2)
+    while mps > 10*(autoclick + printmoney):
+        if mps - 15 >= 10*(autoclick + printmoney):
+            printmoney = printmoney + 1        
+            printmoneytkinter.set("Money Printers Amount: " + str(int(float(int(printmoney2*10)/15))))
+            printprice = int(275*(math.pow(1.25,float(int(printmoney2*10)/15))))
+            printpricetkinter.set("Money Printer (Costs: $" + str(printprice) + ")")
+            continue
+        elif mps - 15 < 10*(autoclick + printmoney):
+            for a in range(int((10*(autoclick + printmoney))), mps):
+                autoclick = autoclick + 1
+                autoclicktkinter.set("Auto-Clickers Amount: " + str(int(autoclick2*10)))
+                autoprice = int(20*(math.pow(1.25,int(autoclick2*10))))
+                autopricetkinter.set("Auto-Clicker (Costs: $" + str(autoprice) + ")")
+            continue
     moneytkinter.set("Balance: $" + str(money))
     master.after(100, automoney1)
 
@@ -90,8 +105,23 @@ def deduction2():
             automoney2()
 
 def automoney2():
-    global money, printmoney
+    global money, autoclick, printmoney, printprice
     money = money + printmoney
+    round(money, 2)
+    while mps > 10*(autoclick + printmoney):
+        if mps - 15 >= 10*(autoclick + printmoney):
+            printmoney = printmoney + 1        
+            printmoneytkinter.set("Money Printers Amount: " + str(int(float(int(printmoney2*10)/15))))
+            printprice = int(275*(math.pow(1.25,float(int(printmoney2*10)/15))))
+            printpricetkinter.set("Money Printer (Costs: $" + str(printprice) + ")")
+            continue
+        elif mps - 15 < 10*(autoclick + printmoney):
+            for a in range(int((10*(autoclick + printmoney))), mps):
+                autoclick = autoclick + 1
+                autoclicktkinter.set("Auto-Clickers Amount: " + str(int(autoclick2*10)))
+                autoprice = int(20*(math.pow(1.25,int(autoclick2*10))))
+                autopricetkinter.set("Auto-Clicker (Costs: $" + str(autoprice) + ")")
+            continue
     moneytkinter.set("Balance: $" + str(money))
     master.after(100, automoney2)
         
