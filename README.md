@@ -1,9 +1,9 @@
 # Click-Incremental Game 1
 A basic Python 2.7.9 Cookie-Clicker style (incremental) game.
 
-Line Amount: 149 lines (and counting!)
+Line Amount: 178 lines (and counting!)
 
-Version: 0.1.1
+Version: 0.1.3
 
 Updates:
     
