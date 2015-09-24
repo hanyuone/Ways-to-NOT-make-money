@@ -1,6 +1,8 @@
 # Ways to NOT make money
 A basic Python 2.7.9 Cookie-Clicker style (incremental) game.
 
+NOTE: This game currently requires the user to download Python to run. An executable file will be posted sometime in the future!
+
 Line Amount: 260 lines (and counting!)
 
 Version: 0.2-2 (fixes required)
