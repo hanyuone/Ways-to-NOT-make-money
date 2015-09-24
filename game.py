@@ -4,44 +4,42 @@ import time
 
 master = Tk()
 master.title("Ways To NOT Earn Money")
-saveimportcheck = False
 
 #VARIABLES
-if saveimportcheck == False:
-    upgcheck1 = int(0)
-    upgcheck2 = int(0)
-    upgcheck3 = int(0)
-    clickupgcheck1 = int(0)
-    inc = int(1)
-    inctkinter = StringVar()
-    inctkinter.set("+" + str(inc) + " money!")
-    money = int(0)
-    moneytkinter = StringVar()
-    moneytkinter.set("Balance: $" + str(money))
-    autoclick = int(0)
-    autoclick2 = int(0)
-    autoclicktkinter = StringVar()
-    autoclicktkinter.set("Auto-Clickers Amount: " + str(int(autoclick2*10)))
-    autoprice = int(20*(math.pow(1.1,int(autoclick2*10))))
-    autopricetkinter = StringVar()
-    autopricetkinter.set("Auto-Clicker (Costs: $" + str(autoprice) + ")")
-    printmoney = int(0)
-    printmoney2 = int(0)
-    printmoneytkinter = StringVar()
-    printmoneytkinter.set("Money Printers Amount: " + str(int(float(printmoney2*10)/15)))
-    printprice = int(275*(math.pow(1.1,int(printmoney2*10))))
-    printpricetkinter = StringVar()
-    printpricetkinter.set("Money Printer (Costs: $" + str(printprice) + ")")
-    counterfeit = int(0)
-    counterfeit2 = int(0)
-    counterfeittkinter = StringVar()
-    counterfeittkinter.set("Counterfeit Companies Amount: " + str(int(float(counterfeit2*10)/221)))
-    counterfeitprice = int(9001*(math.pow(1.1,int(counterfeit2*10))))
-    counterfeitpricetkinter = StringVar()
-    counterfeitpricetkinter.set("Counterfeit Company (Costs: $" + str(counterfeitprice) + ")")
-    mps = int(0)
-    mpstkinter = StringVar()
-    mpstkinter.set("MPS: " + str(mps))
+upgcheck1 = int(0)
+upgcheck2 = int(0)
+upgcheck3 = int(0)
+clickupgcheck1 = int(0)
+inc = int(1)
+inctkinter = StringVar()
+inctkinter.set("+" + str(inc) + " money!")
+money = int(0)
+moneytkinter = StringVar()
+moneytkinter.set("Balance: $" + str(money))
+autoclick = int(0)
+autoclick2 = int(0)
+autoclicktkinter = StringVar()
+autoclicktkinter.set("Auto-Clickers Amount: " + str(int(autoclick2*10)))
+autoprice = int(20*(math.pow(1.1,int(autoclick2*10))))
+autopricetkinter = StringVar()
+autopricetkinter.set("Auto-Clicker (Costs: $" + str(autoprice) + ")")
+printmoney = int(0)
+printmoney2 = int(0)
+printmoneytkinter = StringVar()
+printmoneytkinter.set("Money Printers Amount: " + str(int(float(printmoney2*10)/15)))
+printprice = int(275*(math.pow(1.1,int(printmoney2*10))))
+printpricetkinter = StringVar()
+printpricetkinter.set("Money Printer (Costs: $" + str(printprice) + ")")
+counterfeit = int(0)
+counterfeit2 = int(0)
+counterfeittkinter = StringVar()
+counterfeittkinter.set("Counterfeit Companies Amount: " + str(int(float(counterfeit2*10)/221)))
+counterfeitprice = int(9001*(math.pow(1.1,int(counterfeit2*10))))
+counterfeitpricetkinter = StringVar()
+counterfeitpricetkinter.set("Counterfeit Company (Costs: $" + str(counterfeitprice) + ")")
+mps = int(0)
+mpstkinter = StringVar()
+mpstkinter.set("MPS: " + str(mps))
 
 #AUTO CLICKER
 def boostauto1():
@@ -164,7 +162,7 @@ def automoney():
             continue
         elif mps - 15 < 10*(autoclick + printmoney):
             for a in range(int((10*(autoclick + printmoney + counterfeit))), mps):
-                autoclick = autoclick + 1
+                autoclick = autoclick + 0.1
                 autoclicktkinter.set("Auto-Clickers Amount: " + str(int(autoclick2*10)))
                 autoprice = int(20*(math.pow(1.1,int(autoclick2*10))))
                 autopricetkinter.set("Auto-Clicker (Costs: $" + str(autoprice) + ")")
@@ -174,7 +172,7 @@ def automoney():
 
 #SAVING GAME
 def savegame():
-    x = ["auto", int(autoclick2*10), "print", int(float(int(printmoney2*10))/15), "counter", int(float(int(counterfeit2))/221), \
+    x = ["auto", int(float(autoclick2)*10), "print", int(float(int(printmoney2*10))/15), "counter", int(float(int(counterfeit2))/221), \
          "upg1", int(upgcheck1), "upg2", int(upgcheck2), "upg3", int(upgcheck3), "cupg1", int(clickupgcheck1), "money", int(money)]
     savefile = (str("_".join(str(v) for v in x))).encode("hex")
     f = open("savefile.txt", "w")
@@ -184,38 +182,33 @@ def savegame():
     msg = Message(toplevel1, text="Game saved!")
     
 #SAVE IMPORTS
-def saveimport():
-    g = open("savefile.txt")
-    g2 = str(g.read())
-    g2 = (g2.decode("hex")).split("_")
-    money = int(g2[15])
-    moneytkinter.set("Balance: $" + str(money))
-    autoclick = int((int(float(g2[1])/10)*int((2*g2[7]))) + int(float(g2[1])/10))
-    autoclick2 = int(float(g2[1])/10)
-    autoclicktkinter.set("Auto-Clickers Amount: " + str(int(autoclick2*10)))
-    autoprice = int(20*(math.pow(1.1,int(autoclick2*10))))
-    autopricetkinter.set("Auto-Clicker (Costs: $" + str(autoprice) + ")")
-    printmoney = int((int(float(g2[3])/10)*int((2*g2[9]))) + int(float(g2[3])/10))
-    printmoney2 = int(float(g2[3])/10)
-    printmoneytkinter.set("Money Printers Amount: " + str(int(float(printmoney2*10)/15)))
-    printprice = int(275*(math.pow(1.1,int(printmoney2*10))))
-    printpricetkinter.set("Money Printer (Costs: $" + str(printprice) + ")")
-    counterfeit = int((int(float(g2[5])/10)*int((2*g2[11]))) + int(float(g2[5])/10))
-    counterfeit2 = int(float(g2[5])/10)
-    counterfeittkinter.set("Counterfeit Companies Amount: " + str(int(float(counterfeit2*10)/221)))
-    counterfeitprice = int(9001*(math.pow(1.1,int(counterfeit2*10))))
-    counterfeitpricetkinter.set("Counterfeit Company (Costs: $" + str(counterfeitprice) + ")")
-    inc = int(1 + (int(g2[13])*2))
-    mps = int(10*(autoclick + printmoney + counterfeit))
-    mpstkinter.set("MPS: " + str(mps))
-    if mps >= 1:
-        automoney()
-    saveimportcheck = True
+g = open("savefile.txt")
+g2 = str(g.read())
+g2 = (g2.decode("hex")).split("_")
+money = int(g2[15])
+moneytkinter.set("Balance: $" + str(money))
+autoclick = int((int(float(g2[1])/10)*int(2*g2[7])) + int(float(g2[1])/10))
+autoclick2 = int(float(g2[1])/10)
+autoclicktkinter.set("Auto-Clickers Amount: " + str(int(g2[1])))
+autoprice = int(20*(math.pow(1.1,int(g2[1]))))
+autopricetkinter.set("Auto-Clicker (Costs: $" + str(int(20*(math.pow(1.1,int(g2[1]))))) + ")")
+printmoney = int((int(float(g2[3])/10)*int((2*g2[9]))) + int(float(g2[3])/10))
+printmoney2 = int(float(g2[3])/10)
+printmoneytkinter.set("Money Printers Amount: " + str(int(float(g2[3])/15)))
+printprice = int(275*(math.pow(1.1,int(g2[3]))))
+printpricetkinter.set("Money Printer (Costs: $" + str(int(275*(math.pow(1.1,int(g2[3]))))) + ")")
+counterfeit = int((int(float(g2[5])/10)*int((2*g2[11]))) + int(float(g2[5])/10))
+counterfeit2 = int(float(g2[5])/10)
+counterfeittkinter.set("Counterfeit Companies Amount: " + str(int(float(g2[5])/221)))
+counterfeitprice = int(9001*(math.pow(1.1,int(g2[5]*10))))
+counterfeitpricetkinter.set("Counterfeit Company (Costs: $" + str(int(9001*(math.pow(1.1,int(g2[5]*10))))) + ")")
+inc = int(1 + (int(g2[13])*2))
+inctkinter.set("+" + str(int(1 + int(g2[13])*2)) + " money!")
+mps = int(float(int(g2[1] + g2[3] + g2[5]))/100)
+mpstkinter.set("MPS: " + str(int(float(int(g2[1] + g2[3] + g2[5]))/100)))
+automoney()
 
-#BUTTONS AND LABELS
-saveimportbutton = Button(master, text="Import Save", width=35, command=saveimport)
-saveimportbutton.grid(row=6, column=4, sticky=E)
-
+#BUTTONS, LABELS AND ENTRIES
 checklabel1 = Label(master, textvariable=moneytkinter)
 checklabel1.grid(row=0, column=0, sticky=W)
 
