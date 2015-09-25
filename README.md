@@ -1,5 +1,5 @@
 # Ways to NOT make money
-A basic Python 2.7.9 Cookie-Clicker style (incremental) game.
+A basic Python 2.7.9 Cookie-Clicker style (incremental) game. If anyone can help me edit the game, please do so!
 
 NOTE: This game currently requires the user to download Python to run. An executable file will be posted sometime in the future!
 
@@ -20,3 +20,12 @@ Updates:
     0.2-1*: Changed the save system so that it included an extrenal savefile.
     
     0.2-2: Partially fixed the savefile.
+
+Things to add in the future:
+
+    *New Upgrades
+        -Bank Robbery
+        -New Currency
+        -Fort Knox Heist
+    *Make an .exe file of the game
+    *Make imports
