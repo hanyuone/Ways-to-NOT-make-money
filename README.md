@@ -1,5 +1,5 @@
 # Ways to NOT make money
-A basic Python 2.7.9 Cookie-Clicker style (incremental) game. If anyone can help me edit the game, please do so!
+A basic Python 2.7.9 Cookie-Clicker style (incremental) game. If anyone can help me edit the game, please message me so I can add you as a collaborator!
 
 NOTE: This game currently requires the user to download Python to run. An executable file will be posted sometime in the future!
 
