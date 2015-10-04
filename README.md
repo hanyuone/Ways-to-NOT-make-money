@@ -3,9 +3,9 @@ A basic Python 2.7.9 Cookie-Clicker style (incremental) game. If anyone can help
 
 NOTE: This game currently requires the user to download Python to run. An executable file will be posted sometime in the future!
 
-Line Amount: 260 lines (and counting!)
+Line Amount: 288 lines (and counting!)
 
-Version: 0.2-2 (fixes required)
+Version: 0.2.1
 
 Updates:
     
@@ -20,6 +20,8 @@ Updates:
     0.2-1*: Changed the save system so that it included an extrenal savefile.
     
     0.2-2: Partially fixed the savefile.
+    
+    0.2.1 (not to be confused with 0.2-1): Fully fixed the savefile, and fixed bugs.
 
 Things to add in the future:
 
