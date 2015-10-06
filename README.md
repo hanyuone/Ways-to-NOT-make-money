@@ -15,7 +15,7 @@ Updates:
     
     0.1.3: Fixed a bug in which some labels and buttons don't update.
     
-    0.2*: Added a save system (which needs fixing!), and a new building: Counterfeit Company (Costs $9001, Upgrade costs $2133748).
+    0.2.0*: Added a save system (which needs fixing!), and a new building: Counterfeit Company (Costs $9001, Upgrade costs $2133748).
     
     0.2-1*: Changed the save system so that it included an extrenal savefile.
     
@@ -23,7 +23,7 @@ Updates:
     
     0.2.1 (not to be confused with 0.2-1): Fully fixed the savefile, and fixed bugs.
     
-    0.2.2 (not to be confused with 0.2-2):
+    0.3.0:
         -Added a new upgrade, Better Click Boost (Costs $200000)
         -Changed the code for upgrades
 
