@@ -5,7 +5,7 @@ NOTE: This game currently requires the user to download Python to run. An execut
 
 Line Amount: 279 lines (and counting!)
 
-Version: 0.2.2
+Version: 0.3.0
 
 Updates:
     
