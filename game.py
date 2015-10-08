@@ -49,7 +49,6 @@ def boostauto2():
         boostbutton2.destroy()
         clickbooster2.grid(row=int(4 - (int(upgcheck1) + int(upgcheck2) + int(clickupgcheck1))), column=4, sticky=E)
         boostbutton3.grid(row=int(5 - (int(upgcheck1) + int(upgcheck2) + int(clickupgcheck1) + int(clickupgcheck2))), column=4, sticky=E)
-            
 def deduction2():
     global money, printmoney, printmoney2, printprice, mps, counterfeit
     if money < int(printprice):
@@ -78,7 +77,6 @@ def boostauto3():
         counterfeit = int(counterfeit*30)/10
         upgcheck3 = upgcheck3 + 1
         boostbutton3.destroy()
-
 def deduction3():
     global money, counterfeit, counterfeit2, counterfeitprice, printmoney, automoney, mps
     if money < int(autoprice):
@@ -100,7 +98,6 @@ def collectmoney():
     global inc, money
     money = money + inc
     moneytkinter.set("Balance: $" + str(money))
-
 def clickboost1():
     global money, inc, clickupgcheck1
     if money < 2000:
@@ -117,7 +114,6 @@ def clickboost1():
         boostbutton2.grid(row=int(3 - (int(upgcheck1) + int(clickupgcheck1))), column=4, sticky=E)
         clickbooster2.grid(row=int(4 - (int(upgcheck1) + int(upgcheck2) + int(clickupgcheck1))), column=4, sticky=E)
         boostbutton3.grid(row=int(5 - (int(upgcheck1) + int(upgcheck2) + int(clickupgcheck1) + int(clickupgcheck2))), column=4, sticky=E)
-        
 def clickboost2():
     global money, inc, mps, clickupgcheck2
     if money < 200000 or clickupgcheck1 == int(0):
