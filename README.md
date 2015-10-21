@@ -46,3 +46,6 @@ Things to add in the future:
     *Make imports
     *Add pictures
     *Make the game more interactive
+
+Images (REQUIRED):
+https://cloud.githubusercontent.com/assets/14177193/10632081/d41ab66e-782d-11e5-9d27-be9027e73699.gif
