@@ -17,7 +17,7 @@ Updates:
     
     0.1.3: Fixed a bug in which some labels and buttons don't update.
     
-    0.2.0*: Added a save system (which needs fixing!), and a new building: Counterfeit Company (Costs $9001, Upgrade costs $2133748).
+    0.2.0*: Added a save system (which needs fixing!), and a new building: Counterfeit Company (321 MPS, costs $9001).
     
     0.2-1*: Changed the save system so that it included an extrenal savefile.
     
@@ -28,6 +28,13 @@ Updates:
     0.3.0:
         -Added a new upgrade, Better Click Boost (Costs $200000)
         -Changed the code for upgrades
+    
+    0.4.0:
+        -Added new building, Sharemarket Crash (969 MPS, costs $42000)
+        -Changed the names of the upgrades (less bland)
+        -Ironed out a LOT of the bugs
+        -Changed the code for upgrades AGAIN
+        -Added background
 
 Things to add in the future:
 
@@ -37,3 +44,5 @@ Things to add in the future:
         -Fort Knox Heist
     *Make an .exe file of the game
     *Make imports
+    *Add pictures
+    *Make the game more interactive
