@@ -2,10 +2,12 @@ from Tkinter import *
 import time
 import math
 
+global animate
 master = Tk()
 master.title("Ways To NOT Earn Money")
-
+animate = 0
 img1 = PhotoImage(file="img1.gif")
+number1 = 1
 
 #AUTO CLICKER
 def boostauto1h1():
@@ -152,9 +154,13 @@ def deduction4():
         
 #CLICKS
 def collectmoney():
-    global inc, money
+    global inc, money, animate
     money = money + inc
     moneytkinter.set("Balance: $" + str(money))
+    animate += 1
+    if animate > 3:
+        animate = 1
+    animationthingy()
 def clickboost1():
     global money, inc, clickupgcheck1
     if money < 2000:
@@ -335,8 +341,8 @@ moneylabel.grid(row=0, column=0, sticky=W)
 mpslabel = Label(master, textvariable=mpstkinter)
 mpslabel.grid(row=0, column=2, sticky=E)
 
-clickbutton = Button(master, textvariable=inctkinter, height=3, command=collectmoney)
-clickbutton.grid(row=1, column=1, rowspan=4)
+clickbutton = Button(master, textvariable=inctkinter, height=6, width=18, command=collectmoney)
+clickbutton.grid(row=2, column=1, rowspan=4)
 
 incbutton1 = Button(master, textvariable=autopricetkinter, width=35, command=deduction1)
 incbutton1.grid(row=1, column=0, sticky=W)
@@ -389,4 +395,29 @@ boostbutton4.grid(row=int(7 - (int(upgcheck1h1) + int(upgcheck1h2) + int(upgchec
 savebutton = Button(master, text="Save Game", width=10, command=savegame)
 savebutton.grid(row=9, column=2, sticky=E)
 
+Animation1 = PhotoImage(file="Animation1.gif")
+Animation2 = PhotoImage(file="Animation2.gif")
+Animation3 = PhotoImage(file="Animation3.gif")
+
+
+from PIL import *
+
+
+def animationthingy():
+    if animate == 1:
+        animation1 = Label(master, image=Animation1)
+        animation1.place(x=253, y=0)
+        animation1.image = Animation1
+
+    elif animate == 2: 
+        animation2 = Label(master, image=Animation2)
+        animation2.place(x=253, y=0)
+        animation2.image = Animation2
+    elif animate == 3:
+        animation3 = Label(master, image=Animation3)
+        animation3.place(x=253, y=0)
+        animation3.image = Animation3
+    else:
+        print " "
 mainloop()
+
