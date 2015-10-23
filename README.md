@@ -10,6 +10,7 @@ Line Amount: 424 lines (and counting!)
 Version: 0.5.0
 
 Updates:
+
      0.5.0: (I believe that this update deserves a 0.5.0)
             -Downloading images is no longer required (Thanks to Git Hub for Desktop)
             -Simple animation added. (To be improved)
