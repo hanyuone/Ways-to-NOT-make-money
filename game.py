@@ -350,13 +350,13 @@ incbutton2.grid(row=3, column=0, sticky=W)
 checklabel2 = Label(master, textvariable=printmoneytkinter, width=35)
 checklabel2.grid(row=4, column=0, sticky=W)
 
-incbutton3 = Button(master, textvariable=counterfeitpricetkinter, width=35, command=deduction4)
+incbutton3 = Button(master, textvariable=counterfeitpricetkinter, width=35, command=deduction3)
 incbutton3.grid(row=5, column=0, sticky=W)
 
 checklabel3 = Label(master, textvariable=counterfeittkinter, width=35)   
 checklabel3.grid(row=6, column=0, sticky=W)
 
-incbutton4 = Button(master, textvariable=sharepricetkinter, width=35, command=deduction3)
+incbutton4 = Button(master, textvariable=sharepricetkinter, width=35, command=deduction4
 incbutton4.grid(row=7, column=0, sticky=W)
 
 checklabel4 = Label(master, textvariable=sharecrashtkinter, width=35)
