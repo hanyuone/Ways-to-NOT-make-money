@@ -5,9 +5,9 @@ Also, if you have downloaded this game and find any bugs, please post them to th
 
 NOTE: This game currently requires the user to download Python to run. An executable file will be posted sometime in the future!
 
-Line Amount: 279 lines (and counting!)
+Line Amount: 396 lines (and counting!)
 
-Version: 0.3.0
+Version: 0.4.0
 
 Updates:
     
