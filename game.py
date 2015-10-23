@@ -134,7 +134,7 @@ def boostauto4():
         boostbutton4.destroy()
 def deduction4():
     global money, sharecrash, sharecrash2, shareprice
-    if moeny < int(shareprice):
+    if money < int(shareprice):
         toplevel = Toplevel()
         cannotafford4 = Message(toplevel, text="You cannot afford this.")
         cannotafford.pack()
