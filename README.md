@@ -7,11 +7,11 @@ NOTE: This game currently requires the user to download Python to run. An execut
 
 Line Amount: 424 lines (and counting!)
 
-Version: 0.5.0
+Version: 0.4.1
 
 Updates:
 
-     0.5.0: (I believe that this update deserves a 0.5.0)
+     0.4.1:
             -Downloading images is no longer required (Thanks to Git Hub for Desktop)
             -Simple animation added. (To be improved)
             -Increased +Money Size (Easier for touchscreen users.
@@ -45,20 +45,6 @@ Updates:
     
 
     
-   
-    
-     
-    
-
-
-
-    
-
-    
-
-    
-   
-
 Things to add in the future:
 
     *New Upgrades
