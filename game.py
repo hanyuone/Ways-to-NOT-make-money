@@ -286,7 +286,7 @@ def automoney():
     master.after(100, automoney)
     #gold                                          Note that you must have > 0 MPS to start gold production
     import random
-    random1 = (random.randint(1, 1500))            #Note. Change random1 = (random.randint(1, 600)) to change frequency of gold.
+    random1 = (random.randint(1, 800))            #Note. Change random1 = (random.randint(1, 600)) to change frequency of gold.
     if random1 == 1:                              #note make more random gold placement with random module
         random2 = (random.randint(1,10))
         gold = PhotoImage(file="gold.gif")
@@ -338,7 +338,7 @@ def automoney():
             b10.place(x=340, y=180)
             b10.image = gold
 
-        random3 = (random.randint(1,300))
+        random3 = (random.randint(1,200))
         if random3 == 1:
             b1.destroy()
             b2.destroy()
