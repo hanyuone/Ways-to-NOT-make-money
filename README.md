@@ -33,7 +33,7 @@ Updates:
 
     0.2-2: Partially fixed the savefile.
     
-    0.2-1*: Changed the save system so that it included an extrenal savefile.
+    0.2-1*: Changed the save system so that it included an external savefile.
     
     0.2.0*: Added a save system (which needs fixing!), and a new building: Counterfeit Company (321 MPS, costs $9001).
 
@@ -56,5 +56,3 @@ Things to add in the future:
     *Add pictures
     *Make the game more interactive
 
-Images (REQUIRED):
-https://cloud.githubusercontent.com/assets/14177193/10632081/d41ab66e-782d-11e5-9d27-be9027e73699.gif
