@@ -283,6 +283,54 @@ def automoney():
     moneytkinter.set("Balance: $" + str(money))
     money += float(mps) / 10
     master.after(100, automoney)
+    #gold                                          Note that you must have > 0 MPS to start gold production
+    import random
+    random1 = (random.randint(1, 600))            #Note. Change random1 = (random.randint(1, 600)) to change frequency of gold.
+    if random1 == 1:                              #note make more random gold placement with random module
+        random2 = (random.randint(1,10))
+        gold = PhotoImage(file="gold.gif")
+        if random2 == 1:
+            b1 = Button(master, image=gold, width=100, command=goldmoney1)
+            b1.place(x=23, y=123)
+            b1.image = gold
+        elif random2 == 2:
+            b2 = Button(master, image=gold, width=100, command=goldmoney2)
+            b2.place(x=150, y=12)
+            b2.image = gold
+        elif random2 == 3:
+            b3 = Button(master, image=gold, width=100, command=goldmoney3)
+            b3.place(x=100, y=132)
+            b3.image = gold
+        elif random2 == 4:
+            b4 = Button(master, image=gold, width=100, command=goldmoney4)
+            b4.place(x=478, y=34)
+            b4.image = gold
+        elif random2 == 5:
+            b5 = Button(master, image=gold, width=100, command=goldmoney5)
+            b5.place(x=340, y=180)
+            b5.image = gold
+        elif random2 == 6:
+            b6 = Button(master, image=gold, width=100, command=goldmoney6)
+            b6.place(x=500, y=20)
+            b6.image = gold
+        elif random2 == 7:
+            b7 = Button(master, image=gold, width=100, command=goldmoney7)
+            b7.place(x=435, y=90)
+            b7.image = gold
+        elif random2 == 8:
+            b8 = Button(master, image=gold, width=100, command=goldmoney8)
+            b8.place(x=20, y=20)
+            b8.image = gold
+        elif random2 == 9:
+            b9 = Button(master, image=gold, width=100, command=goldmoney9)
+            b9.place(x=35, y=87)
+            b9.image = gold
+        elif random2 == 10:
+            b10 = Button(master, image=gold, width=100, command=goldmoney10)
+            b10.place(x=340, y=180)
+            b10.image = gold
+
+
 
 
 # SAVING GAME
@@ -478,5 +526,66 @@ def animationthingy():
         animation3.place(x=253, y=0)
         animation3.image = Animation3
 
+#Goldmoney
+def goldmoney1():
+
+    global mps, money, b1, b2, b3, b4, b5, b6, b7, b8, b9, b10
+    money += mps * 50
+    b1.destroy()
+
+def goldmoney2():
+
+    global mps, money, b1, b2, b3, b4, b5, b6, b7, b8, b9, b10
+    money += mps * 50
+    b2.destroy()
+
+def goldmoney3():
+
+    global mps, money, b1, b2, b3, b4, b5, b6, b7, b8, b9, b10
+    money += mps * 50
+    b3.destroy()
+
+def goldmoney4():
+
+    global mps, money, b1, b2, b3, b4, b5, b6, b7, b8, b9, b10
+    money += mps * 50
+    b4.destroy()
+
+def goldmoney5():
+
+    global mps, money, b1, b2, b3, b4, b5, b6, b7, b8, b9, b10
+    money += mps * 50
+    b5.destroy()
+
+def goldmoney6():
+
+    global mps, money, b1, b2, b3, b4, b5, b6, b7, b8, b9, b10
+    money += mps * 50
+    b6.destroy()
+
+
+def goldmoney7():
+
+    global mps, money, b1, b2, b3, b4, b5, b6, b7, b8, b9, b10
+    money += mps * 50
+    b7.destroy()
+
+def goldmoney8():
+
+    global mps, money, b1, b2, b3, b4, b5, b6, b7, b8, b9, b10
+    money += mps * 50
+    b8.destroy()
+
+def goldmoney9():
+
+    global mps, money, b1, b2, b3, b4, b5, b6, b7, b8, b9, b10
+    money += mps * 50
+    b9.destroy()
+
+def goldmoney10():
+
+    global mps, money, b1, b2, b3, b4, b5, b6, b7, b8, b9, b10
+    money += mps * 50
+    b10.destroy()
 
 mainloop()
