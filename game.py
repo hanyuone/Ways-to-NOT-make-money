@@ -1,7 +1,7 @@
 from Tkinter import *
 from PIL import *
 import math
-
+import time
 master = Tk()
 master.title("Ways To NOT Earn Money")
 img1 = PhotoImage(file="img1.gif")
@@ -194,6 +194,7 @@ def collectmoney():
     animate += 1
     if animate > 3:
         animate = 1
+    animationthingy()
 
 
 def clickboost1():
@@ -248,7 +249,7 @@ def clickboost2():
 # AUTOMATIC MONEY
 def automoney():
     global money, autoclick, autoclick2, autoprice, printmoney, printmoney2, printprice, counterfeit, counterfeit2, \
-        counterfeitprice, sharecrash, sharecrash2, shareprice, mps
+        counterfeitprice, sharecrash, sharecrash2, shareprice, mps, b1, b2, b3, b4, b5, b6, b7, b8, b9, b10
     money = round(float(money), 2)
     # BUG FIXER
     while mps > (autoclick + printmoney * 15 + counterfeit * 321 + sharecrash * 969):
@@ -285,38 +286,45 @@ def automoney():
     master.after(100, automoney)
     #gold                                          Note that you must have > 0 MPS to start gold production
     import random
-    random1 = (random.randint(1, 600))            #Note. Change random1 = (random.randint(1, 600)) to change frequency of gold.
+    random1 = (random.randint(1, 1500))            #Note. Change random1 = (random.randint(1, 600)) to change frequency of gold.
     if random1 == 1:                              #note make more random gold placement with random module
         random2 = (random.randint(1,10))
         gold = PhotoImage(file="gold.gif")
         if random2 == 1:
-            b1 = Button(master, image=gold, width=100, command=goldmoney1)
+            b1 = Button(master, image=gold, width=100, command=goldmoney)
             b1.place(x=23, y=123)
             b1.image = gold
+
         elif random2 == 2:
             b2 = Button(master, image=gold, width=100, command=goldmoney2)
             b2.place(x=150, y=12)
             b2.image = gold
+
         elif random2 == 3:
             b3 = Button(master, image=gold, width=100, command=goldmoney3)
             b3.place(x=100, y=132)
             b3.image = gold
+
         elif random2 == 4:
             b4 = Button(master, image=gold, width=100, command=goldmoney4)
             b4.place(x=478, y=34)
             b4.image = gold
+
         elif random2 == 5:
             b5 = Button(master, image=gold, width=100, command=goldmoney5)
             b5.place(x=340, y=180)
             b5.image = gold
+
         elif random2 == 6:
             b6 = Button(master, image=gold, width=100, command=goldmoney6)
-            b6.place(x=500, y=20)
+            b6.place(x=250, y=20)
             b6.image = gold
+
         elif random2 == 7:
             b7 = Button(master, image=gold, width=100, command=goldmoney7)
             b7.place(x=435, y=90)
             b7.image = gold
+
         elif random2 == 8:
             b8 = Button(master, image=gold, width=100, command=goldmoney8)
             b8.place(x=20, y=20)
@@ -329,6 +337,20 @@ def automoney():
             b10 = Button(master, image=gold, width=100, command=goldmoney10)
             b10.place(x=340, y=180)
             b10.image = gold
+
+        random3 = (random.randint(1,300))
+        if random3 == 1:
+            b1.destroy()
+            b2.destroy()
+            b3.destroy()
+            b4.destroy()
+            b5.destroy()
+            b6.destroy()
+            b7.destroy()
+            b8.destroy()
+            b9.destroy()
+            b10.destroy()
+
 
 
 
@@ -448,8 +470,8 @@ moneylabel.grid(row=0, column=0, sticky=W)
 mpslabel = Label(master, textvariable=mpstkinter)
 mpslabel.grid(row=0, column=2, sticky=E)
 
-clickbutton = Button(master, textvariable=inctkinter, height=3, command=collectmoney, highlightbackground="green")
-clickbutton.grid(row=1, column=1, rowspan=4)
+clickbutton = Button(master, textvariable=inctkinter, height=6, width=18, command=collectmoney, highlightbackground="green")
+clickbutton.grid(row=2, column=1, rowspan=4)
 
 incbutton1 = Button(master, textvariable=autopricetkinter, width=35, command=deduction1)
 incbutton1.grid(row=1, column=0, sticky=W)
@@ -527,10 +549,11 @@ def animationthingy():
         animation3.image = Animation3
 
 #Goldmoney
-def goldmoney1():
+def goldmoney():
 
     global mps, money, b1, b2, b3, b4, b5, b6, b7, b8, b9, b10
     money += mps * 50
+    b1.destroy()
     b1.destroy()
 
 def goldmoney2():
@@ -538,11 +561,13 @@ def goldmoney2():
     global mps, money, b1, b2, b3, b4, b5, b6, b7, b8, b9, b10
     money += mps * 50
     b2.destroy()
+    b2.destroy()
 
 def goldmoney3():
 
     global mps, money, b1, b2, b3, b4, b5, b6, b7, b8, b9, b10
     money += mps * 50
+    b3.destroy()
     b3.destroy()
 
 def goldmoney4():
@@ -550,11 +575,13 @@ def goldmoney4():
     global mps, money, b1, b2, b3, b4, b5, b6, b7, b8, b9, b10
     money += mps * 50
     b4.destroy()
+    b4.destroy()
 
 def goldmoney5():
 
     global mps, money, b1, b2, b3, b4, b5, b6, b7, b8, b9, b10
     money += mps * 50
+    b5.destroy()
     b5.destroy()
 
 def goldmoney6():
@@ -562,12 +589,13 @@ def goldmoney6():
     global mps, money, b1, b2, b3, b4, b5, b6, b7, b8, b9, b10
     money += mps * 50
     b6.destroy()
-
+    b6.destroy()
 
 def goldmoney7():
 
     global mps, money, b1, b2, b3, b4, b5, b6, b7, b8, b9, b10
     money += mps * 50
+    b7.destroy()
     b7.destroy()
 
 def goldmoney8():
@@ -575,11 +603,13 @@ def goldmoney8():
     global mps, money, b1, b2, b3, b4, b5, b6, b7, b8, b9, b10
     money += mps * 50
     b8.destroy()
+    b8.destroy()
 
 def goldmoney9():
 
     global mps, money, b1, b2, b3, b4, b5, b6, b7, b8, b9, b10
     money += mps * 50
+    b9.destroy()
     b9.destroy()
 
 def goldmoney10():
@@ -587,5 +617,29 @@ def goldmoney10():
     global mps, money, b1, b2, b3, b4, b5, b6, b7, b8, b9, b10
     money += mps * 50
     b10.destroy()
+    b10.destroy()
+
+Animation1 = PhotoImage(file="Animation1.gif")
+Animation2 = PhotoImage(file="Animation2.gif")
+Animation3 = PhotoImage(file="Animation3.gif")
+
+
+from PIL import *
+
+def animationthingy():
+    if animate == 1:
+        animation1 = Label(master, image=Animation1)
+        animation1.place(x=253, y=0)
+        animation1.image = Animation1
+
+    elif animate == 2:
+        animation2 = Label(master, image=Animation2)
+        animation2.place(x=253, y=0)
+        animation2.image = Animation2
+    elif animate == 3:
+        animation3 = Label(master, image=Animation3)
+        animation3.place(x=253, y=0)
+        animation3.image = Animation3
+
 
 mainloop()
