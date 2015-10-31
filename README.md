@@ -5,12 +5,21 @@ Also, if you have downloaded this game and find any bugs, please post them to th
 
 NOTE: This game currently requires the user to download Python to run. An executable file will be posted sometime in the future!
 
-Line Amount: 424 lines (and counting!)
+Line Amount: 513 lines (and counting!)
 
-Version: 0.4.1
+Version: 0.4.3
 
 Updates:
 
+     0.4.3:
+            -Shrunk the code down by 100+ lines
+            -Changed gold appearances to randint function
+            -Fixed a bug in which upgrades don't change MPS
+            
+     0.4.2:
+            -Added gold button (increases balance by MPS*50)
+            -Fixed most of the bugs (PyCharm!)
+            
      0.4.1:
             -Downloading images is no longer required (Thanks to Git Hub for Desktop)
             -Simple animation added. (To be improved)
@@ -29,19 +38,19 @@ Updates:
             -Added a new upgrade, Better Click Boost (Costs $200000)
             -Changed the code for upgrades
 
-    0.2.1 (not to be confused with 0.2-1): Fully fixed the savefile, and fixed bugs.
+     0.2.1 (not to be confused with 0.2-1): Fully fixed the savefile, and fixed bugs.
 
-    0.2-2: Partially fixed the savefile.
+     0.2-2: Partially fixed the savefile.
     
-    0.2-1*: Changed the save system so that it included an external savefile.
+     0.2-1*: Changed the save system so that it included an external savefile.
     
-    0.2.0*: Added a save system (which needs fixing!), and a new building: Counterfeit Company (321 MPS, costs $9001).
+     0.2.0*: Added a save system (which needs fixing!), and a new building: Counterfeit Company (321 MPS, costs $9001).
 
-    0.1.3: Fixed a bug in which some labels and buttons don't update.
+     0.1.3: Fixed a bug in which some labels and buttons don't update.
 
-    0.1.2: Added placeholders for the Tkinter window.
+     0.1.2: Added placeholders for the Tkinter window.
     
-    0.1.1: Changed from pack and grid to only grid, saving space and making the whole code work
+     0.1.1: Changed from pack and grid to only grid, saving space and making the whole code work
     
 
     
