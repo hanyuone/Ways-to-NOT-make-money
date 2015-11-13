@@ -1,15 +1,16 @@
 from Tkinter import *
-from PIL import *
+from random import randint
 import math
-import time
+
 master = Tk()
 master.title("Ways To NOT Earn Money")
 img1 = PhotoImage(file="img1.gif")
+gold = PhotoImage(file="gold.gif")
 
 
 # AUTO CLICKER
 def boostauto1h1():
-    global money, autoclick, autoclick2, upgcheck1h1
+    global money, autoclick, autoclick2, upgcheck1h1, mps
     if money < 5000 or autoclick2 == 0:
         toplevel = Toplevel()
         norequirements1 = Message(toplevel, text="You do not meet the requirements.")
@@ -18,6 +19,8 @@ def boostauto1h1():
         money -= 5000
         autoclick = int(autoclick * 30) / 10
         upgcheck1h1 += 1
+        mps += autoclick2 * 2
+        mpstkinter.set("MPS: " + str(mps))
         boostbutton1h1.destroy()
         boostbutton2.grid(row=int(3 - (int(upgcheck1h1) + int(clickupgcheck1))), column=2, sticky=E)
         clickbooster2.grid(row=int(4 - (int(upgcheck1h1) + int(upgcheck2) + int(clickupgcheck1))), column=2, sticky=E)
@@ -33,7 +36,7 @@ def boostauto1h1():
 
 
 def boostauto1h2():
-    global money, autoclick, autoclick2, upgcheck1h2
+    global money, autoclick, autoclick2, upgcheck1h2, mps
     if money < 555555 or upgcheck1h1 == 0:
         toplevel = Toplevel()
         norequirements2 = Message(toplevel, text="You do not meet the requirements.")
@@ -42,6 +45,8 @@ def boostauto1h2():
         money -= 555555
         autoclick = int(autoclick * 70) / 10
         upgcheck1h2 += 1
+        mps += autoclick2 * 18
+        mpstkinter.set("MPS: " + str(mps))
         boostbutton1h2.destroy()
         boostbutton3.grid(row=int(
             6 - (int(upgcheck1h1) + int(upgcheck1h2) + int(upgcheck2) + int(clickupgcheck1) + int(clickupgcheck2))),
@@ -73,7 +78,7 @@ def deduction1():
 
 # MONEY PRINTER
 def boostauto2():
-    global money, printmoney, printmoney2, upgcheck2
+    global money, printmoney, printmoney2, upgcheck2, mps
     if money < 42000 or printmoney2 == 0:
         toplevel = Toplevel()
         norequirements3 = Message(toplevel, text="You do not meet the requirements.")
@@ -82,6 +87,8 @@ def boostauto2():
         money -= 42000
         printmoney = int(printmoney * 30) / 10
         upgcheck2 += 1
+        mps += printmoney2 * 2
+        mpstkinter.set("MPS: " + str(mps))
         boostbutton2.destroy()
         clickbooster2.grid(row=int(4 - (int(upgcheck1h1) + int(upgcheck2) + int(clickupgcheck1))), column=2, sticky=E)
         boostbutton1h2.grid(
@@ -117,7 +124,7 @@ def deduction2():
 
 # COUNTERFEIT COMPANY
 def boostauto3():
-    global money, counterfeit, counterfeit2, upgcheck3
+    global money, counterfeit, counterfeit2, upgcheck3, mps
     if money < 2133748 or counterfeit2 == 0:
         toplevel = Toplevel()
         norequirements4 = Message(toplevel, text="You do not meet the requirements.")
@@ -125,6 +132,8 @@ def boostauto3():
     elif money >= 2133748 and counterfeit2 > 0:
         money -= 2133748
         counterfeit = int(counterfeit * 30) / 10
+        mps += counterfeit2 * 2
+        mpstkinter.set("MPS: " + str(mps))
         upgcheck3 += 1
         boostbutton3.destroy()
         boostbutton4.grid(row=int(7 - (
@@ -154,7 +163,7 @@ def deduction3():
 
 # SHAREMARKET CRASH
 def boostauto4():
-    global money, sharecrash, sharecrash2, upgcheck4
+    global money, sharecrash, sharecrash2, upgcheck4, mps
     if money < 12345678 or sharecrash2 == 0:
         toplevel = Toplevel()
         norequirements5 = Message(toplevel, text="You do not meet the requirements.")
@@ -162,6 +171,8 @@ def boostauto4():
     elif money >= 12345678 or sharecrash2 > 0:
         money -= 12345678
         sharecrash = int(sharecrash * 30) / 10
+        mps += sharecrash2 * 2
+        mpstkinter.set("MPS: " + str(mps))
         upgcheck4 += 1
         boostbutton4.destroy()
 
@@ -249,8 +260,24 @@ def clickboost2():
 # AUTOMATIC MONEY
 def automoney():
     global money, autoclick, autoclick2, autoprice, printmoney, printmoney2, printprice, counterfeit, counterfeit2, \
-        counterfeitprice, sharecrash, sharecrash2, shareprice, mps, b1, b2, b3, b4, b5, b6, b7, b8, b9, b10
+        counterfeitprice, sharecrash, sharecrash2, shareprice, mps, check, goldbutton
     money = round(float(money), 2)
+
+    # gold UPGRADE
+    def goldupgrade():
+        global goldbutton, money, mps
+        money += int(mps * 50)
+        toplevel = Toplevel()
+        goldtime = Message(toplevel, text="gold Upgrade Activated(get money to *50 MPS!)")
+        goldtime.pack()
+        goldbutton.destroy()
+    if check == int(10):
+        random1 = randint(1, 600)
+        if random1 == int(1):
+            goldbutton.place(x=int(randint(0, 500)), y=int(randint(0, 200)))
+        check = int(1)
+    goldbutton = Button(master, image=gold, width=20, height=10, text="", command=goldupgrade)
+
     # BUG FIXER
     while mps > (autoclick + printmoney * 15 + counterfeit * 321 + sharecrash * 969):
         if mps - 969 >= (autoclick + printmoney * 15 + counterfeit * 321 + sharecrash * 969):
@@ -275,7 +302,7 @@ def automoney():
             printpricetkinter.set("Money Printer (Costs: $" + str(printprice) + ")")
             continue
         else:
-            autoclick += 1 * (1 + upgcheck1h1 * 2 + upgcheck1h2 * 18)
+            autoclick += (1 + upgcheck1h1 * 2 + upgcheck1h2 * 18)
             autoclick2 += 1
             autoclicktkinter.set("Money Printers Amount: " + str(autoclick2))
             autoprice = int(20 * (math.pow(1.15, autoclick2)))
@@ -283,7 +310,9 @@ def automoney():
             continue
     moneytkinter.set("Balance: $" + str(money))
     money += float(mps) / 10
+    check += 1
     master.after(100, automoney)
+<<<<<<< HEAD
     #gold                                          Note that you must have > 0 MPS to start gold production
     import random
     random1 = (random.randint(1, 800))            #Note. Change random1 = (random.randint(1, 600)) to change frequency of gold.
@@ -353,6 +382,8 @@ def automoney():
 
 
 
+=======
+>>>>>>> origin/master
 
 
 # SAVING GAME
@@ -394,6 +425,8 @@ def resetgame():
 
 
 # SAVE IMPORTS AND VARIABLES
+check = 0
+click = 0
 animate = 0
 g = open("savefile.txt")
 g2 = (str(g.read()).decode("hex")).split("_")
@@ -470,8 +503,8 @@ moneylabel.grid(row=0, column=0, sticky=W)
 mpslabel = Label(master, textvariable=mpstkinter)
 mpslabel.grid(row=0, column=2, sticky=E)
 
-clickbutton = Button(master, textvariable=inctkinter, height=6, width=18, command=collectmoney, highlightbackground="green")
-clickbutton.grid(row=2, column=1, rowspan=4)
+clickbutton = Button(master, textvariable=inctkinter, height=6, width=18, command=collectmoney)
+clickbutton.grid(row=3, column=1, rowspan=4)
 
 incbutton1 = Button(master, textvariable=autopricetkinter, width=35, command=deduction1)
 incbutton1.grid(row=1, column=0, sticky=W)
@@ -539,99 +572,6 @@ def animationthingy():
         animation1 = Label(master, image=Animation1)
         animation1.place(x=253, y=0)
         animation1.image = Animation1
-    elif animate == 2:
-        animation2 = Label(master, image=Animation2)
-        animation2.place(x=253, y=0)
-        animation2.image = Animation2
-    elif animate == 3:
-        animation3 = Label(master, image=Animation3)
-        animation3.place(x=253, y=0)
-        animation3.image = Animation3
-
-#Goldmoney
-def goldmoney():
-
-    global mps, money, b1, b2, b3, b4, b5, b6, b7, b8, b9, b10
-    money += mps * 50
-    b1.destroy()
-    b1.destroy()
-
-def goldmoney2():
-
-    global mps, money, b1, b2, b3, b4, b5, b6, b7, b8, b9, b10
-    money += mps * 50
-    b2.destroy()
-    b2.destroy()
-
-def goldmoney3():
-
-    global mps, money, b1, b2, b3, b4, b5, b6, b7, b8, b9, b10
-    money += mps * 50
-    b3.destroy()
-    b3.destroy()
-
-def goldmoney4():
-
-    global mps, money, b1, b2, b3, b4, b5, b6, b7, b8, b9, b10
-    money += mps * 50
-    b4.destroy()
-    b4.destroy()
-
-def goldmoney5():
-
-    global mps, money, b1, b2, b3, b4, b5, b6, b7, b8, b9, b10
-    money += mps * 50
-    b5.destroy()
-    b5.destroy()
-
-def goldmoney6():
-
-    global mps, money, b1, b2, b3, b4, b5, b6, b7, b8, b9, b10
-    money += mps * 50
-    b6.destroy()
-    b6.destroy()
-
-def goldmoney7():
-
-    global mps, money, b1, b2, b3, b4, b5, b6, b7, b8, b9, b10
-    money += mps * 50
-    b7.destroy()
-    b7.destroy()
-
-def goldmoney8():
-
-    global mps, money, b1, b2, b3, b4, b5, b6, b7, b8, b9, b10
-    money += mps * 50
-    b8.destroy()
-    b8.destroy()
-
-def goldmoney9():
-
-    global mps, money, b1, b2, b3, b4, b5, b6, b7, b8, b9, b10
-    money += mps * 50
-    b9.destroy()
-    b9.destroy()
-
-def goldmoney10():
-
-    global mps, money, b1, b2, b3, b4, b5, b6, b7, b8, b9, b10
-    money += mps * 50
-    b10.destroy()
-    b10.destroy()
-
-Animation1 = PhotoImage(file="Animation1.gif")
-Animation2 = PhotoImage(file="Animation2.gif")
-Animation3 = PhotoImage(file="Animation3.gif")
-
-
-from PIL import *
-
-def animationthingy():
-    if animate == 1:
-        animation1 = Label(master, image=Animation1)
-        animation1.place(x=253, y=0)
-        animation1.image = Animation1
-
     elif animate == 2:
         animation2 = Label(master, image=Animation2)
         animation2.place(x=253, y=0)
