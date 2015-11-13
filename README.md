@@ -11,6 +11,10 @@ Version: 0.4.3
 
 Updates:
 
+     0.5.0:
+            -Probably fixed gold button
+            -Added new upgrade for Money Printers (Costs $7,777,777)
+            -Made a new upgrades button (less crowding)
      0.4.3:
             -Shrunk the code down by 100+ lines
             -Changed gold appearances to randint function
@@ -28,14 +32,14 @@ Updates:
             -Made the change log easier to read. (Order Reversed)
             
      0.4.0:
-            -Added new building, Sharemarket Crash (969 MPS, costs $42000)
+            -Added new building, Sharemarket Crash (969 MPS, costs $42,000)
             -Changed the names of the upgrades (less bland)
             -Ironed out a LOT of the bugs
             -Changed the code for upgrades AGAIN
             -Added background
 
      0.3.0:
-            -Added a new upgrade, Better Click Boost (Costs $200000)
+            -Added a new upgrade, Better Click Boost (Costs $200,000)
             -Changed the code for upgrades
 
      0.2.1 (not to be confused with 0.2-1): Fully fixed the savefile, and fixed bugs.
@@ -44,7 +48,7 @@ Updates:
     
      0.2-1*: Changed the save system so that it included an external savefile.
     
-     0.2.0*: Added a save system (which needs fixing!), and a new building: Counterfeit Company (321 MPS, costs $9001).
+     0.2.0*: Added a save system (which needs fixing!), and a new building: Counterfeit Company (321 MPS, costs $9,001).
 
      0.1.3: Fixed a bug in which some labels and buttons don't update.
 
@@ -64,4 +68,6 @@ Things to add in the future:
     *Make imports
     *Add pictures
     *Make the game more interactive
+    *Do some html stuff (i.e. make this game browser-based)
+    *Automatic savefile converter?
 
