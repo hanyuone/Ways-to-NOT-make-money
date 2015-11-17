@@ -388,53 +388,80 @@ def resetgame():
 
 # UPGRADES WINDOW
 def showupgrades():
-    global clickbooster1, boostbutton1h1, boostbutton2h1, clickbooster2, boostbutton1h2, boostbutton3, boostbutton2h2, \
-        boostbutton4, upgbuttoncheck
-    upgbuttoncheck += 1
-    if upgbuttoncheck == int(1):
-        upgwindow = Toplevel()
-        if clickupgcheck1 == int(0):
-            clickbooster1 = Button(upgwindow, text="Reinforced Button (Costs: $2100)", width=35, command=clickboost1)
-            clickbooster1.grid(row=1, column=2, sticky=E)
-        if upgcheck1h1 == int(0):
-            boostbutton1h1 = Button(upgwindow, text="Stronger Mouses (Costs: $5000)", width=35, command=boostauto1h1)
-            boostbutton1h1.grid(row=int(2 - int(clickupgcheck1)), column=2, sticky=E)
-        if upgcheck2h1 == int(0):
-            boostbutton2h1 = Button(upgwindow, text="Unofficial Printer License (Costs: $42000)", width=35,
-                                    command=boostauto2h1)
-            boostbutton2h1.grid(row=int(3 - (int(upgcheck1h1) + int(clickupgcheck1))), column=2, sticky=E)
-        if clickupgcheck2 == int(0):
-            clickbooster2 = Button(upgwindow, text="Stainless Steel Button (Costs: $200000)", width=35,
-                                   command=clickboost2)
-            clickbooster2.grid(row=int(4 - (int(upgcheck1h1) + int(upgcheck2h1) + int(clickupgcheck1))), column=2,
-                               sticky=E)
-        if upgcheck1h2 == int(0):
-            boostbutton1h2 = Button(upgwindow, text="Experienced Clickers (Costs: $555555)", width=35,
-                                    command=boostauto1h2)
-            boostbutton1h2.grid(
-                row=int(5 - (int(upgcheck1h1) + int(upgcheck2h1) + int(clickupgcheck1) + int(clickupgcheck2))),
-                column=2, sticky=E)
-        if upgcheck3 == int(0):
-            boostbutton3 = Button(upgwindow, text="Skilled Fake Money Making (Costs: $2133748)", width=35,
-                                  command=boostauto3)
-            boostbutton3.grid(
-                row=int(6 - (
-                    int(upgcheck1h1) + int(upgcheck1h2) + int(upgcheck2h1) + int(clickupgcheck1) + int(
-                        clickupgcheck2))),
-                column=2, sticky=E)
-        if upgcheck2h2 == int(0):
-            boostbutton2h2 = Button(upgwindow, text="Printing Press (Costs: $7777777)", width=35, command=boostauto2h2)
-            boostbutton2h2.grid(row=int(7 - (
-                int(upgcheck1h1) + int(upgcheck1h2) + int(upgcheck2h1) + int(upgcheck3) + int(clickupgcheck1) + int(
+    global upgrades, clickbooster1, boostbutton1h1, boostbutton2h1, clickbooster2, boostbutton1h2, boostbutton3, \
+        boostbutton2h2, boostbutton4, exitupgrades
+    upgrades.destroy()
+    if clickupgcheck1 == int(0):
+        clickbooster1 = Button(master, text="Reinforced Button (Costs: $2100)", width=35, command=clickboost1)
+        clickbooster1.grid(row=1, column=2, sticky=E)
+    if upgcheck1h1 == int(0):
+        boostbutton1h1 = Button(master, text="Stronger Mouses (Costs: $5000)", width=35, command=boostauto1h1)
+        boostbutton1h1.grid(row=int(2 - int(clickupgcheck1)), column=2, sticky=E)
+    if upgcheck2h1 == int(0):
+        boostbutton2h1 = Button(master, text="Unofficial Printer License (Costs: $42000)", width=35,
+                                command=boostauto2h1)
+        boostbutton2h1.grid(row=int(3 - (int(upgcheck1h1) + int(clickupgcheck1))), column=2, sticky=E)
+    if clickupgcheck2 == int(0):
+        clickbooster2 = Button(master, text="Stainless Steel Button (Costs: $200000)", width=35,
+                               command=clickboost2)
+        clickbooster2.grid(row=int(4 - (int(upgcheck1h1) + int(upgcheck2h1) + int(clickupgcheck1))), column=2,
+                           sticky=E)
+    if upgcheck1h2 == int(0):
+        boostbutton1h2 = Button(master, text="Experienced Clickers (Costs: $555555)", width=35,
+                                command=boostauto1h2)
+        boostbutton1h2.grid(
+            row=int(5 - (int(upgcheck1h1) + int(upgcheck2h1) + int(clickupgcheck1) + int(clickupgcheck2))),
+            column=2, sticky=E)
+    if upgcheck3 == int(0):
+        boostbutton3 = Button(master, text="Skilled Fake Money Making (Costs: $2133748)", width=35,
+                              command=boostauto3)
+        boostbutton3.grid(
+            row=int(6 - (
+                int(upgcheck1h1) + int(upgcheck1h2) + int(upgcheck2h1) + int(clickupgcheck1) + int(
                     clickupgcheck2))),
-                                column=2, sticky=E)
-        if upgcheck4 == int(0):
-            boostbutton4 = Button(upgwindow, text="Sharemarket Catastrophe (Costs: $12345678)", width=35,
-                                  command=boostauto4)
-            boostbutton4.grid(row=int(8 - (
-                int(upgcheck1h1) + int(upgcheck1h2) + int(upgcheck2h1) + int(upgcheck2h2) + int(upgcheck3) + int(
-                    clickupgcheck1) + int(clickupgcheck2))),
-                              column=2, sticky=E)
+            column=2, sticky=E)
+    if upgcheck2h2 == int(0):
+        boostbutton2h2 = Button(master, text="Printing Press (Costs: $7777777)", width=35, command=boostauto2h2)
+        boostbutton2h2.grid(row=int(7 - (
+            int(upgcheck1h1) + int(upgcheck1h2) + int(upgcheck2h1) + int(upgcheck3) + int(clickupgcheck1) + int(
+                clickupgcheck2))),
+                            column=2, sticky=E)
+    if upgcheck4 == int(0):
+        boostbutton4 = Button(master, text="Sharemarket Catastrophe (Costs: $12345678)", width=35,
+                              command=boostauto4)
+        boostbutton4.grid(row=int(8 - (
+            int(upgcheck1h1) + int(upgcheck1h2) + int(upgcheck2h1) + int(upgcheck2h2) + int(upgcheck3) + int(
+                clickupgcheck1) + int(clickupgcheck2))),
+                          column=2, sticky=E)
+    exitupgrades = Button(master, text="Hide Upgrades", command=hideupgrades)
+    exitupgrades.grid(row=9, column=2, sticky=E)
+    resetbutton.grid(row=10, column=0, sticky=W)
+    savebutton.grid(row=10, column=2, sticky=E)
+
+
+def hideupgrades():
+    global upgrades, exitupgrades
+    if clickupgcheck1 == int(0):
+        clickbooster1.destroy()
+    if upgcheck1h1 == int(0):
+        boostbutton1h1.destroy()
+    if upgcheck2h1 == int(0):
+        boostbutton2h1.destroy()
+    if clickupgcheck2 == int(0):
+        clickbooster2.destroy()
+    if upgcheck1h2 == int(0):
+        boostbutton1h2.destroy()
+    if upgcheck3 == int(0):
+        boostbutton3.destroy()
+    if upgcheck2h2 == int(0):
+        boostbutton2h2.destroy()
+    if upgcheck4 == int(0):
+        boostbutton4.destroy()
+    upgrades = Button(master, text="Upgrades", height=12, width=15, command=showupgrades)
+    upgrades.grid(row=1, column=2, rowspan=8, sticky=E)
+    exitupgrades.destroy()
+    resetbutton.grid(row=9, column=0, sticky=W)
+    savebutton.grid(row=9, column=2, sticky=E)
 
 
 # SAVE IMPORTS AND VARIABLES
@@ -443,7 +470,7 @@ upgbuttoncheck = 0
 click = 0
 animate = 0
 g = open("savefile.txt")
-g2 = (str(g.read()).decode("hex")).split("_")
+g2 = (str(g.readline()).decode("hex")).split("_")
 upgcheck1h1 = int(g2[9])
 upgcheck1h2 = int(g2[11])
 upgcheck2h1 = int(g2[13])
@@ -535,7 +562,7 @@ moneylabel.grid(row=0, column=0, sticky=W)
 mpslabel = Label(master, textvariable=mpstkinter)
 mpslabel.grid(row=0, column=2, sticky=E)
 
-clickbutton = Button(master, textvariable=inctkinter, height=6, width=18, command=collectmoney)
+clickbutton = Button(master, textvariable=inctkinter, height=6, width=18, command=collectmoney, bg="green")
 clickbutton.grid(row=3, column=1, rowspan=4)
 
 incbutton1 = Button(master, textvariable=autopricetkinter, width=35, command=deduction1)
