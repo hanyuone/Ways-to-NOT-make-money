@@ -1,5 +1,5 @@
 from Tkinter import *
-from random import randint
+from random import *
 import math
 
 master = Tk()
@@ -306,9 +306,12 @@ def automoney():
     # gold UPGRADE
     if check == int(10):
         random1 = randint(1, 600)
-        if random1 == int(1):
-            goldbutton.place(x=int(randint(0, 500)), y=int(randint(0, 200)))
         check = int(1)
+        if random1 == int(1):
+            goldbutton = Button(master, image=gold, width=70, height=50, text="", command=goldupgrade)
+            goldbutton.image = gold
+            goldbutton.place(x=(int(randint(0, 500))), y=(int(randint(0, 200))))
+
 
     # BUG FIXER
     while mps > (autoclick + printmoney * 15 + counterfeit * 321 + sharecrash * 969):
@@ -546,8 +549,7 @@ def goldupgrade():
     goldtime.pack()
 
 
-goldbutton = Button(master, image=gold, width=40, height=20, text="", command=goldupgrade)
-goldbutton.image = gold
+
 
 background = Label(master, image=img1)
 background.place(x=0, y=0, relwidth=1, relheight=1)
