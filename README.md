@@ -73,4 +73,4 @@ Things to add in the future:
     *Make the game more interactive
     *Do some html stuff (i.e. make this game browser-based)
     *Automatic savefile converter?
-
+    *Change upgrades (still way too inefficient)
