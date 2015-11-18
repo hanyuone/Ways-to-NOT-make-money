@@ -5,12 +5,16 @@ Also, if you have downloaded this game and find any bugs, please post them to th
 
 NOTE: This game currently requires the user to download Python to run. An executable file will be posted sometime in the future!
 
-Line Amount: 513 lines (and counting!)
+Line Amount: 618 lines (and counting!)
 
-Version: 0.4.3
+Version: 0.5.1
 
 Updates:
-
+     
+     0.5.1:
+            -Fixed the upgrades button (it makes the main screen wider instead of creating a new window)
+            -Starting work on background colours
+            -Still fixing gold button (the previous update was a lie)
      0.5.0:
             -Probably fixed gold button
             -Added new upgrade for Money Printers (Costs $7,777,777)
@@ -19,7 +23,6 @@ Updates:
             -Shrunk the code down by 100+ lines
             -Changed gold appearances to randint function
             -Fixed a bug in which upgrades don't change MPS
-            
      0.4.2:
             -Added gold button (increases balance by MPS*50)
             -Fixed most of the bugs (PyCharm!)
