@@ -308,9 +308,11 @@ def automoney():
         random1 = randint(1, 600)
         check = int(1)
         if random1 == int(1):
-            goldbutton = Button(master, image=gold, width=70, height=50, text="", command=goldupgrade)
-            goldbutton.image = gold
-            goldbutton.place(x=(int(randint(0, 500))), y=(int(randint(0, 200))))
+            if goldcheck == int(0):
+                goldbutton = Button(master, image=gold, width=70, height=50, text="", command=goldupgrade)
+                goldbutton.image = gold
+                goldbutton.place(x=(int(randint(0, 500))), y=(int(randint(0, 200))))
+                goldcheck = int(1)
 
 
     # BUG FIXER
@@ -470,6 +472,7 @@ def hideupgrades():
 # SAVE IMPORTS AND VARIABLES
 check = 0
 upgbuttoncheck = 0
+goldcheck = 0
 click = 0
 animate = 0
 g = open("savefile.txt")
@@ -544,11 +547,10 @@ def goldupgrade():
     global goldbutton, money, mps
     money += int(mps * 50)
     goldbutton.destroy()
+    goldcheck = int(0)
     toplevel = Toplevel()
     goldtime = Message(toplevel, text="Gold Upgrade Activated (get money equal to *50 MPS!)")
     goldtime.pack()
-
-
 
 
 background = Label(master, image=img1)
