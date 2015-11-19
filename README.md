@@ -10,7 +10,12 @@ Line Amount: 618 lines (and counting!)
 Version: 0.5.1
 
 Updates:
-     
+     0.5.2:
+            -Added a colour changed on click of +Money Button (Yes, it's addictive)
+            -Fixed Gold Button
+            -Fixed a bug in which more than one gold would make a sticky button. (Only allowed one gold to exsist at a time)
+            -Doubled Chance of finding Gold.
+            -Working on a Stats Menu.
      0.5.1:
             -Fixed the upgrades button (it makes the main screen wider instead of creating a new window)
             -Starting work on background colours
