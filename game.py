@@ -1,12 +1,12 @@
 from Tkinter import *
 from random import *
-import math
+import math                       #update notes: Fixed obviously untested single gold "fix" (Remebeer to add varibles to global), Made game more colourful.
 
 master = Tk()
 master.title("Ways To NOT Earn Money")
 img1 = PhotoImage(file="img1.gif")
 gold = PhotoImage(file="gold.gif")
-clickcolourcheck = 1
+
 
 
 def statcollapse():
@@ -308,7 +308,7 @@ def automoney():
 
     # gold UPGRADE
     if check == int(10):
-        random1 = randint(1, 600)
+        random1 = randint(1, 300)
         check = int(1)
         if random1 == int(1):
             if goldcheck == int(0):
@@ -477,6 +477,7 @@ upgbuttoncheck = 0
 goldcheck = 0
 click = 0
 animate = 0
+clickcolourcheck = 1
 g = open("savefile.txt")
 g2 = (str(g.readline()).decode("hex")).split("_")
 upgcheck1h1 = int(g2[9])
@@ -627,7 +628,8 @@ def animationthingy():
 def clickcolour():
     global clickcolourcheck
     clickcolourcheck += 1
-    if clickcolourcheck == 2         clickbutton.configure(bg="red")
+    if clickcolourcheck == 2:
+         clickbutton.configure(bg="red")
     elif clickcolourcheck == 3:
          clickbutton.configure(bg="orange")
     elif clickcolourcheck == 4:
