@@ -1,12 +1,16 @@
 from Tkinter import *
 from random import *
-import math
+import math                       #update notes: Fixed obviously untested single gold "fix" (Remebeer to add varibles to global), Made game more colourful.
 
 master = Tk()
 master.title("Ways To NOT Earn Money")
 img1 = PhotoImage(file="img1.gif")
 gold = PhotoImage(file="gold.gif")
+clickcolourcheck = 1
 
+
+def statcollapse():
+    statcollapse.destroy()
 
 # AUTO CLICKER
 def boostauto1h1():
@@ -296,11 +300,10 @@ def clickboost2():
                 clickupgcheck1) + int(
                 clickupgcheck2))), column=2, sticky=E)
 
-
 # AUTOMATIC MONEY
 def automoney():
     global money, autoclick, autoclick2, autoprice, printmoney, printmoney2, printprice, counterfeit, counterfeit2, \
-        counterfeitprice, sharecrash, sharecrash2, shareprice, mps, check, goldbutton
+        counterfeitprice, sharecrash, sharecrash2, shareprice, mps, check, goldbutton, goldcheck
     money = round(float(money), 2)
 
     # gold UPGRADE
@@ -313,7 +316,6 @@ def automoney():
                 goldbutton.image = gold
                 goldbutton.place(x=(int(randint(0, 500))), y=(int(randint(0, 200))))
                 goldcheck = int(1)
-
 
     # BUG FIXER
     while mps > (autoclick + printmoney * 15 + counterfeit * 321 + sharecrash * 969):
@@ -544,7 +546,7 @@ if mps >= 1:
 
 # BUTTONS, LABELS AND ENTRIES
 def goldupgrade():
-    global goldbutton, money, mps
+    global goldbutton, money, mps, goldcheck
     money += int(mps * 50)
     goldbutton.destroy()
     goldcheck = int(0)
@@ -566,7 +568,7 @@ moneylabel.grid(row=0, column=0, sticky=W)
 mpslabel = Label(master, textvariable=mpstkinter)
 mpslabel.grid(row=0, column=2, sticky=E)
 
-clickbutton = Button(master, textvariable=inctkinter, height=6, width=18, command=collectmoney, bg="green")
+clickbutton = Button(master, textvariable=inctkinter, height=6, width=18, command=collectmoney, bg="red")
 clickbutton.grid(row=3, column=1, rowspan=4)
 
 incbutton1 = Button(master, textvariable=autopricetkinter, width=35, command=deduction1)
@@ -593,8 +595,11 @@ incbutton4.grid(row=7, column=0, sticky=W)
 checklabel4 = Label(master, textvariable=sharecrashtkinter, width=35)
 checklabel4.grid(row=8, column=0, sticky=W)
 
+statcollapse = Button(master, text="Stats", width=10, command=statcollapse)
+statcollapse.grid(row=9, column=0, sticky=W)
+
 resetbutton = Button(master, text="Reset Game", width=10, command=resetgame)
-resetbutton.grid(row=9, column=0, sticky=W)
+resetbutton.grid(row=10, column=0, sticky=W)
 
 savebutton = Button(master, text="Save Game", width=10, command=savegame)
 savebutton.grid(row=9, column=2, sticky=E)
@@ -617,6 +622,25 @@ def animationthingy():
         animation3 = Label(master, image=Animation3)
         animation3.place(x=253, y=0)
         animation3.image = Animation3
+    clickcolour()
+
+def clickcolour():
+    global clickcolourcheck
+    clickcolourcheck += 1
+    if clickcolourcheck == 2         clickbutton.configure(bg="red")
+    elif clickcolourcheck == 3:
+         clickbutton.configure(bg="orange")
+    elif clickcolourcheck == 4:
+         clickbutton.configure(bg="yellow")
+    elif clickcolourcheck == 5:
+         clickbutton.configure(bg="green")
+    elif clickcolourcheck == 6:
+         clickbutton.configure(bg="blue")
+    elif clickcolourcheck == 7:
+         clickbutton.configure(bg="purple")
+    elif clickcolourcheck == 8:
+         clickbutton.configure(bg="violet")
+         clickcolourcheck = 1
 
 
 mainloop()
