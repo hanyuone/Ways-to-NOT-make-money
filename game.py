@@ -1,6 +1,6 @@
 from Tkinter import *
 from random import *
-import math                       #update notes: Fixed obviously untested single gold "fix" (Remebeer to add varibles to global), Made game more colourful.
+import math
 
 master = Tk()
 master.title("Ways To NOT Earn Money")
