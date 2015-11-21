@@ -1,6 +1,6 @@
 from Tkinter import *
 from random import *
-import math                       #update notes: Fixed obviously untested single gold "fix" (Remebeer to add varibles to global), Made game more colourful.
+import math
 
 master = Tk()
 master.title("Ways To NOT Earn Money")
@@ -8,9 +8,18 @@ img1 = PhotoImage(file="img1.gif")
 gold = PhotoImage(file="gold.gif")
 
 
+def statsexpand():
+    global totalclicks, totalclicksvar, time, timevar
+    statsbutton.destroy()
+    totalclicksvar = StringVar()
+    totalclicksvar.set("Total clicks: " + str(totalclicks))
+    totalclickslabel = Label(master, textvariable=totalclicksvar)
+    totalclickslabel.grid(row=11, column=0, sticky=W)
+    timevar = StringVar()
+    timevar.set("Total time: " + str(time))
+    timelabel = Label(master, textvariable=timevar)
+    timelabel.grid(row=11, column=2, sticky=E)
 
-def statcollapse():
-    statcollapse.destroy()
 
 # AUTO CLICKER
 def boostauto1h1():
@@ -238,13 +247,14 @@ def deduction4():
 
 # CLICKS
 def collectmoney():
-    global inc, money, animate
+    global inc, money, animate, totalclicks
     money = money + inc
     moneytkinter.set("Balance: $" + str(money))
     animate += 1
     if animate > 3:
         animate = 1
     animationthingy()
+    totalclicks += 1
 
 
 def clickboost1():
@@ -300,22 +310,27 @@ def clickboost2():
                 clickupgcheck1) + int(
                 clickupgcheck2))), column=2, sticky=E)
 
+
 # AUTOMATIC MONEY
 def automoney():
     global money, autoclick, autoclick2, autoprice, printmoney, printmoney2, printprice, counterfeit, counterfeit2, \
-        counterfeitprice, sharecrash, sharecrash2, shareprice, mps, check, goldbutton, goldcheck
+        counterfeitprice, sharecrash, sharecrash2, shareprice, mps, check, goldbutton, goldcheck, time, timevar
     money = round(float(money), 2)
 
-    # gold UPGRADE
     if check == int(10):
+        # GOLD UPGRADE
         random1 = randint(1, 300)
         check = int(1)
-        if random1 == int(1):
-            if goldcheck == int(0):
+        if random1 == int(1) and goldcheck == int(0):
                 goldbutton = Button(master, image=gold, width=70, height=50, text="", command=goldupgrade)
                 goldbutton.image = gold
                 goldbutton.place(x=(int(randint(0, 500))), y=(int(randint(0, 200))))
                 goldcheck = int(1)
+        # ACHIEVEMENT UPDATES
+        timevar.set("Total time: " + str(time))
+        totalclicksvar.set("Total clicks: " + str(totalclicks))
+
+    time += 1
 
     # BUG FIXER
     while mps > (autoclick + printmoney * 15 + counterfeit * 321 + sharecrash * 969):
@@ -359,7 +374,7 @@ def savegame():
          "upg1h1", int(upgcheck1h1), "upg1h2", int(upgcheck1h2), "upg2h1", int(upgcheck2h1), "upg2h2", int(upgcheck2h2),
          "upg3", int(upgcheck3), "upg4",
          int(upgcheck4), "cupg1", int(clickupgcheck1), "cupg2", int(clickupgcheck2), "money", float(money)]
-    savefile = (str("_".join(str(v) for v in x))).encode("hex")
+    savefile = str((str("_".join(str(v) for v in x))).encode("hex") + ";")
     f = open("savefile.txt", "w")
     f.write(str(savefile))
     f.close()
@@ -378,7 +393,7 @@ def resetgame():
         x = ["auto", int(0), "print", int(0), "counter", int(0), "shares", int(0), "upg1h1", int(0), "upg1h2", int(0),
              "upg2h1", int(0), "upg2h2", int(0), "upg3", int(0), "upg4", int(0), "cupg1", int(0), "cupg2", int(0),
              "money", float(0)]
-        resetfile = (str("_".join(str(v) for v in x))).encode("hex")
+        resetfile = str((str("_".join(str(v) for v in x))).encode("hex") + ";")
         f = open("savefile.txt", "w")
         f.write(str(resetfile))
         f.close()
@@ -475,11 +490,13 @@ def hideupgrades():
 check = 0
 upgbuttoncheck = 0
 goldcheck = 0
+totalclicks = 0
+time = 0
 click = 0
 animate = 0
 clickcolourcheck = 1
 g = open("savefile.txt")
-g2 = (str(g.readline()).decode("hex")).split("_")
+g2 = (str(str(g.read()).split(";")[0]).decode("hex")).split("_")
 upgcheck1h1 = int(g2[9])
 upgcheck1h2 = int(g2[11])
 upgcheck2h1 = int(g2[13])
@@ -596,14 +613,14 @@ incbutton4.grid(row=7, column=0, sticky=W)
 checklabel4 = Label(master, textvariable=sharecrashtkinter, width=35)
 checklabel4.grid(row=8, column=0, sticky=W)
 
-statcollapse = Button(master, text="Stats", width=10, command=statcollapse)
-statcollapse.grid(row=9, column=0, sticky=W)
+statsbutton = Button(master, text="Stats", width=10, command=statsexpand)
+statsbutton.grid(row=9, column=0, sticky=W)
 
 resetbutton = Button(master, text="Reset Game", width=10, command=resetgame)
 resetbutton.grid(row=10, column=0, sticky=W)
 
 savebutton = Button(master, text="Save Game", width=10, command=savegame)
-savebutton.grid(row=9, column=2, sticky=E)
+savebutton.grid(row=10, column=2, sticky=E)
 
 Animation1 = PhotoImage(file="Animation1.gif")
 Animation2 = PhotoImage(file="Animation2.gif")
@@ -625,24 +642,25 @@ def animationthingy():
         animation3.image = Animation3
     clickcolour()
 
+
 def clickcolour():
-    global clickcolourcheck
+    global clickcolourcheck, clickbutton
     clickcolourcheck += 1
     if clickcolourcheck == 2:
-         clickbutton.configure(bg="red")
+        clickbutton.configure(bg="red")
     elif clickcolourcheck == 3:
-         clickbutton.configure(bg="orange")
+        clickbutton.configure(bg="orange")
     elif clickcolourcheck == 4:
-         clickbutton.configure(bg="yellow")
+        clickbutton.configure(bg="yellow")
     elif clickcolourcheck == 5:
-         clickbutton.configure(bg="green")
+        clickbutton.configure(bg="green")
     elif clickcolourcheck == 6:
-         clickbutton.configure(bg="blue")
+        clickbutton.configure(bg="blue")
     elif clickcolourcheck == 7:
-         clickbutton.configure(bg="purple")
+        clickbutton.configure(bg="purple")
     elif clickcolourcheck == 8:
-         clickbutton.configure(bg="violet")
-         clickcolourcheck = 1
+        clickbutton.configure(bg="violet")
+        clickcolourcheck = 1
 
 
 mainloop()
