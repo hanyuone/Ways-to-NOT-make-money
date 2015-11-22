@@ -5,12 +5,16 @@ Also, if you have downloaded this game and find any bugs, please post them to th
 
 NOTE: This game currently requires the user to download Python to run. An executable file will be posted sometime in the future!
 
-Line Amount: 618 lines (and counting!)
+Line Amount: 652 lines (and counting!)
 
-Version: 0.5.1
+Version: 0.5.3-1
 
 Updates:
     
+     0.5.3-1:
+            -Fixed the savefile (YAY)
+            -Started on stats
+     
      0.5.2:
             -Added a colour changed on click of +Money Button (Yes, it's addictive)
             -Fixed Gold Button
