@@ -9,8 +9,11 @@ gold = PhotoImage(file="gold.gif")
 
 
 def statsexpand():
-    global totalclicks, totalclicksvar, time, timevar
+    global totalclicks, totalclickslabel, totalclicksvar, time, timevar, timelabel, statscheck, hidestatsbutton
     statsbutton.destroy()
+    resetbutton.grid(row=9, column=0, sticky=W)
+    savebutton.grid(row=9, column=2, sticky=E)
+    statscheck += 1
     totalclicksvar = StringVar()
     totalclicksvar.set("Total clicks: " + str(totalclicks))
     totalclickslabel = Label(master, textvariable=totalclicksvar)
@@ -19,6 +22,19 @@ def statsexpand():
     timevar.set("Total time: " + str(time))
     timelabel = Label(master, textvariable=timevar)
     timelabel.grid(row=11, column=2, sticky=E)
+    hidestatsbutton = Button(master, text="Hide Stats", command=hidestats)
+    hidestatsbutton.grid(row=12, column=0, sticky=W)
+
+
+def hidestats():
+    global statsbutton
+    totalclickslabel.destroy()
+    timelabel.destroy()
+    hidestatsbutton.destroy()
+    resetbutton.grid(row=10, column=0, sticky=W)
+    savebutton.grid(row=10, column=2, sticky=E)
+    statsbutton = Button(master, text="Stats", width=10, command=statsexpand)
+    statsbutton.grid(row=9, column=0, sticky=W)
 
 
 # AUTO CLICKER
@@ -209,7 +225,7 @@ def deduction3():
             automoney()
 
 
-# SHAREMARKET CRASH
+# derp
 def boostauto4():
     global money, sharecrash, sharecrash2, upgcheck4, mps
     if money < 12345678 or sharecrash2 == 0:
@@ -314,10 +330,11 @@ def clickboost2():
 # AUTOMATIC MONEY
 def automoney():
     global money, autoclick, autoclick2, autoprice, printmoney, printmoney2, printprice, counterfeit, counterfeit2, \
-        counterfeitprice, sharecrash, sharecrash2, shareprice, mps, check, goldbutton, goldcheck, time, timevar
+        counterfeitprice, sharecrash, sharecrash2, shareprice, mps, check, goldbutton, goldcheck, time
     money = round(float(money), 2)
 
     if check == int(10):
+        global timevar
         # GOLD UPGRADE
         random1 = randint(1, 300)
         check = int(1)
@@ -327,8 +344,9 @@ def automoney():
                 goldbutton.place(x=(int(randint(0, 500))), y=(int(randint(0, 200))))
                 goldcheck = int(1)
         # ACHIEVEMENT UPDATES
-        timevar.set("Total time: " + str(time))
-        totalclicksvar.set("Total clicks: " + str(totalclicks))
+        if statscheck == 1:
+            timevar.set("Total time: " + str(time))
+            totalclicksvar.set("Total clicks: " + str(totalclicks))
 
     time += 1
 
@@ -494,6 +512,7 @@ totalclicks = 0
 time = 0
 click = 0
 animate = 0
+statscheck = 0
 clickcolourcheck = 1
 g = open("savefile.txt")
 g2 = (str(str(g.read()).split(";")[0]).decode("hex")).split("_")
