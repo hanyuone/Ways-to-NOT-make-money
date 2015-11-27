@@ -334,7 +334,6 @@ def automoney():
     money = round(float(money), 2)
 
     if check == int(10):
-        global timevar
         # GOLD UPGRADE
         random1 = randint(1, 300)
         check = int(1)
@@ -345,6 +344,7 @@ def automoney():
                 goldcheck = int(1)
         # ACHIEVEMENT UPDATES
         if statscheck == 1:
+            global timevar, totalclicksvar
             timevar.set("Total time: " + str(time))
             totalclicksvar.set("Total clicks: " + str(totalclicks))
 
