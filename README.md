@@ -5,14 +5,24 @@ Also, if you have downloaded this game and find any bugs, please post them to th
 
 NOTE: This game currently requires the user to download Python to run. An executable file will be posted sometime in the future!
 
-Line Amount: 652 lines (and counting!)
+Line Amount: 734 lines (and counting!)
 
-Version: 0.5.3-1
+Version: 0.6.0
 
-Updates:
+Changelog:
     
+     0.6.0:
+            -Implemented a "millions" thing, which should prevent (or at least delay) the OverflowError
+    
+     0.5.3-3:
+            -Fixed two main bugs, the timevar and totalclicksvar bugs.
+     
+     0.5.3-2:
+            -Fixed a variety of bugs. (HOORAY FOR BUG FIXING)
+     
      0.5.3-1:
             -Fixed the savefile (YAY)
+            -Implemented an upgrades button
             -Started on stats
      
      0.5.2:
