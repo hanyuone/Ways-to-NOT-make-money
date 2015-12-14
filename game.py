@@ -343,7 +343,8 @@ def automoney():
         counterfeitprice, sharecrash, sharecrash2, shareprice, mps, check, goldbutton, goldcheck, time, moneymillion, \
         templist
     money = round(money, 1)
-    moneymillion = round(float(str(money)[:-7])/10, 1)
+    s=str(money)[:-7]
+    moneymillion = round(float(0.0 if s == '' else s)/10, 1)
     if check == int(10):
         global timevar
         # GOLD UPGRADE
