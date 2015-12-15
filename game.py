@@ -416,8 +416,8 @@ def savegame():
     x = ["auto", int(autoclick2), "print", int(printmoney2), "counter", int(counterfeit2), "shares", int(sharecrash2),
          "upg1h1", int(upgcheck1h1), "upg1h2", int(upgcheck1h2), "upg2h1", int(upgcheck2h1), "upg2h2", int(upgcheck2h2),
          "upg3", int(upgcheck3), "upg4",
-         int(upgcheck4), "cupg1", int(clickupgcheck1), "cupg2", int(clickupgcheck2), "million", float(moneymillion),
-         "money", float(((str(money)[::-1])[:8])[::-1])]
+         int(upgcheck4), "cupg1", int(clickupgcheck1), "cupg2", int(clickupgcheck2),
+         "money", float(((str(money)[::-1])[:8])[::-1]), "million", float(moneymillion)]
     savefile = str((str("_".join(str(v) for v in x))).encode("hex") + ";")
     f = open("savefile.txt", "w")
     f.write(str(savefile))
@@ -435,8 +435,8 @@ def resetgame():
 
     def pressyes():
         x = ["auto", int(0), "print", int(0), "counter", int(0), "shares", int(0), "upg1h1", int(0), "upg1h2", int(0),
-             "upg2h1", int(0), "upg2h2", int(0), "upg3", int(0), "upg4", int(0), "cupg1", int(0), "cupg2", int(0),
-             "million", float(0), "money", float(0)]
+             "upg2h1", int(0), "upg2h2", int(0), "upg3", int(0), "upg4", int(0), "cupg1", int(0), "cupg2", int(0)
+             , "money", float(0), "million", float(0)]
         resetfile = str((str("_".join(str(v) for v in x))).encode("hex") + ";")
         f = open("savefile.txt", "w")
         f.write(str(resetfile))
