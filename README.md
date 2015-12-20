@@ -5,11 +5,20 @@ Also, if you have downloaded this game and find any bugs, please post them to th
 
 NOTE: This game currently requires the user to download Python to run. An executable file will be posted sometime in the future!
 
-Line Amount: 734 lines (and counting!)
+Line Amount: 974 lines (and counting!)
 
-Version: 0.6.0
+Version: 0.6.0-2
 
 Changelog:
+
+     0.6.0-2:
+            -Fixed a variety of bugs (thanks qlstudio).
+                -Fixed the OverflowError for the buildings themselves
+                -Checked for conflict with all the "-illion"'s, no conflict (so far).
+
+     0.6.0-1:
+            -Further added to the "million", creating "billion" to "quintillion", which should delay the OverflowError further (most annoying error so far).
+            -Fixed the "million", and now there should be no conflict.
     
      0.6.0:
             -Implemented a "millions" thing, which should prevent (or at least delay) the OverflowError
