@@ -111,6 +111,7 @@ def boostauto1h1():
         toplevel = Toplevel()
         norequirements1 = Message(toplevel, text="%s" % norequirements)
         norequirements1.pack()
+        toplevel.bell()
     else:
         money -= 5000
         autoclick = int(autoclick * 15) / 10
@@ -141,6 +142,7 @@ def boostauto1h2():
         toplevel = Toplevel()
         norequirements2 = Message(toplevel, text="%s" % norequirements)
         norequirements2.pack()
+        toplevel.bell()
     else:
         money -= 555555
         autoclick = int(autoclick * 50) / 10
@@ -166,6 +168,7 @@ def deduction1():
         toplevel = Toplevel()
         cannotafford1 = Message(toplevel, text="%s" % cannotafford)
         cannotafford1.pack()
+        toplevel.bell()
     else:
         money -= int(autoprice)
         autoclick += (1 + upgcheck1h1 * 2 + upgcheck1h2 * 18)
@@ -187,6 +190,7 @@ def boostauto2h1():
         toplevel = Toplevel()
         norequirements3 = Message(toplevel, text="%s" % norequirements)
         norequirements3.pack()
+        toplevel.bell()
     else:
         money -= 42000
         printmoney = int(float(printmoney * 15) / 10)
@@ -235,6 +239,7 @@ def deduction2():
         toplevel = Toplevel()
         cannotafford2 = Message(toplevel, text="%s" % cannotafford)
         cannotafford2.pack()
+        toplevel.bell()
     else:
         money -= int(printprice)
         printmoney += (1 + upgcheck2h1 * 2 + upgcheck2h2 * 18)
@@ -256,6 +261,7 @@ def boostauto3():
         toplevel = Toplevel()
         norequirements5 = Message(toplevel, text="%s" % norequirements)
         norequirements5.pack()
+        toplevel.bell()
     else:
         money -= 2133748
         counterfeit = int(counterfeit * 15) / 10
@@ -278,6 +284,7 @@ def deduction3():
         toplevel = Toplevel()
         cannotafford3 = Message(toplevel, text="%s" % cannotafford)
         cannotafford3.pack()
+        toplevel.bell()
     else:
         money -= int(counterfeitprice)
         counterfeit += (1 + upgcheck3 * 2)
@@ -299,6 +306,7 @@ def boostauto4():
         toplevel = Toplevel()
         norequirements6 = Message(toplevel, text="%s" % norequirements)
         norequirements6.pack()
+        toplevel.bell()
     else:
         money -= 12345678
         sharecrash = int(sharecrash * 15) / 10
@@ -313,6 +321,7 @@ def deduction4():
     if money < int(shareprice):
         toplevel = Toplevel()
         cannotafford4 = Message(toplevel, text="%s" % cannotafford)
+        toplevel.bell()
         cannotafford4.pack()
     else:
         money -= int(shareprice)
@@ -349,6 +358,7 @@ def clickboost1():
         toplevel = Toplevel()
         norequirements7 = Message(toplevel, text="%s" % norequirements)
         norequirements7.pack()
+        toplevel.bell()
     else:
         money -= 2100
         inc += 2
@@ -379,6 +389,7 @@ def clickboost2():
         toplevel = Toplevel()
         norequirements8 = Message(toplevel, text="%s" % norequirements)
         norequirements8.pack()
+        toplevel.bell()
     else:
         money -= 200000
         inc += mps/10
