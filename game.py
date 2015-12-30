@@ -108,10 +108,12 @@ def hidestats():
 def boostauto1h1():
     global money, autoclick, autoclick2, upgcheck1h1, mps
     if money < 5000 or autoclick2 == 0:
-        toplevel = Toplevel()
-        norequirements1 = Message(toplevel, text="%s" % norequirements)
-        norequirements1.pack()
-        toplevel.bell()
+        global boostafford1h1
+        boostbutton1h1.destroy()
+        master.bell()
+        boostafford1h1 = Label(master, text="%s" % norequirements, width=35)
+        boostafford1h1.grid(row=int(2 - int(clickupgcheck1)), column=2, sticky=E)
+        master.after(500, norequirements1h1)
     else:
         money -= 5000
         autoclick = int(autoclick * 15) / 10
@@ -136,13 +138,24 @@ def boostauto1h1():
                 clickupgcheck2))), column=2, sticky=E)
 
 
+def norequirements1h1():
+    global boostafford1h1, boostbutton1h1
+    boostafford1h1.destroy()
+    boostbutton1h1 = Button(master, text="Stronger Mouses (Costs: $5000)", width=35, command=boostauto1h1)
+    boostbutton1h1.grid(row=int(2 - int(clickupgcheck1)), column=2, sticky=E)
+
+
 def boostauto1h2():
     global money, autoclick, autoclick2, upgcheck1h2, mps
     if money < 555555 or upgcheck1h1 == 0:
-        toplevel = Toplevel()
-        norequirements2 = Message(toplevel, text="%s" % norequirements)
-        norequirements2.pack()
-        toplevel.bell()
+        global boostafford1h2
+        boostbutton1h2.destroy()
+        master.bell()
+        boostafford1h2 = Label(master, text="%s" % norequirements, width=35)
+        boostafford1h2.grid(
+            row=int(5 - (int(upgcheck1h1) + int(upgcheck2h1) + int(clickupgcheck1) + int(clickupgcheck2))), column=2,
+            sticky=E)
+        master.after(500, norequirements1h2)
     else:
         money -= 555555
         autoclick = int(autoclick * 50) / 10
@@ -162,13 +175,25 @@ def boostauto1h2():
                 clickupgcheck2))), column=2, sticky=E)
 
 
+def norequirements1h2():
+    global boostbutton1h2, boostafford1h2
+    boostafford1h2.destroy()
+    boostbutton1h2 = Button(master, text="Experienced Clickers (Costs: $555555)", width=35,
+                            command=boostauto1h2)
+    boostbutton1h2.grid(
+            row=int(5 - (int(upgcheck1h1) + int(upgcheck2h1) + int(clickupgcheck1) + int(clickupgcheck2))),
+            column=2, sticky=E)
+
+
 def deduction1():
     global money, autoclick, autoclick2, autoprice, counterfeit, printmoney, sharecrash, mps, inc
     if money < int(autoprice):
-        toplevel = Toplevel()
-        cannotafford1 = Message(toplevel, text="%s" % cannotafford)
-        cannotafford1.pack()
-        toplevel.bell()
+        global incafford1, incbutton1
+        incbutton1.destroy()
+        master.bell()
+        incafford1 = Label(master, text="%s" % cannotafford, width=35)
+        incafford1.grid(row=1, column=0, sticky=W)
+        master.after(500, cannotafford1)
     else:
         money -= int(autoprice)
         autoclick += (1 + upgcheck1h1 * 2 + upgcheck1h2 * 18)
@@ -177,20 +202,53 @@ def deduction1():
         mpstkinter.set("MPS: " + str(mps))
         autoclicktkinter.set("Auto-Clickers Amount: " + str(autoclick2))
         autoprice = int(20 * (math.pow(1.2, autoclick2)))
+        autopricechoice()
+    inc = int(inc + math.pow(int(clickupgcheck2 * (autoclick + printmoney + counterfeit + sharecrash)), 1.01))
+    if autoclick == 1 and sharecrash == 0 and counterfeit == 0 and printmoney == 0:
+        automoney()
+
+
+def autopricechoice():
+    if len(str(autoprice)) <= 8:
         autopricetkinter.set("Auto-Clicker (Costs: $" + str(autoprice) + ")")
-        inc = int(inc + math.pow(int(clickupgcheck2 * (autoclick + printmoney + counterfeit + sharecrash)), 1.01))
-        if autoclick == 1 and sharecrash == 0 and counterfeit == 0 and printmoney == 0:
-            automoney()
+    else:
+        autopricemillion = round((float(str(autoprice)[:-7])/10), 1)
+        if len(str(autoprice)) <= 11:
+            autopricetkinter.set("Auto-Clicker (Costs: $" + str(autopricemillion) + "m)")
+        else:
+            autopricebillion = round((float(str(autopricemillion)[:-4])/10), 1)
+            if len(str(autoprice)) <= 14:
+                autopricetkinter.set("Auto-Clicker (Costs: $" + str(autopricebillion) + "b)")
+            else:
+                autopricetrillion = round((float(str(autopricebillion)[:-4])/10), 1)
+                if len(str(autoprice)) <= 17:
+                    autopricetkinter.set("Auto-Clicker (Costs: $" + str(autopricetrillion) + "t)")
+                else:
+                    autopricequadrillion = round((float(str(autopricetrillion)[:-4])/10), 1)
+                    if len(str(autoprice)) <= 20:
+                        autopricetkinter.set("Auto-Clicker (Costs: $" + str(autopricequadrillion) + "q)")
+                    else:
+                        autopricequintillion = round((float(str(autopricequadrillion)[:-4])/10), 1)
+                        autopricetkinter.set("Auto-Clicker (Costs : $" + str(autopricequintillion) + "Q)")
+
+
+def cannotafford1():
+    global incafford1, incbutton1
+    incafford1.destroy()
+    incbutton1 = Button(master, textvariable=autopricetkinter, width=35, command=deduction1)
+    incbutton1.grid(row=1, column=0, sticky=W)
 
 
 # MONEY PRINTER
 def boostauto2h1():
     global money, printmoney, printmoney2, upgcheck2h1, mps
     if money < 42000 or printmoney2 == 0:
-        toplevel = Toplevel()
-        norequirements3 = Message(toplevel, text="%s" % norequirements)
-        norequirements3.pack()
-        toplevel.bell()
+        global boostafford2h1
+        boostbutton2h1.destroy()
+        master.bell()
+        boostafford2h1 = Label(master, text="%s" % norequirements, width=35)
+        boostafford2h1.grid(row=int(3 - (int(upgcheck1h1) + int(clickupgcheck1))), column=2, sticky=E)
+        master.after(500, norequirements2h1)
     else:
         money -= 42000
         printmoney = int(float(printmoney * 15) / 10)
@@ -214,12 +272,25 @@ def boostauto2h1():
                 clickupgcheck2))), column=2, sticky=E)
 
 
+def norequirements2h1():
+    global boostbutton2h1
+    boostafford2h1.destroy()
+    boostbutton2h1 = Button(master, text="Unofficial Printer License (Costs: $42000)", width=35,
+                            command=boostauto2h1)
+    boostbutton2h1.grid(row=int(3 - (int(upgcheck1h1) + int(clickupgcheck1))), column=2, sticky=E)
+
+
 def boostauto2h2():
     global money, printmoney, printmoney2, upgcheck2h2, mps
     if money < 7777777 or upgcheck2h1 == 0:
-        toplevel = Toplevel()
-        norequirements4 = Message(toplevel, text="%s" % norequirements)
-        norequirements4.pack()
+        global boostafford2h2
+        boostbutton2h2.destroy()
+        master.bell()
+        boostafford2h2 = Label(master, text="%s" % norequirements, width=35)
+        boostafford2h2.grid(row=int(7 - (int(upgcheck1h1) + int(upgcheck1h2) + int(upgcheck2h1) + int(upgcheck3) +
+                                         int(upgcheck4) + int(clickupgcheck1) + int(clickupgcheck2))), column=2,
+                            sticky=E)
+        master.after(500, norequirements2h2)
     else:
         money -= 7777777
         printmoney = int(float(printmoney * 50) / 10)
@@ -229,17 +300,27 @@ def boostauto2h2():
         boostbutton2h2.destroy()
         boostbutton4.grid(row=int(8 - (
             int(upgcheck1h1) + int(upgcheck1h2) + int(upgcheck2h1) + int(upgcheck2h2) + int(upgcheck3) + int(
-                clickupgcheck1) + int(
+                clickupgcheck1) + int(clickupgcheck2))), column=2, sticky=E)
+
+
+def norequirements2h2():
+    global boostbutton2h2
+    boostafford2h2.destroy()
+    boostbutton2h2 = Button(master, text="Printing Press (Costs: $7777777)", width=35, command=boostauto2h2)
+    boostbutton2h2.grid(row=int(7 - (
+            int(upgcheck1h1) + int(upgcheck1h2) + int(upgcheck2h1) + int(upgcheck3) + int(clickupgcheck1) + int(
                 clickupgcheck2))), column=2, sticky=E)
 
 
 def deduction2():
     global money, printmoney, printmoney2, printprice, sharecrash, counterfeit, autoclick, mps, inc
     if money < int(printprice):
-        toplevel = Toplevel()
-        cannotafford2 = Message(toplevel, text="%s" % cannotafford)
-        cannotafford2.pack()
-        toplevel.bell()
+        global incafford2, incbutton2
+        incbutton2.destroy()
+        master.bell()
+        incafford2 = Label(master, text="%s" % cannotafford, width=35)
+        incafford2.grid(row=3, column=0, sticky=W)
+        master.after(500, cannotafford2)
     else:
         money -= int(printprice)
         printmoney += (1 + upgcheck2h1 * 2 + upgcheck2h2 * 18)
@@ -248,20 +329,55 @@ def deduction2():
         mpstkinter.set("MPS: " + str(mps))
         printmoneytkinter.set("Money Printers Amount: " + str(printmoney2))
         printprice = int(375 * (math.pow(1.2, printmoney2)))
-        printpricetkinter.set("Money Printer (Costs: $" + str(printprice) + ")")
+        printpricechoice()
         inc = int(inc + math.pow(int(clickupgcheck2 * (autoclick + printmoney + counterfeit + sharecrash)), 1.01))
         if printmoney == 1 and sharecrash == 0 and counterfeit == 0 and autoclick == 0:
             automoney()
+
+
+def printpricechoice():
+    if len(str(printprice)) <= 8:
+        printpricetkinter.set("Auto-Clicker (Costs: $" + str(printprice) + ")")
+    else:
+        printpricemillion = round((float(str(printprice)[:-7])/10), 1)
+        if len(str(printprice)) <= 11:
+            printpricetkinter.set("Auto-Clicker (Costs: $" + str(printpricemillion) + "m)")
+        else:
+            printpricebillion = round((float(str(printpricemillion)[:-4])/10), 1)
+            if len(str(printprice)) <= 14:
+                printpricetkinter.set("Auto-Clicker (Costs: $" + str(printpricebillion) + "b)")
+            else:
+                printpricetrillion = round((float(str(printpricebillion)[:-4])/10), 1)
+                if len(str(printprice)) <= 17:
+                    printpricetkinter.set("Auto-Clicker (Costs: $" + str(printpricetrillion) + "t)")
+                else:
+                    printpricequadrillion = round((float(str(printpricetrillion)[:-4])/10), 1)
+                    if len(str(printprice)) <= 20:
+                        printpricetkinter.set("Auto-Clicker (Costs: $" + str(printpricequadrillion) + "q)")
+                    else:
+                        printpricequintillion = round((float(str(printpricequadrillion)[:-4])/10), 1)
+                        printpricetkinter.set("Auto-Clicker (Costs : $" + str(printpricequintillion) + "Q)")
+
+
+def cannotafford2():
+    global incafford2, incbutton2
+    incafford2.destroy()
+    incbutton2 = Button(master, textvariable=printpricetkinter, width=35, command=deduction2)
+    incbutton2.grid(row=3, column=0, sticky=W)
 
 
 # COUNTERFEIT COMPANY
 def boostauto3():
     global money, counterfeit, counterfeit2, upgcheck3, mps
     if money < 2133748 or counterfeit2 == 0:
-        toplevel = Toplevel()
-        norequirements5 = Message(toplevel, text="%s" % norequirements)
-        norequirements5.pack()
-        toplevel.bell()
+        global boostafford3
+        boostbutton3.destroy()
+        master.bell()
+        boostafford3 = Label(master, text="%s" % norequirements, width=35)
+        boostafford3.grid(row=int(
+            6 - (int(upgcheck1h1) + int(upgcheck1h2) + int(upgcheck2h1) + int(clickupgcheck1) + int(clickupgcheck2))),
+            column=2, sticky=E)
+        master.after(500, norequirements3)
     else:
         money -= 2133748
         counterfeit = int(counterfeit * 15) / 10
@@ -272,19 +388,28 @@ def boostauto3():
         boostbutton2h2.grid(row=int(7 - (
             int(upgcheck1h1) + int(upgcheck1h2) + int(upgcheck2h1) + int(upgcheck3) + int(upgcheck4) + int(
                 clickupgcheck1) + int(clickupgcheck2))), column=2, sticky=E)
-        boostbutton4.grid(row=int(8 - (
-            int(upgcheck1h1) + int(upgcheck1h2) + int(upgcheck2h1) + int(upgcheck2h2) + int(upgcheck3) + int(
-                clickupgcheck1) + int(
-                clickupgcheck2))), column=2, sticky=E)
+        boostbutton4.grid(row=int(8 - (int(upgcheck1h1) + int(upgcheck1h2) + int(upgcheck2h1) + int(upgcheck2h2) +
+                                       int(upgcheck3) + int(clickupgcheck1) + int(clickupgcheck2))), column=2, sticky=E)
+
+
+def norequirements3():
+    global boostbutton3
+    boostafford3.destroy()
+    boostbutton3 = Button(master, text="Skilled Fake Money Making (Costs: $2133748)", width=35,
+                          command=boostauto3)
+    boostbutton3.grid(row=int(6 - (int(upgcheck1h1) + int(upgcheck1h2) + int(upgcheck2h1) + int(clickupgcheck1) +
+                      int(clickupgcheck2))), column=2, sticky=E)
 
 
 def deduction3():
     global money, counterfeit, counterfeit2, counterfeitprice, sharecrash, printmoney, autoclick, mps, inc
     if money < int(counterfeitprice):
-        toplevel = Toplevel()
-        cannotafford3 = Message(toplevel, text="%s" % cannotafford)
-        cannotafford3.pack()
-        toplevel.bell()
+        global incafford3, incbutton3
+        incbutton3.destroy()
+        master.bell()
+        incafford3 = Label(master, text="%s" % cannotafford, width=35)
+        incafford3.grid(row=5, column=0, sticky=W)
+        master.after(500, cannotafford3)
     else:
         money -= int(counterfeitprice)
         counterfeit += (1 + upgcheck3 * 2)
@@ -293,20 +418,54 @@ def deduction3():
         mpstkinter.set("MPS: " + str(mps))
         counterfeittkinter.set("Counterfeit Companies Amount: " + str(counterfeit2))
         counterfeitprice = int(9001 * (math.pow(1.2, counterfeit2)))
-        counterfeitpricetkinter.set("Counterfeit Company (Costs: $" + str(counterfeitprice) + ")")
+        counterfeitpricechoice()
         inc = int(inc + math.pow(int(clickupgcheck2 * (autoclick + printmoney + counterfeit + sharecrash)), 1.01))
         if counterfeit == 1 and sharecrash == 0 and printmoney == 0 and autoclick == 0:
             automoney()
+
+
+def counterfeitpricechoice():
+    if len(str(counterfeitprice)) <= 8:
+        counterfeitpricetkinter.set("Auto-Clicker (Costs: $" + str(counterfeitprice) + ")")
+    else:
+        counterfeitpricemillion = round((float(str(counterfeitprice)[:-7])/10), 1)
+        if len(str(counterfeitprice)) <= 11:
+            counterfeitpricetkinter.set("Auto-Clicker (Costs: $" + str(counterfeitpricemillion) + "m)")
+        else:
+            counterfeitpricebillion = round((float(str(counterfeitpricemillion)[:-4])/10), 1)
+            if len(str(counterfeitprice)) <= 14:
+                counterfeitpricetkinter.set("Auto-Clicker (Costs: $" + str(counterfeitpricebillion) + "b)")
+            else:
+                counterfeitpricetrillion = round((float(str(counterfeitpricebillion)[:-4])/10), 1)
+                if len(str(counterfeitprice)) <= 17:
+                    counterfeitpricetkinter.set("Auto-Clicker (Costs: $" + str(counterfeitpricetrillion) + "t)")
+                else:
+                    counterfeitpricequadrillion = round((float(str(counterfeitpricetrillion)[:-4])/10), 1)
+                    if len(str(counterfeitprice)) <= 20:
+                        counterfeitpricetkinter.set("Auto-Clicker (Costs: $" + str(counterfeitpricequadrillion) + "q)")
+                    else:
+                        counterfeitpricequintillion = round((float(str(counterfeitpricequadrillion)[:-4])/10), 1)
+                        counterfeitpricetkinter.set("Auto-Clicker (Costs : $" + str(counterfeitpricequintillion) + "Q)")
+
+
+def cannotafford3():
+    global incafford3, incbutton3
+    incafford3.destroy()
+    incbutton3 = Button(master, textvariable=counterfeitpricetkinter, width=35, command=deduction3)
+    incbutton3.grid(row=5, column=0, sticky=W)
 
 
 # SHAREMARKET CRASH
 def boostauto4():
     global money, sharecrash, sharecrash2, upgcheck4, mps
     if money < 12345678 or sharecrash2 == 0:
-        toplevel = Toplevel()
-        norequirements6 = Message(toplevel, text="%s" % norequirements)
-        norequirements6.pack()
-        toplevel.bell()
+        global boostafford4
+        boostbutton4.destroy()
+        master.bell()
+        boostafford4 = Label(master, text="%s" % norequirements, width=35)
+        boostafford4.grid(row=int(8 - (int(upgcheck1h1) + int(upgcheck1h2) + int(upgcheck2h1) + int(upgcheck2h2) +
+                                       int(upgcheck3) + int(clickupgcheck1) + int(clickupgcheck2))), column=2, sticky=E)
+        master.after(500, norequirements4)
     else:
         money -= 12345678
         sharecrash = int(sharecrash * 15) / 10
@@ -316,13 +475,24 @@ def boostauto4():
         boostbutton4.destroy()
 
 
+def norequirements4():
+    global boostbutton4
+    boostafford4.destroy()
+    boostbutton4 = Button(master, text="Sharemarket Catastrophe (Costs: $12345678)", width=35,
+                          command=boostauto4)
+    boostbutton4.grid(row=int(8 - (int(upgcheck1h1) + int(upgcheck1h2) + int(upgcheck2h1) + int(upgcheck2h2) +
+                                   int(upgcheck3) + int(clickupgcheck1) + int(clickupgcheck2))), column=2, sticky=E)
+
+
 def deduction4():
     global money, sharecrash, sharecrash2, shareprice, counterfeit, printmoney, autoclick, mps, inc
     if money < int(shareprice):
-        toplevel = Toplevel()
-        cannotafford4 = Message(toplevel, text="%s" % cannotafford)
-        toplevel.bell()
-        cannotafford4.pack()
+        global incafford4, incbutton4
+        incbutton4.destroy()
+        master.bell()
+        incafford4 = Label(master, text="%s" % cannotafford, width=35)
+        incafford4.grid(row=7, column=0, sticky=W)
+        master.after(500, cannotafford4)
     else:
         money -= int(shareprice)
         sharecrash += (1 + upgcheck4 * 2)
@@ -331,10 +501,41 @@ def deduction4():
         mpstkinter.set("MPS: " + str(mps))
         sharecrashtkinter.set("Sharemarket Crashes Amount: " + str(sharecrash2))
         shareprice = int(42000 * (math.pow(1.2, sharecrash2)))
-        sharepricetkinter.set("Sharemarket Crash (Costs: $" + str(shareprice) + ")")
+        sharepricechoice()
         inc = int(inc + math.pow(int(clickupgcheck2 * (autoclick + printmoney + counterfeit + sharecrash)), 1.01))
         if sharecrash == 1 and counterfeit == 0 and printmoney == 0 and autoclick == 0:
             automoney()
+
+
+def sharepricechoice():
+    if len(str(shareprice)) <= 8:
+        sharepricetkinter.set("Auto-Clicker (Costs: $" + str(shareprice) + ")")
+    else:
+        sharepricemillion = round((float(str(shareprice)[:-7])/10), 1)
+        if len(str(shareprice)) <= 11:
+            sharepricetkinter.set("Auto-Clicker (Costs: $" + str(sharepricemillion) + "m)")
+        else:
+            sharepricebillion = round((float(str(sharepricemillion)[:-4])/10), 1)
+            if len(str(shareprice)) <= 14:
+                sharepricetkinter.set("Auto-Clicker (Costs: $" + str(sharepricebillion) + "b)")
+            else:
+                sharepricetrillion = round((float(str(sharepricebillion)[:-4])/10), 1)
+                if len(str(shareprice)) <= 17:
+                    sharepricetkinter.set("Auto-Clicker (Costs: $" + str(sharepricetrillion) + "t)")
+                else:
+                    sharepricequadrillion = round((float(str(sharepricetrillion)[:-4])/10), 1)
+                    if len(str(shareprice)) <= 20:
+                        sharepricetkinter.set("Auto-Clicker (Costs: $" + str(sharepricequadrillion) + "q)")
+                    else:
+                        sharepricequintillion = round((float(str(sharepricequadrillion)[:-4])/10), 1)
+                        sharepricetkinter.set("Auto-Clicker (Costs : $" + str(sharepricequintillion) + "Q)")
+
+
+def cannotafford4():
+    global incafford4, incbutton4
+    incafford4.destroy()
+    incbutton4 = Button(master, textvariable=sharepricetkinter, width=35, command=deduction4)
+    incbutton4.grid(row=7, column=0, sticky=W)
 
 
 # CLICKS
@@ -355,10 +556,11 @@ def collectmoney():
 def clickboost1():
     global money, inc, clickupgcheck1
     if money < 2100:
-        toplevel = Toplevel()
-        norequirements7 = Message(toplevel, text="%s" % norequirements)
-        norequirements7.pack()
-        toplevel.bell()
+        global clickafford1
+        clickbooster1.destroy()
+        clickafford1 = Label(master, text="%s" % norequirements, width=35)
+        clickafford1.grid(row=1, column=2, sticky=E)
+        master.after(500, norequirementsc1)
     else:
         money -= 2100
         inc += 2
@@ -383,13 +585,22 @@ def clickboost1():
                                       clickupgcheck2))), column=2, sticky=E)
 
 
+def norequirementsc1():
+    global clickbooster1
+    clickafford1.destroy()
+    clickbooster1 = Button(master, text="Reinforced Button (Costs: $2100)", width=35, command=clickboost1)
+    clickbooster1.grid(row=1, column=2, sticky=E)
+
+
 def clickboost2():
     global money, inc, mps, clickupgcheck2
     if money < 200000 or clickupgcheck1 == int(0):
-        toplevel = Toplevel()
-        norequirements8 = Message(toplevel, text="%s" % norequirements)
-        norequirements8.pack()
-        toplevel.bell()
+        global clickafford2
+        clickbooster2.destroy()
+        clickafford2 = Label(master, text="%s" % norequirements, width=35)
+        clickafford2.grid(row=int(4 - (int(upgcheck1h1) + int(upgcheck2h1) + int(clickupgcheck1))), column=2,
+                          sticky=E)
+        master.after(500, norequirementsc2)
     else:
         money -= 200000
         inc += mps/10
@@ -406,6 +617,15 @@ def clickboost2():
             int(upgcheck1h1) + int(upgcheck1h2) + int(upgcheck2h1) + int(upgcheck2h2) + int(upgcheck3) + int(
                 clickupgcheck1) + int(
                 clickupgcheck2))), column=2, sticky=E)
+
+
+def norequirementsc2():
+    global clickbooster2
+    clickafford2.destroy()
+    clickbooster2 = Button(master, text="Stainless Steel Button (Costs: $200000)", width=35,
+                           command=clickboost2)
+    clickbooster2.grid(row=int(4 - (int(upgcheck1h1) + int(upgcheck2h1) + int(clickupgcheck1))), column=2,
+                       sticky=E)
 
 
 # AUTOMATIC MONEY
@@ -441,33 +661,33 @@ def automoney2():
         moneymillion, templist1
     if len(str(money)) >= 8:
         moneymillion = round((float(str(money)[:-7])/10), 1)
+        if check == int(10):
+            global timevar
+            # GOLD UPGRADE
+            random1 = randint(1, 300)
+            check = int(1)
+            if random1 == int(1) and goldcheck == int(0):
+                goldbutton = Button(master, image=gold, width=70, height=50, text="", command=goldupgrade)
+                goldbutton.image = gold
+                goldbutton.place(x=(int(randint(0, 450))), y=(int(randint(0, 200))))
+                goldcheck = int(1)
+            # ACHIEVEMENT UPDATES
+            if statscheck == 1:
+                timevar.set("Total time: " + str(time))
+                totalclicksvar.set("Total clicks: " + str(totalclicks))
+            time += 1
+            templist1.append(moneymillion)
+            if len(templist1) > 2:
+                templist1.reverse()
+                templist1.pop()
+                templist1.reverse()
+            if float(templist1[1]) != float(templist1[0]):
+                moneymillion += float(templist1[1] - templist1[0])/10
+        bugfixer()
+        money += mps
+        automoneychoice()
     else:
-        automoney()
-    if check == int(10):
-        global timevar
-        # GOLD UPGRADE
-        random1 = randint(1, 300)
-        check = int(1)
-        if random1 == int(1) and goldcheck == int(0):
-            goldbutton = Button(master, image=gold, width=70, height=50, text="", command=goldupgrade)
-            goldbutton.image = gold
-            goldbutton.place(x=(int(randint(0, 450))), y=(int(randint(0, 200))))
-            goldcheck = int(1)
-        # ACHIEVEMENT UPDATES
-        if statscheck == 1:
-            timevar.set("Total time: " + str(time))
-            totalclicksvar.set("Total clicks: " + str(totalclicks))
-        time += 1
-        templist1.append(moneymillion)
-        if len(templist1) > 2:
-            templist1.reverse()
-            templist1.pop()
-            templist1.reverse()
-        if float(templist1[1]) != float(templist1[0]):
-            moneymillion += float(templist1[1] - templist1[0])/10
-    bugfixer()
-    money += mps
-    automoneychoice()
+        automoneychoice()
 
 
 # AUTOMATIC MONEY (BILLIONS)
@@ -505,7 +725,7 @@ def automoney3():
         check += 1
         automoneychoice()
     else:
-        automoney2()
+        automoneychoice()
 
 
 # AUTOMATIC MONEY (TRILLIONS)
@@ -544,9 +764,10 @@ def automoney4():
         check += 1
         automoneychoice()
     else:
-        automoney3()
+        automoneychoice()
 
 
+# AUTOMATIC MONEY (QUADRILLIONS)
 def automoney5():
     global autoclick, autoclick2, autoprice, printmoney, printmoney2, printprice, counterfeit, counterfeit2, \
         counterfeitprice, sharecrash, sharecrash2, shareprice, mps, check, goldbutton, goldcheck, time, \
@@ -583,9 +804,10 @@ def automoney5():
         check += 1
         automoneychoice()
     else:
-        automoney4()
+        automoneychoice()
 
 
+# AUTOMATIC MONEY (QUINTILLIONS)
 def automoney6():
     global autoclick, autoclick2, autoprice, printmoney, printmoney2, printprice, counterfeit, counterfeit2, \
         counterfeitprice, sharecrash, sharecrash2, shareprice, mps, check, goldbutton, goldcheck, time, \
@@ -623,7 +845,7 @@ def automoney6():
         check += 1
         automoneychoice()
     else:
-        automoney5()
+        automoneychoice()
 
 
 # SAVING GAME
@@ -694,30 +916,23 @@ def showupgrades():
     if upgcheck1h2 == int(0):
         boostbutton1h2 = Button(master, text="Experienced Clickers (Costs: $555555)", width=35,
                                 command=boostauto1h2)
-        boostbutton1h2.grid(
-            row=int(5 - (int(upgcheck1h1) + int(upgcheck2h1) + int(clickupgcheck1) + int(clickupgcheck2))),
-            column=2, sticky=E)
+        boostbutton1h2.grid(row=int(5 - (int(upgcheck1h1) + int(upgcheck2h1) + int(clickupgcheck1) +
+                                         int(clickupgcheck2))), column=2, sticky=E)
     if upgcheck3 == int(0):
         boostbutton3 = Button(master, text="Skilled Fake Money Making (Costs: $2133748)", width=35,
                               command=boostauto3)
         boostbutton3.grid(
-            row=int(6 - (
-                int(upgcheck1h1) + int(upgcheck1h2) + int(upgcheck2h1) + int(clickupgcheck1) + int(
-                    clickupgcheck2))),
-            column=2, sticky=E)
+            row=int(6 - (int(upgcheck1h1) + int(upgcheck1h2) + int(upgcheck2h1) + int(clickupgcheck1) +
+                         int(clickupgcheck2))), column=2, sticky=E)
     if upgcheck2h2 == int(0):
         boostbutton2h2 = Button(master, text="Printing Press (Costs: $7777777)", width=35, command=boostauto2h2)
-        boostbutton2h2.grid(row=int(7 - (
-            int(upgcheck1h1) + int(upgcheck1h2) + int(upgcheck2h1) + int(upgcheck3) + int(clickupgcheck1) + int(
-                clickupgcheck2))),
-                            column=2, sticky=E)
+        boostbutton2h2.grid(row=int(7 - (int(upgcheck1h1) + int(upgcheck1h2) + int(upgcheck2h1) + int(upgcheck3) +
+                                         int(clickupgcheck1) + int(clickupgcheck2))), column=2, sticky=E)
     if upgcheck4 == int(0):
         boostbutton4 = Button(master, text="Sharemarket Catastrophe (Costs: $12345678)", width=35,
                               command=boostauto4)
-        boostbutton4.grid(row=int(8 - (
-            int(upgcheck1h1) + int(upgcheck1h2) + int(upgcheck2h1) + int(upgcheck2h2) + int(upgcheck3) + int(
-                clickupgcheck1) + int(clickupgcheck2))),
-                          column=2, sticky=E)
+        boostbutton4.grid(row=int(8 - (int(upgcheck1h1) + int(upgcheck1h2) + int(upgcheck2h1) + int(upgcheck2h2) +
+                                       int(upgcheck3) + int(clickupgcheck1) + int(clickupgcheck2))), column=2, sticky=E)
     exitupgrades = Button(master, text="Hide Upgrades", command=hideupgrades)
     if statscheck:
         global hidestatsbutton
@@ -804,13 +1019,28 @@ def clickcolour():
 
 # GOLD BUTTON
 def goldupgrade():
-    global goldbutton, money, mps, goldcheck
-    money += int(mps * 50)
+    global goldbutton, money, mps, mpstkinter, goldcheck
     goldbutton.destroy()
     goldcheck = int(0)
-    toplevel = Toplevel()
-    goldtime = Message(toplevel, text="Gold Upgrade Activated (get money equal to *50 MPS!)")
-    goldtime.pack()
+    goldupgcheck = randint(1, 77)
+    if goldupgcheck == int(1):
+        mps *= 77
+        mpstkinter = ("MPS: " + str(mps))
+        toplevel = Toplevel()
+        goldtime = Message(toplevel, text="Gold Upgrade Activated (multiply current MPS by 77 for 7.7 seconds!)")
+        goldtime.pack()
+        master.after(7700, goldmpsstop)
+    else:
+        money += int(mps * 50)
+        toplevel = Toplevel()
+        goldtime2 = Message(toplevel, text="Gold Upgrade Activated (get money equal to *50 MPS!)")
+        goldtime2.pack()
+
+
+def goldmpsstop():
+    global mps, mpstkinter
+    mps = float(mps)/77
+    mpstkinter = ("MPS: " + str(mps))
 
 
 # SAVE IMPORTS AND VARIABLES
