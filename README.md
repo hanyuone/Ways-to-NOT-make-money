@@ -5,11 +5,22 @@ Also, if you have downloaded this game and find any bugs, please post them to th
 
 NOTE: This game currently requires the user to download Python to run. An executable file will be posted sometime in the future!
 
-Line Amount: 974 lines (and counting!)
+Line Amount: 1216 lines (and counting!)
 
-Version: 0.6.0-2
+File Size: ~53KB (Game itself, photos take up an extra ~650KB)
+
+Version: 0.6.1
 
 Changelog:
+
+     0.6.1-alpha:
+            -MAJOR UPDATE!
+            -Improved the "cannot affords" and "no requirements", changing the sign to a label that appears in the same place instead of a pop-up window (because those are annoying).
+            -Added "million" things to prices (which is great!)
+
+     0.6.0-3:
+            -Added bells to "cannot affords" and "no requirements".
+            -Fixed more bugs (qlstudio edit this, I have no idea what else you fixed).
 
      0.6.0-2:
             -Fixed a variety of bugs (thanks qlstudio).
