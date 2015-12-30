@@ -871,7 +871,7 @@ def savegame():
          int(str(moneytrillion)[-5:-2]), "billion", int(str(moneybillion)[-5:-2]), "million",
          int(str(moneymillion)[-5:-2]), "money", float(str(money)[-8:])]
     savefile = str(base_encode(str("_".join(str(v) for v in x))) + ";")
-    f = open("savefile.txt", "w")
+    f = open("savefilePy3.txt", "w")
     f.write(str(savefile))
     f.close()
     toplevel = Toplevel()
@@ -891,7 +891,7 @@ def resetgame():
              "quintillion", int(0), "quadrillion", int(0), "trillion", int(0), "billion", int(0), "million", int(0),
              "money", float(0)]
         resetfile = str(base_encode(str("_".join(str(v) for v in x))) + ";")
-        f = open("savefile.txt", "w")
+        f = open("savefilePy3.txt", "w")
         f.write(str(resetfile))
         f.close()
         master.destroy()
@@ -1067,7 +1067,7 @@ totalclicks = 0
 time = 0
 click = 0
 clickcolourcheck = 1
-g = open("savefile.txt")
+g = open("savefilePy3.txt")
 g2 = (base_decode(str(g.read()).split(";")[0])).split("_")
 upgcheck1h1 = int(g2[9])
 upgcheck1h2 = int(g2[11])
