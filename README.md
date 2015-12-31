@@ -5,6 +5,8 @@ Also, if you have downloaded this game and find any bugs, please post them to th
 
 NOTE: This game currently requires the user to download Python to run. An executable file will be posted sometime in the future!
 
+NOTE: For Python 3.5.1 version, visit python3 branch.
+
 Line Amount: 1216 lines (and counting!)
 
 File Size: ~53KB (Game itself, photos take up an extra ~650KB)
