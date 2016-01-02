@@ -1,15 +1,37 @@
 # Ways to NOT make money
-A basic Python 2.7.9 Cookie-Clicker style (incremental) game. If anyone can help me edit the game, please post an issue telling me to add you, and I will add you (once I have added you, please close the issue)!
+A basic Python 2.7.9 / Python 3.5.1 Cookie-Clicker style (incremental) game. If anyone can help me edit the game, please post an issue telling me to add you, and I will add you (once I have added you, please close the issue)!
 
 Also, if you have downloaded this game and find any bugs, please post them to the 'issues' page (the exclamation mark on the right-hand side of the browser). Thanks!
 
 NOTE: This game currently requires the user to download Python to run. An executable file will be posted sometime in the future!
 
-Line Amount: 734 lines (and counting!)
+NOTE: For Python 3.5.1 version, visit python3 branch.
 
-Version: 0.6.0
+Line Amount: 1216 lines (and counting!)
+
+File Size: ~53KB (Game itself, photos take up an extra ~650KB)
+
+Version: 0.6.1
 
 Changelog:
+
+     0.6.1-alpha:
+            -MAJOR UPDATE!
+            -Improved the "cannot affords" and "no requirements", changing the sign to a label that appears in the same place instead of a pop-up window (because those are annoying).
+            -Added "million" things to prices (which is great!)
+
+     0.6.0-3:
+            -Added bells to "cannot affords" and "no requirements".
+            -Fixed more bugs (qlstudio edit this, I have no idea what else you fixed).
+
+     0.6.0-2:
+            -Fixed a variety of bugs (thanks qlstudio).
+                -Fixed the OverflowError for the buildings themselves
+                -Checked for conflict with all the "-illion"'s, no conflict (so far).
+
+     0.6.0-1:
+            -Further added to the "million", creating "billion" to "quintillion", which should delay the OverflowError further (most annoying error so far).
+            -Fixed the "million", and now there should be no conflict.
     
      0.6.0:
             -Implemented a "millions" thing, which should prevent (or at least delay) the OverflowError
@@ -91,7 +113,6 @@ Things to add in the future:
         -Bank Robbery
         -New Currency
         -Fort Knox Heist
-    *Make an .exe file of the game
     *Make imports
     *Add pictures
     *Make the game more interactive
