@@ -3,7 +3,7 @@ A basic Python 2.7.9 / Python 3.5.1 Cookie-Clicker style (incremental) game. If 
 
 Also, if you have downloaded this game and find any bugs, please post them to the 'issues' page (the exclamation mark on the right-hand side of the browser). Thanks!
 
-NOTE: This game currently requires the user to download Python to run. An executable file will be posted sometime in the future!
+NOTE: This game in the master and python3 branches currently requires the user to download Python to run. An executable file is in the ".exe version" branch!
 
 NOTE: For Python 3.5.1 version, visit python3 branch.
 
