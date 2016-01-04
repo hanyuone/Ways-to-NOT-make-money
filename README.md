@@ -16,7 +16,7 @@ Version: 0.6.1
 Changelog:
 
      0.6.1-alpha:
-            -MAJOR UPDATE!
+            -MAJOR UPDATE! (pls)
             -Improved the "cannot affords" and "no requirements", changing the sign to a label that appears in the same place instead of a pop-up window (because those are annoying).
             -Added "million" things to prices (which is great!)
 
@@ -124,12 +124,18 @@ Things to add in the future:
 Cyber-Shadow's to do list:
 
      Serious revamp of the GUI (No offence... Gui is ulgy)
+          New background. (Due to copyright claims... (Jokes))
           Probably pictures for all purchasable assets.
           Stopping deforamation of program
-          Remove crapping moving money animation. (Rip 2hours)
+          More Animations
+          Removing all ulgy default grey.
+          Remove crapping moving money animation. (R.I.P 2 hours)
+          Make a Notification Box that contains notifications like: Not Enough Money! & other simple notifications. (This Will be inplace of the Moving money animation.
      Bug test marathon & Management of user bug testing. (Support Email?)
-     More Animations
      Temporary boosters?
+     
+     
+     
      
      
      
