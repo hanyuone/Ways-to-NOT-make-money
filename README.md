@@ -119,3 +119,17 @@ Things to add in the future:
     *Do some html stuff (i.e. make this game browser-based)
     *Automatic savefile converter?
     *Change upgrades (still way too inefficient)
+    
+    
+Cyber-Shadow's to do list:
+
+     Serious revamp the GUI (No offence... Gui is ulgy)
+          Probably pictures for all purchasable assets.
+          Stopping deforamation of program
+          Remove crapping moving money animation. (Rip 2hours)
+     Bug test marathon & Management of user bug testing. (Support Email?)
+     More Animations
+     Temporary boosters?
+     
+     
+     
