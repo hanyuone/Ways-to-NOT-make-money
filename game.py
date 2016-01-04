@@ -390,26 +390,26 @@ def deduction2():
 
 def printpricechoice():
     if len(str(printprice)) <= 8:
-        printpricetkinter.set("Auto-Clicker (Costs: $" + str(printprice) + ")")
+        printpricetkinter.set("Money Printer (Costs: $" + str(printprice) + ")")
     else:
         printpricemillion = round((float(str(printprice)[:-7]) / 10), 1)
         if len(str(printprice)) <= 11:
-            printpricetkinter.set("Auto-Clicker (Costs: $" + str(printpricemillion) + "m)")
+            printpricetkinter.set("Money Printer (Costs: $" + str(printpricemillion) + "m)")
         else:
             printpricebillion = round((float(str(printpricemillion)[:-4]) / 10), 1)
             if len(str(printprice)) <= 14:
-                printpricetkinter.set("Auto-Clicker (Costs: $" + str(printpricebillion) + "b)")
+                printpricetkinter.set("Money Printer (Costs: $" + str(printpricebillion) + "b)")
             else:
                 printpricetrillion = round((float(str(printpricebillion)[:-4]) / 10), 1)
                 if len(str(printprice)) <= 17:
-                    printpricetkinter.set("Auto-Clicker (Costs: $" + str(printpricetrillion) + "t)")
+                    printpricetkinter.set("Money Printer (Costs: $" + str(printpricetrillion) + "t)")
                 else:
                     printpricequadrillion = round((float(str(printpricetrillion)[:-4]) / 10), 1)
                     if len(str(printprice)) <= 20:
-                        printpricetkinter.set("Auto-Clicker (Costs: $" + str(printpricequadrillion) + "q)")
+                        printpricetkinter.set("Money Printer (Costs: $" + str(printpricequadrillion) + "q)")
                     else:
                         printpricequintillion = round((float(str(printpricequadrillion)[:-4]) / 10), 1)
-                        printpricetkinter.set("Auto-Clicker (Costs : $" + str(printpricequintillion) + "Q)")
+                        printpricetkinter.set("Money Printer (Costs : $" + str(printpricequintillion) + "Q)")
 
 
 def cannotafford2():
@@ -481,26 +481,26 @@ def deduction3():
 
 def counterfeitpricechoice():
     if len(str(counterfeitprice)) <= 8:
-        counterfeitpricetkinter.set("Auto-Clicker (Costs: $" + str(counterfeitprice) + ")")
+        counterfeitpricetkinter.set("Counterfeit Company (Costs: $" + str(counterfeitprice) + ")")
     else:
         counterfeitpricemillion = round((float(str(counterfeitprice)[:-7]) / 10), 1)
         if len(str(counterfeitprice)) <= 11:
-            counterfeitpricetkinter.set("Auto-Clicker (Costs: $" + str(counterfeitpricemillion) + "m)")
+            counterfeitpricetkinter.set("Counterfeit Company (Costs: $" + str(counterfeitpricemillion) + "m)")
         else:
             counterfeitpricebillion = round((float(str(counterfeitpricemillion)[:-4]) / 10), 1)
             if len(str(counterfeitprice)) <= 14:
-                counterfeitpricetkinter.set("Auto-Clicker (Costs: $" + str(counterfeitpricebillion) + "b)")
+                counterfeitpricetkinter.set("Counterfeit Company (Costs: $" + str(counterfeitpricebillion) + "b)")
             else:
                 counterfeitpricetrillion = round((float(str(counterfeitpricebillion)[:-4]) / 10), 1)
                 if len(str(counterfeitprice)) <= 17:
-                    counterfeitpricetkinter.set("Auto-Clicker (Costs: $" + str(counterfeitpricetrillion) + "t)")
+                    counterfeitpricetkinter.set("Counterfeit Company (Costs: $" + str(counterfeitpricetrillion) + "t)")
                 else:
                     counterfeitpricequadrillion = round((float(str(counterfeitpricetrillion)[:-4]) / 10), 1)
                     if len(str(counterfeitprice)) <= 20:
-                        counterfeitpricetkinter.set("Auto-Clicker (Costs: $" + str(counterfeitpricequadrillion) + "q)")
+                        counterfeitpricetkinter.set("Counterfeit Company (Costs: $" + str(counterfeitpricequadrillion) + "q)")
                     else:
                         counterfeitpricequintillion = round((float(str(counterfeitpricequadrillion)[:-4]) / 10), 1)
-                        counterfeitpricetkinter.set("Auto-Clicker (Costs : $" + str(counterfeitpricequintillion) + "Q)")
+                        counterfeitpricetkinter.set("Counterfeit Company (Costs : $" + str(counterfeitpricequintillion) + "Q)")
 
 
 def cannotafford3():
@@ -564,26 +564,26 @@ def deduction4():
 
 def sharepricechoice():
     if len(str(shareprice)) <= 8:
-        sharepricetkinter.set("Auto-Clicker (Costs: $" + str(shareprice) + ")")
+        sharepricetkinter.set("Sharemarket Crash (Costs: $" + str(shareprice) + ")")
     else:
         sharepricemillion = round((float(str(shareprice)[:-7]) / 10), 1)
         if len(str(shareprice)) <= 11:
-            sharepricetkinter.set("Auto-Clicker (Costs: $" + str(sharepricemillion) + "m)")
+            sharepricetkinter.set("Sharemarket Crash (Costs: $" + str(sharepricemillion) + "m)")
         else:
             sharepricebillion = round((float(str(sharepricemillion)[:-4]) / 10), 1)
             if len(str(shareprice)) <= 14:
-                sharepricetkinter.set("Auto-Clicker (Costs: $" + str(sharepricebillion) + "b)")
+                sharepricetkinter.set("Sharemarket Crash (Costs: $" + str(sharepricebillion) + "b)")
             else:
                 sharepricetrillion = round((float(str(sharepricebillion)[:-4]) / 10), 1)
                 if len(str(shareprice)) <= 17:
-                    sharepricetkinter.set("Auto-Clicker (Costs: $" + str(sharepricetrillion) + "t)")
+                    sharepricetkinter.set("Sharemarket Crash (Costs: $" + str(sharepricetrillion) + "t)")
                 else:
                     sharepricequadrillion = round((float(str(sharepricetrillion)[:-4]) / 10), 1)
                     if len(str(shareprice)) <= 20:
-                        sharepricetkinter.set("Auto-Clicker (Costs: $" + str(sharepricequadrillion) + "q)")
+                        sharepricetkinter.set("Sharemarket Crash (Costs: $" + str(sharepricequadrillion) + "q)")
                     else:
                         sharepricequintillion = round((float(str(sharepricequadrillion)[:-4]) / 10), 1)
-                        sharepricetkinter.set("Auto-Clicker (Costs : $" + str(sharepricequintillion) + "Q)")
+                        sharepricetkinter.set("Sharemarket Crash (Costs : $" + str(sharepricequintillion) + "Q)")
 
 
 def cannotafford4():
