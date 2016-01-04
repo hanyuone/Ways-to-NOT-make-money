@@ -123,7 +123,7 @@ Things to add in the future:
     
 Cyber-Shadow's to do list:
 
-     Serious revamp the GUI (No offence... Gui is ulgy)
+     Serious revamp of the GUI (No offence... Gui is ulgy)
           Probably pictures for all purchasable assets.
           Stopping deforamation of program
           Remove crapping moving money animation. (Rip 2hours)
