@@ -128,7 +128,7 @@ Cyber-Shadow's to do list:
           Probably pictures for all purchasable assets.
           Stopping deforamation of program
           More Animations
-          Removing all ulgy default grey.
+          Removing all ugly default grey.
           Remove crapping moving money animation. (R.I.P 2 hours)
           Make a Notification Box that contains notifications like: Not Enough Money! & other simple notifications. (This Will be inplace of the Moving money animation.
           
