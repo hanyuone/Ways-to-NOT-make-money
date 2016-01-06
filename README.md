@@ -7,13 +7,18 @@ NOTE: This game in the master and python3 branches currently requires the user t
 
 NOTE: For Python 3.5.1 version, visit python3 branch.
 
-Line Amount: 1216 lines (and counting!)
+Line Amount: 1284 lines (and counting!)
 
-File Size: ~53KB (Game itself, photos take up an extra ~650KB)
+File Size: ~57KB (Game itself, photos take up an extra ~650KB)
 
-Version: 0.6.1
+Version: 0.6.2
 
 Changelog:
+
+     0.6.2:
+            -EVEN MORE MAJOR OF AN UPDATE!
+            -Added multiplayer (you can play with your friends on the save device!)
+                -Changed the mechanics of savegame()
 
      0.6.1-alpha:
             -MAJOR UPDATE!
@@ -113,8 +118,8 @@ Things to add in the future:
         -Bank Robbery
         -New Currency
         -Fort Knox Heist
-    *Make imports
-    *Add pictures
+    ~~*Make imports~~
+    ~~*Add pictures~~
     *Make the game more interactive
     *Do some html stuff (i.e. make this game browser-based)
     *Automatic savefile converter?
