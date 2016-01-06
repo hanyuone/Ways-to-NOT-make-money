@@ -7,13 +7,18 @@ NOTE: This game in the master and python3 branches currently requires the user t
 
 NOTE: For Python 3.5.1 version, visit python3 branch.
 
-Line Amount: 1216 lines (and counting!)
+Line Amount: 1284 lines (and counting!)
 
-File Size: ~53KB (Game itself, photos take up an extra ~650KB)
+File Size: ~57KB (Game itself, photos take up an extra ~650KB)
 
-Version: 0.6.1
+Version: 0.6.2
 
 Changelog:
+
+     0.6.2:
+            -EVEN MORE MAJOR OF AN UPDATE!
+            -Added multiplayer (you can play with your friends on the save device!)
+                -Changed the mechanics of savegame()
 
      0.6.1-alpha:
             -MAJOR UPDATE!
@@ -113,9 +118,31 @@ Things to add in the future:
         -Bank Robbery
         -New Currency
         -Fort Knox Heist
-    *Make imports
-    *Add pictures
+    ~~*Make imports~~
+    ~~*Add pictures~~
     *Make the game more interactive
     *Do some html stuff (i.e. make this game browser-based)
     *Automatic savefile converter?
     *Change upgrades (still way too inefficient)
+    
+    
+Cyber-Shadow's to do list:
+
+     Project: Visual Overhaul!
+          New background. (Due to copyright claims... (Jokes))
+          Probably pictures for all purchasable assets.
+          Stopping deforamation of program
+          More Animations
+          Removing all ugly default grey.
+          Remove crapping moving money animation. (R.I.P 2 hours)
+          Make a Notification Box that contains notifications like: Not Enough Money! & other simple notifications. (This Will be inplace of the Moving money animation.
+          
+     Bug test marathon & Management of user bug testing. (Support Email?)
+     
+     Temporary boosters?
+     
+     
+     
+     
+     
+     
