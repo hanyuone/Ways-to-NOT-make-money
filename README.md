@@ -19,6 +19,7 @@ Changelog:
             -EVEN MORE MAJOR OF AN UPDATE!
             -Added multiplayer (you can play with your friends on the save device!)
                 -Changed the mechanics of savegame()
+            -Report issues in-game, you don't have to open web browser!
 
      0.6.1-alpha:
             -MAJOR UPDATE!
