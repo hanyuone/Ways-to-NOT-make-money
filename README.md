@@ -125,6 +125,7 @@ Things to add in the future:
     *Do some html stuff (i.e. make this game browser-based)
     *Automatic savefile converter?
     *Change upgrades (still way too inefficient)
+    *Add Progressbar (See #26)
     
     
 Cyber-Shadow's to do list:
