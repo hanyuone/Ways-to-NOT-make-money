@@ -17,8 +17,6 @@ norequirements = "You do not meet the requirements."
 cannotafford = "You cannot afford this."
 signincheck = 1
 signinvalue = 1
-<<<<<<< HEAD
-=======
 
 
 def signin():
@@ -55,7 +53,6 @@ def signin():
     b1.grid(row=3, column=1)
     b2 = Button(master, text='Create account under username', command=createaccount)
     b2.grid(row=4, column=1)
->>>>>>> origin/master
 
 
 def signin():
@@ -1259,13 +1256,11 @@ def main():
 
     savebutton = Button(master, text="Save Game", width=10, command=savegame)
     savebutton.grid(row=10, column=2, sticky=E)
-
-<<<<<<< HEAD
+    
     reportbutton = Button(master, text='Report Issue to Github', width=20, command=report)
     reportbutton.grid(row=11, column=1)
 
-=======
->>>>>>> origin/master
+
 thread = threading.Thread(target=master.mainloop)
 thread.start()
 
