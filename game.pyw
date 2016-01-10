@@ -53,41 +53,6 @@ def signin():
     b2 = Button(master, text='Create account under username', command=createaccount)
     b2.grid(row=4, column=1)
 
-
-def signin():
-    global signincheck
-    signincheck += 1
-
-    def verifysignin():
-        global g
-        un = unentry.get()
-        if ('savefile_' + un + '.txt') in glob.glob('savefile_*.txt'):
-            global g2, signinvalue
-            g = open('savefile_' + un + '.txt')
-            g2 = (str(str(g.read()).split(";")[0]).decode("hex")).split("_")
-            for i in [l, unentry, b1, b2]:
-                i.destroy()
-            signinvalue += 1
-        else:
-            showerror('Wrong Username')
-
-    def createaccount():
-        global g, g2, signinvalue
-        un = unentry.get()
-        _pressyes(username=un)
-        g = open('savefile_' + un + '.txt')
-        g2 = (str(str(g.read()).split(";")[0]).decode("hex")).split("_")
-        signinvalue += 1
-
-    l = Label(master, text='Please enter username')
-    l.grid(row=1, column=1)
-    unentry = Entry(master, show='')
-    unentry.grid(row=2, column=1)
-    b1 = Button(master, text='Log in', command=verifysignin)
-    b1.grid(row=3, column=1)
-    b2 = Button(master, text='Create account under username', command=createaccount)
-    b2.grid(row=4, column=1)
-
 def report():
     g = globals()
     g['t'] = Toplevel() # global use
