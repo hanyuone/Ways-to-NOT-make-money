@@ -38,7 +38,6 @@ def signin():
 
     def createaccount():
         global g, g2, signinvalue
-        print("Yes")
         un = unentry.get()
         _pressyes(username=un)
         g = open('savefile_' + un + '.txt')
@@ -74,7 +73,6 @@ def signin():
 
     def createaccount():
         global g, g2, signinvalue
-        print("Yes")
         un = unentry.get()
         _pressyes(username=un)
         g = open('savefile_' + un + '.txt')
