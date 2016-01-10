@@ -7,6 +7,8 @@ NOTE: This game in the master and python3 branches currently requires the user t
 
 NOTE: For Python 3.5.1 version, visit python3 branch.
 
+IMPORTANT: The current game might be buggy. See #33
+
 Line Amount: 1284 lines (and counting!)
 
 File Size: ~57KB (Game itself, photos take up an extra ~650KB)
