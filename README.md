@@ -1,5 +1,5 @@
 # Ways to NOT make money
-A basic Python 2.7.9 / Python 3.5.1 Cookie-Clicker style (incremental) game. If anyone can help me edit the game, please post an issue telling me to add you, and I will add you (once I have added you, please close the issue)!
+## A basic Python 2.7.9 / Python 3.5.1 Cookie-Clicker style (incremental) game. If anyone can help me edit the game, please post an issue telling me to add you, and I will add you (once I have added you, please close the issue)!
 
 Also, if you have downloaded this game and find any bugs, please post them to the 'issues' page (the exclamation mark on the right-hand side of the browser). Thanks!
 
@@ -7,15 +7,19 @@ NOTE: This game in the master and python3 branches currently requires the user t
 
 NOTE: For Python 3.5.1 version, visit python3 branch.
 
-IMPORTANT: The current game might be buggy. See #33
-
 Line Amount: 1284 lines (and counting!)
 
-File Size: ~57KB (Game itself, photos take up an extra ~650KB)
+File Size: ~58KB (Game itself, photos take up an extra ~650KB, other files take up ~18MB)
 
-Version: 0.6.2
+Version: 0.6.3
 
 Changelog:
+
+     0.6.3:
+            -Updates are rolling in!
+            -Tweaked the savefile, so they don't constantly refresh
+            -Changed the setup of the 'issues' box
+            -IMPLEMENTED AUTOUPDATING for savefiles!
 
      0.6.2:
             -EVEN MORE MAJOR OF AN UPDATE!
@@ -121,11 +125,11 @@ Things to add in the future:
         -Bank Robbery
         -New Currency
         -Fort Knox Heist
-    ~~*Make imports~~
-    ~~*Add pictures~~
+    *Make imports - DONE!
+    *Add pictures - DONE!
     *Make the game more interactive
     *Do some html stuff (i.e. make this game browser-based)
-    *Automatic savefile converter?
+    *Automatic savefile converter? - DONE!
     *Change upgrades (still way too inefficient)
     *Add Progressbar (See #26)
     
