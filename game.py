@@ -30,21 +30,29 @@ def signin():
             global g2, signinvalue
             g = open('savefile_' + un + '.txt')
             g2 = (str(str(g.read()).split(";")[0]).decode("hex")).split("_")
+            try:
+                print(g2[39])
+            except IndexError:
+                g = open('savefile_' + un + '.txt', "w")
+                gtemp = ["time", int(0), "clicks", int(0)]
+                g2.extend(gtemp)
+                g.write(str("_".join(str(y) for y in g2)).encode("hex"))
             for i in [l, unentry, b1, b2]:
                 i.destroy()
             signinvalue += 1
         else:
-            showerror('Wrong Username')
+            showerror(title='Error!', message='Wrong Username.')
 
     def createaccount():
         global g, g2, signinvalue
+        print("Yes")
         un = unentry.get()
         _pressyes(username=un)
         g = open('savefile_' + un + '.txt')
         g2 = (str(str(g.read()).split(";")[0]).decode("hex")).split("_")
         signinvalue += 1
 
-    l = Label(master, text='Please enter username')
+    l = Label(master, text='Please enter your username.')
     l.grid(row=1, column=1)
     unentry = Entry(master, show='')
     unentry.grid(row=2, column=1)
@@ -53,69 +61,72 @@ def signin():
     b2 = Button(master, text='Create account under username', command=createaccount)
     b2.grid(row=4, column=1)
 
+
 def report():
-    g = globals()
-    g['t'] = Toplevel() # global use
-    Label(master=g['t'],
-          text='Make sure you are a collaborator of Ways to not make money, and you don\'t have a fork', bg='yellow')\
-          .grid(row=1, column=1)
-    Label(master=g['t'],
+    gl = globals()
+    gl['t'] = Toplevel()  # global use
+    Label(master=gl['t'],
+          text="Make sure you are a collaborator of Ways to not make money, and you don't have a fork", bg='yellow') \
+        .grid(row=1, column=1)
+    Label(master=gl['t'],
           text='Please sign in to your Github account below. (Username first entry, passcode second)').grid(row=2,
                                                                                                             column=1)
-    g['une'] = Entry(master=g['t'])
-    g['une'].grid(row=3,column=1)
-    g['pce'] = Entry(master=g['t'])
-    g['pce'].grid(row=4,column=1)
-    globals().update(g)
-    Button(master=g['t'], text='Verify', command=_verify_report).grid(row=5, column=1)
+    gl['une'] = Entry(master=gl['t'])
+    gl['une'].grid(row=3, column=1)
+    gl['pce'] = Entry(master=gl['t'], show="*")
+    gl['pce'].grid(row=4, column=1)
+    globals().update(gl)
+    Button(master=gl['t'], text='Verify', command=_verify_report).grid(row=5, column=1)
+
 
 def _verify_report():
-    g = globals()
+    gl = globals()
     verified = False
     try:
-        g['user'] = Github(g['une'].get(), g['pce'].get())
+        gl['user'] = Github(gl['une'].get(), gl['pce'].get())
     except:
         showerror('No username/passcode match, try again')
     else:
         for i in user.get_user().get_repos():
-                if i.name == 'Ways-to-NOT-make-money':
-                    wtnmm = i
+            if i.name == 'Ways-to-NOT-make-money':
+                wtnmm = i
         try:
             wtnmm
         except:
             showerror('Not a collaborator')
         else:
-            g['t'].destroy()
-            g['wtnmm'] = wtnmm
+            gl['t'].destroy()
+            gl['wtnmm'] = wtnmm
             verified = True
-    globals().update(g)
+    globals().update(gl)
     if verified:
         _create_report()
-    
+
+
 def _create_report():
-    g = globals()
-    g['t'] = Toplevel()
-    t = g['t']
-    Label(t, text='Issue Title: ').grid(row=1, column=1)
-    g['e'] = Entry(t)
-    g['e'].grid(row=1, column=2)
-    Label(t, text='Issue Body below').grid(row=2, column=1)
-    g['tx'] = Text(t)
-    g['tx'].grid(row=3, column=1)
-    globals().update(g)
-    Button(t, text='Create Github Issue', command=_send_report).grid(row=4, column=1)
+    gl = globals()
+    gl['t'] = Toplevel()
+    t = gl['t']
+    Label(t, text='Issue Title: ').grid(row=0, column=0)
+    gl['e'] = Entry(t)
+    gl['e'].grid(row=0, column=1)
+    Label(t, text='Issue Body: ').grid(row=1, column=0, columnspan=2)
+    gl['tx'] = Text(t, width=35, height=10)
+    gl['tx'].grid(row=2, column=0, columnspan=2)
+    globals().update(gl)
+    Button(t, text='Create Github Issue', command=_send_report).grid(row=3, column=0, rowspan=2)
+
 
 def _send_report():
-    g = globals()
-    title = g['e'].get()
-    body = g['tx'].get(1.0, "end")
-    rep = g['wtnmm']
+    gl = globals()
+    title = gl['e'].get()
+    body = gl['tx'].get(1.0, "end")
+    rep = gl['wtnmm']
     rep.create_issue(title, body)
-    g['t'].destroy()
-    globals().update(g)
-    
-    
-    
+    gl['t'].destroy()
+    globals().update(gl)
+
+
 # BUG FIXER
 def bugfixer():
     global sharecrash, counterfeit, printmoney, autoclick
@@ -181,6 +192,7 @@ def statsexpand():
     statsbutton.destroy()
     resetbutton.grid(row=11, column=0, sticky=W)
     savebutton.grid(row=11, column=2, sticky=E)
+    reportbutton.grid(row=12, column=1)
     statscheck = True
     totalclicksvar = StringVar()
     totalclicksvar.set("Total clicks: " + str(totalclicks))
@@ -559,10 +571,12 @@ def counterfeitpricechoice():
                 else:
                     counterfeitpricequadrillion = round((float(str(counterfeitpricetrillion)[:-4]) / 10), 1)
                     if len(str(counterfeitprice)) <= 20:
-                        counterfeitpricetkinter.set("Counterfeit Company (Costs: $" + str(counterfeitpricequadrillion) + "q)")
+                        counterfeitpricetkinter.set("Counterfeit Company (Costs: $" +
+                                                    str(counterfeitpricequadrillion) + "q)")
                     else:
                         counterfeitpricequintillion = round((float(str(counterfeitpricequadrillion)[:-4]) / 10), 1)
-                        counterfeitpricetkinter.set("Counterfeit Company (Costs : $" + str(counterfeitpricequintillion) + "Q)")
+                        counterfeitpricetkinter.set("Counterfeit Company (Costs : $" +
+                                                    str(counterfeitpricequintillion) + "Q)")
 
 
 def cannotafford3():
@@ -979,7 +993,8 @@ def savegame():
          "upg3", int(upgcheck3), "upg4", int(upgcheck4), "cupg1", int(clickupgcheck1), "cupg2", int(clickupgcheck2),
          "quintillion", int(moneyquintillion), "quadrillion", int(str(moneyquadrillion)[-5:-2]), "trillion",
          int(str(moneytrillion)[-5:-2]), "billion", int(str(moneybillion)[-5:-2]), "million",
-         int(str(moneymillion)[-5:-2]), "money", float(str(money)[-8:])]
+         int(str(moneymillion)[-5:-2]), "money", float(str(money)[-8:]), "time", int(timeplay), "clicks",
+         int(totalclicks)]
     savefile = str((str("_".join(str(v) for v in x))).encode("hex") + ";")
     f = open("savefile_" + username + ".txt", "w")
     f.write(str(savefile))
@@ -1007,7 +1022,7 @@ def _pressyes(username=None):
     x = ["auto", int(0), "print", int(0), "counter", int(0), "shares", int(0), "upg1h1", int(0), "upg1h2", int(0),
          "upg2h1", int(0), "upg2h2", int(0), "upg3", int(0), "upg4", int(0), "cupg1", int(0), "cupg2", int(0),
          "quintillion", int(0), "quadrillion", int(0), "trillion", int(0), "billion", int(0), "million", int(0),
-         "money", float(0)]
+         "money", float(0), "time", int(0), "clicks", int(0)]
     resetfile = str((str("_".join(str(v) for v in x))).encode("hex") + ";")
     f = open("savefile_" + username + ".txt", "w")
     f.write(str(resetfile))
@@ -1170,7 +1185,8 @@ def goldmpsstop():
 
 def main():
     # BUTTONS, LABELS AND ENTRIES
-    global incbutton1, incbutton2, incbutton3, incbutton4, upgrades, resetbutton, savebutton, clickbutton, statsbutton
+    global incbutton1, incbutton2, incbutton3, incbutton4, upgrades, resetbutton, savebutton, clickbutton, statsbutton,\
+           reportbutton
     background = Label(master, image=img1)
     background.place(x=0, y=0, relwidth=1, relheight=1)
     background.image = img1
@@ -1219,13 +1235,14 @@ def main():
 
     savebutton = Button(master, text="Save Game", width=10, command=savegame)
     savebutton.grid(row=10, column=2, sticky=E)
-    
+
     reportbutton = Button(master, text='Report Issue to Github', width=20, command=report)
     reportbutton.grid(row=11, column=1)
 
 
 thread = threading.Thread(target=master.mainloop)
 thread.start()
+
 
 while True:
     if signincheck == signinvalue:
@@ -1235,8 +1252,8 @@ while True:
             goldcheck = False
             statscheck = False
             animate = 0
-            totalclicks = 0
-            timeplay = 0
+            totalclicks = int(g2[39])
+            timeplay = int(g2[37])
             click = 0
             clickcolourcheck = 1
             upgcheck1h1 = int(g2[9])
