@@ -5,6 +5,8 @@ If anyone can help me edit the game, please post an issue telling me to add you,
 
 Also, if you have downloaded this game and find any bugs, please post them to the 'issues' page (the exclamation mark on the right-hand side of the browser). Thanks!
 
+IMPORTANT: Do pull-requests to "future" branch, not master branch, unless completely necessary to merge to master.
+
 NOTE: This game in the master and python3 branches currently requires the user to download Python to run. An executable file is in the ".exe version" branch!
 
 NOTE: For Python 3.5.1 version, visit python3 branch. (Too, see #19)
