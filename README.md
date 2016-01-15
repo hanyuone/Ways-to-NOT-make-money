@@ -129,6 +129,7 @@ Things to add in the future:
         -Bank Robbery
         -New Currency
         -Fort Knox Heist
+    *Make a game server (Play on any device)
     *Make imports - DONE!
     *Add pictures - DONE!
     *Make the game more interactive
