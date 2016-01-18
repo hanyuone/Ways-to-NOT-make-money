@@ -15,7 +15,7 @@ Line Amount: 1284 lines (and counting!)
 
 File Size: ~58KB (Game itself, photos take up an extra ~650KB, other files take up ~18MB)
 
-Version: 0.7.0 alpha (DEV)
+Version: 0.7.0 beta (DEV)
 
 Changelog:
 
