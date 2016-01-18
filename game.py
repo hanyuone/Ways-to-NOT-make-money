@@ -1239,9 +1239,17 @@ def main():
     reportbutton = Button(master, text='Report Issue to Github', width=20, command=report)
     reportbutton.grid(row=11, column=1)
 
-
+# AUTO-SAVE SYSTEM
+def auto_save():
+    global thread
+    thread.join()
+    savegame()
+    exit() # Make sure otherThread isn't hanging around
+    
 thread = threading.Thread(target=master.mainloop)
 thread.start()
+otherThread = threading.Thread(target=auto_save)
+otherThread.start()
 
 
 while True:
