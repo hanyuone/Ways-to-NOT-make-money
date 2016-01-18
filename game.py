@@ -64,13 +64,11 @@ def signin():
                 gmoney = (g2[2].decode("hex").split("_"))
                 gupgrades = (g2[3].decode("hex").split("_"))
             except (IndexError, TypeError):
-                if len(g2) == 2:
-                    g2 = updatesavefile(g2)
-                    g = open('savefile_' + un + '.txt', 'w')
-                    g.write(g2)
-                    signin()
-                else:
-                    signin()
+                print("Here!")
+                g2 = updatesavefile(g2)
+                g = open('savefile_' + un + '.txt', 'w')
+                g.write(g2)
+                verifysignin()
             for i in [l, unentry, b1, b2]:
                 i.destroy()
             signinvalue += 1
@@ -1320,16 +1318,19 @@ def goldmpsstop():
 def main():
     # BUTTONS, LABELS AND ENTRIES
     global incbutton1, incbutton2, incbutton3, incbutton4, incbutton5, upgrades, resetbutton, savebutton, clickbutton, \
-        statsbutton, reportbutton, frame1, frame2
+        statsbutton, reportbutton, canvas1, frame1, frame2
     background = Label(master, image=img1)
     background.place(x=0, y=0, relwidth=1, relheight=1)
     background.image = img1
 
-    frame1 = Frame(master, bg="white")
-    frame1.grid(row=0, column=0, sticky=N+S+E+W)
+    canvas1 = Canvas(master, height=200, width=200)
+    canvas1.grid(row=1, column=0, sticky=W)
+
+    frame1 = Frame(canvas1, bg="white")
+    canvas1.create_window((0, 0), window=frame1, anchor='ne')
 
     frame2 = Frame(master, bg="white")
-    frame2.grid(row=0, column=0, sticky=N+S+E+W)
+    frame2.grid(row=1, column=2, sticky=N+S+E+W)
 
     upgrades = Button(frame2, text="Upgrades", height=12, width=15, command=showupgrades)
     upgrades.grid(row=0, column=0, rowspan=2, sticky=E)
@@ -1344,46 +1345,51 @@ def main():
     clickbutton.grid(row=1, column=1)
 
     incbutton1 = Button(frame1, textvariable=autopricetkinter, width=35, command=deduction1)
-    incbutton1.grid(row=1, column=0, sticky=W)
+    incbutton1.grid(row=0, column=0)
 
     checklabel1 = Label(frame1, textvariable=autoclicktkinter, width=35)
-    checklabel1.grid(row=2, column=0, sticky=W)
+    checklabel1.grid(row=1, column=0)
 
     incbutton2 = Button(frame1, textvariable=printpricetkinter, width=35, command=deduction2)
-    incbutton2.grid(row=3, column=0, sticky=W)
+    incbutton2.grid(row=2, column=0)
 
     checklabel2 = Label(frame1, textvariable=printmoneytkinter, width=35)
-    checklabel2.grid(row=4, column=0, sticky=W)
+    checklabel2.grid(row=3, column=0)
 
     incbutton3 = Button(frame1, textvariable=counterfeitpricetkinter, width=35, command=deduction3)
-    incbutton3.grid(row=5, column=0, sticky=W)
+    incbutton3.grid(row=4, column=0)
 
     checklabel3 = Label(frame1, textvariable=counterfeittkinter, width=35)
-    checklabel3.grid(row=6, column=0, sticky=W)
+    checklabel3.grid(row=5, column=0)
 
     incbutton4 = Button(frame1, textvariable=sharepricetkinter, width=35, command=deduction4)
-    incbutton4.grid(row=7, column=0, sticky=W)
+    incbutton4.grid(row=6, column=0)
 
     checklabel4 = Label(frame1, textvariable=sharecrashtkinter, width=35)
-    checklabel4.grid(row=8, column=0, sticky=W)
+    checklabel4.grid(row=7, column=0)
 
     incbutton5 = Button(frame1, textvariable=bankpricetkinter, width=35, command=deduction5)
-    incbutton5.grid(row=9, column=0, sticky=W)
+    incbutton5.grid(row=8, column=0)
 
     checklabel5 = Label(frame1, textvariable=bankheisttkinter, width=35)
-    checklabel5.grid(row=10, column=0, sticky=W)
+    checklabel5.grid(row=9, column=0)
 
     statsbutton = Button(master, text="Stats", width=10, command=statsexpand)
-    statsbutton.grid(row=2, column=0, sticky=W)
+    statsbutton.grid(row=2, column=0)
 
     resetbutton = Button(master, text="Reset Game", width=10, command=resetgame)
-    resetbutton.grid(row=3, column=0, sticky=W)
+    resetbutton.grid(row=3, column=0)
 
     savebutton = Button(master, text="Save Game", width=10, command=savegame)
     savebutton.grid(row=3, column=2, sticky=E)
 
     reportbutton = Button(master, text='Report Issue to Github', width=20, command=report)
     reportbutton.grid(row=4, column=1)
+
+    scrollbar1 = Scrollbar(canvas1, orient="vertical", command=canvas1.yview)
+    scrollbar1.pack(side="left", fill="y")
+    canvas1.configure(yscrollcommand=scrollbar1.set)
+    canvas1.configure(scrollregion=canvas1.bbox("all"), width=200, height=200)
 
 
 thread = threading.Thread(target=master.mainloop)
@@ -1518,5 +1524,6 @@ while True:
                 automoneychoice()
             main()
             break
-        except NameError:
+        except NameError as e:
+            print(e)
             signin()
