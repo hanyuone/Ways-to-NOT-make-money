@@ -1155,8 +1155,11 @@ def showupgrades():
     global upgbuttoncheck
     upgbuttoncheck = True
     global clickbooster1, boostbutton1h1, boostbutton2h1, clickbooster2, boostbutton1h2, boostbutton3, \
-        boostbutton2h2, boostbutton4, boostbutton5, exitupgrades
+        boostbutton2h2, boostbutton4, boostbutton5, exitupgrades, scrollbar2
     upgrades.destroy()
+    scrollbar2 = Scrollbar(canvas2, orient="vertical", command=canvas2.yview)
+    scrollbar2.grid(row=0, column=1, sticky=N+S)
+    canvas2.configure(yscrollcommand=scrollbar2.set, scrollregion=(0, 0, 200, 400))
     if clickupgcheck1 == int(0):
         clickbooster1 = Button(frame2, text="Reinforced Button (Costs: $2100)", width=35, command=clickboost1)
         clickbooster1.grid(row=0, column=0, sticky=E)
@@ -1234,6 +1237,7 @@ def hideupgrades():
         boostbutton4.destroy()
     if upgcheck5 == int(0):
         boostbutton5.destroy()
+    scrollbar2.destroy()
     global upgrades
     upgrades = Button(frame2, text="Upgrades", height=12, width=15, command=showupgrades)
     upgrades.grid(row=0, column=0, rowspan=8, sticky=E)
@@ -1318,19 +1322,32 @@ def goldmpsstop():
 def main():
     # BUTTONS, LABELS AND ENTRIES
     global incbutton1, incbutton2, incbutton3, incbutton4, incbutton5, upgrades, resetbutton, savebutton, clickbutton, \
-        statsbutton, reportbutton, canvas1, frame1, frame2
+        statsbutton, reportbutton, canvas1, canvas2, frame1, frame2
     background = Label(master, image=img1)
     background.place(x=0, y=0, relwidth=1, relheight=1)
     background.image = img1
 
-    canvas1 = Canvas(master, height=200, width=200)
-    canvas1.grid(row=1, column=0, sticky=W)
+    metaframe1 = Frame(master, bg="white")
+    metaframe1.grid(row=1, column=0, sticky=N+S+E+W)
 
-    frame1 = Frame(canvas1, bg="white")
-    canvas1.create_window((0, 0), window=frame1, anchor='ne')
+    canvas1 = Canvas(metaframe1, height=200, width=200)
+    canvas1.grid(row=0, column=0, sticky=N+S+E+W)
 
-    frame2 = Frame(master, bg="white")
-    frame2.grid(row=1, column=2, sticky=N+S+E+W)
+    scrollbar1 = Scrollbar(canvas1, orient="vertical", command=canvas1.yview)
+    scrollbar1.grid(row=0, column=0, sticky=N+S)
+    canvas1.configure(yscrollcommand=scrollbar1.set, scrollregion=(0, 0, 200, 400))
+
+    frame1 = Frame(canvas1, bg="white", height=200)
+    frame1.grid(row=0, column=1)
+
+    metaframe2 = Frame(master, bg="white")
+    metaframe2.grid(row=1, column=2, sticky=N+S+E+W)
+
+    canvas2 = Canvas(metaframe2, height=200, width=200)
+    canvas2.grid(row=0, column=0, sticky=N+S+E+W)
+
+    frame2 = Frame(canvas2, bg="white", height=200)
+    frame2.grid(row=0, column=0)
 
     upgrades = Button(frame2, text="Upgrades", height=12, width=15, command=showupgrades)
     upgrades.grid(row=0, column=0, rowspan=2, sticky=E)
@@ -1345,34 +1362,34 @@ def main():
     clickbutton.grid(row=1, column=1)
 
     incbutton1 = Button(frame1, textvariable=autopricetkinter, width=35, command=deduction1)
-    incbutton1.grid(row=0, column=0)
+    incbutton1.grid(row=0, column=1)
 
     checklabel1 = Label(frame1, textvariable=autoclicktkinter, width=35)
-    checklabel1.grid(row=1, column=0)
+    checklabel1.grid(row=1, column=1)
 
     incbutton2 = Button(frame1, textvariable=printpricetkinter, width=35, command=deduction2)
-    incbutton2.grid(row=2, column=0)
+    incbutton2.grid(row=2, column=1)
 
     checklabel2 = Label(frame1, textvariable=printmoneytkinter, width=35)
-    checklabel2.grid(row=3, column=0)
+    checklabel2.grid(row=3, column=1)
 
     incbutton3 = Button(frame1, textvariable=counterfeitpricetkinter, width=35, command=deduction3)
-    incbutton3.grid(row=4, column=0)
+    incbutton3.grid(row=4, column=1)
 
     checklabel3 = Label(frame1, textvariable=counterfeittkinter, width=35)
-    checklabel3.grid(row=5, column=0)
+    checklabel3.grid(row=5, column=1)
 
     incbutton4 = Button(frame1, textvariable=sharepricetkinter, width=35, command=deduction4)
-    incbutton4.grid(row=6, column=0)
+    incbutton4.grid(row=6, column=1)
 
     checklabel4 = Label(frame1, textvariable=sharecrashtkinter, width=35)
-    checklabel4.grid(row=7, column=0)
+    checklabel4.grid(row=7, column=1)
 
     incbutton5 = Button(frame1, textvariable=bankpricetkinter, width=35, command=deduction5)
-    incbutton5.grid(row=8, column=0)
+    incbutton5.grid(row=8, column=1)
 
     checklabel5 = Label(frame1, textvariable=bankheisttkinter, width=35)
-    checklabel5.grid(row=9, column=0)
+    checklabel5.grid(row=9, column=1)
 
     statsbutton = Button(master, text="Stats", width=10, command=statsexpand)
     statsbutton.grid(row=2, column=0)
@@ -1385,11 +1402,6 @@ def main():
 
     reportbutton = Button(master, text='Report Issue to Github', width=20, command=report)
     reportbutton.grid(row=4, column=1)
-
-    scrollbar1 = Scrollbar(canvas1, orient="vertical", command=canvas1.yview)
-    scrollbar1.pack(side="left", fill="y")
-    canvas1.configure(yscrollcommand=scrollbar1.set)
-    canvas1.configure(scrollregion=canvas1.bbox("all"), width=200, height=200)
 
 
 thread = threading.Thread(target=master.mainloop)
