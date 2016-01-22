@@ -238,7 +238,7 @@ def statsexpand():
     totalclicksvar = StringVar()
     totalclicksvar.set("Total clicks: " + str(totalclicks))
     totalclickslabel = Label(master, textvariable=totalclicksvar)
-    totalclickslabel.grid(row=3, column=0, sticky=W)
+    totalclickslabel.grid(row=3, column=1, sticky=W)
     timevar = StringVar()
     timevar.set("Total time: " + str(timeplay))
     timelabel = Label(master, textvariable=timevar)
@@ -272,7 +272,7 @@ def boostauto1h1():
         boostbutton1h1.destroy()
         master.bell()
         boostafford1h1 = Label(frame2, text="%s" % norequirements, width=35)
-        boostafford1h1.grid(row=int(1 - int(clickupgcheck1)), column=2, sticky=E)
+        boostafford1h1.grid(row=int(1 - int(clickupgcheck1)), column=0, sticky=E)
         master.after(500, norequirements1h1)
     else:
         money -= 5000
@@ -281,18 +281,18 @@ def boostauto1h1():
         mps += autoclick2 * 2
         mpstkinter.set("MPS: " + str(mps))
         boostbutton1h1.destroy()
-        boostbutton2h1.grid(row=int(2 - (int(upgcheck1h1) + int(clickupgcheck1))), column=2, sticky=E)
-        clickbooster2.grid(row=int(3 - (int(upgcheck1h1) + int(upgcheck2h1) + int(clickupgcheck1))), column=2, sticky=E)
+        boostbutton2h1.grid(row=int(2 - (int(upgcheck1h1) + int(clickupgcheck1))), column=0, sticky=E)
+        clickbooster2.grid(row=int(3 - (int(upgcheck1h1) + int(upgcheck2h1) + int(clickupgcheck1))), column=0, sticky=E)
         boostbutton1h2.grid(
                 row=int(4 - (int(upgcheck1h1) + int(upgcheck2h1) + int(clickupgcheck1) + int(clickupgcheck2))),
                 column=2,
                 sticky=E)
         boostbutton3.grid(row=int(5 - (int(upgcheck1h1) + int(upgcheck1h2) + int(upgcheck2h1) + int(clickupgcheck1) +
-                                       int(clickupgcheck2))), column=2, sticky=E)
+                                       int(clickupgcheck2))), column=0, sticky=E)
         boostbutton2h2.grid(row=int(6 - (int(upgcheck1h1) + int(upgcheck1h2) + int(upgcheck2h1) + int(upgcheck3) +
-                                         int(clickupgcheck1) + int(clickupgcheck2))), column=2, sticky=E)
+                                         int(clickupgcheck1) + int(clickupgcheck2))), column=0, sticky=E)
         boostbutton4.grid(row=int(7 - (int(upgcheck1h1) + int(upgcheck1h2) + int(upgcheck2h1) + int(upgcheck2h2) +
-                                       int(upgcheck3) + int(clickupgcheck1) + int(clickupgcheck2))), column=2, sticky=E)
+                                       int(upgcheck3) + int(clickupgcheck1) + int(clickupgcheck2))), column=0, sticky=E)
         boostafford5.grid(row=int(8 - (int(upgcheck1h1) + int(upgcheck1h2) + int(upgcheck2h1) + int(upgcheck2h2) +
                                        int(upgcheck3) + int(upgcheck4) + int(clickupgcheck1) + int(clickupgcheck2))),
                           column=2, sticky=E)
@@ -302,7 +302,7 @@ def norequirements1h1():
     global boostafford1h1, boostbutton1h1
     boostafford1h1.destroy()
     boostbutton1h1 = Button(frame2, text="Stronger Mouses (Costs: $5000)", width=35, command=boostauto1h1)
-    boostbutton1h1.grid(row=int(1 - int(clickupgcheck1)), column=2, sticky=E)
+    boostbutton1h1.grid(row=int(1 - int(clickupgcheck1)), column=0, sticky=E)
 
 
 def boostauto1h2():
@@ -314,7 +314,7 @@ def boostauto1h2():
         boostafford1h2 = Label(frame2, text="%s" % norequirements, width=35)
         boostafford1h2.grid(
                 row=int(4 - (int(upgcheck1h1) + int(upgcheck2h1) + int(clickupgcheck1) + int(clickupgcheck2))),
-                column=2,
+                column=0,
                 sticky=E)
         master.after(500, norequirements1h2)
     else:
@@ -325,11 +325,11 @@ def boostauto1h2():
         mpstkinter.set("MPS: " + str(mps))
         boostbutton1h2.destroy()
         boostbutton3.grid(row=int(5 - (int(upgcheck1h1) + int(upgcheck1h2) + int(upgcheck2h1) + int(clickupgcheck1) +
-                                       int(clickupgcheck2))), column=2, sticky=E)
+                                       int(clickupgcheck2))), column=0, sticky=E)
         boostbutton2h2.grid(row=int(6 - (int(upgcheck1h1) + int(upgcheck1h2) + int(upgcheck2h1) + int(upgcheck3) +
-                                    int(clickupgcheck1) + int(clickupgcheck2))), column=2, sticky=E)
+                                    int(clickupgcheck1) + int(clickupgcheck2))), column=0, sticky=E)
         boostbutton4.grid(row=int(7 - (int(upgcheck1h1) + int(upgcheck1h2) + int(upgcheck2h1) + int(upgcheck2h2) +
-                                       int(upgcheck3) + int(clickupgcheck1) + int(clickupgcheck2))), column=2, sticky=E)
+                                       int(upgcheck3) + int(clickupgcheck1) + int(clickupgcheck2))), column=0, sticky=E)
         boostbutton5.grid(row=int(8 - (int(upgcheck1h1) + int(upgcheck1h2) + int(upgcheck2h1) + int(upgcheck2h2) +
                                   int(upgcheck3) + int(upgcheck4) + int(clickupgcheck1) + int(clickupgcheck2))),
                           column=2, sticky=E)
@@ -342,7 +342,7 @@ def norequirements1h2():
                             command=boostauto1h2)
     boostbutton1h2.grid(
             row=int(4 - (int(upgcheck1h1) + int(upgcheck2h1) + int(clickupgcheck1) + int(clickupgcheck2))),
-            column=2, sticky=E)
+            column=0, sticky=E)
 
 
 def deduction1():
@@ -352,7 +352,7 @@ def deduction1():
         incbutton1.destroy()
         master.bell()
         incafford1 = Label(frame1, text="%s" % cannotafford, width=35)
-        incafford1.grid(row=0, column=0, sticky=W)
+        incafford1.grid(row=0, column=1, sticky=W)
         master.after(500, cannotafford1)
     else:
         money -= int(autoprice)
@@ -396,7 +396,7 @@ def cannotafford1():
     global incafford1, incbutton1
     incafford1.destroy()
     incbutton1 = Button(frame1, textvariable=autopricetkinter, width=35, command=deduction1)
-    incbutton1.grid(row=0, column=0, sticky=W)
+    incbutton1.grid(row=0, column=1, sticky=W)
 
 
 # MONEY PRINTER
@@ -407,7 +407,7 @@ def boostauto2h1():
         boostbutton2h1.destroy()
         master.bell()
         boostafford2h1 = Label(frame2, text="%s" % norequirements, width=35)
-        boostafford2h1.grid(row=int(2 - (int(upgcheck1h1) + int(clickupgcheck1))), column=2, sticky=E)
+        boostafford2h1.grid(row=int(2 - (int(upgcheck1h1) + int(clickupgcheck1))), column=0, sticky=E)
         master.after(500, norequirements2h1)
     else:
         money -= 42000
@@ -416,17 +416,17 @@ def boostauto2h1():
         mps += printmoney2 * 2
         mpstkinter.set("MPS: " + str(mps))
         boostbutton2h1.destroy()
-        clickbooster2.grid(row=int(3 - (int(upgcheck1h1) + int(upgcheck2h1) + int(clickupgcheck1))), column=2, sticky=E)
+        clickbooster2.grid(row=int(3 - (int(upgcheck1h1) + int(upgcheck2h1) + int(clickupgcheck1))), column=0, sticky=E)
         boostbutton1h2.grid(
                 row=int(4 - (int(upgcheck1h1) + int(upgcheck2h1) + int(clickupgcheck1) + int(clickupgcheck2))),
                 column=2, sticky=E)
         boostbutton3.grid(row=int(5 - (int(upgcheck1h1) + int(upgcheck1h2) + int(upgcheck2h1) + int(clickupgcheck1) +
-                                       int(clickupgcheck2))), column=2, sticky=E)
+                                       int(clickupgcheck2))), column=0, sticky=E)
         boostbutton2h2.grid(row=int(6 - (int(upgcheck1h1) + int(upgcheck1h2) + int(upgcheck2h1) + int(upgcheck3) +
-                                         int(upgcheck4) + int(clickupgcheck1) + int(clickupgcheck2))), column=2,
+                                         int(upgcheck4) + int(clickupgcheck1) + int(clickupgcheck2))), column=0,
                             sticky=E)
         boostbutton4.grid(row=int(7 - (int(upgcheck1h1) + int(upgcheck1h2) + int(upgcheck2h1) + int(upgcheck2h2) +
-                                       int(upgcheck3) + int(clickupgcheck1) + int(clickupgcheck2))), column=2, sticky=E)
+                                       int(upgcheck3) + int(clickupgcheck1) + int(clickupgcheck2))), column=0, sticky=E)
         boostafford5.grid(row=int(8 - (int(upgcheck1h1) + int(upgcheck1h2) + int(upgcheck2h1) + int(upgcheck2h2) +
                                        int(upgcheck3) + int(upgcheck4) + int(clickupgcheck1) + int(clickupgcheck2))),
                           column=2, sticky=E)
@@ -437,7 +437,7 @@ def norequirements2h1():
     boostafford2h1.destroy()
     boostbutton2h1 = Button(frame2, text="Unofficial Printer License (Costs: $42000)", width=35,
                             command=boostauto2h1)
-    boostbutton2h1.grid(row=int(2 - (int(upgcheck1h1) + int(clickupgcheck1))), column=2, sticky=E)
+    boostbutton2h1.grid(row=int(2 - (int(upgcheck1h1) + int(clickupgcheck1))), column=0, sticky=E)
 
 
 def boostauto2h2():
@@ -448,7 +448,7 @@ def boostauto2h2():
         master.bell()
         boostafford2h2 = Label(frame2, text="%s" % norequirements, width=35)
         boostafford2h2.grid(row=int(6 - (int(upgcheck1h1) + int(upgcheck1h2) + int(upgcheck2h1) + int(upgcheck3) +
-                                         int(clickupgcheck1) + int(clickupgcheck2))), column=2, sticky=E)
+                                         int(clickupgcheck1) + int(clickupgcheck2))), column=0, sticky=E)
         master.after(500, norequirements2h2)
     else:
         money -= 7777777
@@ -458,10 +458,10 @@ def boostauto2h2():
         mpstkinter.set("MPS: " + str(mps))
         boostbutton2h2.destroy()
         boostbutton4.grid(row=int(7 - (int(upgcheck1h1) + int(upgcheck1h2) + int(upgcheck2h1) + int(upgcheck2h2) +
-                                       int(upgcheck3) + int(clickupgcheck1) + int(clickupgcheck2))), column=2, sticky=E)
+                                       int(upgcheck3) + int(clickupgcheck1) + int(clickupgcheck2))), column=0, sticky=E)
         boostafford5.grid(row=int(8 - (int(upgcheck1h1) + int(upgcheck1h2) + int(upgcheck2h1) + int(upgcheck2h2) +
                                        int(upgcheck3) + int(upgcheck4) + int(clickupgcheck1) + int(clickupgcheck2))),
-                          column=2, sticky=E)
+                          column=0, sticky=E)
 
 
 def norequirements2h2():
@@ -469,7 +469,7 @@ def norequirements2h2():
     boostafford2h2.destroy()
     boostbutton2h2 = Button(frame2, text="Printing Press (Costs: $7777777)", width=35, command=boostauto2h2)
     boostbutton2h2.grid(row=int(6 - (int(upgcheck1h1) + int(upgcheck1h2) + int(upgcheck2h1) + int(upgcheck3) +
-                                     int(clickupgcheck1) + int(clickupgcheck2))), column=2, sticky=E)
+                                     int(clickupgcheck1) + int(clickupgcheck2))), column=0, sticky=E)
 
 
 def deduction2():
@@ -479,7 +479,7 @@ def deduction2():
         incbutton2.destroy()
         master.bell()
         incafford2 = Label(frame1, text="%s" % cannotafford, width=35)
-        incafford2.grid(row=2, column=0, sticky=W)
+        incafford2.grid(row=2, column=1, sticky=W)
         master.after(500, cannotafford2)
     else:
         money -= int(printprice)
@@ -523,7 +523,7 @@ def cannotafford2():
     global incafford2, incbutton2
     incafford2.destroy()
     incbutton2 = Button(frame1, textvariable=printpricetkinter, width=35, command=deduction2)
-    incbutton2.grid(row=2, column=0, sticky=W)
+    incbutton2.grid(row=2, column=1, sticky=W)
 
 
 # COUNTERFEIT COMPANY
@@ -535,7 +535,7 @@ def boostauto3():
         master.bell()
         boostafford3 = Label(frame2, text="%s" % norequirements, width=35)
         boostafford3.grid(row=int(5 - (int(upgcheck1h1) + int(upgcheck1h2) + int(upgcheck2h1) + int(clickupgcheck1) +
-                                       int(clickupgcheck2))), column=2, sticky=E)
+                                       int(clickupgcheck2))), column=0, sticky=E)
         master.after(500, norequirements3)
     else:
         money -= 2133748
@@ -545,12 +545,12 @@ def boostauto3():
         upgcheck3 += 1
         boostbutton3.destroy()
         boostbutton2h2.grid(row=int(6 - (int(upgcheck1h1) + int(upgcheck1h2) + int(upgcheck2h1) + int(upgcheck3) +
-                                         int(clickupgcheck1) + int(clickupgcheck2))), column=2, sticky=E)
+                                         int(clickupgcheck1) + int(clickupgcheck2))), column=0, sticky=E)
         boostbutton4.grid(row=int(7 - (int(upgcheck1h1) + int(upgcheck1h2) + int(upgcheck2h1) + int(upgcheck2h2) +
-                                       int(upgcheck3) + int(clickupgcheck1) + int(clickupgcheck2))), column=2, sticky=E)
+                                       int(upgcheck3) + int(clickupgcheck1) + int(clickupgcheck2))), column=0, sticky=E)
         boostafford5.grid(row=int(8 - (int(upgcheck1h1) + int(upgcheck1h2) + int(upgcheck2h1) + int(upgcheck2h2) +
                                        int(upgcheck3) + int(upgcheck4) + int(clickupgcheck1) + int(clickupgcheck2))),
-                          column=2, sticky=E)
+                          column=0, sticky=E)
 
 
 def norequirements3():
@@ -559,7 +559,7 @@ def norequirements3():
     boostbutton3 = Button(frame2, text="Skilled Fake Money Making (Costs: $2133748)", width=35,
                           command=boostauto3)
     boostbutton3.grid(row=int(5 - (int(upgcheck1h1) + int(upgcheck1h2) + int(upgcheck2h1) + int(clickupgcheck1) +
-                                   int(clickupgcheck2))), column=2, sticky=E)
+                                   int(clickupgcheck2))), column=0, sticky=E)
 
 
 def deduction3():
@@ -569,7 +569,7 @@ def deduction3():
         incbutton3.destroy()
         master.bell()
         incafford3 = Label(frame1, text="%s" % cannotafford, width=35)
-        incafford3.grid(row=4, column=0, sticky=W)
+        incafford3.grid(row=4, column=1, sticky=W)
         master.after(500, cannotafford3)
     else:
         money -= int(counterfeitprice)
@@ -615,7 +615,7 @@ def cannotafford3():
     global incafford3, incbutton3
     incafford3.destroy()
     incbutton3 = Button(frame1, textvariable=counterfeitpricetkinter, width=35, command=deduction3)
-    incbutton3.grid(row=4, column=0, sticky=W)
+    incbutton3.grid(row=4, column=1, sticky=W)
 
 
 # SHAREMARKET CRASH
@@ -627,7 +627,7 @@ def boostauto4():
         master.bell()
         boostafford4 = Label(frame2, text="%s" % norequirements, width=35)
         boostafford4.grid(row=int(7 - (int(upgcheck1h1) + int(upgcheck1h2) + int(upgcheck2h1) + int(upgcheck2h2) +
-                                       int(upgcheck3) + int(clickupgcheck1) + int(clickupgcheck2))), column=2, sticky=E)
+                                       int(upgcheck3) + int(clickupgcheck1) + int(clickupgcheck2))), column=0, sticky=E)
         master.after(500, norequirements4)
     else:
         money -= 12345678
@@ -644,7 +644,7 @@ def norequirements4():
     boostbutton4 = Button(frame2, text="Sharemarket Catastrophe (Costs: $12345678)", width=35,
                           command=boostauto4)
     boostbutton4.grid(row=int(7 - (int(upgcheck1h1) + int(upgcheck1h2) + int(upgcheck2h1) + int(upgcheck2h2) +
-                                   int(upgcheck3) + int(clickupgcheck1) + int(clickupgcheck2))), column=2, sticky=E)
+                                   int(upgcheck3) + int(clickupgcheck1) + int(clickupgcheck2))), column=0, sticky=E)
 
 
 def deduction4():
@@ -654,7 +654,7 @@ def deduction4():
         incbutton4.destroy()
         master.bell()
         incafford4 = Label(frame1, text="%s" % cannotafford, width=35)
-        incafford4.grid(row=6, column=0, sticky=W)
+        incafford4.grid(row=6, column=1, sticky=W)
         master.after(500, cannotafford4)
     else:
         money -= int(shareprice)
@@ -698,7 +698,7 @@ def cannotafford4():
     global incafford4, incbutton4
     incafford4.destroy()
     incbutton4 = Button(frame1, textvariable=sharepricetkinter, width=35, command=deduction4)
-    incbutton4.grid(row=6, column=0, sticky=W)
+    incbutton4.grid(row=6, column=1, sticky=W)
 
 
 # BANK HEIST
@@ -711,8 +711,8 @@ def boostauto5():
         boostafford5 = Label(frame2, text="%s" % norequirements, width=35)
         boostafford5.grid(row=int(8 - (int(upgcheck1h1) + int(upgcheck1h2) + int(upgcheck2h1) + int(upgcheck2h2) +
                                        int(upgcheck3) + int(upgcheck4) + int(clickupgcheck1) + int(clickupgcheck2))),
-                          column=2, sticky=E)
-        master.after(500, norequirements4)
+                          column=0, sticky=E)
+        master.after(500, norequirements5)
     else:
         money -= 91215000
         bankheist = int(bankheist * 15) / 10
@@ -725,11 +725,11 @@ def boostauto5():
 def norequirements5():
     global boostbutton5
     boostafford5.destroy()
-    boostbutton5 = Button(frame2, text="Sharemarket Catastrophe (Costs: $12345678)", width=35,
-                          command=boostauto4)
+    boostbutton5 = Button(frame2, text="Bank Blueprints (Costs: $91215000)", width=35,
+                          command=boostauto5)
     boostbutton5.grid(row=int(8 - (int(upgcheck1h1) + int(upgcheck1h2) + int(upgcheck2h1) + int(upgcheck2h2) +
                                    int(upgcheck3) + int(upgcheck4) + int(clickupgcheck1) + int(clickupgcheck2))),
-                      column=2, sticky=E)
+                      column=0, sticky=E)
 
 
 def deduction5():
@@ -739,7 +739,7 @@ def deduction5():
         incbutton5.destroy()
         master.bell()
         incafford5 = Label(frame1, text="%s" % cannotafford, width=35)
-        incafford5.grid(row=8, column=0, sticky=W)
+        incafford5.grid(row=8, column=1, sticky=W)
         master.after(500, cannotafford5)
     else:
         money -= int(bankprice)
@@ -783,7 +783,7 @@ def cannotafford5():
     global incafford5, incbutton5
     incafford5.destroy()
     incbutton5 = Button(frame1, textvariable=bankpricetkinter, width=35, command=deduction4)
-    incbutton5.grid(row=8, column=0, sticky=W)
+    incbutton5.grid(row=8, column=1, sticky=W)
 
 
 # CLICKS
@@ -806,8 +806,9 @@ def clickboost1():
     if money < 2100:
         global clickafford1
         clickbooster1.destroy()
+        master.bell()
         clickafford1 = Label(frame2, text="%s" % norequirements, width=35)
-        clickafford1.grid(row=0, column=2, sticky=E)
+        clickafford1.grid(row=0, column=0, sticky=E)
         master.after(500, norequirementsc1)
     else:
         money -= 2100
@@ -815,29 +816,29 @@ def clickboost1():
         inctkinter.set("+" + str(inc) + " money!")
         clickupgcheck1 += 1
         clickbooster1.destroy()
-        boostbutton1h1.grid(row=int(1 - int(clickupgcheck1)), column=2, sticky=E)
-        boostbutton2h1.grid(row=int(2 - (int(upgcheck1h1) + int(clickupgcheck1))), column=2, sticky=E)
-        clickbooster2.grid(row=int(3 - (int(upgcheck1h1) + int(upgcheck2h1) + int(clickupgcheck1))), column=2, sticky=E)
+        boostbutton1h1.grid(row=int(1 - int(clickupgcheck1)), column=0, sticky=E)
+        boostbutton2h1.grid(row=int(2 - (int(upgcheck1h1) + int(clickupgcheck1))), column=0, sticky=E)
+        clickbooster2.grid(row=int(3 - (int(upgcheck1h1) + int(upgcheck2h1) + int(clickupgcheck1))), column=0, sticky=E)
         boostbutton1h2.grid(
                 row=int(4 - (int(upgcheck1h1) + int(upgcheck2h1) + int(clickupgcheck1) + int(clickupgcheck2))),
                 column=2, sticky=E)
         boostbutton3.grid(row=int(5 - (int(upgcheck1h1) + int(upgcheck1h2) + int(upgcheck2h1) + int(clickupgcheck1) +
-                                       int(clickupgcheck2))), column=2, sticky=E)
+                                       int(clickupgcheck2))), column=0, sticky=E)
         boostbutton2h2.grid(row=int(6 - (int(upgcheck1h1) + int(upgcheck1h2) + int(upgcheck2h1) + int(upgcheck3) +
-                                         int(upgcheck4) + int(clickupgcheck1) + int(clickupgcheck2))), column=2,
+                                         int(upgcheck4) + int(clickupgcheck1) + int(clickupgcheck2))), column=0,
                             sticky=E)
         boostbutton4.grid(row=int(7 - (int(upgcheck1h1) + int(upgcheck1h2) + int(upgcheck2h1) + int(upgcheck2h2) +
-                                       int(upgcheck3) + int(clickupgcheck1) + int(clickupgcheck2))), column=2, sticky=E)
+                                       int(upgcheck3) + int(clickupgcheck1) + int(clickupgcheck2))), column=0, sticky=E)
         boostafford5.grid(row=int(8 - (int(upgcheck1h1) + int(upgcheck1h2) + int(upgcheck2h1) + int(upgcheck2h2) +
                                        int(upgcheck3) + int(upgcheck4) + int(clickupgcheck1) + int(clickupgcheck2))),
-                          column=2, sticky=E)
+                          column=0, sticky=E)
 
 
 def norequirementsc1():
     global clickbooster1
     clickafford1.destroy()
-    clickbooster1 = Button(master, text="Reinforced Button (Costs: $2100)", width=35, command=clickboost1)
-    clickbooster1.grid(row=0, column=2, sticky=E)
+    clickbooster1 = Button(frame2, text="Reinforced Button (Costs: $2100)", width=35, command=clickboost1)
+    clickbooster1.grid(row=0, column=0, sticky=E)
 
 
 def clickboost2():
@@ -845,8 +846,9 @@ def clickboost2():
     if money < 200000 or clickupgcheck1 == int(0):
         global clickafford2
         clickbooster2.destroy()
+        master.bell()
         clickafford2 = Label(frame2, text="%s" % norequirements, width=35)
-        clickafford2.grid(row=int(3 - (int(upgcheck1h1) + int(upgcheck2h1) + int(clickupgcheck1))), column=2,
+        clickafford2.grid(row=int(3 - (int(upgcheck1h1) + int(upgcheck2h1) + int(clickupgcheck1))), column=0,
                           sticky=E)
         master.after(500, norequirementsc2)
     else:
@@ -857,26 +859,26 @@ def clickboost2():
         clickbooster2.destroy()
         boostbutton1h2.grid(
                 row=int(4 - (int(upgcheck1h1) + int(upgcheck2h1) + int(clickupgcheck1) + int(clickupgcheck2))),
-                column=2,
+                column=0,
                 sticky=E)
         boostbutton3.grid(row=int(5 - (int(upgcheck1h1) + int(upgcheck1h2) + int(upgcheck2h1) + int(clickupgcheck1) +
-                                       int(clickupgcheck2))), column=2, sticky=E)
+                                       int(clickupgcheck2))), column=0, sticky=E)
         boostbutton2h2.grid(row=int(6 - (int(upgcheck1h1) + int(upgcheck1h2) + int(upgcheck2h1) + int(upgcheck3) +
-                                         int(upgcheck4) + int(clickupgcheck1) + int(clickupgcheck2))), column=2,
+                                         int(upgcheck4) + int(clickupgcheck1) + int(clickupgcheck2))), column=0,
                             sticky=E)
         boostbutton4.grid(row=int(7 - (int(upgcheck1h1) + int(upgcheck1h2) + int(upgcheck2h1) + int(upgcheck2h2) +
-                                       int(upgcheck3) + int(clickupgcheck1) + int(clickupgcheck2))), column=2, sticky=E)
+                                       int(upgcheck3) + int(clickupgcheck1) + int(clickupgcheck2))), column=0, sticky=E)
         boostafford5.grid(row=int(8 - (int(upgcheck1h1) + int(upgcheck1h2) + int(upgcheck2h1) + int(upgcheck2h2) +
                                        int(upgcheck3) + int(upgcheck4) + int(clickupgcheck1) + int(clickupgcheck2))),
-                          column=2, sticky=E)
+                          column=0, sticky=E)
 
 
 def norequirementsc2():
     global clickbooster2
     clickafford2.destroy()
-    clickbooster2 = Button(master, text="Stainless Steel Button (Costs: $200000)", width=35,
+    clickbooster2 = Button(frame2, text="Stainless Steel Button (Costs: $200000)", width=35,
                            command=clickboost2)
-    clickbooster2.grid(row=int(3 - (int(upgcheck1h1) + int(upgcheck2h1) + int(clickupgcheck1))), column=2,
+    clickbooster2.grid(row=int(3 - (int(upgcheck1h1) + int(upgcheck2h1) + int(clickupgcheck1))), column=0,
                        sticky=E)
 
 
@@ -1404,8 +1406,18 @@ def main():
     reportbutton.grid(row=4, column=1)
 
 
+# AUTO-SAVE SYSTEM
+def auto_save():
+    global thread
+    thread.join()
+    savegame()
+    exit()
+
 thread = threading.Thread(target=master.mainloop)
 thread.start()
+otherThread = threading.Thread(target=auto_save)
+otherThread.start()
+
 
 while True:
     if signincheck == signinvalue:
