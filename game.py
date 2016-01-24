@@ -17,6 +17,7 @@ norequirements = "You do not meet the requirements."
 cannotafford = "You cannot afford this."
 signincheck = 1
 signinvalue = 1
+signedin = False
 
 
 def signin():
@@ -40,6 +41,7 @@ def signin():
             for i in [l, unentry, b1, b2]:
                 i.destroy()
             signinvalue += 1
+            signedin = True
         else:
             showerror(title='Error!', message='Wrong Username.')
 
@@ -51,6 +53,7 @@ def signin():
         g = open('savefile_' + un + '.txt')
         g2 = (str(str(g.read()).split(";")[0]).decode("hex")).split("_")
         signinvalue += 1
+        signedin = True
 
     l = Label(master, text='Please enter your username.')
     l.grid(row=1, column=1)
@@ -1238,13 +1241,23 @@ def main():
 
     reportbutton = Button(master, text='Report Issue to Github', width=20, command=report)
     reportbutton.grid(row=11, column=1)
+    
+    logoutButton = Button(master, text='Log Out', width=20, command=logout)
+    logoutButton.grid(row=12, column=1)
 
 # AUTO-SAVE SYSTEM
 def auto_save():
-    global thread
+    global thread, signedin
     thread.join()
-    savegame()
-    exit() # Make sure otherThread isn't hanging around
+    if signedin: # prevent NameError
+        savegame()
+        exit() # Make sure otherThread isn't hanging around
+
+# LOG OUT
+def logout():
+    global g, g2
+    del g
+    del g2
     
 thread = threading.Thread(target=master.mainloop)
 thread.start()
