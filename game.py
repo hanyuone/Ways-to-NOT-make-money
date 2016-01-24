@@ -1241,6 +1241,9 @@ def main():
 
     reportbutton = Button(master, text='Report Issue to Github', width=20, command=report)
     reportbutton.grid(row=11, column=1)
+    
+    logoutButton = Button(master, text='Log Out', width=20, command=logout)
+    logoutButton.grid(row=12, column=1)
 
 # AUTO-SAVE SYSTEM
 def auto_save():
@@ -1249,6 +1252,12 @@ def auto_save():
     if signedin: # prevent NameError
         savegame()
         exit() # Make sure otherThread isn't hanging around
+
+# LOG OUT
+def logout():
+    global g, g2
+    del g
+    del g2
     
 thread = threading.Thread(target=master.mainloop)
 thread.start()
