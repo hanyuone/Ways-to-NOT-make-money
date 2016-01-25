@@ -4,7 +4,7 @@ from tkMessageBox import showerror
 from github import Github
 import math
 import glob
-import threading
+
 
 master = Tk()
 master.title("Ways To NOT Earn Money")
@@ -17,7 +17,14 @@ norequirements = "You do not meet the requirements."
 cannotafford = "You cannot afford this."
 signincheck = 1
 signinvalue = 1
-signedin = False
+# signedin = False
+save_needed = False
+money = 0
+inc = 1
+autoprice = 0
+moneymillion = 0.0
+main_laid_out = False
+data_loaded = False
 
 
 def signin():
@@ -31,6 +38,7 @@ def signin():
             global g2, signinvalue
             g = open('savefile_' + un + '.txt')
             g2 = (str(str(g.read()).split(";")[0]).decode("hex")).split("_")
+            print 'g2', g2
             try:
                 print(g2[39])
             except IndexError:
@@ -41,7 +49,8 @@ def signin():
             for i in [l, unentry, b1, b2]:
                 i.destroy()
             signinvalue += 1
-            signedin = True
+            # signedin = True
+            save_needed = True
         else:
             showerror(title='Error!', message='Wrong Username.')
 
@@ -53,7 +62,8 @@ def signin():
         g = open('savefile_' + un + '.txt')
         g2 = (str(str(g.read()).split(";")[0]).decode("hex")).split("_")
         signinvalue += 1
-        signedin = True
+        # signedin = True
+        save_needed = True
 
     l = Label(master, text='Please enter your username.')
     l.grid(row=1, column=1)
@@ -210,7 +220,7 @@ def statsexpand():
 
 
 def hidestats():
-    global statsbutton, statscheck
+    global statsbutton, statscheck, upgbuttoncheck
     statscheck = False
     totalclickslabel.destroy()
     timelabel.destroy()
@@ -316,11 +326,15 @@ def deduction1():
     global money, autoclick, autoclick2, autoprice, counterfeit, printmoney, sharecrash, mps, inc
     if money < int(autoprice):
         global incafford1
+
+        print "can't afford, autoprice:", money, autoprice
+
         incbutton1.destroy()
         master.bell()
         incafford1 = Label(master, text="%s" % cannotafford, width=35)
         incafford1.grid(row=1, column=0, sticky=W)
         master.after(500, cannotafford1)
+
     else:
         money -= int(autoprice)
         autoclick += (1 + upgcheck1h1 * 2 + upgcheck1h2 * 18)
@@ -329,6 +343,9 @@ def deduction1():
         mpstkinter.set("MPS: " + str(mps))
         autoclicktkinter.set("Auto-Clickers Amount: " + str(autoclick2))
         autoprice = int(20 * (math.pow(1.2, autoclick2)))
+
+        print "can afford, autoprice:", money, autoprice, autoclick2
+
         autopricechoice()
     inc = int(inc + math.pow(int(clickupgcheck2 * (autoclick + printmoney + counterfeit + sharecrash)), 1.01))
     if autoclick == 1 and sharecrash == 0 and counterfeit == 0 and printmoney == 0:
@@ -336,6 +353,11 @@ def deduction1():
 
 
 def autopricechoice():
+    global autopricetkinter, main_laid_out
+    print 'autopricechoice', autoprice
+
+    main_laid_out = False
+
     if len(str(autoprice)) <= 8:
         autopricetkinter.set("Auto-Clicker (Costs: $" + str(autoprice) + ")")
     else:
@@ -674,9 +696,10 @@ def cannotafford4():
 
 # CLICKS
 def collectmoney():
-    global inc, money, animate, totalclicks
+    global inc, money, animate, totalclicks, main_laid_out
     money += inc
-    if moneymillion == 0:
+    print 'collectmoney', money, inc, moneymillion
+    if moneymillion == 0.0:
         moneytkinter.set("Balance: $" + str(money))
     else:
         moneytkinter.set("Balance: $" + str(moneymillion) + "m")
@@ -685,6 +708,7 @@ def collectmoney():
         animate = 1
     animationthingy()
     totalclicks += 1
+    main_laid_out = False
 
 
 def clickboost1():
@@ -1034,7 +1058,7 @@ def _pressyes(username=None):
 
 # UPGRADES WINDOW
 def showupgrades():
-    global upgbuttoncheck
+    global upgbuttoncheck, statscheck
     upgbuttoncheck = True
     global clickbooster1, boostbutton1h1, boostbutton2h1, clickbooster2, boostbutton1h2, boostbutton3, \
         boostbutton2h2, boostbutton4, exitupgrades
@@ -1189,7 +1213,10 @@ def goldmpsstop():
 def main():
     # BUTTONS, LABELS AND ENTRIES
     global incbutton1, incbutton2, incbutton3, incbutton4, upgrades, resetbutton, savebutton, clickbutton, statsbutton,\
-           reportbutton
+           reportbutton, moneylabel
+
+    print 'main() laying things out'
+
     background = Label(master, image=img1)
     background.place(x=0, y=0, relwidth=1, relheight=1)
     background.image = img1
@@ -1245,143 +1272,167 @@ def main():
     logoutButton = Button(master, text='Log Out', width=20, command=logout)
     logoutButton.grid(row=12, column=1)
 
-# AUTO-SAVE SYSTEM
-def auto_save():
-    global thread, signedin
-    thread.join()
-    if signedin: # prevent NameError
-        savegame()
-        exit() # Make sure otherThread isn't hanging around
 
 # LOG OUT
 def logout():
     global g, g2
     del g
     del g2
-    
-thread = threading.Thread(target=master.mainloop)
-thread.start()
-otherThread = threading.Thread(target=auto_save)
-otherThread.start()
 
 
-while True:
+def main_tick():
+    global animate, autoclick, autoclick2, clickcolourcheck, totalclicks, upgbuttoncheck, \
+           upgcheck1h1, upgcheck1h2, upgcheck2h1, upgcheck2h2, upgcheck3, upgcheck4, clickupgcheck1, clickupgcheck2, \
+           mps, printmoney, printmoney2, counterfeit, counterfeit2, sharecrash, sharecrash2, \
+           save_needed, moneytkinter, mpstkinter, inctkinter, autopricetkinter, autoclicktkinter, \
+           printpricetkinter, printmoneytkinter, counterfeitpricetkinter, counterfeittkinter, sharepricetkinter, \
+           sharecrashtkinter, check, main_laid_out, statscheck, timeplay, goldcheck, \
+           money, moneymillion, moneytrillion, moneyquadrillion, moneyquintillion, data_loaded
+    # while True:
     if signincheck == signinvalue:
-        try:
-            check = False
-            upgbuttoncheck = False
-            goldcheck = False
-            statscheck = False
-            animate = 0
-            totalclicks = int(g2[39])
-            timeplay = int(g2[37])
-            click = 0
-            clickcolourcheck = 1
-            upgcheck1h1 = int(g2[9])
-            upgcheck1h2 = int(g2[11])
-            upgcheck2h1 = int(g2[13])
-            upgcheck2h2 = int(g2[15])
-            upgcheck3 = int(g2[17])
-            upgcheck4 = int(g2[19])
-            clickupgcheck1 = int(g2[21])
-            clickupgcheck2 = int(g2[23])
-            money = float(str(g2[25] + g2[27] + g2[29] + g2[31] + g2[33] + g2[35]))
-            if len(str(money)) < 8:
-                moneycheck = "0"
-            else:
-                moneycheck = str(money)[:1]
-            moneymillion = round(float(str(g2[25] + g2[27] + g2[29] + g2[31] + g2[33]) + "." + moneycheck), 1)
-            if len(str(moneymillion)) < 5:
-                moneymillioncheck = "0"
-            else:
-                moneymillioncheck = str(moneymillion)[:1]
-            moneybillion = round(float(str(g2[25] + g2[27] + g2[29] + g2[31]) + "." + moneymillioncheck), 1)
-            if len(str(moneybillion)) < 5:
-                moneybillioncheck = "0"
-            else:
-                moneybillioncheck = str(moneybillion)[:1]
-            moneytrillion = round(float(str(g2[25] + g2[27] + g2[29]) + "." + moneybillioncheck), 1)
-            if len(str(moneytrillion)) < 5:
-                moneytrillioncheck = "0"
-            else:
-                moneytrillioncheck = str(moneytrillion)[:1]
-            moneyquadrillion = round(float(str(g2[25] + g2[27]) + "." + moneytrillioncheck), 1)
-            if len(str(moneyquadrillion)) < 5:
-                moneyquadrillioncheck = "0"
-            else:
-                moneyquadrillioncheck = str(moneyquadrillion)[:1]
-            moneyquintillion = round(float(str(g2[25]) + "." + moneyquadrillioncheck), 1)
-            moneytkinter = StringVar()
-            if moneymillion == 0:
-                moneytkinter.set("Balance: $" + str(money))
-            elif moneybillion == 0:
-                moneytkinter.set("Balance: $" + str(moneymillion) + "m")
-            elif moneytrillion == 0:
-                moneytkinter.set("Balance: $" + str(moneybillion) + "b")
-            elif moneyquadrillion == 0:
-                moneytkinter.set("Balance: $" + str(moneytrillion) + "t")
-            elif moneyquintillion == 0:
-                moneytkinter.set("Balance: $" + str(moneyquadrillion) + "q")
-            else:
-                moneytkinter.set("Balance: $" + str(moneyquintillion) + "Q")
-            autoclick = int((g2[1] * 18 * int(g2[11])) + (g2[1] * 2 * int(g2[9])) + g2[1])
-            autoclick2 = int(g2[1])
-            autoclicktkinter = StringVar()
-            autoclicktkinter.set("Auto-Clickers Amount: " + str(g2[1]))
-            autoprice = int(20 * (math.pow(1.2, int(g2[1]))))
-            autopricetkinter = StringVar()
-            autopricetkinter.set("Auto-Clicker (Costs: $" + str(autoprice) + ")")
-            printmoney = int((g2[3] * 2 * int(g2[13])) + g2[3])
-            printmoney2 = int(g2[3])
-            printmoneytkinter = StringVar()
-            printmoneytkinter.set("Money Printers Amount: " + str(g2[3]))
-            printprice = int(375 * (math.pow(1.2, int(g2[3]))))
-            printpricetkinter = StringVar()
-            printpricetkinter.set("Money Printer (Costs: $" + str(printprice) + ")")
-            counterfeit = int((g2[5] * 2 * int(g2[17])) + g2[5])
-            counterfeit2 = int(g2[5])
-            counterfeittkinter = StringVar()
-            counterfeittkinter.set("Counterfeit Companies Amount: " + str(g2[5]))
-            counterfeitprice = int(9001 * (math.pow(1.2, int(g2[5]))))
-            counterfeitpricetkinter = StringVar()
-            counterfeitpricetkinter.set("Counterfeit Company (Costs: $" + str(counterfeitprice) + ")")
-            sharecrash = int((g2[7] * 2 * int(g2[19])) + g2[7])
-            sharecrash2 = int(g2[7])
-            sharecrashtkinter = StringVar()
-            sharecrashtkinter.set("Sharemarket Crashes Amount: " + str(sharecrash2))
-            shareprice = int(42000 * (math.pow(1.2, int(g2[7]))))
-            sharepricetkinter = StringVar()
-            sharepricetkinter.set("Sharemarket Crash (Costs: $" + str(shareprice) + ")")
-            mps = int(g2[1]) + 15 * int(g2[3]) + 321 * int(g2[5]) + 969 * int(g2[7])
-            mpstkinter = StringVar()
-            mpstkinter.set("MPS: " + str(mps))
-            inc = int(1 + (int(g2[21]) * 2) + int(g2[23]) * (mps / 10))
-            inctkinter = StringVar()
-            inctkinter.set("+" + str(inc) + " money!")
-            templist1 = [moneymillion] * 2
-            templist2 = [moneybillion] * 2
-            templist3 = [moneytrillion] * 2
-            templist4 = [moneyquadrillion] * 2
-            templist5 = [moneyquintillion] * 2
-            if g2[21] == int(1):
-                clickbooster1.destroy()
-            if g2[9] == int(1):
-                boostbutton1h1.destroy()
-            if g2[13] == int(1):
-                boostbutton2h1.destroy()
-            if g2[23] == int(1):
-                clickbooster2.destroy()
-            if g2[11] == int(1):
-                boostbutton1h2.destroy()
-            if g2[17] == int(1):
-                boostbutton3.destroy()
-            if g2[15] == int(1):
-                boostbutton2h2.destroy()
-            if g2[19] == int(1):
-                boostbutton4.destroy()
-            if mps >= 1:
-                automoneychoice()
-            main()
-            break
-        except NameError:
-            signin()
+        if save_needed:
+            print 'main_tick() saving'
+            savegame()
+            save_needed = False
+        elif not data_loaded:
+            print 'main_tick() NOT saving'
+            try:
+                check = False
+                upgbuttoncheck = False
+                goldcheck = False
+                statscheck = False
+                animate = 0
+                totalclicks = int(g2[39])
+                timeplay = int(g2[37])
+                click = 0
+                clickcolourcheck = 1
+                upgcheck1h1 = int(g2[9])
+                upgcheck1h2 = int(g2[11])
+                upgcheck2h1 = int(g2[13])
+                upgcheck2h2 = int(g2[15])
+                upgcheck3 = int(g2[17])
+                upgcheck4 = int(g2[19])
+                clickupgcheck1 = int(g2[21])
+                clickupgcheck2 = int(g2[23])
+                money = float(str(g2[25] + g2[27] + g2[29] + g2[31] + g2[33] + g2[35]))
+                if len(str(money)) < 8:
+                    moneycheck = "0"
+                else:
+                    moneycheck = str(money)[:1]
+                moneymillion = round(float(str(g2[25] + g2[27] + g2[29] + g2[31] + g2[33]) + "." + moneycheck), 1)
+                if len(str(moneymillion)) < 5:
+                    moneymillioncheck = "0"
+                else:
+                    moneymillioncheck = str(moneymillion)[:1]
+                moneybillion = round(float(str(g2[25] + g2[27] + g2[29] + g2[31]) + "." + moneymillioncheck), 1)
+                if len(str(moneybillion)) < 5:
+                    moneybillioncheck = "0"
+                else:
+                    moneybillioncheck = str(moneybillion)[:1]
+                moneytrillion = round(float(str(g2[25] + g2[27] + g2[29]) + "." + moneybillioncheck), 1)
+                if len(str(moneytrillion)) < 5:
+                    moneytrillioncheck = "0"
+                else:
+                    moneytrillioncheck = str(moneytrillion)[:1]
+                moneyquadrillion = round(float(str(g2[25] + g2[27]) + "." + moneytrillioncheck), 1)
+                if len(str(moneyquadrillion)) < 5:
+                    moneyquadrillioncheck = "0"
+                else:
+                    moneyquadrillioncheck = str(moneyquadrillion)[:1]
+                moneyquintillion = round(float(str(g2[25]) + "." + moneyquadrillioncheck), 1)
+                moneytkinter = StringVar()
+                if moneymillion == 0:
+                    moneytkinter.set("Balance: $" + str(money))
+                    print 'balance set to money', money
+                elif moneybillion == 0:
+                    moneytkinter.set("Balance: $" + str(moneymillion) + "m")
+                    print 'balance set to moneymillion', moneymillion
+                elif moneytrillion == 0:
+                    moneytkinter.set("Balance: $" + str(moneybillion) + "b")
+                    print 'balance set to moneybillion', moneybillion
+                elif moneyquadrillion == 0:
+                    moneytkinter.set("Balance: $" + str(moneytrillion) + "t")
+                    print 'balance set to moneytrillion', moneytrillion
+                elif moneyquintillion == 0:
+                    moneytkinter.set("Balance: $" + str(moneyquadrillion) + "q")
+                    print 'balance set to moneyquadrillion', moneyquadrillion
+                else:
+                    moneytkinter.set("Balance: $" + str(moneyquintillion) + "Q")
+                    print 'balance set to moneyquintillion', moneyquintillion
+
+                autoclick = int((g2[1] * 18 * int(g2[11])) + (g2[1] * 2 * int(g2[9])) + g2[1])
+                autoclick2 = int(g2[1])
+                autoclicktkinter = StringVar()
+                autoclicktkinter.set("Auto-Clickers Amount: " + str(g2[1]))
+                autoprice = int(20 * (math.pow(1.2, int(g2[1]))))
+                autopricetkinter = StringVar()
+                autopricetkinter.set("Auto-Clicker (Costs: $" + str(autoprice) + ")")
+                printmoney = int((g2[3] * 2 * int(g2[13])) + g2[3])
+                printmoney2 = int(g2[3])
+                printmoneytkinter = StringVar()
+                printmoneytkinter.set("Money Printers Amount: " + str(g2[3]))
+                printprice = int(375 * (math.pow(1.2, int(g2[3]))))
+                printpricetkinter = StringVar()
+                printpricetkinter.set("Money Printer (Costs: $" + str(printprice) + ")")
+                counterfeit = int((g2[5] * 2 * int(g2[17])) + g2[5])
+                counterfeit2 = int(g2[5])
+                counterfeittkinter = StringVar()
+                counterfeittkinter.set("Counterfeit Companies Amount: " + str(g2[5]))
+                counterfeitprice = int(9001 * (math.pow(1.2, int(g2[5]))))
+                counterfeitpricetkinter = StringVar()
+                counterfeitpricetkinter.set("Counterfeit Company (Costs: $" + str(counterfeitprice) + ")")
+                sharecrash = int((g2[7] * 2 * int(g2[19])) + g2[7])
+                sharecrash2 = int(g2[7])
+                sharecrashtkinter = StringVar()
+                sharecrashtkinter.set("Sharemarket Crashes Amount: " + str(sharecrash2))
+                shareprice = int(42000 * (math.pow(1.2, int(g2[7]))))
+                sharepricetkinter = StringVar()
+                sharepricetkinter.set("Sharemarket Crash (Costs: $" + str(shareprice) + ")")
+                mps = int(g2[1]) + 15 * int(g2[3]) + 321 * int(g2[5]) + 969 * int(g2[7])
+                mpstkinter = StringVar()
+                mpstkinter.set("MPS: " + str(mps))
+                inc = int(1 + (int(g2[21]) * 2) + int(g2[23]) * (mps / 10))
+                inctkinter = StringVar()
+                inctkinter.set("+" + str(inc) + " money!")
+                templist1 = [moneymillion] * 2
+                templist2 = [moneybillion] * 2
+                templist3 = [moneytrillion] * 2
+                templist4 = [moneyquadrillion] * 2
+                templist5 = [moneyquintillion] * 2
+                if g2[21] == int(1):
+                    clickbooster1.destroy()
+                if g2[9] == int(1):
+                    boostbutton1h1.destroy()
+                if g2[13] == int(1):
+                    boostbutton2h1.destroy()
+                if g2[23] == int(1):
+                    clickbooster2.destroy()
+                if g2[11] == int(1):
+                    boostbutton1h2.destroy()
+                if g2[17] == int(1):
+                    boostbutton3.destroy()
+                if g2[15] == int(1):
+                    boostbutton2h2.destroy()
+                if g2[19] == int(1):
+                    boostbutton4.destroy()
+                if mps >= 1:
+                    automoneychoice()
+
+                print 'main_tick(), main_laid_out', main_laid_out
+                if not main_laid_out:
+                    main()
+                    main_laid_out = True
+                # break
+
+                data_loaded = True
+
+            except NameError as ne:
+                print ne
+                signin()
+
+    master.after(1000, main_tick)
+
+
+master.after(0, main_tick)
+master.mainloop()
+
