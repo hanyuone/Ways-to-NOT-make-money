@@ -6,6 +6,9 @@ import math
 import glob
 import threading
 
+class NotSignedIn(Exception):
+    pass
+
 master = Tk()
 master.title("Ways To NOT Earn Money")
 img1 = PhotoImage(file="img1.gif")
@@ -28,7 +31,7 @@ def signin():
         global g
         un = unentry.get()
         if ('savefile_' + un + '.txt') in glob.glob('savefile_*.txt'):
-            global g2, signinvalue
+            global g2, signinvalue, signedin
             g = open('savefile_' + un + '.txt')
             g2 = (str(str(g.read()).split(";")[0]).decode("hex")).split("_")
             try:
@@ -46,7 +49,7 @@ def signin():
             showerror(title='Error!', message='Wrong Username.')
 
     def createaccount():
-        global g, g2, signinvalue
+        global g, g2, signinvalue, signedin
         print("Yes")
         un = unentry.get()
         _pressyes(username=un)
@@ -1189,7 +1192,7 @@ def goldmpsstop():
 def main():
     # BUTTONS, LABELS AND ENTRIES
     global incbutton1, incbutton2, incbutton3, incbutton4, upgrades, resetbutton, savebutton, clickbutton, statsbutton,\
-           reportbutton
+           reportbutton, logoutButton
     background = Label(master, image=img1)
     background.place(x=0, y=0, relwidth=1, relheight=1)
     background.image = img1
@@ -1245,6 +1248,14 @@ def main():
     logoutButton = Button(master, text='Log Out', width=20, command=logout)
     logoutButton.grid(row=12, column=1)
 
+def unMain():
+    global master
+    master.destroy()
+    del master
+    master = Tk()
+    signin()
+    
+
 # AUTO-SAVE SYSTEM
 def auto_save():
     global thread, signedin
@@ -1255,9 +1266,11 @@ def auto_save():
 
 # LOG OUT
 def logout():
-    global g, g2
+    global g, g2, signedin
     del g
     del g2
+    signedin = False
+    unMain()
     
 thread = threading.Thread(target=master.mainloop)
 thread.start()
@@ -1268,6 +1281,8 @@ otherThread.start()
 while True:
     if signincheck == signinvalue:
         try:
+            if not signedin:
+                raise NotSignedIn
             check = False
             upgbuttoncheck = False
             goldcheck = False
@@ -1383,5 +1398,5 @@ while True:
                 automoneychoice()
             main()
             break
-        except NameError:
+        except NotSignedIn:
             signin()
