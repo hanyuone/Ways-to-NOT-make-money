@@ -5,13 +5,13 @@ class GameState:
     def __init__(self, data=None):
         self.data = [] if data is None else data
 
-        self.check = False
+        self.check = 0
         self.upgbuttoncheck = False
         self.goldcheck = False
         self.statscheck = False
 
         self.animate = 0
-        self.click = 0
+        # self.click = 0
         self.clickcolourcheck = 1
 
         self.upgcheck1h1 = int(self.data[9])
@@ -27,36 +27,6 @@ class GameState:
         self.totalclicks = int(self.data[39])
 
         self.money = float(self.data[25] + self.data[27] + self.data[29] + self.data[31] + self.data[33] + self.data[35])
-        if len(str(self.money)) < 8:
-            self.moneycheck = "0"
-        else:
-            self.moneycheck = str(self.money)[:1]
-
-        self.moneymillion = round(float(str(self.data[25] + self.data[27] + self.data[29] + self.data[31] + self.data[33]) + "." + self.moneycheck), 1)
-        if len(str(self.moneymillion)) < 5:
-            self.moneymillioncheck = "0"
-        else:
-            self.moneymillioncheck = str(self.moneymillion)[:1]
-
-        self.moneybillion = round(float(str(self.data[25] + self.data[27] + self.data[29] + self.data[31]) + "." + self.moneymillioncheck), 1)
-        if len(str(self.moneybillion)) < 5:
-            self.moneybillioncheck = "0"
-        else:
-            self.moneybillioncheck = str(self.moneybillion)[:1]
-
-        self.moneytrillion = round(float(self.data[25] + self.data[27] + self.data[29] + "." + self.moneybillioncheck), 1)
-        if len(str(self.moneytrillion)) < 5:
-            self.moneytrillioncheck = "0"
-        else:
-            self.moneytrillioncheck = str(self.moneytrillion)[:1]
-
-        self.moneyquadrillion = round(float(self.data[25] + self.data[27] + "." + self.moneytrillioncheck), 1)
-        if len(str(self.moneyquadrillion)) < 5:
-            self.moneyquadrillioncheck = "0"
-        else:
-            self.moneyquadrillioncheck = str(self.moneyquadrillion)[:1]
-
-        self.moneyquintillion = round(float(self.data[25] + "." + self.moneyquadrillioncheck), 1)
 
         self.autoclick2 = int(self.data[1])
         self.autoclick = self.autoclick2 * 18 * self.upgcheck1h2 + self.autoclick2 * 2 * self.upgcheck1h1 + self.autoclick2
@@ -76,31 +46,10 @@ class GameState:
 
         self.mps = self.autoclick2 + 15 * self.printmoney2 + 321 * self.counterfeit2 + 969 * self.sharecrash2
         self.inc = 1 + self.clickupgcheck1 * 2 + self.clickupgcheck2 * self.mps / 10
-        self.templist1 = [self.moneymillion] * 2
-        self.templist2 = [self.moneybillion] * 2
-        self.templist3 = [self.moneytrillion] * 2
-        self.templist4 = [self.moneyquadrillion] * 2
-        self.templist5 = [self.moneyquintillion] * 2
 
     def set(self, name, value):
         i = self.data.index(name)
         self.data[i+1] = value
-
-    def get_balance(self):
-        if self.moneymillion == 0:
-            money_string = str(self.money)
-        elif self.moneybillion == 0:
-            money_string = str(self.moneymillion) + "m"
-        elif self.moneytrillion == 0:
-            money_string = str(self.moneybillion) + "b"
-        elif self.moneyquadrillion == 0:
-            money_string = str(self.moneytrillion) + "t"
-        elif self.moneyquintillion == 0:
-            money_string = str(self.moneyquadrillion) + "q"
-        else:
-            money_string = str(self.moneyquintillion) + "Q"
-
-        return "Balance: $" + money_string
 
     def get_autoclick(self):
         return self.autoclick
@@ -141,8 +90,11 @@ class GameState:
     def inc_printmoney2(self, amount=1):
         self.printmoney2 += amount
 
-    def get_money_printer_price(self):
+    def get_printprice(self):
         return self.printprice
+
+    def set_printprice(self, amount):
+        self.printprice = amount
 
     def get_counterfeit(self):
         return self.counterfeit
@@ -230,4 +182,69 @@ class GameState:
 
     def inc_money(self, amount=1):
         self.money += amount
+
+    def get_animate(self):
+        return self.animate
+
+    def inc_animate(self):
+        self.animate = (self.animate + 1) % 3
+
+    def inc_clickcolourcheck(self):
+        c = self.clickcolourcheck
+        self.clickcolourcheck = (self.clickcolourcheck + 1) % 7
+        return c
+
+    def get_upgcheck1h1(self):
+        return self.upgcheck1h1
+
+    def inc_upgcheck1h1(self, amount=1):
+        self.upgcheck1h1 += amount
+
+    def get_upgcheck1h2(self):
+        return self.upgcheck1h2
+
+    def inc_upgcheck1h2(self, amount=1):
+        self.upgcheck1h2 += amount
+
+    def get_upgcheck2h1(self):
+        return self.upgcheck2h1
+
+    def inc_upgcheck2h1(self, amount=1):
+        self.upgcheck2h1 += amount
+
+    def get_upgcheck2h2(self):
+        return self.upgcheck2h2
+
+    def inc_upgcheck2h2(self, amount=1):
+        self.upgcheck2h2 += amount
+
+    def get_upgcheck3(self):
+        return self.upgcheck3
+
+    def inc_upgcheck3(self, amount=1):
+        self.upgcheck3 += amount
+
+    def get_upgcheck4(self):
+        return self.upgcheck4
+
+    def inc_upgcheck4(self, amount=1):
+        self.upgcheck4 += amount
+
+    def get_clickupgcheck1(self):
+        return self.clickupgcheck1
+
+    def inc_clickupgcheck1(self, amount=1):
+        self.clickupgcheck1 += amount
+
+    def get_clickupgcheck2(self):
+        return self.clickupgcheck2
+
+    def inc_clickupgcheck2(self, amount=1):
+        self.clickupgcheck2 += amount
+
+    def get_upgbuttoncheck(self):
+        return self.upgbuttoncheck
+
+    def set_upgbuttoncheck(self, u):
+        self.upgbuttoncheck = u
 
