@@ -1444,44 +1444,47 @@ while True:
             goldcheck = False
             statscheck = False
             animate = 0
-            totalclicks = int(g2[39])
-            timeplay = int(g2[37])
+            totalclicks = int(gmisc[3])
+            timeplay = int(gmisc[1])
             click = 0
             clickcolourcheck = 1
-            upgcheck1h1 = int(g2[9])
-            upgcheck1h2 = int(g2[11])
-            upgcheck2h1 = int(g2[13])
-            upgcheck2h2 = int(g2[15])
-            upgcheck3 = int(g2[17])
-            upgcheck4 = int(g2[19])
-            clickupgcheck1 = int(g2[21])
-            clickupgcheck2 = int(g2[23])
-            money = float(str(g2[25] + g2[27] + g2[29] + g2[31] + g2[33] + g2[35]))
+            upgcheck1h1 = int(gupgrades[1])
+            upgcheck1h2 = int(gupgrades[3])
+            upgcheck2h1 = int(gupgrades[5])
+            upgcheck2h2 = int(gupgrades[7])
+            upgcheck3 = int(gupgrades[9])
+            upgcheck4 = int(gupgrades[11])
+            upgcheck5 = int(gupgrades[13])
+            clickupgcheck1 = int(gupgrades[15])
+            clickupgcheck2 = int(gupgrades[17])
+            money = float(str(gmoney[1] + gmoney[3] + gmoney[5] + gmoney[7] + gmoney[9] + gmoney[11]))
             if len(str(money)) < 8:
                 moneycheck = "0"
             else:
                 moneycheck = str(money)[:1]
-            moneymillion = round(float(str(g2[25] + g2[27] + g2[29] + g2[31] + g2[33]) + "." + moneycheck), 1)
+            moneymillion = round(float(str(gmoney[1] + gmoney[3] + gmoney[5] + gmoney[7] + gmoney[9]) + "." +
+                                       moneycheck), 1)
             if len(str(moneymillion)) < 5:
                 moneymillioncheck = "0"
             else:
                 moneymillioncheck = str(moneymillion)[:1]
-            moneybillion = round(float(str(g2[25] + g2[27] + g2[29] + g2[31]) + "." + moneymillioncheck), 1)
+            moneybillion = round(float(str(gmoney[1] + gmoney[3] + gmoney[5] + gmoney[7]) + "." + moneymillioncheck),
+                                 1)
             if len(str(moneybillion)) < 5:
                 moneybillioncheck = "0"
             else:
                 moneybillioncheck = str(moneybillion)[:1]
-            moneytrillion = round(float(str(g2[25] + g2[27] + g2[29]) + "." + moneybillioncheck), 1)
+            moneytrillion = round(float(str(gmoney[1] + gmoney[3] + gmoney[5]) + "." + moneybillioncheck), 1)
             if len(str(moneytrillion)) < 5:
                 moneytrillioncheck = "0"
             else:
                 moneytrillioncheck = str(moneytrillion)[:1]
-            moneyquadrillion = round(float(str(g2[25] + g2[27]) + "." + moneytrillioncheck), 1)
+            moneyquadrillion = round(float(str(gmoney[1] + gmoney[3]) + "." + moneytrillioncheck), 1)
             if len(str(moneyquadrillion)) < 5:
                 moneyquadrillioncheck = "0"
             else:
                 moneyquadrillioncheck = str(moneyquadrillion)[:1]
-            moneyquintillion = round(float(str(g2[25]) + "." + moneyquadrillioncheck), 1)
+            moneyquintillion = round(float(str(gmoney[1]) + "." + moneyquadrillioncheck), 1)
             moneytkinter = StringVar()
             if moneymillion == 0:
                 moneytkinter.set("Balance: $" + str(money))
@@ -1495,38 +1498,46 @@ while True:
                 moneytkinter.set("Balance: $" + str(moneyquadrillion) + "q")
             else:
                 moneytkinter.set("Balance: $" + str(moneyquintillion) + "Q")
-            autoclick = int((g2[1] * 18 * int(g2[11])) + (g2[1] * 2 * int(g2[9])) + g2[1])
-            autoclick2 = int(g2[1])
+            autoclick = int((gbuildings[1] * 18 * int(gupgrades[3])) + (gbuildings[1] * 2 * int(gupgrades[1])) + 
+                            gbuildings[1])
+            autoclick2 = int(gbuildings[1])
             autoclicktkinter = StringVar()
-            autoclicktkinter.set("Auto-Clickers Amount: " + str(g2[1]))
-            autoprice = int(20 * (math.pow(1.2, int(g2[1]))))
+            autoclicktkinter.set("Auto-Clickers Amount: " + str(gbuildings[1]))
+            autoprice = int(20 * (math.pow(1.2, int(gbuildings[1]))))
             autopricetkinter = StringVar()
             autopricetkinter.set("Auto-Clicker (Costs: $" + str(autoprice) + ")")
-            printmoney = int((g2[3] * 2 * int(g2[13])) + g2[3])
-            printmoney2 = int(g2[3])
+            printmoney = int((gbuildings[3] * 2 * int(gupgrades[5])) + gbuildings[3])
+            printmoney2 = int(gbuildings[3])
             printmoneytkinter = StringVar()
-            printmoneytkinter.set("Money Printers Amount: " + str(g2[3]))
-            printprice = int(375 * (math.pow(1.2, int(g2[3]))))
+            printmoneytkinter.set("Money Printers Amount: " + str(gbuildings[3]))
+            printprice = int(375 * (math.pow(1.2, int(gbuildings[3]))))
             printpricetkinter = StringVar()
             printpricetkinter.set("Money Printer (Costs: $" + str(printprice) + ")")
-            counterfeit = int((g2[5] * 2 * int(g2[17])) + g2[5])
-            counterfeit2 = int(g2[5])
+            counterfeit = int((gbuildings[5] * 2 * int(gupgrades[9])) + gbuildings[5])
+            counterfeit2 = int(gbuildings[5])
             counterfeittkinter = StringVar()
-            counterfeittkinter.set("Counterfeit Companies Amount: " + str(g2[5]))
-            counterfeitprice = int(9001 * (math.pow(1.2, int(g2[5]))))
+            counterfeittkinter.set("Counterfeit Companies Amount: " + str(gbuildings[5]))
+            counterfeitprice = int(9001 * (math.pow(1.2, int(gbuildings[5]))))
             counterfeitpricetkinter = StringVar()
             counterfeitpricetkinter.set("Counterfeit Company (Costs: $" + str(counterfeitprice) + ")")
-            sharecrash = int((g2[7] * 2 * int(g2[19])) + g2[7])
-            sharecrash2 = int(g2[7])
+            sharecrash = int((gbuildings[7] * 2 * int(gupgrades[11])) + gbuildings[7])
+            sharecrash2 = int(gbuildings[7])
             sharecrashtkinter = StringVar()
             sharecrashtkinter.set("Sharemarket Crashes Amount: " + str(sharecrash2))
-            shareprice = int(42000 * (math.pow(1.2, int(g2[7]))))
+            shareprice = int(42000 * (math.pow(1.2, int(gbuildings[7]))))
             sharepricetkinter = StringVar()
             sharepricetkinter.set("Sharemarket Crash (Costs: $" + str(shareprice) + ")")
-            mps = int(g2[1]) + 15 * int(g2[3]) + 321 * int(g2[5]) + 969 * int(g2[7])
+            bankheist = int((gbuildings[9]) * 2 * int(gupgrades[13]) + gbuildings[9])
+            bankheist2 = int(gbuildings[9])
+            bankheisttkinter = StringVar()
+            bankheisttkinter.set("Bank Heists Amount: " + str(bankheist2))
+            bankprice = int(181700 * (math.pow(1.2, bankheist2)))
+            bankpricetkinter = StringVar()
+            bankpricetkinter.set("Bank Heist (Costs: $" + str(bankprice) + ")")
+            mps = autoclick + printmoney + counterfeit + sharecrash
             mpstkinter = StringVar()
             mpstkinter.set("MPS: " + str(mps))
-            inc = int(1 + (int(g2[21]) * 2) + int(g2[23]) * (mps / 10))
+            inc = int(1 + (int(gupgrades[15]) * 2) + int(gupgrades[17]) * (mps / 10))
             inctkinter = StringVar()
             inctkinter.set("+" + str(inc) + " money!")
             templist1 = [moneymillion] * 2
@@ -1534,25 +1545,26 @@ while True:
             templist3 = [moneytrillion] * 2
             templist4 = [moneyquadrillion] * 2
             templist5 = [moneyquintillion] * 2
-            if g2[21] == int(1):
+            if gupgrades[13] == int(1):
                 clickbooster1.destroy()
-            if g2[9] == int(1):
+            if gupgrades[1] == int(1):
                 boostbutton1h1.destroy()
-            if g2[13] == int(1):
+            if gupgrades[5] == int(1):
                 boostbutton2h1.destroy()
-            if g2[23] == int(1):
+            if gupgrades[15] == int(1):
                 clickbooster2.destroy()
-            if g2[11] == int(1):
+            if gupgrades[3] == int(1):
                 boostbutton1h2.destroy()
-            if g2[17] == int(1):
+            if gupgrades[9] == int(1):
                 boostbutton3.destroy()
-            if g2[15] == int(1):
+            if gupgrades[7] == int(1):
                 boostbutton2h2.destroy()
-            if g2[19] == int(1):
+            if gupgrades[11] == int(1):
                 boostbutton4.destroy()
             if mps >= 1:
                 automoneychoice()
             main()
             break
-        except :
+        except NameError as e:
+            print(e)
             signin()
