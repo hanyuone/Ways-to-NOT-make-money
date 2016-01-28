@@ -1,7 +1,7 @@
 import math
 
-class GameState:
 
+class GameState:
     def __init__(self, data=None):
         self.data = [] if data is None else data
 
@@ -11,7 +11,6 @@ class GameState:
         self.statscheck = False
 
         self.animate = 0
-        # self.click = 0
         self.clickcolourcheck = 1
 
         self.upgcheck1h1 = int(self.data[9])
@@ -23,13 +22,14 @@ class GameState:
         self.clickupgcheck1 = int(self.data[21])
         self.clickupgcheck2 = int(self.data[23])
 
-        self.timeplay = int(self.data[37])
-        self.totalclicks = int(self.data[39])
+        self.timeplay = int(self.data[27])
+        self.totalclicks = int(self.data[29])
 
-        self.money = float(self.data[25] + self.data[27] + self.data[29] + self.data[31] + self.data[33] + self.data[35])
+        self.money = float(self.data[25])
 
         self.autoclick2 = int(self.data[1])
-        self.autoclick = self.autoclick2 * 18 * self.upgcheck1h2 + self.autoclick2 * 2 * self.upgcheck1h1 + self.autoclick2
+        self.autoclick = self.autoclick2 * 18 * self.upgcheck1h2 + self.autoclick2 * 2 * self.upgcheck1h1 + \
+                         self.autoclick2
         self.autoprice = int(20 * math.pow(1.2, self.autoclick2))
 
         self.printmoney2 = int(self.data[3])
@@ -49,7 +49,7 @@ class GameState:
 
     def set(self, name, value):
         i = self.data.index(name)
-        self.data[i+1] = value
+        self.data[i + 1] = value
 
     def get_autoclick(self):
         return self.autoclick
@@ -57,7 +57,7 @@ class GameState:
     def set_autoclick(self, amount):
         self.autoclick = amount
 
-    def inc_autoclick(self, amount=1):
+    def inc_autoclick(self, amount):
         self.autoclick += amount
 
     def get_autoclick2(self):
@@ -70,7 +70,7 @@ class GameState:
         return self.autoprice
 
     def set_autoprice(self, amount):
-        self.autoprice += amount
+        self.autoprice = amount
 
     def get_printmoney(self):
         return self.printmoney
@@ -78,7 +78,7 @@ class GameState:
     def set_printmoney(self, amount):
         self.printmoney = amount
 
-    def inc_printmoney(self, amount=1):
+    def inc_printmoney(self, amount):
         self.printmoney += amount
 
     def get_printmoney2(self):
@@ -102,7 +102,7 @@ class GameState:
     def set_counterfeit(self, amount):
         self.counterfeit = amount
 
-    def inc_counterfeit(self, amount=1):
+    def inc_counterfeit(self, amount):
         self.counterfeit += amount
 
     def get_counterfeit2(self):
@@ -247,4 +247,3 @@ class GameState:
 
     def set_upgbuttoncheck(self, u):
         self.upgbuttoncheck = u
-
