@@ -1,11 +1,11 @@
-from Tkinter import *
-from random import *
-from tkMessageBox import showerror
-from github import Github
-import math
-import glob
-import threading
-import webbrowser
+from Tkinter import * # for GUI
+from random import * # for gold button
+from tkMessageBox import showerror # for dialogs
+from github import Github # for issue reporting
+import math # for exponents
+import glob # for file matching
+import threading # for multitasking
+import webbrowser # for issue reporting
 
 master = Tk()
 master.title("Ways To NOT Earn Money")
