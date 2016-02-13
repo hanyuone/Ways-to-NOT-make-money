@@ -130,6 +130,8 @@ def _send_report():
     gl = globals()
     title = gl['e'].get()
     body = gl['tx'].get(1.0, "end")
+    body += '''
+<This issue was Python-created>'''
     rep = gl['wtnmm']
     rep.create_issue(title, body)
     gl['t'].destroy()
