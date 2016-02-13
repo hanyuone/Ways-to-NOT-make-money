@@ -15,10 +15,13 @@ Line Amount: 1284 lines (and counting!)
 
 File Size: ~58KB (Game itself, photos take up an extra ~650KB, other files take up ~18MB)
 
-Version: 0.6.3
+Version: 0.6.3b2
 
 Changelog:
 
+     0.6.3b2:
+            -Added in-game open browser for issue-reporting
+            
      0.6.3:
             -Updates are rolling in!
             -Tweaked the savefile, so they don't constantly refresh
