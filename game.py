@@ -1,11 +1,11 @@
-from Tkinter import * # for GUI
-from random import * # for gold button
-from tkMessageBox import showerror # for dialogs
-from github import Github # for issue reporting
-import math # for exponents
-import glob # for file matching
-import threading # for multitasking
-import webbrowser # for issue reporting
+from Tkinter import *
+from random import *
+from tkMessageBox import showerror
+from github import Github
+import math
+import glob
+import threading
+import webbrowser
 
 master = Tk()
 master.title("Ways To NOT Earn Money")
@@ -130,8 +130,6 @@ def _send_report():
     gl = globals()
     title = gl['e'].get()
     body = gl['tx'].get(1.0, "end")
-    body += '''
-<This issue was Python-created>'''
     rep = gl['wtnmm']
     rep.create_issue(title, body)
     gl['t'].destroy()
@@ -1038,6 +1036,8 @@ def _pressyes(username=None):
     f = open("savefile_" + username + ".txt", "w")
     f.write(str(resetfile))
     f.close()
+    global master
+    master.destroy()
 
 
 # UPGRADES WINDOW
@@ -1252,6 +1252,7 @@ def main():
     
     logoutButton = Button(master, text='Log Out', width=20, command=logout)
     logoutButton.grid(row=12, column=1)
+
 
 # AUTO-SAVE SYSTEM
 def auto_save():
