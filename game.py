@@ -83,24 +83,6 @@ def signin():
         username = unentry.get()
         if save_and_load.save_file_exists(username):
             global g2, signinvalue
-<<<<<<< HEAD
-            g = open('savefile_' + un + '.txt')
-            g2 = (str(g.read()).split(";"))
-            if len(g2) == 2:
-                g2 = str(g2[0])
-            try:
-                global gbuildings, gmisc, gmoney, gupgrades
-                gbuildings = (g2[0].decode("hex")).split("_")
-                gmisc = (g2[1].decode("hex").split("_"))
-                gmoney = (g2[2].decode("hex").split("_"))
-                gupgrades = (g2[3].decode("hex").split("_"))
-            except (IndexError, TypeError):
-                print("Here!")
-                g2 = updatesavefile(g2)
-                g = open('savefile_' + un + '.txt', 'w')
-                g.write(g2)
-                verifysignin()
-=======
             try:
                 g2 = save_and_load.read_game_data(username)
                 print 'g2', g2
@@ -111,8 +93,6 @@ def signin():
             save_and_load.encode_and_save(username, g2)
             game_state = game_model.GameState(g2)
             print 'game_state', game_state
-
->>>>>>> pr/46
             for i in [l, unentry, b1, b2]:
                 i.destroy()
 
@@ -123,18 +103,6 @@ def signin():
             showerror(title='Error!', message='Wrong Username.')
 
     def createaccount():
-<<<<<<< HEAD
-        global g, g2, signinvalue, gbuildings, gmisc, gmoney, gupgrades
-        print("Yes")
-        un = unentry.get()
-        _pressyes(username=un)
-        g = open('savefile_' + un + '.txt')
-        g2 = str(str(g.read()).split(";"))
-        gbuildings = (g2[0].decode("hex")).split("_")
-        gmisc = (g2[1].decode("hex").split("_"))
-        gmoney = (g2[2].decode("hex").split("_"))
-        gupgrades = (g2[3].decode("hex").split("_"))
-=======
         global g, g2, signinvalue, username, game_state
         print("Yes")
         username = unentry.get()
@@ -146,8 +114,6 @@ def signin():
             print 'game_state', game_state
         except IOError as ioe:
             print ioe
-
->>>>>>> pr/46
         signinvalue += 1
         # signedin = True
         save_needed = True
@@ -162,15 +128,11 @@ def signin():
     b2.grid(row=3, column=0)
 
 
-<<<<<<< HEAD
-# REPORT AN ISSUE
-=======
 def set_stats(state, clicksvar, timevar):
     clicksvar.set("Total clicks: %s" % state.get_total_clicks())
     timevar.set("Total time: %s" % state.get_timeplay())
 
 
->>>>>>> pr/46
 def report():
     gl = globals()
     gl['t'] = Toplevel()
@@ -277,7 +239,6 @@ def bugfixer():
             continue
 
 
-<<<<<<< HEAD
 # CHOICE FOR AUTOMATIC MONEY
 def automoneychoice():
     if len(str(money)) <= 8:
@@ -300,43 +261,26 @@ def automoneychoice():
         master.after(100, automoney6)
 
 
-=======
->>>>>>> pr/46
 # STATS STUFF
 def statsexpand():
     global totalclickslabel, totalclicksvar, timevar, timelabel, hidestatsbutton, game_state
 
     statsbutton.destroy()
-<<<<<<< HEAD
-    resetbutton.grid(row=4, column=0, sticky=W)
-    savebutton.grid(row=4, column=2, sticky=E)
-    reportbutton.grid(row=5, column=1)
-    statscheck = True
-=======
     resetbutton.grid(row=11, column=0, sticky=W)
     savebutton.grid(row=11, column=2, sticky=E)
     reportbutton.grid(row=12, column=1)
     game_state.statscheck = True
 
->>>>>>> pr/46
     totalclicksvar = StringVar()
     totalclickslabel = Label(master, textvariable=totalclicksvar)
-<<<<<<< HEAD
-    totalclickslabel.grid(row=3, column=1, sticky=W)
-=======
     totalclickslabel.grid(row=10, column=0, sticky=W)
 
->>>>>>> pr/46
     timevar = StringVar()
     timelabel = Label(master, textvariable=timevar)
-<<<<<<< HEAD
-    timelabel.grid(row=3, column=2, sticky=E)
-=======
     timelabel.grid(row=10, column=2, sticky=E)
 
     set_stats(game_state, totalclicksvar, timevar)
 
->>>>>>> pr/46
     hidestatsbutton = Button(master, text="Hide Stats", width=10, command=hidestats)
     hidestatsbutton.grid(row=2, column=0, sticky=W)
 
@@ -351,18 +295,9 @@ def hidestats():
     savebutton.grid(row=3, column=2, sticky=E)
     reportbutton.grid(row=4, column=1)
     statsbutton = Button(master, text="Stats", width=10, command=statsexpand)
-<<<<<<< HEAD
-    statsbutton.grid(row=2, column=0, sticky=W)
-    if upgbuttoncheck:
-        exitupgrades.grid(row=2, column=2, sticky=E)
-    elif not upgbuttoncheck:
-        pass
-=======
     statsbutton.grid(row=9, column=0, sticky=W)
     if game_state.get_upgbuttoncheck():
         exitupgrades.grid(row=9, column=2, sticky=E)
->>>>>>> pr/46
-
 
 # AUTO CLICKER
 def boostauto1h1():
@@ -371,13 +306,8 @@ def boostauto1h1():
         global boostafford1h1
         boostbutton1h1.destroy()
         master.bell()
-<<<<<<< HEAD
-        boostafford1h1 = Label(frame2, text="%s" % norequirements, width=35)
-        boostafford1h1.grid(row=int(1 - int(clickupgcheck1)), column=0, sticky=E)
-=======
         boostafford1h1 = Label(master, text="%s" % norequirements, width=35)
         boostafford1h1.grid(row=int(2 - game_state.get_clickupgcheck1()), column=2, sticky=E)
->>>>>>> pr/46
         master.after(500, norequirements1h1)
     else:
         game_state.inc_money(-5000)
@@ -386,23 +316,6 @@ def boostauto1h1():
         game_state.inc_mps(game_state.get_autoclick2() * 2)
         mpstkinter.set("MPS: %s" % game_state.get_mps())
         boostbutton1h1.destroy()
-<<<<<<< HEAD
-        boostbutton2h1.grid(row=int(2 - (int(upgcheck1h1) + int(clickupgcheck1))), column=0, sticky=E)
-        clickbooster2.grid(row=int(3 - (int(upgcheck1h1) + int(upgcheck2h1) + int(clickupgcheck1))), column=0, sticky=E)
-        boostbutton1h2.grid(
-                row=int(4 - (int(upgcheck1h1) + int(upgcheck2h1) + int(clickupgcheck1) + int(clickupgcheck2))),
-                column=2,
-                sticky=E)
-        boostbutton3.grid(row=int(5 - (int(upgcheck1h1) + int(upgcheck1h2) + int(upgcheck2h1) + int(clickupgcheck1) +
-                                       int(clickupgcheck2))), column=0, sticky=E)
-        boostbutton2h2.grid(row=int(6 - (int(upgcheck1h1) + int(upgcheck1h2) + int(upgcheck2h1) + int(upgcheck3) +
-                                         int(clickupgcheck1) + int(clickupgcheck2))), column=0, sticky=E)
-        boostbutton4.grid(row=int(7 - (int(upgcheck1h1) + int(upgcheck1h2) + int(upgcheck2h1) + int(upgcheck2h2) +
-                                       int(upgcheck3) + int(clickupgcheck1) + int(clickupgcheck2))), column=0, sticky=E)
-        boostafford5.grid(row=int(8 - (int(upgcheck1h1) + int(upgcheck1h2) + int(upgcheck2h1) + int(upgcheck2h2) +
-                                       int(upgcheck3) + int(upgcheck4) + int(clickupgcheck1) + int(clickupgcheck2))),
-                          column=2, sticky=E)
-=======
         boostbutton2h1.grid(row=max(0, 3 - (game_state.get_upgcheck1h1() + game_state.get_clickupgcheck1())), column=2, sticky=E)
         clickbooster2.grid(row=4 - (game_state.get_upgcheck1h1() + game_state.get_upgcheck2h1() + game_state.get_clickupgcheck1()), 
                             column=2, sticky=E)
@@ -420,19 +333,13 @@ def boostauto1h1():
                             game_state.get_upgcheck2h2() + game_state.get_upgcheck3() + 
                             game_state.get_clickupgcheck1() + game_state.get_clickupgcheck2()), 
                             column=2, sticky=E)
->>>>>>> pr/46
 
 
 def norequirements1h1():
     global boostafford1h1, boostbutton1h1
     boostafford1h1.destroy()
-<<<<<<< HEAD
-    boostbutton1h1 = Button(frame2, text="Stronger Mouses (Costs: $5000)", width=35, command=boostauto1h1)
-    boostbutton1h1.grid(row=int(1 - int(clickupgcheck1)), column=0, sticky=E)
-=======
     boostbutton1h1 = Button(master, text="Stronger Mouses (Costs: $5000)", width=35, command=boostauto1h1)
     boostbutton1h1.grid(row=int(2 - game_state.get_clickupgcheck1()), column=2, sticky=E)
->>>>>>> pr/46
 
 
 def boostauto1h2():
@@ -441,17 +348,10 @@ def boostauto1h2():
         global boostafford1h2
         boostbutton1h2.destroy()
         master.bell()
-<<<<<<< HEAD
-        boostafford1h2 = Label(frame2, text="%s" % norequirements, width=35)
-        boostafford1h2.grid(
-                row=int(4 - (int(upgcheck1h1) + int(upgcheck2h1) + int(clickupgcheck1) + int(clickupgcheck2))),
-                column=0,
-=======
         boostafford1h2 = Label(master, text="%s" % norequirements, width=35)
         boostafford1h2.grid(row=5 - (game_state.get_upgcheck1h1() + game_state.get_upgcheck2h1() + 
                                     game_state.get_clickupgcheck1() + game_state.get_clickupgcheck2()),
                 column=2,
->>>>>>> pr/46
                 sticky=E)
         master.after(500, norequirements1h2)
     else:
@@ -461,16 +361,6 @@ def boostauto1h2():
         game_state.inc_mps(game_state.get_autoclick2() * 18)
         mpstkinter.set("MPS: %s" % game_state.get_mps())
         boostbutton1h2.destroy()
-<<<<<<< HEAD
-        boostbutton3.grid(row=int(5 - (int(upgcheck1h1) + int(upgcheck1h2) + int(upgcheck2h1) + int(clickupgcheck1) +
-                                       int(clickupgcheck2))), column=0, sticky=E)
-        boostbutton2h2.grid(row=int(6 - (int(upgcheck1h1) + int(upgcheck1h2) + int(upgcheck2h1) + int(upgcheck3) +
-                                    int(clickupgcheck1) + int(clickupgcheck2))), column=0, sticky=E)
-        boostbutton4.grid(row=int(7 - (int(upgcheck1h1) + int(upgcheck1h2) + int(upgcheck2h1) + int(upgcheck2h2) +
-                                       int(upgcheck3) + int(clickupgcheck1) + int(clickupgcheck2))), column=0, sticky=E)
-        boostbutton5.grid(row=int(8 - (int(upgcheck1h1) + int(upgcheck1h2) + int(upgcheck2h1) + int(upgcheck2h2) +
-                                  int(upgcheck3) + int(upgcheck4) + int(clickupgcheck1) + int(clickupgcheck2))),
-=======
         boostbutton3.grid(row=6 - (game_state.get_upgcheck1h1() + game_state.get_upgcheck1h2() + 
                             game_state.get_upgcheck2h1() + game_state.get_clickupgcheck1() +
                             game_state.get_clickupgcheck2()),
@@ -484,7 +374,6 @@ def boostauto1h2():
                             game_state.get_upgcheck2h1() + game_state.get_upgcheck2h2() + 
                             game_state.get_upgcheck3() + game_state.get_clickupgcheck1() + 
                             game_state.get_clickupgcheck2()), 
->>>>>>> pr/46
                           column=2, sticky=E)
 
 
@@ -493,15 +382,9 @@ def norequirements1h2():
     boostafford1h2.destroy()
     boostbutton1h2 = Button(frame2, text="Experienced Clickers (Costs: $555555)", width=35,
                             command=boostauto1h2)
-<<<<<<< HEAD
-    boostbutton1h2.grid(
-            row=int(4 - (int(upgcheck1h1) + int(upgcheck2h1) + int(clickupgcheck1) + int(clickupgcheck2))),
-            column=0, sticky=E)
-=======
     boostbutton1h2.grid(row=5 - (game_state.get_upgcheck1h1() + game_state.get_upgcheck2h1() + 
                                  game_state.get_clickupgcheck1() + game_state.get_clickupgcheck2()),
                         column=2, sticky=E)
->>>>>>> pr/46
 
 
 def deduction1():
@@ -551,13 +434,8 @@ def boostauto2h1():
         global boostafford2h1
         boostbutton2h1.destroy()
         master.bell()
-<<<<<<< HEAD
-        boostafford2h1 = Label(frame2, text="%s" % norequirements, width=35)
-        boostafford2h1.grid(row=int(2 - (int(upgcheck1h1) + int(clickupgcheck1))), column=0, sticky=E)
-=======
         boostafford2h1 = Label(master, text="%s" % norequirements, width=35)
         boostafford2h1.grid(row=3 - (game_state.get_upgcheck1h1() + game_state.get_clickupgcheck1()), column=2, sticky=E)
->>>>>>> pr/46
         master.after(500, norequirements2h1)
     else:
         game_state.inc_money(-42000)
@@ -566,22 +444,6 @@ def boostauto2h1():
         game_state.inc_mps(game_state.get_printmoney2() * 2)
         mpstkinter.set("MPS: %s" % game_state.get_mps())
         boostbutton2h1.destroy()
-<<<<<<< HEAD
-        clickbooster2.grid(row=int(3 - (int(upgcheck1h1) + int(upgcheck2h1) + int(clickupgcheck1))), column=0, sticky=E)
-        boostbutton1h2.grid(
-                row=int(4 - (int(upgcheck1h1) + int(upgcheck2h1) + int(clickupgcheck1) + int(clickupgcheck2))),
-                column=2, sticky=E)
-        boostbutton3.grid(row=int(5 - (int(upgcheck1h1) + int(upgcheck1h2) + int(upgcheck2h1) + int(clickupgcheck1) +
-                                       int(clickupgcheck2))), column=0, sticky=E)
-        boostbutton2h2.grid(row=int(6 - (int(upgcheck1h1) + int(upgcheck1h2) + int(upgcheck2h1) + int(upgcheck3) +
-                                         int(upgcheck4) + int(clickupgcheck1) + int(clickupgcheck2))), column=0,
-                            sticky=E)
-        boostbutton4.grid(row=int(7 - (int(upgcheck1h1) + int(upgcheck1h2) + int(upgcheck2h1) + int(upgcheck2h2) +
-                                       int(upgcheck3) + int(clickupgcheck1) + int(clickupgcheck2))), column=0, sticky=E)
-        boostafford5.grid(row=int(8 - (int(upgcheck1h1) + int(upgcheck1h2) + int(upgcheck2h1) + int(upgcheck2h2) +
-                                       int(upgcheck3) + int(upgcheck4) + int(clickupgcheck1) + int(clickupgcheck2))),
-                          column=2, sticky=E)
-=======
         clickbooster2.grid(row=4 - (game_state.get_upgcheck1h1() + game_state.get_upgcheck2h1() + game_state.get_clickupgcheck1()), 
                            column=2, sticky=E)
         boostbutton1h2.grid(row=5 - (game_state.get_upgcheck1h1() + game_state.get_upgcheck2h1() + 
@@ -600,7 +462,6 @@ def boostauto2h1():
                                 game_state.get_upgcheck2h1() + game_state.get_upgcheck2h2() + game_state.get_upgcheck3() + 
                                 game_state.get_clickupgcheck1() + game_state.get_clickupgcheck2()), 
                                 column=2, sticky=E)
->>>>>>> pr/46
 
 
 def norequirements2h1():
@@ -608,12 +469,8 @@ def norequirements2h1():
     boostafford2h1.destroy()
     boostbutton2h1 = Button(frame2, text="Unofficial Printer License (Costs: $42000)", width=35,
                             command=boostauto2h1)
-<<<<<<< HEAD
-    boostbutton2h1.grid(row=int(2 - (int(upgcheck1h1) + int(clickupgcheck1))), column=0, sticky=E)
-=======
     boostbutton2h1.grid(row=3 - (game_state.get_upgcheck1h1() + game_state.get_clickupgcheck1()), 
                         column=2, sticky=E)
->>>>>>> pr/46
 
 
 def boostauto2h2():
@@ -622,18 +479,12 @@ def boostauto2h2():
         global boostafford2h2
         boostbutton2h2.destroy()
         master.bell()
-<<<<<<< HEAD
-        boostafford2h2 = Label(frame2, text="%s" % norequirements, width=35)
-        boostafford2h2.grid(row=int(6 - (int(upgcheck1h1) + int(upgcheck1h2) + int(upgcheck2h1) + int(upgcheck3) +
-                                         int(clickupgcheck1) + int(clickupgcheck2))), column=0, sticky=E)
-=======
         boostafford2h2 = Label(master, text="%s" % norequirements, width=35)
         boostafford2h2.grid(row=7 - (game_state.get_upgcheck1h1() + game_state.get_upgcheck1h2() + game_state.get_upgcheck2h1() + 
                             game_state.get_upgcheck3() + game_state.get_upgcheck4() + 
                             game_state.get_clickupgcheck1() + game_state.get_clickupgcheck2()), 
                             column=2,
                             sticky=E)
->>>>>>> pr/46
         master.after(500, norequirements2h2)
     else:
         game_state.inc_money(-7777777)
@@ -642,34 +493,20 @@ def boostauto2h2():
         game_state.inc_mps(game_state.get_printmoney2() * 18)
         mpstkinter.set("MPS: %s" % game_state.get_mps())
         boostbutton2h2.destroy()
-<<<<<<< HEAD
-        boostbutton4.grid(row=int(7 - (int(upgcheck1h1) + int(upgcheck1h2) + int(upgcheck2h1) + int(upgcheck2h2) +
-                                       int(upgcheck3) + int(clickupgcheck1) + int(clickupgcheck2))), column=0, sticky=E)
-        boostafford5.grid(row=int(8 - (int(upgcheck1h1) + int(upgcheck1h2) + int(upgcheck2h1) + int(upgcheck2h2) +
-                                       int(upgcheck3) + int(upgcheck4) + int(clickupgcheck1) + int(clickupgcheck2))),
-                          column=0, sticky=E)
-=======
         boostbutton4.grid(row=8 - (game_state.get_upgcheck1h1() + game_state.get_upgcheck1h2() + game_state.get_upgcheck2h1() + 
                             game_state.get_upgcheck2h2() + game_state.get_upgcheck3() + 
                             game_state.get_clickupgcheck1() + game_state.get_clickupgcheck2()), 
                             column=2, sticky=E)
->>>>>>> pr/46
 
 
 def norequirements2h2():
     global boostbutton2h2, game_state
     boostafford2h2.destroy()
-<<<<<<< HEAD
-    boostbutton2h2 = Button(frame2, text="Printing Press (Costs: $7777777)", width=35, command=boostauto2h2)
-    boostbutton2h2.grid(row=int(6 - (int(upgcheck1h1) + int(upgcheck1h2) + int(upgcheck2h1) + int(upgcheck3) +
-                                     int(clickupgcheck1) + int(clickupgcheck2))), column=0, sticky=E)
-=======
     boostbutton2h2 = Button(master, text="Printing Press (Costs: $7777777)", width=35, command=boostauto2h2)
     boostbutton2h2.grid(row=7 - (game_state.get_upgcheck1h1() + game_state.get_upgcheck1h2() + 
                         game_state.get_upgcheck2h1() + game_state.get_upgcheck3() + 
                         game_state.get_clickupgcheck1() + game_state.get_clickupgcheck2()), 
                         column=2, sticky=E)
->>>>>>> pr/46
 
 
 def deduction2():
@@ -749,16 +586,10 @@ def boostauto3():
         global boostafford3
         boostbutton3.destroy()
         master.bell()
-<<<<<<< HEAD
-        boostafford3 = Label(frame2, text="%s" % norequirements, width=35)
-        boostafford3.grid(row=int(5 - (int(upgcheck1h1) + int(upgcheck1h2) + int(upgcheck2h1) + int(clickupgcheck1) +
-                                       int(clickupgcheck2))), column=0, sticky=E)
-=======
         boostafford3 = Label(master, text="%s" % norequirements, width=35)
         boostafford3.grid(row=6 - (game_state.get_upgcheck1h1() + game_state.get_upgcheck1h2() + 
                             game_state.get_upgcheck2h1() + game_state.get_clickupgcheck1() + game_state.get_clickupgcheck2()),
                             column=2, sticky=E)
->>>>>>> pr/46
         master.after(500, norequirements3)
     else:
         game_state.inc_money(-2133748)
@@ -767,15 +598,6 @@ def boostauto3():
         mpstkinter.set("MPS: %s" % game_state.get_mps())
         game_state.inc_upgcheck3()
         boostbutton3.destroy()
-<<<<<<< HEAD
-        boostbutton2h2.grid(row=int(6 - (int(upgcheck1h1) + int(upgcheck1h2) + int(upgcheck2h1) + int(upgcheck3) +
-                                         int(clickupgcheck1) + int(clickupgcheck2))), column=0, sticky=E)
-        boostbutton4.grid(row=int(7 - (int(upgcheck1h1) + int(upgcheck1h2) + int(upgcheck2h1) + int(upgcheck2h2) +
-                                       int(upgcheck3) + int(clickupgcheck1) + int(clickupgcheck2))), column=0, sticky=E)
-        boostafford5.grid(row=int(8 - (int(upgcheck1h1) + int(upgcheck1h2) + int(upgcheck2h1) + int(upgcheck2h2) +
-                                       int(upgcheck3) + int(upgcheck4) + int(clickupgcheck1) + int(clickupgcheck2))),
-                          column=0, sticky=E)
-=======
         boostbutton2h2.grid(row=7 - (game_state.get_upgcheck1h1() + game_state.get_upgcheck1h2() + 
                             game_state.get_upgcheck2h1() + game_state.get_upgcheck3() + 
                             game_state.get_upgcheck4() + game_state.get_clickupgcheck1() + game_state.get_clickupgcheck2()), 
@@ -784,7 +606,6 @@ def boostauto3():
                             game_state.get_upgcheck2h1() + game_state.get_upgcheck2h2() +
                             game_state.get_upgcheck3() + game_state.get_clickupgcheck1() + game_state.get_clickupgcheck2()), 
                             column=2, sticky=E)
->>>>>>> pr/46
 
 
 def norequirements3():
@@ -792,14 +613,9 @@ def norequirements3():
     boostafford3.destroy()
     boostbutton3 = Button(frame2, text="Skilled Fake Money Making (Costs: $2133748)", width=35,
                           command=boostauto3)
-<<<<<<< HEAD
-    boostbutton3.grid(row=int(5 - (int(upgcheck1h1) + int(upgcheck1h2) + int(upgcheck2h1) + int(clickupgcheck1) +
-                                   int(clickupgcheck2))), column=0, sticky=E)
-=======
     boostbutton3.grid(row=6 - (game_state.get_upgcheck1h1() + game_state.get_upgcheck1h2() + game_state.get_upgcheck2h1() + 
                         game_state.get_clickupgcheck1() + game_state.get_clickupgcheck2()), 
                         column=2, sticky=E)
->>>>>>> pr/46
 
 
 def deduction3():
@@ -844,18 +660,12 @@ def boostauto4():
         global boostafford4
         boostbutton4.destroy()
         master.bell()
-<<<<<<< HEAD
-        boostafford4 = Label(frame2, text="%s" % norequirements, width=35)
-        boostafford4.grid(row=int(7 - (int(upgcheck1h1) + int(upgcheck1h2) + int(upgcheck2h1) + int(upgcheck2h2) +
-                                       int(upgcheck3) + int(clickupgcheck1) + int(clickupgcheck2))), column=0, sticky=E)
-=======
         boostafford4 = Label(master, text="%s" % norequirements, width=35)
         boostafford4.grid(row=8 - (game_state.get_upgcheck1h1() + game_state.get_upgcheck1h2() + 
                             game_state.get_upgcheck2h1() + game_state.get_upgcheck2h2() + 
                             game_state.get_upgcheck3() + game_state.get_clickupgcheck1() + 
                             game_state.get_clickupgcheck2()), 
                             column=2, sticky=E)
->>>>>>> pr/46
         master.after(500, norequirements4)
     else:
         game_state.inc_money(-12345678)
@@ -871,15 +681,10 @@ def norequirements4():
     boostafford4.destroy()
     boostbutton4 = Button(frame2, text="Sharemarket Catastrophe (Costs: $12345678)", width=35,
                           command=boostauto4)
-<<<<<<< HEAD
-    boostbutton4.grid(row=int(7 - (int(upgcheck1h1) + int(upgcheck1h2) + int(upgcheck2h1) + int(upgcheck2h2) +
-                                   int(upgcheck3) + int(clickupgcheck1) + int(clickupgcheck2))), column=0, sticky=E)
-=======
     boostbutton4.grid(row=8 - (game_state.get_upgcheck1h1() + game_state.get_upgcheck1h2() + game_state.get_upgcheck2h1() + 
                         game_state.get_upgcheck2h2() + game_state.get_upgcheck3() + game_state.get_clickupgcheck1() + 
                         game_state.get_clickupgcheck2()), 
                         column=2, sticky=E)
->>>>>>> pr/46
 
 
 def deduction4():
@@ -1029,24 +834,6 @@ def clickboost1():
         inctkinter.set("+%s money!" % game_state.get_inc())
         game_state.inc_clickupgcheck1()
         clickbooster1.destroy()
-<<<<<<< HEAD
-        boostbutton1h1.grid(row=int(1 - int(clickupgcheck1)), column=0, sticky=E)
-        boostbutton2h1.grid(row=int(2 - (int(upgcheck1h1) + int(clickupgcheck1))), column=0, sticky=E)
-        clickbooster2.grid(row=int(3 - (int(upgcheck1h1) + int(upgcheck2h1) + int(clickupgcheck1))), column=0, sticky=E)
-        boostbutton1h2.grid(
-                row=int(4 - (int(upgcheck1h1) + int(upgcheck2h1) + int(clickupgcheck1) + int(clickupgcheck2))),
-                column=2, sticky=E)
-        boostbutton3.grid(row=int(5 - (int(upgcheck1h1) + int(upgcheck1h2) + int(upgcheck2h1) + int(clickupgcheck1) +
-                                       int(clickupgcheck2))), column=0, sticky=E)
-        boostbutton2h2.grid(row=int(6 - (int(upgcheck1h1) + int(upgcheck1h2) + int(upgcheck2h1) + int(upgcheck3) +
-                                         int(upgcheck4) + int(clickupgcheck1) + int(clickupgcheck2))), column=0,
-                            sticky=E)
-        boostbutton4.grid(row=int(7 - (int(upgcheck1h1) + int(upgcheck1h2) + int(upgcheck2h1) + int(upgcheck2h2) +
-                                       int(upgcheck3) + int(clickupgcheck1) + int(clickupgcheck2))), column=0, sticky=E)
-        boostafford5.grid(row=int(8 - (int(upgcheck1h1) + int(upgcheck1h2) + int(upgcheck2h1) + int(upgcheck2h2) +
-                                       int(upgcheck3) + int(upgcheck4) + int(clickupgcheck1) + int(clickupgcheck2))),
-                          column=0, sticky=E)
-=======
         boostbutton1h1.grid(row=2 - game_state.get_clickupgcheck1(), column=2, sticky=E)
         boostbutton2h1.grid(row=3 - (game_state.get_upgcheck1h1() + game_state.get_clickupgcheck1()), column=2, sticky=E)
         clickbooster2.grid(row=4 - (game_state.get_upgcheck1h1() + game_state.get_upgcheck2h1() + game_state.get_clickupgcheck1()), 
@@ -1066,7 +853,6 @@ def clickboost1():
                             game_state.get_upgcheck2h1() + game_state.get_upgcheck2h2() + 
                             game_state.get_upgcheck3() + game_state.get_clickupgcheck1() + game_state.get_clickupgcheck2()), 
                             column=2, sticky=E)
->>>>>>> pr/46
 
 
 def norequirementsc1():
@@ -1081,16 +867,9 @@ def clickboost2():
     if game_state.get_money() < 200000 or game_state.get_clickupgcheck1() == 0:
         global clickafford2
         clickbooster2.destroy()
-<<<<<<< HEAD
-        master.bell()
-        clickafford2 = Label(frame2, text="%s" % norequirements, width=35)
-        clickafford2.grid(row=int(3 - (int(upgcheck1h1) + int(upgcheck2h1) + int(clickupgcheck1))), column=0,
-                          sticky=E)
-=======
         clickafford2 = Label(master, text="%s" % norequirements, width=35)
         clickafford2.grid(row=4 - (game_state.get_upgcheck1h1() + game_state.get_upgcheck2h1() + game_state.get_clickupgcheck1()), 
                             column=2, sticky=E)
->>>>>>> pr/46
         master.after(500, norequirementsc2)
     else:
         game_state.inc_money(-200000)
@@ -1098,22 +877,6 @@ def clickboost2():
         inctkinter.set("+%s money!" % game_state.get_inc())
         game_state.inc_clickupgcheck2()
         clickbooster2.destroy()
-<<<<<<< HEAD
-        boostbutton1h2.grid(
-                row=int(4 - (int(upgcheck1h1) + int(upgcheck2h1) + int(clickupgcheck1) + int(clickupgcheck2))),
-                column=0,
-                sticky=E)
-        boostbutton3.grid(row=int(5 - (int(upgcheck1h1) + int(upgcheck1h2) + int(upgcheck2h1) + int(clickupgcheck1) +
-                                       int(clickupgcheck2))), column=0, sticky=E)
-        boostbutton2h2.grid(row=int(6 - (int(upgcheck1h1) + int(upgcheck1h2) + int(upgcheck2h1) + int(upgcheck3) +
-                                         int(upgcheck4) + int(clickupgcheck1) + int(clickupgcheck2))), column=0,
-                            sticky=E)
-        boostbutton4.grid(row=int(7 - (int(upgcheck1h1) + int(upgcheck1h2) + int(upgcheck2h1) + int(upgcheck2h2) +
-                                       int(upgcheck3) + int(clickupgcheck1) + int(clickupgcheck2))), column=0, sticky=E)
-        boostafford5.grid(row=int(8 - (int(upgcheck1h1) + int(upgcheck1h2) + int(upgcheck2h1) + int(upgcheck2h2) +
-                                       int(upgcheck3) + int(upgcheck4) + int(clickupgcheck1) + int(clickupgcheck2))),
-                          column=0, sticky=E)
-=======
         boostbutton1h2.grid(row=max(0, 5 - (game_state.get_upgcheck1h1() + game_state.get_upgcheck2h1() + 
                             game_state.get_clickupgcheck1() + game_state.get_clickupgcheck2())),
                             column=2,
@@ -1126,7 +889,6 @@ def clickboost2():
                             game_state.get_upgcheck2h1() + game_state.get_upgcheck2h2() + 
                             game_state.get_upgcheck3() + game_state.get_clickupgcheck1() + game_state.get_clickupgcheck2()), 
                             column=2, sticky=E)
->>>>>>> pr/46
 
 
 def norequirementsc2():
@@ -1134,13 +896,8 @@ def norequirementsc2():
     clickafford2.destroy()
     clickbooster2 = Button(frame2, text="Stainless Steel Button (Costs: $200000)", width=35,
                            command=clickboost2)
-<<<<<<< HEAD
-    clickbooster2.grid(row=int(3 - (int(upgcheck1h1) + int(upgcheck2h1) + int(clickupgcheck1))), column=0,
-                       sticky=E)
-=======
     clickbooster2.grid(row=4 - (game_state.get_upgcheck1h1() + game_state.get_upgcheck2h1() + game_state.get_clickupgcheck1()), 
                         column=2, sticky=E)
->>>>>>> pr/46
 
 
 def automoneychoice():
@@ -1156,32 +913,6 @@ def automoney():
 
     bugfixer()
     game_state.inc_money(game_state.get_mps())
-
-<<<<<<< HEAD
-# SAVING GAME
-def savegame():
-    username = g.name.split('_')[1].split('.')[0]
-    xbuildings = ["auto", int(autoclick2), "print", int(printmoney2), "counter", int(counterfeit2), "shares",
-                  int(sharecrash2)]
-    xmisc = ["time", int(timeplay), "clicks", int(totalclicks)]
-    xmoney = ["quintillion", int(moneyquintillion), "quadrillion", int(str(moneyquadrillion)[-5:-2]), "trillion",
-              int(str(moneytrillion)[-5:-2]), "billion", int(str(moneybillion)[-5:-2]), "million",
-              int(str(moneymillion)[-5:-2]), "money", float(str(money)[-8:])]
-    xupgrades = ["upg1h1", int(upgcheck1h1), "upg1h2", int(upgcheck1h2), "upg2h1", int(upgcheck2h1), "upg2h2",
-                 int(upgcheck2h2), "upg3", int(upgcheck3), "upg4", int(upgcheck4), "cupg1", int(clickupgcheck1),
-                 "cupg2", int(clickupgcheck2)]
-    savefilebuildings = str((str("_".join(str(v) for v in xbuildings))).encode("hex") + ";")
-    savefilemisc = str((str("_".join(str(v) for v in xmisc))).encode("hex") + ";")
-    savefilemoney = str((str("_".join(str(v) for v in xmoney))).encode("hex") + ";")
-    savefileupgrades = str((str("_".join(str(v) for v in xupgrades))).encode("hex") + ";")
-    savefile = str(savefilebuildings + savefilemisc + savefilemoney + savefileupgrades)
-    f = open("savefile_" + username + ".txt", "w")
-    f.write(str(savefile))
-    f.close()
-    toplevel = Toplevel()
-    msg = Message(toplevel, text="Game saved!")
-    msg.pack()
-=======
     game_state.money += game_state.mps / 10.0
     game_state.check += 1
 
@@ -1203,7 +934,6 @@ def auto_money_helper():
     # ACHIEVEMENT UPDATES
     if game_state.statscheck:
         set_stats(game_state, totalclicksvar, timevar)
->>>>>>> pr/46
 
 
 # RESETTING GAME
@@ -1227,51 +957,6 @@ def showupgrades():
     global clickbooster1, boostbutton1h1, boostbutton2h1, clickbooster2, boostbutton1h2, boostbutton3, \
         boostbutton2h2, boostbutton4, boostbutton5, exitupgrades, scrollbar2
     upgrades.destroy()
-<<<<<<< HEAD
-    scrollbar2 = Scrollbar(canvas2, orient="vertical", command=canvas2.yview)
-    scrollbar2.grid(row=0, column=1, sticky=N+S)
-    canvas2.configure(yscrollcommand=scrollbar2.set, scrollregion=(0, 0, 200, 400))
-    if clickupgcheck1 == int(0):
-        clickbooster1 = Button(frame2, text="Reinforced Button (Costs: $2100)", width=35, command=clickboost1)
-        clickbooster1.grid(row=0, column=0, sticky=E)
-    if upgcheck1h1 == int(0):
-        boostbutton1h1 = Button(frame2, text="Stronger Mouses (Costs: $5000)", width=35, command=boostauto1h1)
-        boostbutton1h1.grid(row=int(1 - int(clickupgcheck1)), column=0, sticky=E)
-    if upgcheck2h1 == int(0):
-        boostbutton2h1 = Button(frame2, text="Unofficial Printer License (Costs: $42000)", width=35,
-                                command=boostauto2h1)
-        boostbutton2h1.grid(row=int(2 - (int(upgcheck1h1) + int(clickupgcheck1))), column=0, sticky=E)
-    if clickupgcheck2 == int(0):
-        clickbooster2 = Button(frame2, text="Stainless Steel Button (Costs: $200000)", width=35,
-                               command=clickboost2)
-        clickbooster2.grid(row=int(3 - (int(upgcheck1h1) + int(upgcheck2h1) + int(clickupgcheck1))), column=0,
-                           sticky=E)
-    if upgcheck1h2 == int(0):
-        boostbutton1h2 = Button(frame2, text="Experienced Clickers (Costs: $555555)", width=35,
-                                command=boostauto1h2)
-        boostbutton1h2.grid(row=int(4 - (int(upgcheck1h1) + int(upgcheck2h1) + int(clickupgcheck1) +
-                                         int(clickupgcheck2))), column=0, sticky=E)
-    if upgcheck3 == int(0):
-        boostbutton3 = Button(frame2, text="Skilled Fake Money Making (Costs: $2133748)", width=35,
-                              command=boostauto3)
-        boostbutton3.grid(
-                row=int(5 - (int(upgcheck1h1) + int(upgcheck1h2) + int(upgcheck2h1) + int(clickupgcheck1) +
-                             int(clickupgcheck2))), column=0, sticky=E)
-    if upgcheck2h2 == int(0):
-        boostbutton2h2 = Button(frame2, text="Printing Press (Costs: $7777777)", width=35, command=boostauto2h2)
-        boostbutton2h2.grid(row=int(6 - (int(upgcheck1h1) + int(upgcheck1h2) + int(upgcheck2h1) + int(upgcheck3) +
-                                         int(clickupgcheck1) + int(clickupgcheck2))), column=0, sticky=E)
-    if upgcheck4 == int(0):
-        boostbutton4 = Button(frame2, text="Sharemarket Catastrophe (Costs: $12345678)", width=35,
-                              command=boostauto4)
-        boostbutton4.grid(row=int(7 - (int(upgcheck1h1) + int(upgcheck1h2) + int(upgcheck2h1) + int(upgcheck2h2) +
-                                       int(upgcheck3) + int(clickupgcheck1) + int(clickupgcheck2))), column=0, sticky=E)
-    if upgcheck5 == int(0):
-        boostbutton5 = Button(frame2, text="Bank Blueprints (Costs: $91215000)", width=35, command=boostauto5)
-        boostbutton5.grid(row=int(8 - (int(upgcheck1h1) + int(upgcheck1h2) + int(upgcheck2h1) + int(upgcheck2h2) +
-                                       int(upgcheck3) + int(upgcheck4) + int(clickupgcheck1) + int(clickupgcheck2))),
-                          column=0, sticky=E)
-=======
     if game_state.get_clickupgcheck1() == 0:
         clickbooster1 = Button(master, text="Reinforced Button (Costs: $2100)", width=35, command=clickboost1)
         clickbooster1.grid(row=1, column=2, sticky=E)
@@ -1311,7 +996,6 @@ def showupgrades():
                             game_state.get_upgcheck2h1() + game_state.get_upgcheck2h2() + 
                             game_state.get_upgcheck3() + game_state.get_clickupgcheck1() + game_state.get_clickupgcheck2()), 
                             column=2, sticky=E)
->>>>>>> pr/46
     exitupgrades = Button(master, text="Hide Upgrades", command=hideupgrades)
     if game_state.statscheck:
         global hidestatsbutton
@@ -1356,18 +1040,6 @@ def hideupgrades():
     upgrades = Button(frame2, text="Upgrades", height=12, width=15, command=showupgrades)
     upgrades.grid(row=0, column=0, rowspan=8, sticky=E)
     exitupgrades.destroy()
-<<<<<<< HEAD
-    if statscheck:
-        hidestatsbutton.grid(row=2, column=0, sticky=W)
-        resetbutton.grid(row=4, column=0, sticky=W)
-        savebutton.grid(row=4, column=2, sticky=E)
-        reportbutton.grid(row=5, column=1)
-    elif not statscheck:
-        statsbutton.grid(row=2, column=0, sticky=W)
-        resetbutton.grid(row=3, column=0, sticky=W)
-        savebutton.grid(row=3, column=2, sticky=E)
-        reportbutton.grid(row=4, column=1)
-=======
     if game_state.statscheck:
         hidestatsbutton.grid(row=9, column=0, sticky=W)
         resetbutton.grid(row=11, column=0, sticky=W)
@@ -1376,7 +1048,6 @@ def hideupgrades():
         statsbutton.grid(row=9, column=0, sticky=W)
         resetbutton.grid(row=10, column=0, sticky=W)
         savebutton.grid(row=10, column=2, sticky=E)
->>>>>>> pr/46
 
 
 # ANIMATION
@@ -1449,16 +1120,11 @@ def goldmpsstop():
 
 def main():
     # BUTTONS, LABELS AND ENTRIES
-<<<<<<< HEAD
-    global incbutton1, incbutton2, incbutton3, incbutton4, incbutton5, upgrades, resetbutton, savebutton, clickbutton, \
-        statsbutton, reportbutton, canvas1, canvas2, frame1, frame2
-=======
     global incbutton1, incbutton2, incbutton3, incbutton4, upgrades, resetbutton, savebutton, clickbutton, statsbutton,\
            reportbutton, moneylabel
 
     print 'main() laying things out'
 
->>>>>>> pr/46
     background = Label(master, image=img1)
     background.place(x=0, y=0, relwidth=1, relheight=1)
     background.image = img1
@@ -1537,15 +1203,10 @@ def main():
     savebutton.grid(row=3, column=2, sticky=E)
 
     reportbutton = Button(master, text='Report Issue to Github', width=20, command=report)
-<<<<<<< HEAD
-    reportbutton.grid(row=4, column=1)
-
-=======
     reportbutton.grid(row=11, column=1)
     
     logoutButton = Button(master, text='Log Out', width=20, command=logout)
     logoutButton.grid(row=12, column=1)
->>>>>>> pr/46
 
 # AUTO-SAVE SYSTEM
 def auto_save():
@@ -1554,18 +1215,11 @@ def auto_save():
     savegame()
     exit()
 
-<<<<<<< HEAD
-thread = threading.Thread(target=master.mainloop)
-thread.start()
-otherThread = threading.Thread(target=auto_save)
-otherThread.start()
-=======
 # LOG OUT
 def logout():
     global username, g2
     del username
     del g2
->>>>>>> pr/46
 
 
 def main_tick():
@@ -1575,138 +1229,6 @@ def main_tick():
            sharecrashtkinter, main_laid_out, data_loaded, game_state
     # while True:
     if signincheck == signinvalue:
-<<<<<<< HEAD
-        try:
-            check = False
-            upgbuttoncheck = False
-            goldcheck = False
-            statscheck = False
-            animate = 0
-            totalclicks = int(gmisc[3])
-            timeplay = int(gmisc[1])
-            click = 0
-            clickcolourcheck = 1
-            upgcheck1h1 = int(gupgrades[1])
-            upgcheck1h2 = int(gupgrades[3])
-            upgcheck2h1 = int(gupgrades[5])
-            upgcheck2h2 = int(gupgrades[7])
-            upgcheck3 = int(gupgrades[9])
-            upgcheck4 = int(gupgrades[11])
-            upgcheck5 = int(gupgrades[13])
-            clickupgcheck1 = int(gupgrades[15])
-            clickupgcheck2 = int(gupgrades[17])
-            money = float(str(gmoney[1] + gmoney[3] + gmoney[5] + gmoney[7] + gmoney[9] + gmoney[11]))
-            if len(str(money)) < 8:
-                moneycheck = "0"
-            else:
-                moneycheck = str(money)[:1]
-            moneymillion = round(float(str(gmoney[1] + gmoney[3] + gmoney[5] + gmoney[7] + gmoney[9]) + "." +
-                                       moneycheck), 1)
-            if len(str(moneymillion)) < 5:
-                moneymillioncheck = "0"
-            else:
-                moneymillioncheck = str(moneymillion)[:1]
-            moneybillion = round(float(str(gmoney[1] + gmoney[3] + gmoney[5] + gmoney[7]) + "." + moneymillioncheck),
-                                 1)
-            if len(str(moneybillion)) < 5:
-                moneybillioncheck = "0"
-            else:
-                moneybillioncheck = str(moneybillion)[:1]
-            moneytrillion = round(float(str(gmoney[1] + gmoney[3] + gmoney[5]) + "." + moneybillioncheck), 1)
-            if len(str(moneytrillion)) < 5:
-                moneytrillioncheck = "0"
-            else:
-                moneytrillioncheck = str(moneytrillion)[:1]
-            moneyquadrillion = round(float(str(gmoney[1] + gmoney[3]) + "." + moneytrillioncheck), 1)
-            if len(str(moneyquadrillion)) < 5:
-                moneyquadrillioncheck = "0"
-            else:
-                moneyquadrillioncheck = str(moneyquadrillion)[:1]
-            moneyquintillion = round(float(str(gmoney[1]) + "." + moneyquadrillioncheck), 1)
-            moneytkinter = StringVar()
-            if moneymillion == 0:
-                moneytkinter.set("Balance: $" + str(money))
-            elif moneybillion == 0:
-                moneytkinter.set("Balance: $" + str(moneymillion) + "m")
-            elif moneytrillion == 0:
-                moneytkinter.set("Balance: $" + str(moneybillion) + "b")
-            elif moneyquadrillion == 0:
-                moneytkinter.set("Balance: $" + str(moneytrillion) + "t")
-            elif moneyquintillion == 0:
-                moneytkinter.set("Balance: $" + str(moneyquadrillion) + "q")
-            else:
-                moneytkinter.set("Balance: $" + str(moneyquintillion) + "Q")
-            autoclick = int((gbuildings[1] * 18 * int(gupgrades[3])) + (gbuildings[1] * 2 * int(gupgrades[1])) + 
-                            gbuildings[1])
-            autoclick2 = int(gbuildings[1])
-            autoclicktkinter = StringVar()
-            autoclicktkinter.set("Auto-Clickers Amount: " + str(gbuildings[1]))
-            autoprice = int(20 * (math.pow(1.2, int(gbuildings[1]))))
-            autopricetkinter = StringVar()
-            autopricetkinter.set("Auto-Clicker (Costs: $" + str(autoprice) + ")")
-            printmoney = int((gbuildings[3] * 2 * int(gupgrades[5])) + gbuildings[3])
-            printmoney2 = int(gbuildings[3])
-            printmoneytkinter = StringVar()
-            printmoneytkinter.set("Money Printers Amount: " + str(gbuildings[3]))
-            printprice = int(375 * (math.pow(1.2, int(gbuildings[3]))))
-            printpricetkinter = StringVar()
-            printpricetkinter.set("Money Printer (Costs: $" + str(printprice) + ")")
-            counterfeit = int((gbuildings[5] * 2 * int(gupgrades[9])) + gbuildings[5])
-            counterfeit2 = int(gbuildings[5])
-            counterfeittkinter = StringVar()
-            counterfeittkinter.set("Counterfeit Companies Amount: " + str(gbuildings[5]))
-            counterfeitprice = int(9001 * (math.pow(1.2, int(gbuildings[5]))))
-            counterfeitpricetkinter = StringVar()
-            counterfeitpricetkinter.set("Counterfeit Company (Costs: $" + str(counterfeitprice) + ")")
-            sharecrash = int((gbuildings[7] * 2 * int(gupgrades[11])) + gbuildings[7])
-            sharecrash2 = int(gbuildings[7])
-            sharecrashtkinter = StringVar()
-            sharecrashtkinter.set("Sharemarket Crashes Amount: " + str(sharecrash2))
-            shareprice = int(42000 * (math.pow(1.2, int(gbuildings[7]))))
-            sharepricetkinter = StringVar()
-            sharepricetkinter.set("Sharemarket Crash (Costs: $" + str(shareprice) + ")")
-            bankheist = int((gbuildings[9]) * 2 * int(gupgrades[13]) + gbuildings[9])
-            bankheist2 = int(gbuildings[9])
-            bankheisttkinter = StringVar()
-            bankheisttkinter.set("Bank Heists Amount: " + str(bankheist2))
-            bankprice = int(181700 * (math.pow(1.2, bankheist2)))
-            bankpricetkinter = StringVar()
-            bankpricetkinter.set("Bank Heist (Costs: $" + str(bankprice) + ")")
-            mps = autoclick + printmoney + counterfeit + sharecrash
-            mpstkinter = StringVar()
-            mpstkinter.set("MPS: " + str(mps))
-            inc = int(1 + (int(gupgrades[15]) * 2) + int(gupgrades[17]) * (mps / 10))
-            inctkinter = StringVar()
-            inctkinter.set("+" + str(inc) + " money!")
-            templist1 = [moneymillion] * 2
-            templist2 = [moneybillion] * 2
-            templist3 = [moneytrillion] * 2
-            templist4 = [moneyquadrillion] * 2
-            templist5 = [moneyquintillion] * 2
-            if gupgrades[13] == int(1):
-                clickbooster1.destroy()
-            if gupgrades[1] == int(1):
-                boostbutton1h1.destroy()
-            if gupgrades[5] == int(1):
-                boostbutton2h1.destroy()
-            if gupgrades[15] == int(1):
-                clickbooster2.destroy()
-            if gupgrades[3] == int(1):
-                boostbutton1h2.destroy()
-            if gupgrades[9] == int(1):
-                boostbutton3.destroy()
-            if gupgrades[7] == int(1):
-                boostbutton2h2.destroy()
-            if gupgrades[11] == int(1):
-                boostbutton4.destroy()
-            if mps >= 1:
-                automoneychoice()
-            main()
-            break
-        except NameError as e:
-            print(e)
-            signin()
-=======
         if save_needed:
             print 'main_tick() saving'
             savegame()
@@ -1774,4 +1296,3 @@ def main_tick():
 master.after(0, main_tick)
 master.mainloop()
 
->>>>>>> pr/46
