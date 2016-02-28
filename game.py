@@ -1193,11 +1193,46 @@ def goldmpsstop():
     mps = float(mps) / 77
     mpstkinter = ("MPS: " + str(mps))
 
+def lotto():
+    global money, lottobutton, lottoprice, lottolabel, cannotafford
+    if money < int(lottoprice):
+        lottobutton.destroy()
+        master.bell()
+        lottoafford = Label(master, text="%s" % cannotafford, width=35)
+        lottoafford.grid(row=8, column=0, sticky=W)
+        master.after(500, lambda: eval('''lottoafford.destroy()
+lottobutton = Button(master, width=35, text='Money Lottery (Random!)')
+lottobutton.grid(row=8, column=0, sticky=W)'''))
+    else:
+        money -= lottoprice
+        lottoprice *= uniform(1.1, 5.1)
+        prob = random()
+        if prob < (1/3.0): # 1/3 probability
+            money += 50.0
+        elif prob < (1/3.0 + 1/5.0): # 1/5 prob
+            money += 120.0
+        elif prob < (1/3.0 + 1/5.0 + 1/7.0): # 1/7 prob
+            money += 200.0
+        elif prob < (1/3.0 + 1/5.0 + 1/7.0 + 1/9.0): # 1/9 prob
+            money += 260.0
+        elif prob < (1/3.0 + 1/5.0 + 1/7.0 + 1/9.0 + 1/11.0): # 1/11 prob
+            money += 500.0
+        elif prob < (1/3.0 + 1/5.0 + 1/7.0 + 1/9.0 + 1/11.0 + 1/13.0): # 1/13 prob
+            money += 600.0
+        elif prob < (1/3.0 + 1/5.0 + 1/7.0 + 1/9.0 + 1/11.0 + 1/13.0 + 1/1013.0): # 1/1013 prob
+            money += 50000.0
+        elif prob < (1/3.0 + 1/5.0 + 1/7.0 + 1/9.0 + 1/11.0 + 1/13.0 + 1/1013.0 + 1/2013.0): # 1/2013 prob
+            money += 250000.0
+        elif prob < (1/3.0 + 1/5.0 + 1/7.0 + 1/9.0 + 1/11.0 + 1/13.0 + 1/1013.0 + 1/2013.0 + 1/3013.0): # 1/3013 prob
+            money += 153250000.0
+        else:
+            money = 1000.0 # hee hee hee...
+        lottolabel['text'] = ('Money Lottery Price: $'+str(round(lottoprice, 1)))
 
 def main():
     # BUTTONS, LABELS AND ENTRIES
     global incbutton1, incbutton2, incbutton3, incbutton4, upgrades, resetbutton, savebutton, clickbutton, statsbutton,\
-           reportbutton
+           reportbutton, lottobutton, lottoprice, lottolabel
     background = Label(master, image=img1)
     background.place(x=0, y=0, relwidth=1, relheight=1)
     background.image = img1
@@ -1238,11 +1273,19 @@ def main():
     checklabel4 = Label(master, textvariable=sharecrashtkinter, width=35)
     checklabel4.grid(row=8, column=0, sticky=W)
 
+    lottobutton = Button(master, width=35, text='Money Lottery (Random!)', command=lotto)
+    lottobutton.grid(row=9, column=0, sticky=W)
+
+    lottolabel = Label(master, width=35, text='Money Lottery Price: $100')
+    lottolabel.grid(row=10, column=0, sticky=W)
+
+    lottoprice = 100.0
+
     statsbutton = Button(master, text="Stats", width=10, command=statsexpand)
-    statsbutton.grid(row=9, column=0, sticky=W)
+    statsbutton.grid(row=11, column=0, sticky=W)
 
     resetbutton = Button(master, text="Reset Game", width=10, command=resetgame)
-    resetbutton.grid(row=10, column=0, sticky=W)
+    resetbutton.grid(row=12, column=0, sticky=W)
 
     savebutton = Button(master, text="Save Game", width=10, command=savegame)
     savebutton.grid(row=10, column=2, sticky=E)
