@@ -1,7 +1,7 @@
 import math
 
-class GameState:
 
+class GameState:
     def __init__(self, data=None):
         self.data = [] if data is None else data
 
@@ -11,29 +11,31 @@ class GameState:
         self.statscheck = False
 
         self.animate = 0
-        # self.click = 0
         self.clickcolourcheck = 1
 
-        self.upgcheck1h1 = int(self.data[9])
-        self.upgcheck1h2 = int(self.data[11])
-        self.upgcheck2h1 = int(self.data[13])
-        self.upgcheck2h2 = int(self.data[15])
-        self.upgcheck3 = int(self.data[17])
-        self.upgcheck4 = int(self.data[19])
-        self.clickupgcheck1 = int(self.data[21])
-        self.clickupgcheck2 = int(self.data[23])
+        self.upgcheck1h1 = int(self.data[11])
+        self.upgcheck1h2 = int(self.data[13])
+        self.upgcheck2h1 = int(self.data[15])
+        self.upgcheck2h2 = int(self.data[17])
+        self.upgcheck3 = int(self.data[19])
+        self.upgcheck4 = int(self.data[21])
+        self.upgcheck5 = int(self.data[23])
+        self.clickupgcheck1 = int(self.data[25])
+        self.clickupgcheck2 = int(self.data[27])
 
-        self.timeplay = int(self.data[37])
-        self.totalclicks = int(self.data[39])
+        self.timeplay = int(self.data[31])
+        self.totalclicks = int(self.data[33])
 
-        self.money = float(self.data[25] + self.data[27] + self.data[29] + self.data[31] + self.data[33] + self.data[35])
+        self.money = float(self.data[29])
 
         self.autoclick2 = int(self.data[1])
-        self.autoclick = self.autoclick2 * 18 * self.upgcheck1h2 + self.autoclick2 * 2 * self.upgcheck1h1 + self.autoclick2
+        self.autoclick = self.autoclick2 * 18 * self.upgcheck1h2 + self.autoclick2 * 2 * self.upgcheck1h1 + \
+                         self.autoclick2
         self.autoprice = int(20 * math.pow(1.2, self.autoclick2))
 
         self.printmoney2 = int(self.data[3])
-        self.printmoney = self.printmoney2 * 2 * self.upgcheck2h1 + self.printmoney2
+        self.printmoney = self.printmoney2* 18 * self.upgcheck2h2 + self.printmoney2 * 2 * self.upgcheck2h1 + \
+                          self.printmoney2
         self.printprice = int(375 * (math.pow(1.2, self.printmoney2)))
 
         self.counterfeit2 = int(self.data[5])
@@ -44,12 +46,16 @@ class GameState:
         self.sharecrash = self.sharecrash2 * 2 * self.upgcheck4 + self.sharecrash2
         self.shareprice = int(42000 * math.pow(1.2, self.sharecrash2))
 
+        self.bankheist2 = int(self.data[7])
+        self.bankheist = self.bankheist2 * 2 * self.upgcheck4 + self.bankheist2
+        self.bankprice = int(181700 * math.pow(1.2, self.bankheist2))
+
         self.mps = self.autoclick2 + 15 * self.printmoney2 + 321 * self.counterfeit2 + 969 * self.sharecrash2
         self.inc = 1 + self.clickupgcheck1 * 2 + self.clickupgcheck2 * self.mps / 10
 
     def set(self, name, value):
         i = self.data.index(name)
-        self.data[i+1] = value
+        self.data[i + 1] = value
 
     def get_autoclick(self):
         return self.autoclick
@@ -57,7 +63,7 @@ class GameState:
     def set_autoclick(self, amount):
         self.autoclick = amount
 
-    def inc_autoclick(self, amount=1):
+    def inc_autoclick(self, amount):
         self.autoclick += amount
 
     def get_autoclick2(self):
@@ -70,7 +76,7 @@ class GameState:
         return self.autoprice
 
     def set_autoprice(self, amount):
-        self.autoprice += amount
+        self.autoprice = amount
 
     def get_printmoney(self):
         return self.printmoney
@@ -78,7 +84,7 @@ class GameState:
     def set_printmoney(self, amount):
         self.printmoney = amount
 
-    def inc_printmoney(self, amount=1):
+    def inc_printmoney(self, amount):
         self.printmoney += amount
 
     def get_printmoney2(self):
@@ -102,7 +108,7 @@ class GameState:
     def set_counterfeit(self, amount):
         self.counterfeit = amount
 
-    def inc_counterfeit(self, amount=1):
+    def inc_counterfeit(self, amount):
         self.counterfeit += amount
 
     def get_counterfeit2(self):
@@ -143,6 +149,30 @@ class GameState:
 
     def set_shareprice(self, amount):
         self.shareprice = amount
+        
+    def get_bankheist(self):
+        return self.bankheist
+
+    def set_bankheist(self, amount):
+        self.bankheist = amount
+
+    def inc_bankheist(self, amount):
+        self.bankheist += amount
+
+    def get_bankheist2(self):
+        return self.bankheist2
+
+    def set_bankheist2(self, amount):
+        self.bankheist2 = amount
+
+    def inc_bankheist2(self, amount=1):
+        self.bankheist2 += amount
+
+    def get_bankprice(self):
+        return self.bankprice
+
+    def set_bankprice(self, amount):
+        self.bankprice = amount
 
     def get_mps(self):
         return self.mps
@@ -230,6 +260,12 @@ class GameState:
     def inc_upgcheck4(self, amount=1):
         self.upgcheck4 += amount
 
+    def get_upgcheck5(self):
+        return self.upgcheck5
+
+    def inc_upgcheck5(self, amount=1):
+        self.upgcheck5 += amount
+
     def get_clickupgcheck1(self):
         return self.clickupgcheck1
 
@@ -247,4 +283,3 @@ class GameState:
 
     def set_upgbuttoncheck(self, u):
         self.upgbuttoncheck = u
-
