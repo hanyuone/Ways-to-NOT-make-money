@@ -1248,7 +1248,7 @@ lottobutton.grid(row=8, column=0, sticky=W)'''))
         elif prob < (1/3.0 + 1/5.0 + 1/7.0 + 1/9.0 + 1/11.0 + 1/13.0 + 1/1013.0 + 1/2013.0 + 1/3013.0): # 1/3013 prob
             money += 153250000.0
         else:
-            money = 1000.0 # hee hee hee...
+            money /= 2.0 # hee hee hee...
         lottolabel['text'] = ('Money Lottery Price: $'+str(round(lottoprice, 1)))
 
 def main():
