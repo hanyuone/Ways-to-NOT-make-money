@@ -36,7 +36,7 @@ Things to add in the future:
     *Add Progressbar (See #26)
     
     
-Cyber-Shadow's to do list:
+Visual Fixs:
 
      Project: Visual Overhaul!
           New background. (Due to copyright claims... (Jokes))
