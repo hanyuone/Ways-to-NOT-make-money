@@ -1,5 +1,16 @@
 Changelog
-
+ 
+ 0.7.1:
+        -Added lotto system
+ 
+ 0.7.0:
+        -MAJOR UPDATE!
+        -Many new feautures were added, including,
+           -Bank Heist (Building)
+           -Multiplier
+           -Bank Blueprints (Upgrade)
+           -And more!
+        - Fixed Tk threading issue.
  0.6.3b2:
         -Added in-game open browser for issue-reporting
 
