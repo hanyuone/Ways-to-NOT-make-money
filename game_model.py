@@ -23,8 +23,8 @@ class GameState:
         self.clickupgcheck1 = int(self.data[25])
         self.clickupgcheck2 = int(self.data[27])
 
-        self.timeplay = int(self.data[31])
-        self.totalclicks = int(self.data[33])
+        self.timeplay = int(self.data[41])
+        self.totalclicks = int(self.data[43])
 
         self.money = float(self.data[29])
 
