@@ -35,7 +35,7 @@ def savegame():
             "upg4", game_state.get_upgcheck4(), "upg5", game_state.get_upgcheck5(),
             "cupg1", game_state.get_clickupgcheck1(), "cupg2", game_state.get_clickupgcheck2(),
             "money", float(str(game_state.get_money())[-8:]), "time", game_state.get_timeplay(),
-            "clicks", game_state.get_total_clicks()]
+            "clicks", game_state.get_total_clicks(), "lotto", game_state.get_lotto()]
 
     save_and_load.encode_and_save(username, data)
 
@@ -56,6 +56,8 @@ def signin():
             try:
                 g2 = save_and_load.read_game_data(username)
                 print 'g2', g2
+                g2 = save_and_load.auto_updater(g2, username)
+                print 'update', g2
             except IOError as ioe:
                 print ioe
             save_and_load.encode_and_save(username, g2)
@@ -1184,7 +1186,7 @@ def updatevars():
 def main():
     # BUTTONS, LABELS AND ENTRIES
     global incbutton1, incbutton2, incbutton3, incbutton4, incbutton5, upgrades, resetbutton, savebutton, clickbutton, \
-        statsbutton, reportbutton, logoutbutton, moneylabel
+        statsbutton, reportbutton, logoutbutton, moneylabel, lottoprice, lottobutton
 
     background = Label(master, image=img1)
     background.place(x=0, y=0, relwidth=1, relheight=1)
@@ -1250,21 +1252,65 @@ def main():
     mpscheck5 = Label(master, textvariable=bankmpstkinter, width=35)
     mpscheck5.grid(row=10, column=0, sticky=W, columnspan=2)
 
+    lottobutton = Button(master, text="Lotto ($%s) " % (lottoprice), width=35, command=lotto)
+    lottobutton.grid(row=11, column=0, sticky=W)
+
     statsbutton = Button(master, text="Stats", width=10, command=showstats)
-    statsbutton.grid(row=11, column=0, sticky=W)
+    statsbutton.grid(row=12, column=0, sticky=W)
 
     resetbutton = Button(master, text="Reset Game", width=10, command=resetgame)
-    resetbutton.grid(row=12, column=0, sticky=W)
+    resetbutton.grid(row=13, column=0, sticky=W)
 
     savebutton = Button(master, text="Save Game", width=10, command=savegame)
-    savebutton.grid(row=12, column=3, sticky=E)
+    savebutton.grid(row=13, column=3, sticky=E)
 
     reportbutton = Button(master, text='Report Issue to Github', width=20, command=report)
-    reportbutton.grid(row=13, column=2)
+    reportbutton.grid(row=14, column=2)
 
     logoutbutton = Button(master, text='Log Out', width=20, command=logout)
-    logoutbutton.grid(row=14, column=2)
+    logoutbutton.grid(row=15, column=2)
 
+def lotto():
+    global game_state, lottobutton, cannotafford
+    if game_state.get_money() < int(game_state.get_lotto()):
+        lottobutton.destroy()
+        master.bell()
+        lottoafford = Label(master, text="%s" % cannotafford, width=35)
+        lottoafford.grid(row=8, column=0, sticky=W)
+        master.after(500, lambda: eval('''lottoafford.destroy()
+lottobutton = Button(master, width=35, text="Lotto ($%s) " % (lottoprice)')
+lottobutton.grid(row=11, column=0, sticky=W)'''))
+    else:
+        money = game_state.get_money()
+        money -= game_state.get_lotto()
+        game_state.lottoprice *= uniform(1.1, 5.1)
+        prob = random()
+        if prob < (1/3.0): # 1/3 probability
+            money += 50.0
+        elif prob < (1/3.0 + 1/5.0): # 1/5 prob
+            money += 120.0
+        elif prob < (1/3.0 + 1/5.0 + 1/7.0): # 1/7 prob
+            money += 200.0
+        elif prob < (1/3.0 + 1/5.0 + 1/7.0 + 1/9.0): # 1/9 prob
+            money += 260.0
+        elif prob < (1/3.0 + 1/5.0 + 1/7.0 + 1/9.0 + 1/11.0): # 1/11 prob
+            money += 500.0
+        elif prob < (1/3.0 + 1/5.0 + 1/7.0 + 1/9.0 + 1/11.0 + 1/13.0): # 1/13 prob
+            money += 600.0
+        elif prob < (1/3.0 + 1/5.0 + 1/7.0 + 1/9.0 + 1/11.0 + 1/13.0 + 1/1013.0): # 1/1013 prob
+            money += 50000.0
+        elif prob < (1/3.0 + 1/5.0 + 1/7.0 + 1/9.0 + 1/11.0 + 1/13.0 + 1/1013.0 + 1/2013.0): # 1/2013 prob
+            money += 250000.0
+        elif prob < (1/3.0 + 1/5.0 + 1/7.0 + 1/9.0 + 1/11.0 + 1/13.0 + 1/1013.0 + 1/2013.0 + 1/3013.0): # 1/3013 prob
+            money += 153250000.0
+        elif prob < (1/3.0 + 1/5.0 + 1/7.0 + 1/9.0 + 1/11.0 + 1/13.0 + 1/1013.0 + 1/2013.0 + 1/3013.0 + 1/13013.0): # 1/13013 prob
+            money += 23153250000.0
+        elif prob < (1/3.0 + 1/5.0 + 1/7.0 + 1/9.0 + 1/11.0 + 1/13.0 + 1/1013.0 + 1/2013.0 + 1/3013.0 + 1/13013.0 + 1/23013.0): # 1/23013 prob
+            money += 423153250000.0
+        else:
+            money /= 2.0 # hee hee hee...
+        lottobutton['text'] = ('Lotto ($'+str(round(game_state.get_lotto(), 1))+')')
+        game_state.set_money(money)
 
 # LOG OUT
 def logout():
@@ -1278,7 +1324,7 @@ def main_tick():
            autompstkinter, printpricetkinter, printmoneytkinter, printmpstkinter, counterfeitpricetkinter, \
            counterfeittkinter, counterfeitmpstkinter, sharepricetkinter, sharecrashtkinter, sharempstkinter, \
            bankheisttkinter, bankpricetkinter, bankmpstkinter, multipliercheck, main_laid_out, data_loaded, \
-           game_state
+           game_state, lottoprice
     # while True:
     if signincheck == signinvalue:
         if save_needed:
@@ -1344,6 +1390,7 @@ def main_tick():
                     boostbutton4.destroy()
                 if game_state and game_state.mps >= 1:
                     automoneychoice()
+                lottoprice = int(game_state.get_lotto())
 
                 if not main_laid_out:
                     main()
