@@ -1,24 +1,34 @@
 # Ways to NOT make money
 ## A basic Python 2.7.9 / Python 3.5.1 Cookie-Clicker style (incremental) game. 
 
+START SIDE NOTE
+
 If anyone can help me edit the game, please post an issue telling me to add you, and I will add you (once I have added you, please close the issue)!
 
 Also, if you have downloaded this game and find any bugs, please post them to the 'issues' page (the exclamation mark on the right-hand side of the browser). Thanks!
 
 ***IMPORTANT: This is a future branch. Download at your own risk, since there are many bugs. The master branch is approved.***
 
-NOTE: This game in the master and python3 branches currently requires the user to download Python to run. An executable file is in the ".exe version" branch!
 
-NOTE: For Python 3.5.1 version, visit python3 branch. (Too, see #19)
+NOTE: This game in the master and python3 branches currently requires the user to download Python to run. An executable file is in the ".exe version" branch! For the Python 3 version, visit python3 branch.
+
+END SIDE NOTE
 
 Line Amount: 1284 lines (and counting!)
 
 File Size: ~58KB (Game itself, photos take up an extra ~650KB, other files take up ~18MB)
 
+<<<<<<< HEAD
 Version: 0.7.0 beta (DEV)
+=======
+Version: 0.6.3b2
+>>>>>>> master
 
 Changelog:
 
+     0.6.3b2:
+            -Added in-game open browser for issue-reporting
+            
      0.6.3:
             -Updates are rolling in!
             -Tweaked the savefile, so they don't constantly refresh

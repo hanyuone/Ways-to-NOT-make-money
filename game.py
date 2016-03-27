@@ -3,8 +3,17 @@ from random import *
 from tkMessageBox import showerror
 from github import Github
 import math
+<<<<<<< HEAD
 import save_and_load
 import game_model
+=======
+import glob
+import threading
+import webbrowser
+
+if __name__ != '__main__':
+    raise SystemExit # prevent importing
+>>>>>>> master
 
 master = Tk()
 master.title("Ways To NOT Earn Money")
@@ -43,6 +52,29 @@ def savegame():
     msg = Message(toplevel, text="Game saved!")
     msg.pack()
 
+def auto_updater(g2, un):
+    # AUTO-UPDATE
+    # lt 0.6.3 -> 0.6.3b3
+    try:
+        g2[39]
+    except IndexError:
+        g = open('savefile_' + un + '.txt', "w")
+        gtemp = ["time", int(0), "clicks", int(0)]
+        g2.extend(gtemp)
+        g.write(str("_".join(str(y) for y in g2)).encode("hex"))
+        g.close()
+
+    # lt 0.6.3b3 -> 0.6.4a1
+    try:
+        g2[41]
+    except IndexError:
+        g = open('savefile_' + un + '.txt', "w")
+        gtemp = ["lotto", 100]
+        g2.extend(gtemp)
+        g.write(str("_".join(str(y) for y in g2)).encode("hex"))
+        g.close()
+
+    return g2
 
 def signin():
     global signincheck, game_state
@@ -53,6 +85,7 @@ def signin():
         username = unentry.get()
         if save_and_load.save_file_exists(username):
             global g2, signinvalue
+<<<<<<< HEAD
             try:
                 g2 = save_and_load.read_game_data(username)
                 print 'g2', g2
@@ -63,6 +96,13 @@ def signin():
             save_and_load.encode_and_save(username, g2)
             game_state = game_model.GameState(g2)
             print 'game_state', game_state
+=======
+            g = open('savefile_' + un + '.txt')
+            g2 = (str(str(g.read()).split(";")[0]).decode("hex")).split("_")
+            g.close()
+            g2 = auto_updater(g2, un)
+                
+>>>>>>> master
             for i in [l, unentry, b1, b2]:
                 i.destroy()
 
@@ -105,17 +145,22 @@ def report():
     gl = globals()
     gl['t'] = Toplevel()  # global use
     Label(master=gl['t'],
-          text="Make sure you are a collaborator of Ways to not make money, and you don't have a fork", bg='yellow') \
+          text="For in-game report to work, follow below instructions. To directly report, click bottom button") \
         .grid(row=1, column=1)
     Label(master=gl['t'],
-          text='Please sign in to your Github account below. (Username first entry, passcode second)').grid(row=2,
+          text="Make sure you are a collaborator of Ways to not make money, and you don't have a fork", bg='yellow') \
+        .grid(row=2, column=1)
+    Label(master=gl['t'],
+          text='Please sign in to your Github account below. (Username first entry, passcode second)').grid(row=3,
                                                                                                             column=1)
     gl['une'] = Entry(master=gl['t'])
-    gl['une'].grid(row=3, column=1)
+    gl['une'].grid(row=4, column=1)
     gl['pce'] = Entry(master=gl['t'], show="*")
-    gl['pce'].grid(row=4, column=1)
+    gl['pce'].grid(row=5, column=1)
     globals().update(gl)
-    Button(master=gl['t'], text='Verify', command=_verify_report).grid(row=5, column=1)
+    Button(master=gl['t'], text='Verify', command=_verify_report).grid(row=6, column=1)
+    f = lambda: webbrowser.open("https://github.com/DerpfacePython/Ways-to-NOT-make-money/issues/new", new=0, autoraise=True)
+    Button(master=gl['t'], text='OR visit website', command=f).grid(row=7, column=1)
 
 
 def _verify_report():
@@ -875,6 +920,7 @@ def automoney():
 
     bugfixer()
 
+<<<<<<< HEAD
     game_state.money += float(game_state.mps) / 10.0
     game_state.check += 1
 
@@ -896,6 +942,25 @@ def auto_money_helper():
     # ACHIEVEMENT UPDATES
     if game_state.statscheck:
         set_stats(game_state, totalclicksvar, timevar, totalspentvar)
+=======
+# SAVING GAME
+def savegame():
+    username = g.name.split('_')[1].split('.')[0]
+    x = ["auto", int(autoclick2), "print", int(printmoney2), "counter", int(counterfeit2), "shares", int(sharecrash2),
+         "upg1h1", int(upgcheck1h1), "upg1h2", int(upgcheck1h2), "upg2h1", int(upgcheck2h1), "upg2h2", int(upgcheck2h2),
+         "upg3", int(upgcheck3), "upg4", int(upgcheck4), "cupg1", int(clickupgcheck1), "cupg2", int(clickupgcheck2),
+         "quintillion", int(moneyquintillion), "quadrillion", int(str(moneyquadrillion)[-5:-2]), "trillion",
+         int(str(moneytrillion)[-5:-2]), "billion", int(str(moneybillion)[-5:-2]), "million",
+         int(str(moneymillion)[-5:-2]), "money", float(str(money)[-8:]), "time", int(timeplay), "clicks",
+         int(totalclicks), 'lotto', int(lottoprice)]
+    savefile = str((str("_".join(str(v) for v in x))).encode("hex") + ";")
+    f = open("savefile_" + username + ".txt", "w")
+    f.write(str(savefile))
+    f.close()
+    toplevel = Toplevel()
+    msg = Message(toplevel, text="Game saved!")
+    msg.pack()
+>>>>>>> master
 
 
 # RESETTING GAME
@@ -910,6 +975,7 @@ def resetgame():
     nobutton.grid(row=1, column=1)
 
 
+<<<<<<< HEAD
 # STATS STUFF
 def showstats():
     global totalclickslabel, totalclicksvar, timelabel, timevar, totalspentlabel, totalspentvar, hidestatsbutton, \
@@ -953,6 +1019,21 @@ def hidestats():
     savebutton.grid(row=13, column=3, sticky=E)
     if game_state.get_upgbuttoncheck():
         exitupgrades.grid(row=11, column=3, sticky=E)
+=======
+def _pressyes(username=None):
+    if username is None:
+        username = g.name.split('_')[1].split('.')[0]
+    x = ["auto", int(0), "print", int(0), "counter", int(0), "shares", int(0), "upg1h1", int(0), "upg1h2", int(0),
+         "upg2h1", int(0), "upg2h2", int(0), "upg3", int(0), "upg4", int(0), "cupg1", int(0), "cupg2", int(0),
+         "quintillion", int(0), "quadrillion", int(0), "trillion", int(0), "billion", int(0), "million", int(0),
+         "money", float(0), "time", int(0), "clicks", int(0)]
+    resetfile = str((str("_".join(str(v) for v in x))).encode("hex") + ";")
+    f = open("savefile_" + username + ".txt", "w")
+    f.write(str(resetfile))
+    f.close()
+    global master
+    master.destroy()
+>>>>>>> master
 
 
 # UPGRADES WINDOW
@@ -1182,12 +1263,56 @@ def updatevars():
     bankpricetkinter.set("Bank Heist (Costs: $%s)" % str(format_price(game_state.get_bankprice())))
     bankmpstkinter.set("Bank Heists MPS: " + str(game_state.get_bankheist() * 2015))
 
+def lotto():
+    global money, lottobutton, lottoprice, lottolabel, cannotafford
+    if money < int(lottoprice):
+        lottobutton.destroy()
+        master.bell()
+        lottoafford = Label(master, text="%s" % cannotafford, width=35)
+        lottoafford.grid(row=8, column=0, sticky=W)
+        master.after(500, lambda: eval('''lottoafford.destroy()
+lottobutton = Button(master, width=35, text='Money Lottery (Random!)')
+lottobutton.grid(row=8, column=0, sticky=W)'''))
+    else:
+        money -= lottoprice
+        lottoprice *= uniform(1.1, 5.1)
+        prob = random()
+        if prob < (1/3.0): # 1/3 probability
+            money += 50.0
+        elif prob < (1/3.0 + 1/5.0): # 1/5 prob
+            money += 120.0
+        elif prob < (1/3.0 + 1/5.0 + 1/7.0): # 1/7 prob
+            money += 200.0
+        elif prob < (1/3.0 + 1/5.0 + 1/7.0 + 1/9.0): # 1/9 prob
+            money += 260.0
+        elif prob < (1/3.0 + 1/5.0 + 1/7.0 + 1/9.0 + 1/11.0): # 1/11 prob
+            money += 500.0
+        elif prob < (1/3.0 + 1/5.0 + 1/7.0 + 1/9.0 + 1/11.0 + 1/13.0): # 1/13 prob
+            money += 600.0
+        elif prob < (1/3.0 + 1/5.0 + 1/7.0 + 1/9.0 + 1/11.0 + 1/13.0 + 1/1013.0): # 1/1013 prob
+            money += 50000.0
+        elif prob < (1/3.0 + 1/5.0 + 1/7.0 + 1/9.0 + 1/11.0 + 1/13.0 + 1/1013.0 + 1/2013.0): # 1/2013 prob
+            money += 250000.0
+        elif prob < (1/3.0 + 1/5.0 + 1/7.0 + 1/9.0 + 1/11.0 + 1/13.0 + 1/1013.0 + 1/2013.0 + 1/3013.0): # 1/3013 prob
+            money += 153250000.0
+        elif prob < (1/3.0 + 1/5.0 + 1/7.0 + 1/9.0 + 1/11.0 + 1/13.0 + 1/1013.0 + 1/2013.0 + 1/3013.0 + 1/13013.0): # 1/13013 prob
+            money += 23153250000.0
+        elif prob < (1/3.0 + 1/5.0 + 1/7.0 + 1/9.0 + 1/11.0 + 1/13.0 + 1/1013.0 + 1/2013.0 + 1/3013.0 + 1/13013.0 + 1/23013.0): # 1/23013 prob
+            money += 423153250000.0
+        else:
+            money /= 2.0 # hee hee hee...
+        lottolabel['text'] = ('Money Lottery Price: $'+str(round(lottoprice, 1)))
 
 def main():
     # BUTTONS, LABELS AND ENTRIES
+<<<<<<< HEAD
     global incbutton1, incbutton2, incbutton3, incbutton4, incbutton5, upgrades, resetbutton, savebutton, clickbutton, \
         statsbutton, reportbutton, logoutbutton, moneylabel, lottoprice, lottobutton
 
+=======
+    global incbutton1, incbutton2, incbutton3, incbutton4, upgrades, resetbutton, savebutton, clickbutton, statsbutton,\
+           reportbutton, lottobutton, lottoprice, lottolabel
+>>>>>>> master
     background = Label(master, image=img1)
     background.place(x=0, y=0, relwidth=1, relheight=1)
     background.image = img1
@@ -1249,6 +1374,7 @@ def main():
     checklabel5 = Label(master, textvariable=bankheisttkinter, width=2)
     checklabel5.grid(row=9, column=1, sticky=W)
 
+<<<<<<< HEAD
     mpscheck5 = Label(master, textvariable=bankmpstkinter, width=35)
     mpscheck5.grid(row=10, column=0, sticky=W, columnspan=2)
 
@@ -1260,6 +1386,19 @@ def main():
 
     resetbutton = Button(master, text="Reset Game", width=10, command=resetgame)
     resetbutton.grid(row=13, column=0, sticky=W)
+=======
+    lottobutton = Button(master, width=35, text='Money Lottery (Random!)', command=lotto)
+    lottobutton.grid(row=9, column=0, sticky=W)
+
+    lottolabel = Label(master, width=35, text='Money Lottery Price: $' + str(round(lottoprice)))
+    lottolabel.grid(row=10, column=0, sticky=W)
+
+    statsbutton = Button(master, text="Stats", width=10, command=statsexpand)
+    statsbutton.grid(row=11, column=0, sticky=W)
+
+    resetbutton = Button(master, text="Reset Game", width=10, command=resetgame)
+    resetbutton.grid(row=12, column=0, sticky=W)
+>>>>>>> master
 
     savebutton = Button(master, text="Save Game", width=10, command=savegame)
     savebutton.grid(row=13, column=3, sticky=E)
@@ -1267,6 +1406,7 @@ def main():
     reportbutton = Button(master, text='Report Issue to Github', width=20, command=report)
     reportbutton.grid(row=14, column=2)
 
+<<<<<<< HEAD
     logoutbutton = Button(master, text='Log Out', width=20, command=logout)
     logoutbutton.grid(row=15, column=2)
 
@@ -1311,6 +1451,16 @@ lottobutton.grid(row=11, column=0, sticky=W)'''))
             money /= 2.0 # hee hee hee...
         lottobutton['text'] = ('Lotto ($'+str(round(game_state.get_lotto(), 1))+')')
         game_state.set_money(money)
+=======
+
+# AUTO-SAVE SYSTEM
+def auto_save():
+    global thread, signedin
+    thread.join()
+    if signedin: # prevent NameError
+        savegame()
+        exit() # Make sure otherThread isn't hanging around
+>>>>>>> master
 
 # LOG OUT
 def logout():
@@ -1327,6 +1477,7 @@ def main_tick():
            game_state, lottoprice
     # while True:
     if signincheck == signinvalue:
+<<<<<<< HEAD
         if save_needed:
             savegame()
             save_needed = False
@@ -1407,3 +1558,124 @@ def main_tick():
 
 master.after(0, main_tick)
 master.mainloop()
+=======
+        try:
+            check = False
+            upgbuttoncheck = False
+            goldcheck = False
+            statscheck = False
+            animate = 0
+            totalclicks = int(g2[39])
+            timeplay = int(g2[37])
+            click = 0
+            clickcolourcheck = 1
+            upgcheck1h1 = int(g2[9])
+            upgcheck1h2 = int(g2[11])
+            upgcheck2h1 = int(g2[13])
+            upgcheck2h2 = int(g2[15])
+            upgcheck3 = int(g2[17])
+            upgcheck4 = int(g2[19])
+            clickupgcheck1 = int(g2[21])
+            clickupgcheck2 = int(g2[23])
+            lottoprice = int(g2[41])
+            money = float(str(g2[25] + g2[27] + g2[29] + g2[31] + g2[33] + g2[35]))
+            if len(str(money)) < 8:
+                moneycheck = "0"
+            else:
+                moneycheck = str(money)[:1]
+            moneymillion = round(float(str(g2[25] + g2[27] + g2[29] + g2[31] + g2[33]) + "." + moneycheck), 1)
+            if len(str(moneymillion)) < 5:
+                moneymillioncheck = "0"
+            else:
+                moneymillioncheck = str(moneymillion)[:1]
+            moneybillion = round(float(str(g2[25] + g2[27] + g2[29] + g2[31]) + "." + moneymillioncheck), 1)
+            if len(str(moneybillion)) < 5:
+                moneybillioncheck = "0"
+            else:
+                moneybillioncheck = str(moneybillion)[:1]
+            moneytrillion = round(float(str(g2[25] + g2[27] + g2[29]) + "." + moneybillioncheck), 1)
+            if len(str(moneytrillion)) < 5:
+                moneytrillioncheck = "0"
+            else:
+                moneytrillioncheck = str(moneytrillion)[:1]
+            moneyquadrillion = round(float(str(g2[25] + g2[27]) + "." + moneytrillioncheck), 1)
+            if len(str(moneyquadrillion)) < 5:
+                moneyquadrillioncheck = "0"
+            else:
+                moneyquadrillioncheck = str(moneyquadrillion)[:1]
+            moneyquintillion = round(float(str(g2[25]) + "." + moneyquadrillioncheck), 1)
+            moneytkinter = StringVar()
+            if moneymillion == 0:
+                moneytkinter.set("Balance: $" + str(money))
+            elif moneybillion == 0:
+                moneytkinter.set("Balance: $" + str(moneymillion) + "m")
+            elif moneytrillion == 0:
+                moneytkinter.set("Balance: $" + str(moneybillion) + "b")
+            elif moneyquadrillion == 0:
+                moneytkinter.set("Balance: $" + str(moneytrillion) + "t")
+            elif moneyquintillion == 0:
+                moneytkinter.set("Balance: $" + str(moneyquadrillion) + "q")
+            else:
+                moneytkinter.set("Balance: $" + str(moneyquintillion) + "Q")
+            autoclick = int((g2[1] * 18 * int(g2[11])) + (g2[1] * 2 * int(g2[9])) + g2[1])
+            autoclick2 = int(g2[1])
+            autoclicktkinter = StringVar()
+            autoclicktkinter.set("Auto-Clickers Amount: " + str(g2[1]))
+            autoprice = int(20 * (math.pow(1.2, int(g2[1]))))
+            autopricetkinter = StringVar()
+            autopricetkinter.set("Auto-Clicker (Costs: $" + str(autoprice) + ")")
+            printmoney = int((g2[3] * 2 * int(g2[13])) + g2[3])
+            printmoney2 = int(g2[3])
+            printmoneytkinter = StringVar()
+            printmoneytkinter.set("Money Printers Amount: " + str(g2[3]))
+            printprice = int(375 * (math.pow(1.2, int(g2[3]))))
+            printpricetkinter = StringVar()
+            printpricetkinter.set("Money Printer (Costs: $" + str(printprice) + ")")
+            counterfeit = int((g2[5] * 2 * int(g2[17])) + g2[5])
+            counterfeit2 = int(g2[5])
+            counterfeittkinter = StringVar()
+            counterfeittkinter.set("Counterfeit Companies Amount: " + str(g2[5]))
+            counterfeitprice = int(9001 * (math.pow(1.2, int(g2[5]))))
+            counterfeitpricetkinter = StringVar()
+            counterfeitpricetkinter.set("Counterfeit Company (Costs: $" + str(counterfeitprice) + ")")
+            sharecrash = int((g2[7] * 2 * int(g2[19])) + g2[7])
+            sharecrash2 = int(g2[7])
+            sharecrashtkinter = StringVar()
+            sharecrashtkinter.set("Sharemarket Crashes Amount: " + str(sharecrash2))
+            shareprice = int(42000 * (math.pow(1.2, int(g2[7]))))
+            sharepricetkinter = StringVar()
+            sharepricetkinter.set("Sharemarket Crash (Costs: $" + str(shareprice) + ")")
+            mps = int(g2[1]) + 15 * int(g2[3]) + 321 * int(g2[5]) + 969 * int(g2[7])
+            mpstkinter = StringVar()
+            mpstkinter.set("MPS: " + str(mps))
+            inc = int(1 + (int(g2[21]) * 2) + int(g2[23]) * (mps / 10))
+            inctkinter = StringVar()
+            inctkinter.set("+" + str(inc) + " money!")
+            templist1 = [moneymillion] * 2
+            templist2 = [moneybillion] * 2
+            templist3 = [moneytrillion] * 2
+            templist4 = [moneyquadrillion] * 2
+            templist5 = [moneyquintillion] * 2
+            if g2[21] == int(1):
+                clickbooster1.destroy()
+            if g2[9] == int(1):
+                boostbutton1h1.destroy()
+            if g2[13] == int(1):
+                boostbutton2h1.destroy()
+            if g2[23] == int(1):
+                clickbooster2.destroy()
+            if g2[11] == int(1):
+                boostbutton1h2.destroy()
+            if g2[17] == int(1):
+                boostbutton3.destroy()
+            if g2[15] == int(1):
+                boostbutton2h2.destroy()
+            if g2[19] == int(1):
+                boostbutton4.destroy()
+            if mps >= 1:
+                automoneychoice()
+            main()
+            break
+        except NameError:
+            signin()
+>>>>>>> master
