@@ -1,5 +1,28 @@
 import glob
 
+def auto_updater(g2, un):
+    # AUTO-UPDATE
+    # lt 0.6.3 -> 0.6.3b3
+    try:
+        g2[39]
+    except IndexError:
+        g = open('savefile_' + un + '.txt', "w")
+        gtemp = ["time", int(0), "clicks", int(0)]
+        g2.extend(gtemp)
+        g.write(str("_".join(str(y) for y in g2)).encode("hex"))
+        g.close()
+
+    # lt 0.6.3b3 -> 0.6.4a1
+    try:
+        g2[41]
+    except IndexError:
+        g = open('savefile_' + un + '.txt', "w")
+        gtemp = ["lotto", 100]
+        g2.extend(gtemp)
+        g.write(str("_".join(str(y) for y in g2)).encode("hex"))
+        g.close()
+
+    return g2
 
 def read_game_data(username):
     filename = "savefile_" + username + ".txt"
