@@ -1,7 +1,6 @@
 from Tkinter import *
 from random import *
 from tkMessageBox import showerror
-from github import Github
 import math
 import save_and_load
 import game_model
@@ -125,74 +124,7 @@ def set_stats(state, clicksvar, timepassedvar, spentvar):
 
 
 def report():
-    gl = globals()
-    gl['t'] = Toplevel()  # global use
-    Label(master=gl['t'],
-          text="For in-game report to work, follow below instructions. To directly report, click bottom button") \
-        .grid(row=1, column=1)
-    Label(master=gl['t'],
-          text="Make sure you are a collaborator of Ways to not make money, and you don't have a fork", bg='yellow') \
-        .grid(row=2, column=1)
-    Label(master=gl['t'],
-          text='Please sign in to your Github account below. (Username first entry, passcode second)').grid(row=3,
-                                                                                                            column=1)
-    gl['une'] = Entry(master=gl['t'])
-    gl['une'].grid(row=4, column=1)
-    gl['pce'] = Entry(master=gl['t'], show="*")
-    gl['pce'].grid(row=5, column=1)
-    globals().update(gl)
-    Button(master=gl['t'], text='Verify', command=_verify_report).grid(row=6, column=1)
-    f = lambda: webbrowser.open("https://github.com/DerpfacePython/Ways-to-NOT-make-money/issues/new", new=0, autoraise=True)
-    Button(master=gl['t'], text='OR visit website', command=f).grid(row=7, column=1)
-
-
-def _verify_report():
-    gl = globals()
-    verified = False
-    try:
-        gl['user'] = Github(gl['une'].get(), gl['pce'].get())
-    except:
-        showerror('No username/passcode match, try again')
-    else:
-        for i in user.get_user().get_repos():
-            if i.name == 'Ways-to-NOT-make-money':
-                wtnmm = i
-        try:
-            wtnmm
-        except:
-            showerror('Not a collaborator')
-        else:
-            gl['t'].destroy()
-            gl['wtnmm'] = wtnmm
-            verified = True
-    globals().update(gl)
-    if verified:
-        _create_report()
-
-
-def _create_report():
-    gl = globals()
-    gl['t'] = Toplevel()
-    t = gl['t']
-    Label(t, text='Issue Title: ').grid(row=0, column=0)
-    gl['e'] = Entry(t)
-    gl['e'].grid(row=0, column=1)
-    Label(t, text='Issue Body: ').grid(row=1, column=0, columnspan=2)
-    gl['tx'] = Text(t, width=35, height=10)
-    gl['tx'].grid(row=2, column=0, columnspan=2)
-    globals().update(gl)
-    Button(t, text='Create Github Issue', command=_send_report).grid(row=3, column=0, rowspan=2)
-
-
-def _send_report():
-    gl = globals()
-    title = gl['e'].get()
-    body = gl['tx'].get(1.0, "end")
-    rep = gl['wtnmm']
-    rep.create_issue(title, body)
-    gl['t'].destroy()
-    globals().update(gl)
-
+    webbrowser.open("https://github.com/DerpfacePython/Ways-to-NOT-make-money/issues/new", new=0, autoraise=True)
 
 # BUG FIXER
 def bugfixer():
