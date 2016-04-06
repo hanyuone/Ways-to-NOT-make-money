@@ -1,0 +1,7 @@
+Zone 0: Passive, get your money quick here. (Lasts for 9min 59sec)
+Zone 1: Spiders, posionous spiders, and rare skeletons. Requires 100 points to pass.
+Zone 2: All from zone 1 and skeletons, zombies and rare "money traps" Requires 250 points ONLY FROM ZONE 2 to pass.
+Zone 3: All from zone 2 and various traps, witches and ghosts Requires 400 points to pass
+
+More zones to be added.
+Refer to mobs.txt for database
