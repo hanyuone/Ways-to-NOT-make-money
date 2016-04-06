@@ -1,0 +1,39 @@
+You, player
+  100 health.
+  
+  Attack methods:
+    Irostone sword deals 20 damage
+    Iron Sword deals 40 damage
+    Irodiamond Sword deals 80 damage
+    "Fire Stone" deals 5~200 damage
+  
+  Defense methods:
+    Sword Block absorbs 65%
+    Compressed Stick Bundle absorbs 20%
+    Compressed Stick Shield absorbs 31%
+    Stone Shield absorbs 49%
+    Irostone shield absorbs 52%
+    Iron Shield absorbs 57%
+    Irodiamond Shield absorbs 82%
+    Diamond Shield absorbs 91%
+    Diaconcrete Shield absorbs 99.89% (drawback: slowness effect)
+
+Spider
+  30 health
+  
+  Attack methods:
+    "Pounce" deals 15 damage
+  
+  Defense methods:
+    None
+
+Poison Spider
+  30 health
+  
+  Attack methods:
+    "Pounce" deals 21 damage
+    "Poison" deals 1 damage every second for 1 1/4 min (difficult to get away with...)
+  
+  Defense methods:
+    "Cobweb" absorbs 10% while giving player Slowness
+  
