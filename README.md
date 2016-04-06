@@ -7,9 +7,6 @@ If anyone can help me edit the game, please post an issue telling me to add you,
 
 Also, if you have downloaded this game and find any bugs, please post them to the 'issues' page (the exclamation mark on the right-hand side of the browser). Thanks!
 
-***IMPORTANT: This is a future branch. Download at your own risk, since there are many bugs. The master branch is approved.***
-
-
 NOTE: This game in the master and python3 branches currently requires the user to download Python to run. An executable file is in the ".exe version" branch! For the Python 3 version, visit python3 branch.
 
 END SIDE NOTE
