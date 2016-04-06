@@ -26,6 +26,8 @@ Spider
   
   Defense methods:
     None
+  
+  Points: 10
 
 Poison Spider
   30 health
@@ -37,3 +39,73 @@ Poison Spider
   Defense methods:
     "Cobweb" absorbs 10% while giving player Slowness
   
+  Points: 20
+  
+Skeleton "Living cacti"
+  50 health
+  
+  Attack method:
+    "Bone Toss" deals 10~70 damage
+  
+  Defense methods: None
+  
+  Points: 30
+
+Zombie "Punching machine"
+  50 health
+  
+  Attack method:
+    "Hit" deals 15 damage
+  
+  Defense method: None
+  
+  Points: 30
+
+Money Trap "Gobbler"
+  inf health
+  It can't move around.
+  
+  Attck methods:
+    "Gnaw" deals 20 damage and -2K money
+    "Suck" -100K money
+  
+  Defense: None
+  
+  Points: -
+
+Witch:
+  1K health
+  
+  Attack methods:
+    "Poison" deals 4 damage per second  until you get to next level
+    "Lightning" deals 98 damage
+    "Fire Burst" deals 600 damage
+    "Explosive Burst" deals 900M damage
+  
+  Defense:
+    "Fire Resistance" absorbs 100% of all fire-related attacks
+    "Lightning Resistance" absorbs 100% of all electricity-related attacks
+    "Projectile Resistance" absorbs 100% of all explosive-related attacks
+  
+  Points: 20M
+
+Dragon *:
+  10K health
+  
+  Attack methods:
+    "Lightning Bomb" deals 60G damage
+    "Fire Bomb" deals 124G damage
+    "Nuclear Bomb" deals 6 septillion damage
+  
+  Defense: None; attack covers it all.
+  
+  Points: 50G
+
+Ghost:
+  50 health
+  
+  Attack method: None
+  
+  Defense: Fly in the air
+  
+  Points: 100
