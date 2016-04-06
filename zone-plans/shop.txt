@@ -1,0 +1,15 @@
+Damage-dealing
+  Irostone sword $500
+  Iron sword $700
+  Irodiamond $1500
+  Fire Stone $1400
+
+damage-absorbing
+  Compressed Stick Bundle $100
+  Compressed Stick Shield $200
+  Stone Shield $ 300
+  Irostone shield $550
+  Iron Shield $750
+  Irodiamond Shield  $1550
+  Diamond Shield $2050
+  Diaconcrete Shield $ 4550
