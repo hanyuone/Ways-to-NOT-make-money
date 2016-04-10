@@ -4,6 +4,7 @@ from tkMessageBox import showerror
 import math
 import save_and_load
 import game_model
+import webbrowser
 
 master = Tk()
 master.title("Ways To NOT Earn Money")
