@@ -54,8 +54,6 @@ def signin():
             try:
                 g2 = save_and_load.read_game_data(username)
                 print 'g2', g2
-                g2 = save_and_load.auto_updater(g2, username)
-                print 'update', g2
             except IOError as ioe:
                 print ioe
             save_and_load.encode_and_save(username, g2)
