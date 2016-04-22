@@ -1,6 +1,6 @@
-from Tkinter import *
+from tkinter import *
 from random import *
-from tkMessageBox import showerror
+from tkinter.messagebox import showerror
 import math
 import save_and_load
 import game_model
@@ -24,9 +24,16 @@ username = ''
 
 game_state = None
 
+print('Debug [Y/N]: ', end='')
+debug = (input()[0].upper() == 'Y')
+
+def log(*args):
+    if debug:
+        print(*args)
 
 def savegame():
     global game_state
+    log('savegame invoked')
     data = ["auto", game_state.autoclick2, "print", game_state.printmoney2, "counter", game_state.counterfeit2,
             "shares", game_state.sharecrash2, "bank", game_state.bankheist2, "upg1h1", game_state.upgcheck1h1,
             "upg1h2", game_state.upgcheck1h2, "upg2h1", game_state.upgcheck2h1, "upg2h2", game_state.upgcheck2h2,
@@ -44,6 +51,7 @@ def savegame():
 
 def signin():
     global signincheck, game_state
+    log('signin invoked')
     signincheck += 1
 
     def verifysignin():
@@ -53,14 +61,12 @@ def signin():
             global g2, signinvalue
             try:
                 g2 = save_and_load.read_game_data(username)
-                print 'g2', g2
-                g2 = save_and_load.auto_updater(g2, username)
-                print 'update', g2
+                log('g2', g2)
             except IOError as ioe:
-                print ioe
+                log(ioe)
             save_and_load.encode_and_save(username, g2)
             game_state = game_model.GameState(g2)
-            print 'game_state', game_state
+            log('game_state', str(game_state))
             for i in [l, unentry, b1, b2]:
                 i.destroy()
 
@@ -71,15 +77,15 @@ def signin():
 
     def createaccount():
         global signinvalue, username, game_state, save_needed
-        print("Yes")
+        log("createaccount invoked")
         username = unentry.get()
         save_and_load.encode_and_save(username, data=None)
         try:
             g2 = save_and_load.read_game_data(username)
             game_state = game_model.GameState(g2)
-            print 'game_state', game_state
+            log('game_state', str(game_state))
         except IOError as ioe:
-            print ioe
+            log(ioe)
         signinvalue += 1
         save_needed = True
 
@@ -94,12 +100,14 @@ def signin():
 
 
 def set_stats(state, clicksvar, timepassedvar, spentvar):
-    clicksvar.set("Total clicks: %s" % state.get_total_clicks())
-    timepassedvar.set("Total time: %s" % state.get_timeplay())
+    log('set_stats  invoked')
+    clicksvar.set("Total clicks: %s" % state.totalclicks)
+    timepassedvar.set("Total time: %s" % state.timeplay)
     spentvar.set("Total money spent: %s" % state.get_totalspent())
 
 
 def report():
+    log('report invoked')
     webbrowser.open("https://github.com/DerpfacePython/Ways-to-NOT-make-money/issues/new", new=0, autoraise=True)
 
 
@@ -153,6 +161,7 @@ def bugfixer():
 # AUTO CLICKER
 def boostauto1h1():
     global game_state
+    log('ba1h1  invoked')
     if game_state.money < 5000 or game_state.autoclick2 == 0:
         global boostafford1h1
         boostbutton1h1.destroy()
@@ -187,6 +196,7 @@ def boostauto1h1():
 
 def norequirements1h1():
     global boostafford1h1, boostbutton1h1
+    log('nq1h1  invoked')
     boostafford1h1.destroy()
     boostbutton1h1 = Button(master, text="Stronger Mouses (Costs: $5000)", width=35, command=boostauto1h1)
     boostbutton1h1.grid(row=2 - game_state.clickupgcheck1, column=3, sticky=E)
@@ -194,6 +204,7 @@ def norequirements1h1():
 
 def boostauto1h2():
     global game_state
+    log('ba1h2  invoked')
     if game_state.money < 555555 or game_state.upgcheck1h1 == 0:
         global boostafford1h2
         boostbutton1h2.destroy()
@@ -223,6 +234,7 @@ def boostauto1h2():
 
 
 def norequirements1h2():
+    log('nq1h2 invoked')
     global boostbutton1h2, boostafford1h2
     boostafford1h2.destroy()
     boostbutton1h2 = Button(master, text="Experienced Clickers (Costs: $555555)", width=35,
@@ -232,6 +244,7 @@ def norequirements1h2():
 
 
 def deduction1():
+    log('deduction1 invoked')
     global game_state
     if game_state.money < int(game_state.autoprice):
         global incafford1
@@ -258,6 +271,7 @@ def deduction1():
 
 
 def cannotafford1():
+    log('ca1  invoked')
     global incafford1, incbutton1
     incafford1.destroy()
     incbutton1 = Button(master, textvariable=autopricetkinter, width=33, command=deduction1)
@@ -267,6 +281,7 @@ def cannotafford1():
 # MONEY PRINTER
 def boostauto2h1():
     global game_state
+    log('ba2h1 invoked')
     if game_state.money < 42000 or game_state.printmoney2 == 0:
         global boostafford2h1
         boostbutton2h1.destroy()
@@ -300,6 +315,7 @@ def boostauto2h1():
 
 def norequirements2h1():
     global boostbutton2h1, game_state
+    log('nq2h1 invoked')
     boostafford2h1.destroy()
     boostbutton2h1 = Button(master, text="Unofficial Printer License (Costs: $42000)", width=35,
                             command=boostauto2h1)
@@ -308,6 +324,7 @@ def norequirements2h1():
 
 def boostauto2h2():
     global game_state
+    log('ba2h2 invoked')
     if game_state.money < 7777777 or game_state.upgcheck2h1 == 0:
         global boostafford2h2
         boostbutton2h2.destroy()
@@ -334,6 +351,7 @@ def boostauto2h2():
 
 def norequirements2h2():
     global boostbutton2h2, game_state
+    log('nq2h2 invoked')
     boostafford2h2.destroy()
     boostbutton2h2 = Button(master, text="Printing Press (Costs: $7777777)", width=35, command=boostauto2h2)
     boostbutton2h2.grid(row=7 - (game_state.upgcheck1h1 + game_state.upgcheck1h2 + game_state.upgcheck2h1 +
@@ -343,6 +361,7 @@ def norequirements2h2():
 
 def deduction2():
     global game_state
+    log('deduction2  invoked')
 
     if game_state.money < game_state.printprice:
         global incafford2
@@ -369,6 +388,7 @@ def deduction2():
 
 def cannotafford2():
     global incafford2, incbutton2
+    log('ca2 invoked')
     incafford2.destroy()
     incbutton2 = Button(master, textvariable=printpricetkinter, width=33, command=deduction2)
     incbutton2.grid(row=3, column=0, sticky=W)
@@ -377,6 +397,7 @@ def cannotafford2():
 # COUNTERFEIT COMPANY
 def boostauto3():
     global game_state
+    log('ba3 invoked')
     if game_state.money < 2133748 or game_state.counterfeit2 == 0:
         global boostafford3
         boostbutton3.destroy()
@@ -405,6 +426,7 @@ def boostauto3():
 
 def norequirements3():
     global boostbutton3
+    log('nq3 invoked')
     boostafford3.destroy()
     boostbutton3 = Button(master, text="Skilled Fake Money Making (Costs: $2133748)", width=35,
                           command=boostauto3)
@@ -414,6 +436,7 @@ def norequirements3():
 
 def deduction3():
     global game_state
+    log('deduction3 invoked')
     if game_state.money < game_state.counterprice:
         global incafford3
         incbutton3.destroy()
@@ -439,6 +462,7 @@ def deduction3():
 
 def cannotafford3():
     global incafford3, incbutton3
+    log('ca3 invoked')
     incafford3.destroy()
     incbutton3 = Button(master, textvariable=counterpricetkinter, width=33, command=deduction3)
     incbutton3.grid(row=5, column=0, sticky=W)
@@ -447,6 +471,7 @@ def cannotafford3():
 # SHAREMARKET CRASH
 def boostauto4():
     global game_state
+    log('ba4 invoked')
     if game_state.money < 12345678 or game_state.sharecrash2 == 0:
         global boostafford4
         boostbutton4.destroy()
@@ -470,6 +495,7 @@ def boostauto4():
 
 def norequirements4():
     global boostbutton4, game_state
+    log('nq4 invoked')
     boostafford4.destroy()
     boostbutton4 = Button(master, text="Sharemarket Catastrophe (Costs: $12345678)", width=35,
                           command=boostauto4)
@@ -480,6 +506,7 @@ def norequirements4():
 
 def deduction4():
     global game_state
+    log('deduction4 invoked')
     if game_state.money < game_state.shareprice:
         global incafford4
         incbutton4.destroy()
@@ -505,6 +532,7 @@ def deduction4():
 
 def cannotafford4():
     global incafford4, incbutton4
+    log('ca4 invoked')
     incafford4.destroy()
     incbutton4 = Button(master, textvariable=bankpricetkinter, width=33, command=deduction4)
     incbutton4.grid(row=7, column=0, sticky=W)
@@ -513,6 +541,7 @@ def cannotafford4():
 # BANK HEIST
 def boostauto5():
     global game_state
+    log('ba5 invoked')
     if game_state.money < 12345678 or game_state.bankheist2 == 0:
         global boostafford5
         boostbutton5.destroy()
@@ -533,6 +562,7 @@ def boostauto5():
 
 def norequirements5():
     global boostbutton5, game_state
+    log('nq5 invoked')
     boostafford5.destroy()
     boostbutton5 = Button(master, text="Bank Blueprints ($91215000)", width=35, command=boostauto5)
     boostbutton5.grid(row=9 - (game_state.upgcheck1h1 + game_state.upgcheck1h2 + game_state.upgcheck2h1 +
@@ -542,6 +572,7 @@ def norequirements5():
 
 def deduction5():
     global game_state
+    log('deduction5 invoked')
     if game_state.money < game_state.bankprice:
         global incafford5
         incbutton5.destroy()
@@ -567,6 +598,7 @@ def deduction5():
 
 def cannotafford5():
     global incafford5, incbutton5
+    log('ca5 invoked')
     incafford5.destroy()
     incbutton5 = Button(master, textvariable=bankpricetkinter, width=33, command=deduction4)
     incbutton5.grid(row=9, column=0, sticky=W)
@@ -575,6 +607,7 @@ def cannotafford5():
 # CLICKS
 def collectmoney():
     global main_laid_out, game_state
+    log('collectmoney invoked')
 
     game_state.money += game_state.inc
 
@@ -589,10 +622,10 @@ def collectmoney():
 def format_price(pricevar):
     def add_decimal(price, d):
         price = str(price / 10 ** d)
-        return price[:-1] + '.' + price[-1]
+        return price[:-1]  #+ '.' + price[-1]
 
     if pricevar < 10 ** 6:
-        return '%s' % pricevar
+        return '%s' % round(pricevar, 1)
     elif pricevar < 10 ** 9:
         return '%sm' % add_decimal(pricevar, 5)
     elif pricevar < 10 ** 12:
@@ -627,6 +660,7 @@ def bankpricechoice():
 
 def clickboost1():
     global game_state
+    log('cb1 invoked')
     if game_state.money < 2100:
         global clickafford1
         clickbooster1.destroy()
@@ -661,6 +695,7 @@ def clickboost1():
 
 def norequirementsc1():
     global clickbooster1
+    log('nq1 invoked')
     clickafford1.destroy()
     clickbooster1 = Button(master, text="Reinforced Button (Costs: $2100)", width=35, command=clickboost1)
     clickbooster1.grid(row=1, column=3, sticky=E)
@@ -668,6 +703,7 @@ def norequirementsc1():
 
 def clickboost2():
     global game_state
+    log('cb2 invoked')
     if game_state.money < 200000 or not game_state.clickupgcheck1:
         global clickafford2
         clickbooster2.destroy()
@@ -699,6 +735,7 @@ def clickboost2():
 
 def norequirementsc2():
     global clickbooster2, game_state
+    log('nqc2 invoked')
     clickafford2.destroy()
     clickbooster2 = Button(master, text="Stainless Steel Button (Costs: $200000)", width=35, command=clickboost2)
     clickbooster2.grid(row=4 - (game_state.upgcheck1h1 + game_state.upgcheck2h1 + game_state.clickupgcheck1), column=3,
@@ -743,6 +780,7 @@ def auto_money_helper():
 
 # RESETTING GAME
 def resetgame():
+    log('resetgame invoked')
     toplevel = Toplevel()
     msg = Label(toplevel, text="Are you sure you want to reset?")
     msg.grid(row=0, column=0, columnspan=2)
@@ -1155,6 +1193,15 @@ def logout():
     del username
     del g2
 
+def initialize_vars():
+    args = ['incbutton1', 'incbutton2', 'incbutton3', 'incbutton4', 'incbutton5', 'upgrades', 'resetbutton', 'savebutton', 'clickbutton', \
+            'statsbutton', 'reportbutton', 'logoutbutton', 'moneylabel', 'lottobutton', 'save_needed', 'moneytkinter', 'mpstkinter', 'inctkinter', \
+            'multiplier', 'autopricetkinter', 'autoclicktkinter', 'autompstkinter', 'printpricetkinter', 'printmoneytkinter', 'printmpstkinter', \
+            'counterpricetkinter', 'counterfeittkinter', 'countermpstkinter', 'sharepricetkinter', 'sharecrashtkinter', 'sharempstkinter', \
+            'bankheisttkinter', 'bankpricetkinter', 'bankmpstkinter', 'multipliercheck', 'main_laid_out', 'data_loaded', 'game_state', 'lottoprice'
+]
+    for i in args:
+        globals()[i] = None
 
 def main_tick():
     global save_needed, moneytkinter, mpstkinter, inctkinter, multiplier, autopricetkinter, autoclicktkinter, \
@@ -1244,6 +1291,6 @@ def main_tick():
 
     master.after(1000, main_tick)
 
-
+initialize_vars()
 master.after(0, main_tick)
 master.mainloop()
