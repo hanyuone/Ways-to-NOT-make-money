@@ -1,207 +1,69 @@
 <!DOCTYPE html>
 <html>
+
   <head>
     <meta charset='utf-8'>
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <meta name="viewport" content="width=640">
+    <meta name="description" content="Ways to NOT make money : A basic Python (NOT Tcl) 2.7 Cookie-Clicker style (incremental) game.">
 
-    <link rel="stylesheet" href="stylesheets/core.css" media="screen">
-    <link rel="stylesheet" href="stylesheets/mobile.css" media="handheld, only screen and (max-device-width:640px)">
-    <link rel="stylesheet" href="stylesheets/github-light.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
 
-    <script type="text/javascript" src="javascripts/modernizr.js"></script>
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-    <script type="text/javascript" src="javascripts/headsmart.min.js"></script>
-    <script type="text/javascript">
-      $(document).ready(function () {
-        $('#main_content').headsmart()
-      })
-    </script>
-    <title>Ways-to-not-make-money by DerpfacePython</title>
+    <title>Ways to NOT make money</title>
   </head>
 
   <body>
-    <a id="forkme_banner" href="https://github.com/DerpfacePython/Ways-to-NOT-make-money">View on GitHub</a>
-    <div class="shell">
 
-      <header>
-        <span class="ribbon-outer">
-          <span class="ribbon-inner">
-            <h1>Ways-to-not-make-money</h1>
-            <h2>A basic Python (NOT Tcl) 2.7 Cookie-Clicker style (incremental) game.</h2>
-          </span>
-          <span class="left-tail"></span>
-          <span class="right-tail"></span>
-        </span>
-      </header>
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/DerpfacePython/Ways-to-NOT-make-money">View on GitHub</a>
 
-      <section id="downloads">
-        <span class="inner">
-          <a href="https://github.com/DerpfacePython/Ways-to-NOT-make-money/zipball/master" class="zip"><em>download</em> .ZIP</a><a href="https://github.com/DerpfacePython/Ways-to-NOT-make-money/tarball/master" class="tgz"><em>download</em> .TGZ</a>
-        </span>
-      </section>
+          <h1 id="project_title">Ways to NOT make money</h1>
+          <h2 id="project_tagline">A basic Python (NOT Tcl) 2.7 Cookie-Clicker style (incremental) game.</h2>
 
-
-      <span class="banner-fix"></span>
-
-
-      <section id="main_content">
-        <h1>
-<a id="ways-to-not-make-money" class="anchor" href="#ways-to-not-make-money" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Ways to NOT make money</h1>
-
-<h2>
-<a id="a-basic-python-279--python-351-cookie-clicker-style-incremental-game-if-anyone-can-help-me-edit-the-game-please-post-an-issue-telling-me-to-add-you-and-i-will-add-you-once-i-have-added-you-please-close-the-issue" class="anchor" href="#a-basic-python-279--python-351-cookie-clicker-style-incremental-game-if-anyone-can-help-me-edit-the-game-please-post-an-issue-telling-me-to-add-you-and-i-will-add-you-once-i-have-added-you-please-close-the-issue" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>A basic Python 2.7.9 / Python 3.5.1 Cookie-Clicker style (incremental) game. If anyone can help me edit the game, please post an issue telling me to add you, and I will add you (once I have added you, please close the issue)!</h2>
-
-<p><a href="https://github.com/DerpfacePython/Ways-to-NOT-make-money/archive/exe-version.zip" class="zip"><em>download</em> COMPRESSED GAME EXECUTABLE</a></p>
-
-<p>Also, if you have downloaded this game and find any bugs, please post them to the 'issues' page (the exclamation mark on the right-hand side of the browser). Thanks!</p>
-
-<p>NOTE: This game currently requires the user to download Python to run. An executable file will be posted sometime in the future!</p>
-
-<p>Line Amount: 1284 lines (and counting!)</p>
-
-<p>File Size: ~58KB (Game itself, photos take up an extra ~650KB, PyGithub ~18MB)</p>
-
-<p>Version: 0.6.3b2</p>
-
-<p>Changelog:</p>
-
-<pre><code>  0.6.3b2:
-        -Added in-game open browser for issue-reporting
-
-0.6.3:
-        -Updates are rolling in!
-        -Tweaked the savefile, so they don't constantly refresh
-        -Changed the setup of the 'issues' box
-        -IMPLEMENTED AUTOUPDATING for savefiles!
-
-0.6.2:
-        -EVEN MORE MAJOR OF AN UPDATE!
-        -Added multiplayer (you can play with your friends on the save device!)
-            -Changed the mechanics of savegame()
-        -Report issues in-game, you don't have to open web browser!
-
-0.6.1-alpha:
-        -MAJOR UPDATE!
-        -Improved the "cannot affords" and "no requirements", changing the sign to a label that appears in the same place instead of a pop-up window (because those are annoying).
-        -Added "million" things to prices (which is great!)
-
- 0.6.0-3:
-        -Added bells to "cannot affords" and "no requirements".
-        -Fixed more bugs (qlstudio edit this, I have no idea what else you fixed).
-
- 0.6.0-2:
-        -Fixed a variety of bugs (thanks qlstudio).
-            -Fixed the OverflowError for the buildings themselves
-            -Checked for conflict with all the "-illion"'s, no conflict (so far).
-
- 0.6.0-1:
-        -Further added to the "million", creating "billion" to "quintillion", which should delay the OverflowError further (most annoying error so far).
-        -Fixed the "million", and now there should be no conflict.
-
- 0.6.0:
-        -Implemented a "millions" thing, which should prevent (or at least delay) the OverflowError
-
- 0.5.3-3:
-        -Fixed two main bugs, the timevar and totalclicksvar bugs.
-
- 0.5.3-2:
-        -Fixed a variety of bugs. (HOORAY FOR BUG FIXING)
-
- 0.5.3-1:
-        -Fixed the savefile (YAY)
-        -Implemented an upgrades button
-        -Started on stats
-
- 0.5.2:
-        -Added a colour changed on click of +Money Button (Yes, it's addictive)
-        -Fixed Gold Button
-        -Fixed a bug in which more than one gold would make a sticky button. (Only allowed one gold to exsist at a time)
-        -Doubled Chance of finding Gold.
-        -Working on a Stats Menu.
-
- 0.5.1:
-        -Fixed the upgrades button (it makes the main screen wider instead of creating a new window)
-        -Starting work on background colours
-        -Still fixing gold button (the previous update was a lie)
-
- 0.5.0:
-        -Probably fixed gold button
-        -Added new upgrade for Money Printers (Costs $7,777,777)
-        -Made a new upgrades button (less crowding)
-
- 0.4.3:
-        -Shrunk the code down by 100+ lines
-        -Changed gold appearances to randint function
-        -Fixed a bug in which upgrades don't change MPS
-
- 0.4.2:
-        -Added gold button (increases balance by MPS*50)
-        -Fixed most of the bugs (PyCharm!)
-
- 0.4.1:
-        -Downloading images is no longer required (Thanks to Git Hub for Desktop)
-        -Simple animation added. (To be improved)
-        -Increased +Money Size (Easier for touchscreen users.
-        -Bugs fixed (Prior to this upadate)
-        -Made the change log easier to read. (Order Reversed)
-
- 0.4.0:
-        -Added new building, Sharemarket Crash (969 MPS, costs $42,000)
-        -Changed the names of the upgrades (less bland)
-        -Ironed out a LOT of the bugs
-        -Changed the code for upgrades AGAIN
-        -Added background
-
- 0.3.0:
-        -Added a new upgrade, Better Click Boost (Costs $200,000)
-        -Changed the code for upgrades
-
- 0.2.1 (not to be confused with 0.2-1): Fully fixed the savefile, and fixed bugs.
-
- 0.2-2: Partially fixed the savefile.
-
- 0.2-1*: Changed the save system so that it included an external savefile.
-
- 0.2.0*: Added a save system (which needs fixing!), and a new building: Counterfeit Company (321 MPS, costs $9,001).
-
- 0.1.3: Fixed a bug in which some labels and buttons don't update.
-
- 0.1.2: Added placeholders for the Tkinter window.
-
- 0.1.1: Changed from pack and grid to only grid, saving space and making the whole code work
-</code></pre>
-
-<p>Things to add in the future:</p>
-
-<pre><code>*New Upgrades
-    -Bank Robbery
-    -New Currency
-    -Fort Knox Heist
-*Make an .exe file of the game
-*Make imports
-*Add pictures
-*Make the game more interactive
-*Do some html stuff (i.e. make this game browser-based)
-*Automatic savefile converter?
-*Change upgrades (still way too inefficient)
-</code></pre>
-      </section>
-
-      <footer>
-        <span class="ribbon-outer">
-          <span class="ribbon-inner">
-            <p>this project by <a href="https://github.com/DerpfacePython">DerpfacePython</a> can be found on <a href="https://github.com/DerpfacePython/Ways-to-NOT-make-money">GitHub</a></p>
-          </span>
-          <span class="left-tail"></span>
-          <span class="right-tail"></span>
-        </span>
-        <p>Generated with <a href="https://pages.github.com">GitHub Pages</a> using Merlot</p>
-        <span class="octocat"></span>
-      </footer>
-
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/DerpfacePython/Ways-to-NOT-make-money/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/DerpfacePython/Ways-to-NOT-make-money/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
     </div>
 
-    
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>
+<a id="ways-to-not-make-money" class="anchor" href="#ways-to-not-make-money" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Ways-to-NOT-make-money</h1>
+
+<h3>
+<a id="a-basic-python-2x3x-cookie-clicker-style-incremental-game" class="anchor" href="#a-basic-python-2x3x-cookie-clicker-style-incremental-game" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>A basic Python 2.x/3.x Cookie-Clicker style (incremental) game.</h3>
+
+<p><a href="https://github.com/DerpfacePython/Ways-to-NOT-make-money/tree/qlstudio-patch-1/py2">py2 folder/version</a>
+<a href="https://github.com/DerpfacePython/Ways-to-NOT-make-money/tree/qlstudio-patch-1/py3">py3 folder/version</a></p>
+
+<p>Both are version 0.7.1<br>
+Master is for current stable release; for development version use <a href="https://github.com/DerpfacePython/Ways-to-NOT-make-money/tree/future">future branch</a>. In rare cases this branch is possible to be behind the master branch by several commits.</p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Ways to NOT make money maintained by <a href="https://github.com/DerpfacePython">DerpfacePython</a></p>
+        <p>Published with <a href="https://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-1635948-1");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+
   </body>
 </html>
