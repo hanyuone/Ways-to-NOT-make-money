@@ -534,7 +534,7 @@ def cannotafford4():
     global incafford4, incbutton4
     log('ca4 invoked')
     incafford4.destroy()
-    incbutton4 = Button(master, textvariable=bankpricetkinter, width=33, command=deduction4)
+    incbutton4 = Button(master, textvariable=sharempstkinter, width=33, command=deduction4)
     incbutton4.grid(row=7, column=0, sticky=W)
 
 
@@ -950,6 +950,8 @@ def hideupgrades():
 def animationthingy():
     global game_state
 
+    game_state.animate = game_state.animate % 3
+
     if game_state.animate == 0:
         animation1 = Label(master, image=Animation1)
         animation1.place(x=253, y=0)
@@ -962,8 +964,6 @@ def animationthingy():
         animation3 = Label(master, image=Animation3)
         animation3.place(x=253, y=0)
         animation3.image = Animation3
-    else:
-        game_state.animate -= 3
     clickcolour()
 
 
@@ -1151,39 +1151,44 @@ def lotto():
         master.bell()
         lottoafford = Label(master, text="%s" % cannotafford, width=35)
         lottoafford.grid(row=8, column=0, sticky=W)
-        master.after(500, lambda: eval('''lottoafford.destroy()
-lottobutton = Button(master, width=35, text="Lotto ($%s)" % (lottoprice)')
-lottobutton.grid(row=11, column=0, sticky=W)'''))
+
+        def update_lotto_afford(price):
+            lottoafford.destroy()
+            lottobutton = Button(master, width=35, text="Lotto ($%s)" % (price))
+            lottobutton.grid(row=11, column=0, sticky=W)
+
+        master.after(500, lambda: update_lotto_afford(game_state.lottoprice))
     else:
         global lottoprice
-        money = game_state.money - game_state.lottoprice
+        lp = game_state.lottoprice
+        money = game_state.money - lp
         game_state.lottoprice *= uniform(1.1, 5.1)
         prob = random()
         if prob < 0.5:
-            money += (lottoprice / 2.0)
+            money += (lp / 2.0)
         elif prob < 0.7:
-            money += (lottoprice / 1.5)
+            money += (lp / 1.5)
         elif prob < 0.8:
-            money += lottoprice
+            money += lp
         elif prob < 0.8625:
-            money += lottoprice * 1.5
+            money += lp * 1.5
         elif prob < 0.8825:
-            money += lottoprice * 2.5
+            money += lp * 2.5
         elif prob < 0.895:
-            money += lottoprice * 4
+            money += lp * 4
         elif prob < 0.896:
-            money += lottoprice * 10
+            money += lp * 10
         elif prob < 0.8965:
-            money += lottoprice * 40
+            money += lp * 40
         elif prob < 0.8967:
-            money += lottoprice * 250
+            money += lp * 250
         elif prob < 0.896875:
-            money += lottoprice * 1000
+            money += lp * 1000
         elif prob < 0.897:
-            money += lottoprice * 20000
+            money += lp * 20000
         else:
             money /= 2.0
-        lottoprice.set('Lotto ($' + str(round(game_state.lottoprice, 1)) + ')')
+        lottoprice.set('Lotto ($' + str(round(lp, 1)) + ')')
         game_state.money = money
 
 
