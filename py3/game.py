@@ -3,12 +3,14 @@ from random import *
 from tkinter.messagebox import showerror
 import math
 import save_and_load
+import frames
 import game_model
 import webbrowser
 import sys
 
 master = Tk()
 master.title("Ways To NOT Earn Money")
+
 img1 = PhotoImage(file="img1.gif")
 gold = PhotoImage(file="gold.gif")
 Animation1 = PhotoImage(file="Animation1.gif")
@@ -600,7 +602,7 @@ def cannotafford5():
     global incafford5, incbutton5
     log('ca5 invoked')
     incafford5.destroy()
-    incbutton5 = Button(master, textvariable=bankpricetkinter, width=33, command=deduction4)
+    incbutton5 = Button(master, textvariable=bankpricetkinter, width=33, command=deduction5)
     incbutton5.grid(row=9, column=0, sticky=W)
 
 
@@ -619,23 +621,24 @@ def collectmoney():
     main_laid_out = False
 
 
-def format_price(pricevar):
+def format_price(price):
 
-    def add_decimal(price, d):
-        return '%.3f' % (price / 10 ** d)
+    def add_decimal(p, d):
+        return '%.3f' % (p / 10 ** d)
 
-    if pricevar < 10 ** 6:
-        return '%.3f' % (pricevar)
-    elif pricevar < 10 ** 9:
-        return add_decimal(pricevar, 6) + 'm'
-    elif pricevar < 10 ** 12:
-        return add_decimal(pricevar, 9) + 'b'
-    elif pricevar < 10 ** 15:
-        return add_decimal(pricevar, 12) + 't'
-    elif pricevar < 10 ** 18:
-        return add_decimal(pricevar, 15) + 'q'
+    if price < 10 ** 6:
+        log('price', price, '%.3f' % (price))
+        return '%.3f' % (price)
+    elif price < 10 ** 9:
+        return add_decimal(price, 6) + 'm'
+    elif price < 10 ** 12:
+        return add_decimal(price, 9) + 'b'
+    elif price < 10 ** 15:
+        return add_decimal(price, 12) + 't'
+    elif price < 10 ** 18:
+        return add_decimal(price, 15) + 'q'
     else:
-        return add_decimal(pricevar, 18) + 'Q'
+        return add_decimal(price, 18) + 'Q'
 
 
 def autopricechoice():
@@ -844,47 +847,59 @@ def showupgrades():
 
     global clickbooster1, boostbutton1h1, boostbutton2h1, clickbooster2, boostbutton1h2, boostbutton3, \
         boostbutton2h2, boostbutton4, boostbutton5, exitupgrades
+
     upgrades.destroy()
+
     if game_state.clickupgcheck1 == 0:
         clickbooster1 = Button(master, text="Reinforced Button (Costs: $2100)", width=35, command=clickboost1)
         clickbooster1.grid(row=1, column=3, sticky=E)
+
     if game_state.upgcheck1h1 == 0:
         boostbutton1h1 = Button(master, text="Stronger Mouses (Costs: $5000)", width=35, command=boostauto1h1)
         boostbutton1h1.grid(row=2 - game_state.clickupgcheck1, column=3, sticky=E)
+
     if game_state.upgcheck2h1 == 0:
         boostbutton2h1 = Button(master, text="Unofficial Printer License (Costs: $42000)", width=35,
                                 command=boostauto2h1)
         boostbutton2h1.grid(row=3 - (game_state.upgcheck1h1 + game_state.clickupgcheck1), column=3, sticky=E)
+
     if game_state.clickupgcheck2 == 0:
         clickbooster2 = Button(master, text="Stainless Steel Button (Costs: $200000)", width=35, command=clickboost2)
         clickbooster2.grid(row=4 - (game_state.upgcheck1h1 + game_state.upgcheck2h1 + game_state.clickupgcheck1),
                            column=3, sticky=E)
+
     if game_state.upgcheck1h2 == 0:
         boostbutton1h2 = Button(master, text="Experienced Clickers (Costs: $555555)", width=35, command=boostauto1h2)
         boostbutton1h2.grid(row=5 - (game_state.upgcheck1h1 + game_state.upgcheck2h1 + game_state.clickupgcheck1 +
                                      game_state.clickupgcheck2), column=3, sticky=E)
+
     if game_state.upgcheck3 == 0:
         boostbutton3 = Button(master, text="Skilled Fake Money Making (Costs: $2133748)", width=35,
                               command=boostauto3)
         boostbutton3.grid(row=6 - (game_state.upgcheck1h1 + game_state.upgcheck1h2 + game_state.upgcheck2h1 +
                                    game_state.clickupgcheck1 + game_state.clickupgcheck2), column=3, sticky=E)
+
     if game_state.upgcheck2h2 == 0:
         boostbutton2h2 = Button(master, text="Printing Press (Costs: $7777777)", width=35, command=boostauto2h2)
         boostbutton2h2.grid(row=7 - (game_state.upgcheck1h1 + game_state.upgcheck1h2 + game_state.upgcheck2h1 +
                                      game_state.upgcheck3 + game_state.clickupgcheck1 + game_state.clickupgcheck2),
                             column=3, sticky=E)
+
     if game_state.upgcheck4 == 0:
         boostbutton4 = Button(master, text="Sharemarket Catastrophe (Costs: $12345678)", width=35,
                               command=boostauto4)
         boostbutton4.grid(row=8 - (game_state.upgcheck1h1 + game_state.upgcheck1h2 + game_state.upgcheck2h1 +
                                    game_state.upgcheck2h2 + game_state.upgcheck3 + game_state.clickupgcheck1 +
                                    game_state.clickupgcheck2), column=3, sticky=E)
+
     if game_state.upgcheck5 == 0:
         boostbutton5 = Button(master, text="Bank Blueprints (Costs: $91215000)", width=35, command=boostauto5)
         boostbutton5.grid(row=9 - (game_state.upgcheck1h1 + game_state.upgcheck1h2 + game_state.upgcheck2h1 +
                                    game_state.upgcheck2h2 + game_state.upgcheck3 + game_state.upgcheck4 +
                                    game_state.clickupgcheck1 + game_state.clickupgcheck2), column=3, sticky=E)
+
     exitupgrades = Button(master, text="Hide Upgrades", command=hideupgrades)
+
     if game_state.statscheck:
         global hidestatsbutton
         exitupgrades.grid(row=11, column=3, sticky=E)
@@ -1061,6 +1076,7 @@ def main():
     # BUTTONS, LABELS AND ENTRIES
     global incbutton1, incbutton2, incbutton3, incbutton4, incbutton5, upgrades, resetbutton, savebutton, clickbutton, \
         statsbutton, reportbutton, logoutbutton, moneylabel, lottobutton
+
     background = Label(master, image=img1)
     background.place(x=0, y=0, relwidth=1, relheight=1)
     background.image = img1
