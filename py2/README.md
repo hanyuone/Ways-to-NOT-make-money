@@ -20,7 +20,7 @@ Version: 0.7.1
 Things to add in the future:
 
     *New Upgrades
-        -Bank Robbery
+        -Bank Robbery - DONE in V0.7.0!
         -New Currency
         -Fort Knox Heist
     *Make a game server (Play on any device)
@@ -29,7 +29,7 @@ Things to add in the future:
     *Make the game more interactive
     *Do some html stuff (i.e. make this game browser-based)
     *Automatic savefile converter? - DONE!
-    *Change upgrades (still way too inefficient)
+    *Change upgrades (still way too inefficient) - DONE!
     *Add Progressbar (See #26)
     
     
@@ -41,8 +41,8 @@ Visual Fixs:
           Stopping deforamation of program
           More Animations
           Removing all ugly default grey.
-          Remove crapping moving money animation. (R.I.P 2 hours)
-          Make a Notification Box that contains notifications like: Not Enough Money! & other simple notifications. (This Will be inplace of the Moving money animation.
+          Remove crapping moving money animation. (R.I.P 2 hours) - DONE in V0.7.2!
+          Make a Notification Box that contains notifications like: Not Enough Money! & other simple notifications. (This Will be inplace of the Moving money animation. - DONE in V0.7.2!
           
      Bug test marathon & Management of user bug testing. (Support Email?)
      
