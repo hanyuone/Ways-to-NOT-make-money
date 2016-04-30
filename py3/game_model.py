@@ -50,7 +50,10 @@ class GameState:
         self.bankheist = self.bankheist2 * 2 * self.upgcheck4 + self.bankheist2
         self.bankprice = int(175000 * math.pow(1.1, self.bankheist2))
 
-        self.lottoprice = int(self.data[35])
+        if len(self.data) > 35:
+            self.lottoprice = int(self.data[35])
+        else:
+            self.lottoprice = 0
 
         self.mps = self.autoclick2 + 15 * self.printmoney2 + 321 * self.counterfeit2 + 969 * self.sharecrash2
         self.inc = 1 + self.clickupgcheck1 * 2 + self.clickupgcheck2 * self.mps / 10
