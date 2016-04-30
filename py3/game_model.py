@@ -23,10 +23,14 @@ class GameState:
         self.clickupgcheck1 = int(self.data[25])
         self.clickupgcheck2 = int(self.data[27])
 
+        self.money = float(self.data[29])
+
         self.timeplay = int(self.data[31])
         self.totalclicks = int(self.data[33])
-
-        self.money = float(self.data[29])
+        if len(self.data) > 35:
+            self.lottoprice = int(self.data[35])
+        else:
+            self.lottoprice = 0
 
         self.autoclick2 = int(self.data[1])
         self.autoclick = self.autoclick2 * 18 * self.upgcheck1h2 + self.autoclick2 * 2 * self.upgcheck1h1 + \
@@ -50,10 +54,7 @@ class GameState:
         self.bankheist = self.bankheist2 * 2 * self.upgcheck4 + self.bankheist2
         self.bankprice = int(175000 * math.pow(1.1, self.bankheist2))
 
-        if len(self.data) > 35:
-            self.lottoprice = int(self.data[35])
-        else:
-            self.lottoprice = 0
+        # self.data[9] unused
 
         self.mps = self.autoclick2 + 15 * self.printmoney2 + 321 * self.counterfeit2 + 969 * self.sharecrash2
         self.inc = 1 + self.clickupgcheck1 * 2 + self.clickupgcheck2 * self.mps / 10

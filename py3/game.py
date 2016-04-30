@@ -5,6 +5,7 @@ import math
 import save_and_load
 import game_model
 import webbrowser
+import sys
 
 master = Tk()
 master.title("Ways To NOT Earn Money")
@@ -24,8 +25,7 @@ username = ''
 
 game_state = None
 
-print('Debug [Y/N]: ', end='')
-debug = (input()[0].upper() == 'Y')
+debug = 'debug' in sys.argv
 
 def log(*args):
     if debug:
@@ -620,22 +620,22 @@ def collectmoney():
 
 
 def format_price(pricevar):
+
     def add_decimal(price, d):
-        price = str(price / 10 ** d)
-        return price[:-1]  #+ '.' + price[-1]
+        return '%.3f' % (price / 10 ** d)
 
     if pricevar < 10 ** 6:
-        return '%s' % round(pricevar, 1)
+        return '%.3f' % (pricevar)
     elif pricevar < 10 ** 9:
-        return '%sm' % add_decimal(pricevar, 5)
+        return add_decimal(pricevar, 6) + 'm'
     elif pricevar < 10 ** 12:
-        return '%sb' % add_decimal(pricevar, 8)
+        return add_decimal(pricevar, 9) + 'b'
     elif pricevar < 10 ** 15:
-        return '%st' % add_decimal(pricevar, 11)
+        return add_decimal(pricevar, 12) + 't'
     elif pricevar < 10 ** 18:
-        return '%sq' % add_decimal(pricevar, 14)
+        return add_decimal(pricevar, 15) + 'q'
     else:
-        return '%sQ' % add_decimal(pricevar, 17)
+        return add_decimal(pricevar, 18) + 'Q'
 
 
 def autopricechoice():
