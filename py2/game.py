@@ -31,7 +31,7 @@ debug = 'debug' in sys.argv
 
 def log(*args):
     if debug:
-        print(*args)
+        print(args)
 
 def savegame():
     global game_state
