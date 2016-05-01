@@ -29,21 +29,22 @@ class GameFrame(Frame):
 
 
 class ButtonFrame(Frame):
-    def __init__(self, master, name_action_list):
+    def __init__(self, master, name_action_list, callback):
         Frame.__init__(self, master)
         self.grid()
 
         self.buttons = {}
 
         row = 0
-        for (name, cmd) in name_action_list:
+        for ls in name_action_list:
+            name = ls[0]
 
-            def make_callback(s, n, c):
-                b = Button(self, text=name, command=lambda: c(s, n))
+            def make_callback(s, ls):
+                b = Button(self, text=name, command=lambda: callback(self, ls))
                 b.grid(row=row, column=0, sticky=W+E+N+S)
                 self.buttons[name] = b
 
-            make_callback(self, name, cmd)
+            make_callback(self, ls)
             row += 1
 
     def hide(self, name):
