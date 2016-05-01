@@ -4,6 +4,7 @@ import math
 class GameState:
     def __init__(self, data=None):
         self.data = [] if data is None else data
+        print('GameState got data:', self.data)
 
         self.check = 0
         self.upgbuttoncheck = False

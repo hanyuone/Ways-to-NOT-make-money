@@ -35,7 +35,6 @@ def log(*args):
 
 def savegame():
     global game_state
-    log('savegame invoked')
     data = ["auto", game_state.autoclick2, "print", game_state.printmoney2, "counter", game_state.counterfeit2,
             "shares", game_state.sharecrash2, "bank", game_state.bankheist2, "upg1h1", game_state.upgcheck1h1,
             "upg1h2", game_state.upgcheck1h2, "upg2h1", game_state.upgcheck2h1, "upg2h2", game_state.upgcheck2h2,
@@ -43,7 +42,9 @@ def savegame():
             "cupg1", game_state.clickupgcheck1, "cupg2", game_state.clickupgcheck2, "money",
             float(str(game_state.money)[-8:]), "time", game_state.timeplay, "clicks",
             game_state.totalclicks, "lotto", game_state.lottoprice]
+    log('savegame invoked', data)
 
+    log('savegame function')
     save_and_load.encode_and_save(username, data)
 
     toplevel = Toplevel()
@@ -66,7 +67,10 @@ def signin():
                 log('g2', g2)
             except IOError as ioe:
                 log(ioe)
+
+            log('verifysignin function')
             save_and_load.encode_and_save(username, g2)
+
             game_state = game_model.GameState(g2)
             log('game_state', str(game_state))
             for i in [l, unentry, b1, b2]:
@@ -81,7 +85,10 @@ def signin():
         global signinvalue, username, game_state, save_needed
         log("createaccount invoked")
         username = unentry.get()
+
+        log('createaccount function')
         save_and_load.encode_and_save(username, data=None)
+
         try:
             g2 = save_and_load.read_game_data(username)
             game_state = game_model.GameState(g2)
@@ -95,6 +102,7 @@ def signin():
     l.grid(row=1, column=1)
     unentry = Entry(master, show='')
     unentry.grid(row=2, column=1)
+    unentry.focus()
     b1 = Button(master, text='Log in', command=verifysignin)
     b1.grid(row=3, column=1)
     b2 = Button(master, text='Create account under username', command=createaccount)
@@ -102,7 +110,6 @@ def signin():
 
 
 def set_stats(state, clicksvar, timepassedvar, spentvar):
-    log('set_stats  invoked')
     clicksvar.set("Total clicks: %s" % state.totalclicks)
     timepassedvar.set("Total time: %s" % state.timeplay)
     spentvar.set("Total money spent: %s" % state.get_totalspent())
@@ -160,89 +167,65 @@ def bugfixer():
             continue
 
 
+def clickboost1(button_frame, button_name):
+    global game_state
+    log('cb1 invoked')
+    if game_state.money < 2100:
+        log('actual money', game_state.money)
+        master.bell()
+        status_var.set(norequirements)
+    else:
+        game_state.money -= 2100
+        game_state.inc += 2
+        inctkinter.set("+%s money!" % game_state.inc)
+        log('new money', game_state.money)
+        game_state.clickupgcheck1 += 1
+        button_frame.hide(button_name)
+
+
+def clickboost2(button_frame, button_name):
+    global game_state
+    log('cb2 invoked')
+    if game_state.money < 200000 or not game_state.clickupgcheck1:
+        master.bell()
+        status_var.set(norequirements)
+    else:
+        game_state.money -= 200000
+        game_state.inc += game_state.mps / 10
+        inctkinter.set("+%s money!" % game_state.inc)
+        game_state.clickupgcheck2 += 1
+        button_frame.hide(button_name)
+
+
 # AUTO CLICKER
-def boostauto1h1():
+def boostauto1h1(button_frame, button_name):
     global game_state
     log('ba1h1  invoked')
     if game_state.money < 5000 or game_state.autoclick2 == 0:
-        global boostafford1h1
-        boostbutton1h1.destroy()
         master.bell()
-        boostafford1h1 = Label(master, text="%s" % norequirements, width=35)
-        boostafford1h1.grid(row=2 - game_state.clickupgcheck1, column=3, sticky=E)
-        master.after(500, norequirements1h1)
+        status_var.set(norequirements)
     else:
         game_state.money -= 5000
         game_state.autoclick = float(game_state.autoclick * 15) / 10
         game_state.upgcheck1h1 += 1
         game_state.mps += float(game_state.autoclick2) * 1.5
         mpstkinter.set("MPS: %s" % game_state.mps)
-        boostbutton1h1.destroy()
-        boostbutton2h1.grid(row=3 - (game_state.upgcheck1h1 + game_state.clickupgcheck1), column=3, sticky=E)
-        clickbooster2.grid(row=4 - (game_state.upgcheck1h1 + game_state.upgcheck2h1 + game_state.clickupgcheck1),
-                           column=3, sticky=E)
-        boostbutton1h2.grid(row=5 - (game_state.upgcheck1h1 + game_state.upgcheck2h1 + game_state.clickupgcheck1 +
-                                     game_state.clickupgcheck2), column=3, sticky=E)
-        boostbutton3.grid(row=6 - (game_state.upgcheck1h1 + game_state.upgcheck1h2 + game_state.upgcheck2h1 +
-                                   game_state.clickupgcheck1 + game_state.clickupgcheck2), column=3, sticky=E)
-        boostbutton2h2.grid(row=7 - (game_state.upgcheck1h1 + game_state.upgcheck1h2 + game_state.upgcheck2h1 +
-                                     game_state.upgcheck3 + game_state.clickupgcheck1 + game_state.clickupgcheck2),
-                            column=3, sticky=E)
-        boostbutton4.grid(row=8 - (game_state.upgcheck1h1 + game_state.upgcheck1h2 + game_state.upgcheck2h1 +
-                                   game_state.upgcheck2h2 + game_state.upgcheck3 + game_state.clickupgcheck1 +
-                                   game_state.clickupgcheck2), column=3, sticky=E)
-        boostbutton5.grid(row=9 - (game_state.upgcheck1h1 + game_state.upgcheck1h2 + game_state.upgcheck2h1 +
-                                   game_state.upgcheck2h2 + game_state.upgcheck3 + game_state.upgcheck4 +
-                                   game_state.clickupgcheck1 + game_state.clickupgcheck2), column=3, sticky=E)
+        button_frame.hide(button_name)
 
 
-def norequirements1h1():
-    global boostafford1h1, boostbutton1h1
-    log('nq1h1  invoked')
-    boostafford1h1.destroy()
-    boostbutton1h1 = Button(master, text="Stronger Mouses (Costs: $5000)", width=35, command=boostauto1h1)
-    boostbutton1h1.grid(row=2 - game_state.clickupgcheck1, column=3, sticky=E)
-
-
-def boostauto1h2():
+def boostauto1h2(button_frame, button_name):
     global game_state
     log('ba1h2  invoked')
     if game_state.money < 555555 or game_state.upgcheck1h1 == 0:
-        global boostafford1h2
-        boostbutton1h2.destroy()
         master.bell()
-        boostafford1h2 = Label(master, text="%s" % norequirements, width=35)
-        boostafford1h2.grid(row=5 - (game_state.upgcheck1h1 + game_state.upgcheck2h1 + game_state.clickupgcheck1 +
-                                     game_state.clickupgcheck2), column=3, sticky=E)
-        master.after(500, norequirements1h2)
+        status_var.set(norequirements)
     else:
         game_state.money -= 555555
         game_state.autoclick = float(game_state.autoclick * 50) / 10
         game_state.upgcheck1h2 += 1
         game_state.mps += float(game_state.autoclick2) * 6
         mpstkinter.set("MPS: %s" % game_state.mps)
-        boostbutton1h2.destroy()
-        boostbutton3.grid(row=6 - (game_state.upgcheck1h1 + game_state.upgcheck1h2 + game_state.upgcheck2h1 +
-                                   game_state.clickupgcheck1 + game_state.clickupgcheck2), column=3, sticky=E)
-        boostbutton2h2.grid(row=7 - (game_state.upgcheck1h1 + game_state.upgcheck1h2 + game_state.upgcheck2h1 +
-                                     game_state.upgcheck3 + game_state.upgcheck4 + game_state.clickupgcheck1 +
-                                     game_state.clickupgcheck2), column=3, sticky=E)
-        boostbutton4.grid(row=8 - (game_state.upgcheck1h1 + game_state.upgcheck1h2 + game_state.upgcheck2h1 +
-                                   game_state.upgcheck2h2 + game_state.upgcheck3 + game_state.clickupgcheck1 +
-                                   game_state.clickupgcheck2), column=3, sticky=E)
-        boostbutton5.grid(row=9 - (game_state.upgcheck1h1 + game_state.upgcheck1h2 + game_state.upgcheck2h1 +
-                                   game_state.upgcheck2h2 + game_state.upgcheck3 + game_state.upgcheck4 +
-                                   game_state.clickupgcheck1 + game_state.clickupgcheck2), column=3, sticky=E)
-
-
-def norequirements1h2():
-    log('nq1h2 invoked')
-    global boostbutton1h2, boostafford1h2
-    boostafford1h2.destroy()
-    boostbutton1h2 = Button(master, text="Experienced Clickers (Costs: $555555)", width=35,
-                            command=boostauto1h2)
-    boostbutton1h2.grid(row=5 - (game_state.upgcheck1h1 + game_state.upgcheck2h1 + game_state.clickupgcheck1 +
-                                 game_state.clickupgcheck2), column=3, sticky=E)
+        button_frame.hide(button_name)
 
 
 def deduction1():
@@ -281,84 +264,34 @@ def cannotafford1():
 
 
 # MONEY PRINTER
-def boostauto2h1():
+def boostauto2h1(button_frame, button_name):
     global game_state
     log('ba2h1 invoked')
     if game_state.money < 42000 or game_state.printmoney2 == 0:
-        global boostafford2h1
-        boostbutton2h1.destroy()
         master.bell()
-        boostafford2h1 = Label(master, text="%s" % norequirements, width=35)
-        boostafford2h1.grid(row=3 - (game_state.upgcheck1h1 + game_state.clickupgcheck1), column=3, sticky=E)
-        master.after(500, norequirements2h1)
+        status_var.set(norequirements)
     else:
         game_state.money -= 42000
         game_state.printmoney = float(game_state.printmoney * 15) / 10
         game_state.upgcheck2h1 += 1
         game_state.mps += float(game_state.printmoney2) * 1.5
         mpstkinter.set("MPS: %s" % game_state.mps)
-        boostbutton2h1.destroy()
-        clickbooster2.grid(row=4 - (game_state.upgcheck1h1 + game_state.upgcheck2h1 + game_state.clickupgcheck1),
-                           column=3, sticky=E)
-        boostbutton1h2.grid(row=5 - (game_state.upgcheck1h1 + game_state.upgcheck2h1 + game_state.clickupgcheck1 +
-                                     game_state.clickupgcheck2), column=3, sticky=E)
-        boostbutton3.grid(row=6 - (game_state.upgcheck1h1 + game_state.upgcheck1h2 + game_state.upgcheck2h1 +
-                                   game_state.clickupgcheck1 + game_state.clickupgcheck2), column=3, sticky=E)
-        boostbutton2h2.grid(row=7 - (game_state.upgcheck1h1 + game_state.upgcheck1h2 + game_state.upgcheck2h1 +
-                                     game_state.upgcheck3 + game_state.clickupgcheck1 + game_state.clickupgcheck2),
-                            column=3, sticky=E)
-        boostbutton4.grid(row=8 - (game_state.upgcheck1h1 + game_state.upgcheck1h2 + game_state.upgcheck2h1 +
-                                   game_state.upgcheck2h2 + game_state.upgcheck3 + game_state.clickupgcheck1 +
-                                   game_state.clickupgcheck2), column=3, sticky=E)
-        boostbutton5.grid(row=9 - (game_state.upgcheck1h1 + game_state.upgcheck1h2 + game_state.upgcheck2h1 +
-                                   game_state.upgcheck2h2 + game_state.upgcheck3 + game_state.upgcheck4 +
-                                   game_state.clickupgcheck1 + game_state.clickupgcheck2), column=3, sticky=E)
+        button_frame.hide(button_name)
 
 
-def norequirements2h1():
-    global boostbutton2h1, game_state
-    log('nq2h1 invoked')
-    boostafford2h1.destroy()
-    boostbutton2h1 = Button(master, text="Unofficial Printer License (Costs: $42000)", width=35,
-                            command=boostauto2h1)
-    boostbutton2h1.grid(row=3 - (game_state.upgcheck1h1 + game_state.clickupgcheck1), column=3, sticky=E)
-
-
-def boostauto2h2():
+def boostauto2h2(button_frame, button_name):
     global game_state
     log('ba2h2 invoked')
     if game_state.money < 7777777 or game_state.upgcheck2h1 == 0:
-        global boostafford2h2
-        boostbutton2h2.destroy()
         master.bell()
-        boostafford2h2 = Label(master, text="%s" % norequirements, width=35)
-        boostafford2h2.grid(row=7 - (game_state.upgcheck1h1 + game_state.upgcheck1h2 + game_state.upgcheck2h1 +
-                                     game_state.upgcheck3 + game_state.clickupgcheck1 + game_state.clickupgcheck2),
-                            column=3, sticky=E)
-        master.after(500, norequirements2h2)
+        status_var.set(norequirements)
     else:
         game_state.money -= 7777777
         game_state.printmoney = int(float(game_state.printmoney * 50) / 10)
         game_state.upgcheck2h2 += 1
         game_state.mps += float(game_state.printmoney2) * 6
         mpstkinter.set("MPS: %s" % game_state.mps)
-        boostbutton2h2.destroy()
-        boostbutton4.grid(row=8 - (game_state.upgcheck1h1 + game_state.upgcheck1h2 + game_state.upgcheck2h1 +
-                                   game_state.upgcheck2h2 + game_state.upgcheck3 + game_state.clickupgcheck1 +
-                                   game_state.clickupgcheck2), column=3, sticky=E)
-        boostbutton5.grid(row=9 - (game_state.upgcheck1h1 + game_state.upgcheck1h2 + game_state.upgcheck2h1 +
-                                   game_state.upgcheck2h2 + game_state.upgcheck3 + game_state.upgcheck4 +
-                                   game_state.clickupgcheck1 + game_state.clickupgcheck2), column=3, sticky=E)
-
-
-def norequirements2h2():
-    global boostbutton2h2, game_state
-    log('nq2h2 invoked')
-    boostafford2h2.destroy()
-    boostbutton2h2 = Button(master, text="Printing Press (Costs: $7777777)", width=35, command=boostauto2h2)
-    boostbutton2h2.grid(row=7 - (game_state.upgcheck1h1 + game_state.upgcheck1h2 + game_state.upgcheck2h1 +
-                                 game_state.upgcheck3 + game_state.clickupgcheck1 + game_state.clickupgcheck2),
-                        column=3, sticky=E)
+        button_frame.hide(button_name)
 
 
 def deduction2():
@@ -397,43 +330,19 @@ def cannotafford2():
 
 
 # COUNTERFEIT COMPANY
-def boostauto3():
+def boostauto3(button_frame, button_name):
     global game_state
     log('ba3 invoked')
     if game_state.money < 2133748 or game_state.counterfeit2 == 0:
-        global boostafford3
-        boostbutton3.destroy()
         master.bell()
-        boostafford3 = Label(master, text="%s" % norequirements, width=35)
-        boostafford3.grid(row=6 - (game_state.upgcheck1h1 + game_state.upgcheck1h2 + game_state.upgcheck2h1 +
-                                   game_state.clickupgcheck1 + game_state.clickupgcheck2), column=3, sticky=E)
-        master.after(500, norequirements3)
+        status_var.set(norequirements)
     else:
         game_state.money -= 2133748
         game_state.counterfeit = int(float(game_state.counterfeit * 15) / 10)
         game_state.mps += float(game_state.counterfeit2) * 1.5
         mpstkinter.set("MPS: %s" % game_state.mps)
         game_state.upgcheck3 += 1
-        boostbutton3.destroy()
-        boostbutton2h2.grid(row=7 - (game_state.upgcheck1h1 + game_state.upgcheck1h2 + game_state.upgcheck2h1 +
-                                     game_state.upgcheck3 + game_state.clickupgcheck1 + game_state.clickupgcheck2),
-                            column=3, sticky=E)
-        boostbutton4.grid(row=8 - (game_state.upgcheck1h1 + game_state.upgcheck1h2 + game_state.upgcheck2h1 +
-                                   game_state.upgcheck2h2 + game_state.upgcheck3 + game_state.clickupgcheck1 +
-                                   game_state.clickupgcheck2), column=3, sticky=E)
-        boostbutton5.grid(row=9 - (game_state.upgcheck1h1 + game_state.upgcheck1h2 + game_state.upgcheck2h1 +
-                                   game_state.upgcheck2h2 + game_state.upgcheck3 + game_state.upgcheck4 +
-                                   game_state.clickupgcheck1 + game_state.clickupgcheck2), column=3, sticky=E)
-
-
-def norequirements3():
-    global boostbutton3
-    log('nq3 invoked')
-    boostafford3.destroy()
-    boostbutton3 = Button(master, text="Skilled Fake Money Making (Costs: $2133748)", width=35,
-                          command=boostauto3)
-    boostbutton3.grid(row=6 - (game_state.upgcheck1h1 + game_state.upgcheck1h2 + game_state.upgcheck2h1 +
-                               game_state.clickupgcheck1 + game_state.clickupgcheck2), column=3, sticky=E)
+        button_frame.hide(button_name)
 
 
 def deduction3():
@@ -471,39 +380,19 @@ def cannotafford3():
 
 
 # SHAREMARKET CRASH
-def boostauto4():
+def boostauto4(button_frame, button_name):
     global game_state
     log('ba4 invoked')
     if game_state.money < 12345678 or game_state.sharecrash2 == 0:
-        global boostafford4
-        boostbutton4.destroy()
         master.bell()
-        boostafford4 = Label(master, text="%s" % norequirements, width=35)
-        boostafford4.grid(row=8 - (game_state.upgcheck1h1 + game_state.upgcheck1h2 + game_state.upgcheck2h1 +
-                                   game_state.upgcheck2h2 + game_state.upgcheck3 + game_state.clickupgcheck1 +
-                                   game_state.clickupgcheck2), column=3, sticky=E)
-        master.after(500, norequirements4)
+        status_var.set(norequirements)
     else:
         game_state.money -= 12345678
         game_state.sharecrash = int(float(game_state.sharecrash * 15) / 10)
         game_state.mps += float(game_state.sharecrash2) * 1.5
         mpstkinter.set("MPS: %s" % game_state.mps)
         game_state.upgcheck4 += 1
-        boostbutton4.destroy()
-        boostbutton5.grid(row=9 - (game_state.upgcheck1h1 + game_state.upgcheck1h2 + game_state.upgcheck2h1 +
-                                   game_state.upgcheck2h2 + game_state.upgcheck3 + game_state.upgcheck4 +
-                                   game_state.clickupgcheck1 + game_state.clickupgcheck2), column=3, sticky=E)
-
-
-def norequirements4():
-    global boostbutton4, game_state
-    log('nq4 invoked')
-    boostafford4.destroy()
-    boostbutton4 = Button(master, text="Sharemarket Catastrophe (Costs: $12345678)", width=35,
-                          command=boostauto4)
-    boostbutton4.grid(row=8 - (game_state.upgcheck1h1 + game_state.upgcheck1h2 + game_state.upgcheck2h1 +
-                               game_state.upgcheck2h2 + game_state.upgcheck3 + game_state.clickupgcheck1 +
-                               game_state.clickupgcheck2), column=3, sticky=E)
+        button_frame.hide(button_name)
 
 
 def deduction4():
@@ -541,35 +430,19 @@ def cannotafford4():
 
 
 # BANK HEIST
-def boostauto5():
+def boostauto5(button_frame, button_name):
+    log('boostauto5')
     global game_state
-    log('ba5 invoked')
     if game_state.money < 12345678 or game_state.bankheist2 == 0:
-        global boostafford5
-        boostbutton5.destroy()
         master.bell()
-        boostafford5 = Label(master, text="%s" % norequirements, width=35)
-        boostafford5.grid(row=9 - (game_state.upgcheck1h1 + game_state.upgcheck1h2 + game_state.upgcheck2h1 +
-                                   game_state.upgcheck2h2 + game_state.upgcheck3 + game_state.upgcheck4 +
-                                   game_state.clickupgcheck1 + game_state.clickupgcheck2), column=3, sticky=E)
-        master.after(500, norequirements5)
+        status_var.set(norequirements)
     else:
         game_state.money -= 12345678
         game_state.bankheist = int(float(game_state.bankheist * 15) / 10)
         game_state.mps = float(game_state.bankheist2) * 1.5
         mpstkinter.set("MPS: %s" % game_state.mps)
         game_state.upgcheck5 += 1
-        boostbutton5.destroy()
-
-
-def norequirements5():
-    global boostbutton5, game_state
-    log('nq5 invoked')
-    boostafford5.destroy()
-    boostbutton5 = Button(master, text="Bank Blueprints ($91215000)", width=35, command=boostauto5)
-    boostbutton5.grid(row=9 - (game_state.upgcheck1h1 + game_state.upgcheck1h2 + game_state.upgcheck2h1 +
-                               game_state.upgcheck2h2 + game_state.upgcheck3 + game_state.upgcheck4 +
-                               game_state.clickupgcheck1 + game_state.clickupgcheck2), column=3, sticky=E)
+        button_frame.hide(button_name)
 
 
 def deduction5():
@@ -606,10 +479,22 @@ def cannotafford5():
     incbutton5.grid(row=9, column=0, sticky=W)
 
 
+button_names_and_actions = [
+    ('Reinforced Button (Costs: $2100)', clickboost1),
+    ('Stronger Mouses (Costs: $5000)', boostauto1h1),
+    ('Unofficial Printer License (Costs: $42000)', boostauto2h1),
+    ('Stainless Steel Button (Costs: $200000)', clickboost2),
+    ('Experienced Clickers (Costs: $555555)', boostauto1h2),
+    ('Skilled Fake Money Making (Costs: $2133748)', boostauto3),
+    ('Printing Press (Costs: $7777777)', boostauto2h2),
+    ('Sharemarket Catastrophe (Costs: $12345678)', boostauto4),
+    ('Bank Blueprints (Costs: $91215000)', boostauto5)
+]
+
+
 # CLICKS
 def collectmoney():
     global main_laid_out, game_state
-    log('collectmoney invoked')
 
     game_state.money += game_state.inc
 
@@ -627,7 +512,6 @@ def format_price(price):
         return '%.3f' % (p / 10 ** d)
 
     if price < 10 ** 6:
-        log('price', price, '%.3f' % (price))
         return '%.3f' % (price)
     elif price < 10 ** 9:
         return add_decimal(price, 6) + 'm'
@@ -659,90 +543,6 @@ def sharepricechoice():
 
 def bankpricechoice():
     bankpricetkinter.set("Bank Heist (Costs: $%s)" % format_price(game_state.bankprice))
-
-
-def clickboost1():
-    global game_state
-    log('cb1 invoked')
-    if game_state.money < 2100:
-        global clickafford1
-        clickbooster1.destroy()
-        master.bell()
-        clickafford1 = Label(master, text="%s" % norequirements, width=35)
-        clickafford1.grid(row=1, column=3, sticky=E)
-        master.after(500, norequirementsc1)
-    else:
-        game_state.money -= 2100
-        game_state.inc += 2
-        inctkinter.set("+%s money!" % game_state.inc)
-        game_state.clickupgcheck1 += 1
-        clickbooster1.destroy()
-        boostbutton1h1.grid(row=2 - game_state.clickupgcheck1, column=3, sticky=E)
-        boostbutton2h1.grid(row=3 - (game_state.upgcheck1h1 + game_state.clickupgcheck1), column=3, sticky=E)
-        clickbooster2.grid(row=4 - (game_state.upgcheck1h1 + game_state.upgcheck2h1 + game_state.clickupgcheck1),
-                           column=3, sticky=E)
-        boostbutton1h2.grid(row=5 - (game_state.upgcheck1h1 + game_state.upgcheck2h1 + game_state.clickupgcheck1 +
-                                     game_state.clickupgcheck2), column=3, sticky=E)
-        boostbutton3.grid(row=6 - (game_state.upgcheck1h1 + game_state.upgcheck1h2 + game_state.upgcheck2h1 +
-                                   game_state.clickupgcheck1 + game_state.clickupgcheck2), column=3, sticky=E)
-        boostbutton2h2.grid(row=7 - (game_state.upgcheck1h1 + game_state.upgcheck1h2 + game_state.upgcheck2h1 +
-                                     game_state.upgcheck3 + game_state.clickupgcheck1 + game_state.clickupgcheck2),
-                            column=3, sticky=E)
-        boostbutton4.grid(row=8 - (game_state.upgcheck1h1 + game_state.upgcheck1h2 + game_state.upgcheck2h1 +
-                                   game_state.upgcheck2h2 + game_state.upgcheck3 + game_state.clickupgcheck1 +
-                                   game_state.clickupgcheck2), column=3, sticky=E)
-        boostbutton5.grid(row=9 - (game_state.upgcheck1h1 + game_state.upgcheck1h2 + game_state.upgcheck2h1 +
-                                   game_state.upgcheck2h2 + game_state.upgcheck3 + game_state.upgcheck4 +
-                                   game_state.clickupgcheck1 + game_state.clickupgcheck2), column=3, sticky=E)
-
-
-def norequirementsc1():
-    global clickbooster1
-    log('nq1 invoked')
-    clickafford1.destroy()
-    clickbooster1 = Button(master, text="Reinforced Button (Costs: $2100)", width=35, command=clickboost1)
-    clickbooster1.grid(row=1, column=3, sticky=E)
-
-
-def clickboost2():
-    global game_state
-    log('cb2 invoked')
-    if game_state.money < 200000 or not game_state.clickupgcheck1:
-        global clickafford2
-        clickbooster2.destroy()
-        master.bell()
-        clickafford2 = Label(master, text="%s" % norequirements, width=35)
-        clickafford2.grid(row=4 - (game_state.upgcheck1h1 + game_state.upgcheck2h1 + game_state.clickupgcheck1),
-                          column=3, sticky=E)
-        master.after(500, norequirementsc2)
-    else:
-        game_state.money -= 200000
-        game_state.inc += game_state.mps / 10
-        inctkinter.set("+%s money!" % game_state.inc)
-        game_state.clickupgcheck2 += 1
-        clickbooster2.destroy()
-        boostbutton1h2.grid(row=5 - (game_state.upgcheck1h1 + game_state.upgcheck2h1 + game_state.clickupgcheck1 +
-                                     game_state.clickupgcheck2), column=3, sticky=E)
-        boostbutton3.grid(row=6 - (game_state.upgcheck1h1 + game_state.upgcheck1h2 + game_state.upgcheck2h1 +
-                                   game_state.clickupgcheck1 + game_state.clickupgcheck2), column=3, sticky=E)
-        boostbutton2h2.grid(row=7 - (game_state.upgcheck1h1 + game_state.upgcheck1h2 + game_state.upgcheck2h1 +
-                                     game_state.upgcheck3 + game_state.clickupgcheck1 + game_state.clickupgcheck2),
-                            column=3, sticky=E)
-        boostbutton4.grid(row=8 - (game_state.upgcheck1h1 + game_state.upgcheck1h2 + game_state.upgcheck2h1 +
-                                   game_state.upgcheck2h2 + game_state.upgcheck3 + game_state.clickupgcheck1 +
-                                   game_state.clickupgcheck2), column=3, sticky=E)
-        boostbutton5.grid(row=9 - (game_state.upgcheck1h1 + game_state.upgcheck1h2 + game_state.upgcheck2h1 +
-                                   game_state.upgcheck2h2 + game_state.upgcheck3 + game_state.upgcheck4 +
-                                   game_state.clickupgcheck1 + game_state.clickupgcheck2), column=3, sticky=E)
-
-
-def norequirementsc2():
-    global clickbooster2, game_state
-    log('nqc2 invoked')
-    clickafford2.destroy()
-    clickbooster2 = Button(master, text="Stainless Steel Button (Costs: $200000)", width=35, command=clickboost2)
-    clickbooster2.grid(row=4 - (game_state.upgcheck1h1 + game_state.upgcheck2h1 + game_state.clickupgcheck1), column=3,
-                       sticky=E)
 
 
 def automoneychoice():
@@ -841,68 +641,51 @@ def hidestats():
 
 # UPGRADES WINDOW
 def showupgrades():
-    global game_state
+    global game_state, bf, button_names_and_actions, exitupgrades
 
     game_state.upgbuttoncheck = True
 
-    global clickbooster1, boostbutton1h1, boostbutton2h1, clickbooster2, boostbutton1h2, boostbutton3, \
-        boostbutton2h2, boostbutton4, boostbutton5, exitupgrades
+    upgrades.grid_forget() # destroy()
 
-    upgrades.destroy()
+    bf = frames.ButtonFrame(master, button_names_and_actions)
+    bf.grid(row=1, column=3, rowspan=11)
 
-    if game_state.clickupgcheck1 == 0:
-        clickbooster1 = Button(master, text="Reinforced Button (Costs: $2100)", width=35, command=clickboost1)
-        clickbooster1.grid(row=1, column=3, sticky=E)
+    log('hiding upgrade buttons')
 
-    if game_state.upgcheck1h1 == 0:
-        boostbutton1h1 = Button(master, text="Stronger Mouses (Costs: $5000)", width=35, command=boostauto1h1)
-        boostbutton1h1.grid(row=2 - game_state.clickupgcheck1, column=3, sticky=E)
+    if game_state.clickupgcheck1 != 0:
+        bf.hide(button_names_and_actions[0][0])
 
-    if game_state.upgcheck2h1 == 0:
-        boostbutton2h1 = Button(master, text="Unofficial Printer License (Costs: $42000)", width=35,
-                                command=boostauto2h1)
-        boostbutton2h1.grid(row=3 - (game_state.upgcheck1h1 + game_state.clickupgcheck1), column=3, sticky=E)
+    if game_state.upgcheck1h1 != 0:
+        bf.hide(button_names_and_actions[1][0])
 
-    if game_state.clickupgcheck2 == 0:
-        clickbooster2 = Button(master, text="Stainless Steel Button (Costs: $200000)", width=35, command=clickboost2)
-        clickbooster2.grid(row=4 - (game_state.upgcheck1h1 + game_state.upgcheck2h1 + game_state.clickupgcheck1),
-                           column=3, sticky=E)
+    if game_state.upgcheck2h1 != 0:
+        bf.hide(button_names_and_actions[2][0])
 
-    if game_state.upgcheck1h2 == 0:
-        boostbutton1h2 = Button(master, text="Experienced Clickers (Costs: $555555)", width=35, command=boostauto1h2)
-        boostbutton1h2.grid(row=5 - (game_state.upgcheck1h1 + game_state.upgcheck2h1 + game_state.clickupgcheck1 +
-                                     game_state.clickupgcheck2), column=3, sticky=E)
+    if game_state.clickupgcheck2 != 0:
+        bf.hide(button_names_and_actions[3][0])
 
-    if game_state.upgcheck3 == 0:
-        boostbutton3 = Button(master, text="Skilled Fake Money Making (Costs: $2133748)", width=35,
-                              command=boostauto3)
-        boostbutton3.grid(row=6 - (game_state.upgcheck1h1 + game_state.upgcheck1h2 + game_state.upgcheck2h1 +
-                                   game_state.clickupgcheck1 + game_state.clickupgcheck2), column=3, sticky=E)
+    if game_state.upgcheck1h2 != 0:
+        bf.hide(button_names_and_actions[4][0])
 
-    if game_state.upgcheck2h2 == 0:
-        boostbutton2h2 = Button(master, text="Printing Press (Costs: $7777777)", width=35, command=boostauto2h2)
-        boostbutton2h2.grid(row=7 - (game_state.upgcheck1h1 + game_state.upgcheck1h2 + game_state.upgcheck2h1 +
-                                     game_state.upgcheck3 + game_state.clickupgcheck1 + game_state.clickupgcheck2),
-                            column=3, sticky=E)
+    if game_state.upgcheck3 != 0:
+        bf.hide(button_names_and_actions[5][0])
 
-    if game_state.upgcheck4 == 0:
-        boostbutton4 = Button(master, text="Sharemarket Catastrophe (Costs: $12345678)", width=35,
-                              command=boostauto4)
-        boostbutton4.grid(row=8 - (game_state.upgcheck1h1 + game_state.upgcheck1h2 + game_state.upgcheck2h1 +
-                                   game_state.upgcheck2h2 + game_state.upgcheck3 + game_state.clickupgcheck1 +
-                                   game_state.clickupgcheck2), column=3, sticky=E)
+    if game_state.upgcheck2h2 != 0:
+        bf.hide(button_names_and_actions[6][0])
 
-    if game_state.upgcheck5 == 0:
-        boostbutton5 = Button(master, text="Bank Blueprints (Costs: $91215000)", width=35, command=boostauto5)
-        boostbutton5.grid(row=9 - (game_state.upgcheck1h1 + game_state.upgcheck1h2 + game_state.upgcheck2h1 +
-                                   game_state.upgcheck2h2 + game_state.upgcheck3 + game_state.upgcheck4 +
-                                   game_state.clickupgcheck1 + game_state.clickupgcheck2), column=3, sticky=E)
+    if game_state.upgcheck4 != 0:
+        bf.hide(button_names_and_actions[7][0])
+
+    if game_state.upgcheck5 != 0:
+        bf.hide(button_names_and_actions[8][0])
+
 
     exitupgrades = Button(master, text="Hide Upgrades", command=hideupgrades)
+    exitupgrades.grid(row=12, column=3, sticky=E)
 
     if game_state.statscheck:
         global hidestatsbutton
-        exitupgrades.grid(row=11, column=3, sticky=E)
+        # exitupgrades.grid(row=11, column=3, sticky=E)
         hidestatsbutton.grid(row=12, column=0, sticky=W)
         totalspentlabel.grid(row=12, column=3, sticky=E)
         totalclickslabel.grid(row=13, column=0, sticky=W)
@@ -912,7 +695,7 @@ def showupgrades():
         reportbutton.grid(row=15, column=2)
         logoutbutton.grid(row=16, column=2)
     else:
-        exitupgrades.grid(row=11, column=3, sticky=E)
+        # exitupgrades.grid(row=11, column=3, sticky=E)
         statsbutton.grid(row=12, column=0, sticky=W)
         resetbutton.grid(row=13, column=0, sticky=W)
         savebutton.grid(row=13, column=3, sticky=E)
@@ -921,32 +704,14 @@ def showupgrades():
 
 
 def hideupgrades():
-    global exitupgrades, game_state
+    global exitupgrades, game_state, upgrades, bf
 
     game_state.upgbuttoncheck = False
 
-    if game_state.clickupgcheck1 == 0:
-        clickbooster1.destroy()
-    if game_state.upgcheck1h1 == 0:
-        boostbutton1h1.destroy()
-    if game_state.upgcheck2h1 == 0:
-        boostbutton2h1.destroy()
-    if game_state.clickupgcheck2 == 0:
-        clickbooster2.destroy()
-    if game_state.upgcheck1h2 == 0:
-        boostbutton1h2.destroy()
-    if game_state.upgcheck3 == 0:
-        boostbutton3.destroy()
-    if game_state.upgcheck2h2 == 0:
-        boostbutton2h2.destroy()
-    if game_state.upgcheck4 == 0:
-        boostbutton4.destroy()
-    if game_state.upgcheck5 == 0:
-        boostbutton5.destroy()
-    global upgrades
-    upgrades = Button(master, text="Upgrades", height=12, width=15, command=showupgrades)
+    # upgrades = Button(master, text="Upgrades", height=12, width=15, command=showupgrades)
     upgrades.grid(row=1, column=3, rowspan=8, sticky=E)
-    exitupgrades.destroy()
+    bf.grid_forget()
+    exitupgrades.grid_forget() # destroy()
     if game_state.statscheck:
         hidestatsbutton.grid(row=12, column=0, sticky=W)
         resetbutton.grid(row=13, column=0, sticky=W)
@@ -1075,7 +840,7 @@ def updatevars():
 def main():
     # BUTTONS, LABELS AND ENTRIES
     global incbutton1, incbutton2, incbutton3, incbutton4, incbutton5, upgrades, resetbutton, savebutton, clickbutton, \
-        statsbutton, reportbutton, logoutbutton, moneylabel, lottobutton
+        statsbutton, reportbutton, logoutbutton, moneylabel, lottobutton, status_label, status_var
 
     background = Label(master, image=img1)
     background.place(x=0, y=0, relwidth=1, relheight=1)
@@ -1159,6 +924,10 @@ def main():
     logoutbutton = Button(master, text='Log Out', width=20, command=logout)
     logoutbutton.grid(row=15, column=2)
 
+    status_var = StringVar()
+    status_label = Label(master, textvariable=status_var)
+    status_label.grid(row=16, column=0, columnspan=4, sticky=W)
+
 
 def lotto():
     global game_state, lottobutton, cannotafford
@@ -1229,7 +998,8 @@ def main_tick():
         autompstkinter, printpricetkinter, printmoneytkinter, printmpstkinter, counterpricetkinter, \
         counterfeittkinter, countermpstkinter, sharepricetkinter, sharecrashtkinter, sharempstkinter, \
         bankheisttkinter, bankpricetkinter, bankmpstkinter, multipliercheck, main_laid_out, data_loaded, \
-        game_state, lottoprice
+        game_state, lottoprice, button_names_and_actions, bf
+
     # while True:
     if signincheck == signinvalue:
         if save_needed:
@@ -1279,31 +1049,15 @@ def main_tick():
                 multiplier.set("x1")
                 lottoprice = StringVar()
                 lottoprice.set("Lotto ($%s)" % str(game_state.lottoprice))
-                if g2[21] == 1:
-                    clickbooster1.destroy()
-                if g2[9] == 1:
-                    boostbutton1h1.destroy()
-                if g2[13] == 1:
-                    boostbutton2h1.destroy()
-                if g2[23] == 1:
-                    clickbooster2.destroy()
-                if g2[11] == 1:
-                    boostbutton1h2.destroy()
-                if g2[17] == 1:
-                    boostbutton3.destroy()
-                if g2[15] == 1:
-                    boostbutton2h2.destroy()
-                if g2[19] == 1:
-                    boostbutton4.destroy()
-                if g2[25] == 1:
-                    boostbutton5.destroy()
+
+
+                log('state and mps:', game_state, game_state.mps)
                 if game_state and game_state.mps >= 1:
                     automoneychoice()
 
                 if not main_laid_out:
                     main()
                     main_laid_out = True
-                # break
 
                 data_loaded = True
 
