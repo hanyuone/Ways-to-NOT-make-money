@@ -1,5 +1,8 @@
 from Tkinter import *
 
+def f():
+    return
+
 class GameFrame(Frame):
     def __init__(self, master=None):
         Frame.__init__(self, master)
