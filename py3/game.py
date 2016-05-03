@@ -28,12 +28,13 @@ def log(*args):
 
 def savegame():
     global game_state
+    log('saving game', game_state.money, str(game_state.money)[-8:])
     data = ["auto", game_state.autoclick2, "print", game_state.printmoney2, "counter", game_state.counterfeit2,
             "shares", game_state.sharecrash2, "bank", game_state.bankheist2, "upg1h1", game_state.upgcheck1h1,
             "upg1h2", game_state.upgcheck1h2, "upg2h1", game_state.upgcheck2h1, "upg2h2", game_state.upgcheck2h2,
             "upg3", game_state.upgcheck3, "upg4", game_state.upgcheck4, "upg5", game_state.upgcheck5,
             "cupg1", game_state.clickupgcheck1, "cupg2", game_state.clickupgcheck2, "money",
-            float(str(game_state.money)[-8:]), "time", game_state.timeplay, "clicks",
+            game_state.money, "time", game_state.timeplay, "clicks",
             game_state.totalclicks, "lotto", game_state.lottoprice]
     log('savegame invoked', data)
 
