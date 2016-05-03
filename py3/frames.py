@@ -54,7 +54,7 @@ class ItemFrame(Frame):
 
         self.button_string_var = StringVar()
 
-        self.button = Button(self, textvariable=self.button_string_var, command=callback) # , width=33)
+        self.button = Button(self, textvariable=self.button_string_var, command=callback, width=30)
         self.button.grid(row=0, column=0) # , sticky=W)
 
         self.label_string_var = StringVar()

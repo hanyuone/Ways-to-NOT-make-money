@@ -18,7 +18,6 @@ Animation2 = PhotoImage(file="Animation2.gif")
 Animation3 = PhotoImage(file="Animation3.gif")
 norequirements = "You do not meet the requirements."
 cannotafford = "You cannot afford this."
-username = ''
 
 game_state = None
 
@@ -28,18 +27,10 @@ def log(*args):
 
 def savegame():
     global game_state
-    log('saving game', game_state.money, str(game_state.money)[-8:])
-    data = ["auto", game_state.autoclick2, "print", game_state.printmoney2, "counter", game_state.counterfeit2,
-            "shares", game_state.sharecrash2, "bank", game_state.bankheist2, "upg1h1", game_state.upgcheck1h1,
-            "upg1h2", game_state.upgcheck1h2, "upg2h1", game_state.upgcheck2h1, "upg2h2", game_state.upgcheck2h2,
-            "upg3", game_state.upgcheck3, "upg4", game_state.upgcheck4, "upg5", game_state.upgcheck5,
-            "cupg1", game_state.clickupgcheck1, "cupg2", game_state.clickupgcheck2, "money",
-            game_state.money, "time", game_state.timeplay, "clicks",
-            game_state.totalclicks, "lotto", game_state.lottoprice]
-    log('savegame invoked', data)
 
     log('savegame function')
-    save_and_load.encode_and_save(username, data)
+
+    save_and_load.encode_and_save(username, game_state)
 
     toplevel = Toplevel()
     msg = Message(toplevel, text="Game saved!")
@@ -50,42 +41,37 @@ def signin():
 
     log('signin invoked')
 
-    def verifysignin(login_frame, username):
-        global game_state
+    def verifysignin(login_frame, uname):
+        global game_state, username
+        username = uname
+
         if save_and_load.save_file_exists(username):
-            global g2
 
             login_frame.destroy()
 
             try:
-                g2 = save_and_load.read_game_data(username)
-                log('g2', g2)
+                game_state = save_and_load.read_game_data(username)
+                log('game_state for', username, game_state)
+                main()
+
             except IOError as ioe:
                 log(ioe)
-
-            log('verifysignin function')
-            save_and_load.encode_and_save(username, g2)
-
-            game_state = game_model.GameState(g2)
-            log('game_state', str(game_state))
-
-            main()
 
         else:
             showerror(title='Error!', message='Wrong Username.')
 
-    def createaccount(login_frame, username):
-        global game_state
+    def createaccount(login_frame, uname):
+        global game_state, username
+        username = uname
 
         login_frame.destroy()
 
-        save_and_load.encode_and_save(username, data=None)
+        game_state = game_model.GameState()
 
         try:
-            g2 = save_and_load.read_game_data(username)
-            game_state = game_model.GameState(g2)
-            log('game_state', str(game_state))
+            save_and_load.encode_and_save(username, game_state)
             main()
+
         except IOError as ioe:
             log(ioe)
 
@@ -416,7 +402,7 @@ def resetgame():
     msg = Label(toplevel, text="Are you sure you want to reset?")
     msg.grid(row=0, column=0, columnspan=2)
 
-    yesbutton = Button(toplevel, text="Yes", command=lambda: save_and_load.encode_and_save(username, data=None))
+    yesbutton = Button(toplevel, text="Yes", command=lambda: save_and_load.encode_and_save(username, game_state))
     yesbutton.grid(row=1, column=0)
     nobutton = Button(toplevel, text="No", command=toplevel.destroy)
     nobutton.grid(row=1, column=1)
@@ -553,27 +539,27 @@ def main():
     incbutton1 = frames.ItemFrame(master, 
         'Auto-Clicker (%s)' % format_price(game_state.autoprice), '%.2f $/s, %d owned' % (game_state.autoclick * 221, game_state.autoclick2), 
         deduction1)
-    incbutton1.grid(row=1, column=0) # , sticky=W)
+    incbutton1.grid(row=1, column=0, sticky=N+E+W+S)
 
     incbutton2 = frames.ItemFrame(master, 
         'Money Printer (%s)' % format_price(game_state.printprice), '%.2f $/s, %d owned' % (game_state.printmoney * 221, game_state.printmoney2), 
         deduction2)
-    incbutton2.grid(row=2, column=0) # , sticky=W)
+    incbutton2.grid(row=2, column=0, sticky=N+E+W+S)
 
     incbutton3 = frames.ItemFrame(master, 
         'Counterfeit Company (%s)' % format_price(game_state.counterprice), '%.2f $/s, %d owned' % (game_state.counterfeit * 221, game_state.counterfeit2), 
         deduction3)
-    incbutton3.grid(row=3, column=0) # , sticky=W)
+    incbutton3.grid(row=3, column=0, sticky=N+E+W+S)
 
     incbutton4 = frames.ItemFrame(master, 
         'Sharemarket Crash (%s)' % format_price(game_state.shareprice), '%.2f $/s, %d owned' % (game_state.sharecrash * 221, game_state.sharecrash2), 
         deduction4)
-    incbutton4.grid(row=4, column=0) # , sticky=W)
+    incbutton4.grid(row=4, column=0, sticky=N+E+W+S)
 
     incbutton5 = frames.ItemFrame(master, 
         'Bank Heist (%s)' % format_price(game_state.bankprice), '%.2f $/s, %d owned' % (game_state.bankheist * 221, game_state.bankheist2), 
         deduction5)
-    incbutton5.grid(row=5, column=0) # , sticky=W)
+    incbutton5.grid(row=5, column=0, sticky=N+E+W+S)
 
     lottoprice = StringVar()
     lottoprice.set("Lotto ($%s)" % str(game_state.lottoprice))
