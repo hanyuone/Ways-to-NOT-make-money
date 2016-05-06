@@ -125,113 +125,35 @@ def bugfixer():
             autopricechoice()
 
 
-def deduction1():
-    log('deduction1 invoked')
+def deduction_X(name, purchase_msg, choice_fn):
+    log('deduction_X invoked', name)
     global game_state
-    if game_state.money < int(game_state.autoprice):
+    if not game_state.can_increment(name):
         master.bell()
         status_var.set(cannotafford)
 
     else:
-        game_state.money -= game_state.autoprice
-        game_state.autoclick += (1 + game_state.upgcheck1h1 * 2 + game_state.upgcheck1h2 * 18) * game_state.multiplier
-        game_state.autoclick2 += game_state.multiplier
-        game_state.mps += (1 + game_state.upgcheck1h1 * 2 + game_state.upgcheck1h2 * 18) * game_state.multiplier
-        mpstkinter.set("MPS: %s" % game_state.mps)
-        status_var.set('Auto-Clicker purchased')
-        game_state.autoprice = int(20 * (math.pow(1.15, game_state.autoclick2)))
-        autopricechoice()
-        game_state.inc += math.pow(game_state.clickupgcheck2 * game_state.autoclick, 1.01)
-    if (game_state.autoclick == 1 and game_state.bankheist == 0 and game_state.sharecrash == 0 and
-        game_state.counterfeit == 0 and game_state.printmoney == 0):
-        automoney()
+        game_state.increment(name)
 
+        mpstkinter.set("MPS: %s" % game_state.mps)
+        status_var.set(purchase_msg)
+        choice_fn()
+
+
+def deduction1():
+    deduction_X('autoprice', 'Auto-Clicker purchased', autopricechoice)
 
 def deduction2():
-    global game_state
-    log('deduction2  invoked')
-
-    if game_state.money < game_state.printprice:
-        master.bell()
-        status_var.set(cannotafford)
-    else:
-        game_state.money -= game_state.printprice
-        game_state.printmoney += (1 + game_state.upgcheck2h1 * 2 + game_state.upgcheck2h2 * 18) * game_state.multiplier
-        game_state.printmoney2 += game_state.multiplier
-        game_state.mps += 15 * (1 + game_state.upgcheck2h1 * 2 + game_state.upgcheck2h2 * 18) * game_state.multiplier
-        mpstkinter.set("MPS: %s" % game_state.mps)
-        counterpricechoice()
-        status_var.set('Money Printer purchased')
-        game_state.printprice = 375 * math.pow(1.25, game_state.printmoney2)
-        printpricechoice()
-        game_state.inc += math.pow(game_state.clickupgcheck2 * game_state.printmoney, 1.01)
-        if (game_state.printmoney == 1 and game_state.bankheist == 0 and game_state.sharecrash == 0 and
-            game_state.counterfeit == 0 and game_state.autoclick == 0):
-            automoney()
-
+    deduction_X('printprice', 'Money Printer purchased', printpricechoice)
 
 def deduction3():
-    global game_state
-    log('deduction3 invoked')
-    if game_state.money < game_state.counterprice:
-        master.bell()
-        status_var.set(cannotafford)
-    else:
-        game_state.money -= game_state.counterprice
-        game_state.counterfeit += (1 + game_state.upgcheck3 * 2) * game_state.multiplier
-        game_state.counterfeit2 += game_state.multiplier
-        game_state.mps += 221 * (1 + game_state.upgcheck3 * 2) * game_state.multiplier
-        mpstkinter.set("MPS: %s" % game_state.mps)
-        status_var.set('Counterfeit Company purchased')
-        game_state.counterprice = 9001 * math.pow(1.3, game_state.counterfeit2)
-        counterpricechoice()
-        game_state.inc += math.pow(game_state.clickupgcheck2 * game_state.counterfeit, 1.01)
-        if (game_state.counterfeit == 1 and game_state.bankheist and game_state.sharecrash == 0 and
-            game_state.printmoney == 0 and game_state.autoclick == 0):
-            automoney()
-
+    deduction_X('counterprice', 'Counterfeit Company purchased', counterpricechoice)
 
 def deduction4():
-    global game_state
-    log('deduction4 invoked')
-    if game_state.money < game_state.shareprice:
-        master.bell()
-        status_var.set(cannotafford)
-    else:
-        game_state.money -= game_state.shareprice
-        game_state.sharecrash += (1 + game_state.upgcheck4 * 2) * game_state.multiplier
-        game_state.sharecrash2 += game_state.multiplier
-        game_state.mps += 969 * (1 + game_state.upgcheck4 * 2) * game_state.multiplier
-        mpstkinter.set("MPS: %s" % game_state.mps)
-        status_var.set('Sharemarket Crash purchased')
-        game_state.shareprice = 42000 * math.pow(1.4, game_state.sharecrash2)
-        sharepricechoice()
-        game_state.inc += math.pow(game_state.clickupgcheck2 * game_state.sharecrash, 1.01)
-        if (game_state.sharecrash == 1 and game_state.bankheist == 1 and
-            game_state.counterfeit == 0 and game_state.printmoney == 0 and game_state.autoclick == 0):
-            automoney()
-
+    deduction_X('shareprice', 'Sharemarket Crash purchased', sharepricechoice)
 
 def deduction5():
-    global game_state
-    log('deduction5 invoked')
-    if game_state.money < game_state.bankprice:
-        master.bell()
-        status_var.set(cannotafford)
-    else:
-        game_state.money -= game_state.bankprice
-        game_state.bankheist += (1 + game_state.upgcheck4 * 2) * game_state.multiplier
-        game_state.bankheist2 += game_state.multiplier
-        game_state.mps += 1844 * (1 + game_state.upgcheck4 * 2) * game_state.multiplier
-        mpstkinter.set("MPS: %s" % game_state.mps)
-        status_var.set('Bank Heist purchased')
-        bankpricechoice()
-        game_state.bankprice = int(42000 * math.pow(1.1, game_state.bankheist2))
-        bankpricechoice()
-        game_state.inc += math.pow(game_state.clickupgcheck2 * game_state.bankheist, 1.01)
-        if (game_state.bankheist == 1 and game_state.sharecrash == 0 and game_state.counterfeit == 0 and
-            game_state.printmoney == 0 and game_state.autoclick == 0):
-            automoney()
+    deduction_X('bankprice', 'Bank Heist purchased', sharepricechoice)
 
 
 def normal_upgrade(button_frame, tup):
@@ -415,7 +337,7 @@ def showupgrades():
     upgrades.grid_forget() # destroy()
 
     bf = frames.ButtonFrame(master, button_names_and_actions, normal_upgrade)
-    bf.grid(row=1, column=2, rowspan=8)
+    bf.grid(row=1, column=2, rowspan=6)
 
     log('hiding upgrade buttons')
 
@@ -454,7 +376,7 @@ def showupgrades():
 def hideupgrades():
     global exitupgrades, game_state, upgrades, bf
 
-    upgrades.grid(row=1, column=2, rowspan=9, sticky=N+E+W+S)
+    upgrades.grid(row=1, column=2, rowspan=6, sticky=N+E+W+S)
     bf.grid_forget()
     exitupgrades.grid_forget() # destroy()
 
@@ -482,15 +404,11 @@ def clickcolour():
 
 # MULTIPLIER STUFF
 def multiplierchange():
-    global multipliercheck
+    global game_state
 
-    multiplier_strings = ['x1', 'x10', 'x100']
-    multipliercheck = (multipliercheck + 1) % 3
-    multiplier.set(multiplier_strings[multipliercheck])
-    updatevars()
+    game_state.bump_multiplier()
+    multiplier.set('x' + str(game_state.multiplier))
 
-
-def updatevars():
     autopricechoice()
     printpricechoice()
     counterpricechoice()
@@ -501,7 +419,7 @@ def updatevars():
 def main():
     # BUTTONS, LABELS AND ENTRIES
     global incbutton1, incbutton2, incbutton3, incbutton4, incbutton5, upgrades, clickbutton, \
-        moneylabel, lottobutton, status_label, status_var, multipliercheck, multiplier, \
+        moneylabel, lottobutton, status_label, status_var, multiplier, \
         moneytkinter, mpstkinter, totalclicksvar, timevar, totalspentvar
 
     background = Label(master, image=img1)
@@ -509,7 +427,7 @@ def main():
     background.image = img1
 
     upgrades = Button(master, text="Upgrades", height=12, width=15, command=showupgrades)
-    upgrades.grid(row=1, column=2, rowspan=9, sticky=N+E+W+S)
+    upgrades.grid(row=1, column=2, rowspan=6, sticky=N+E+W+S)
 
     moneytkinter = StringVar()
     moneytkinter.set("Balance: $" + format_price(game_state.money))
@@ -523,7 +441,6 @@ def main():
     mpslabel = Label(master, textvariable=mpstkinter)
     mpslabel.grid(row=0, column=2, sticky=E)
 
-    multipliercheck = 0
     multiplier = StringVar()
     multiplier.set("x1")
 
