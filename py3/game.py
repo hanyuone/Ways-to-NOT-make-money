@@ -420,7 +420,7 @@ def main():
     # BUTTONS, LABELS AND ENTRIES
     global incbutton1, incbutton2, incbutton3, incbutton4, incbutton5, upgrades, clickbutton, \
         moneylabel, lottobutton, status_label, status_var, multiplier, \
-        moneytkinter, mpstkinter, totalclicksvar, timevar, totalspentvar
+        moneytkinter, mpstkinter, totalclicksvar, timevar, totalspentvar, inctkinter
 
     background = Label(master, image=img1)
     background.place(x=0, y=0, relwidth=1, relheight=1)

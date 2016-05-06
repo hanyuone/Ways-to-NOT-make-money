@@ -1,4 +1,5 @@
 import glob
+import game_model
 
 
 def auto_updater(g2, un):
@@ -42,15 +43,17 @@ def read_game_data(username):
     with open(filename) as f:
         data = f.read()
     decoded_data = data.split(";")[0].decode("hex")
-    return decoded_data.split("_")
+    return game_model.GameState(decoded_data.split("_"))
 
 
-def encode_and_save(username, data):
-    if data is None:
-        data = ["auto", 0, "print", 0, "counter", 0, "shares", 0, "bank", 0, "upg1h1", 0, "upg1h2", 0,
-                "upg2h1", 0, "upg2h2", 0, "upg3", 0, "upg4", 0, "upg5", 0, "cupg1", 0, "cupg2", 0,
-                "quintillion", 0, "quadrillion", 0, "trillion", 0, "billion", 0, "million", 0,
-                "money", 0.0, "time", 0, "clicks", 0]
+def encode_and_save(username, game_state):
+    data = ["auto", game_state.autoclick2, "print", game_state.printmoney2, "counter", game_state.counterfeit2,
+            "shares", game_state.sharecrash2, "bank", game_state.bankheist2, "upg1h1", game_state.upgcheck1h1,
+            "upg1h2", game_state.upgcheck1h2, "upg2h1", game_state.upgcheck2h1, "upg2h2", game_state.upgcheck2h2,
+            "upg3", game_state.upgcheck3, "upg4", game_state.upgcheck4, "upg5", game_state.upgcheck5,
+            "cupg1", game_state.clickupgcheck1, "cupg2", game_state.clickupgcheck2, "money",
+            game_state.money, "time", game_state.timeplay, "clicks",
+            game_state.totalclicks, "lotto", game_state.lottoprice]
 
     encoded_data = ("_".join(str(v) for v in data)).encode("hex") + ";"
 
@@ -60,4 +63,5 @@ def encode_and_save(username, data):
 
 
 def save_file_exists(username):
-    return ('savefile_' + username + '.txt') in glob.glob('savefile_*.txt')
+    return 'savefile_' + username + '.txt' in glob.glob('savefile_*.txt')
+
