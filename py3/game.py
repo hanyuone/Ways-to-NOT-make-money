@@ -419,7 +419,7 @@ def multiplierchange():
 def main():
     # BUTTONS, LABELS AND ENTRIES
     global incbutton1, incbutton2, incbutton3, incbutton4, incbutton5, upgrades, clickbutton, \
-        moneylabel, lottobutton, status_label, status_var, multiplier, \
+        lottobutton, status_label, status_var, multiplier, \
         moneytkinter, mpstkinter, totalclicksvar, timevar, totalspentvar, inctkinter
 
     background = Label(master, image=img1)
@@ -555,13 +555,5 @@ def lotto():
         game_state.money = money
 
 
-def initialize_vars():
-    args = ['incbutton1', 'incbutton2', 'incbutton3', 'incbutton4', 'incbutton5', 'upgrades', 'clickbutton', \
-            'moneylabel', 'lottobutton', 'game_state']
-    for i in args:
-        globals()[i] = None
-
-
-initialize_vars()
 master.after(10, signin)
 master.mainloop()
