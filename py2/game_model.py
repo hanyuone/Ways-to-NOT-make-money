@@ -4,6 +4,7 @@ import math
 class GameState:
     def __init__(self, data=None):
         self.data = [] if data is None else data
+        print('GameState got data:', self.data)
 
         self.check = 0
         self.upgbuttoncheck = False
@@ -23,10 +24,14 @@ class GameState:
         self.clickupgcheck1 = int(self.data[25])
         self.clickupgcheck2 = int(self.data[27])
 
-        self.timeplay = int(self.data[41])
-        self.totalclicks = int(self.data[43])
-
         self.money = float(self.data[29])
+
+        self.timeplay = int(self.data[31])
+        self.totalclicks = int(self.data[33])
+        if len(self.data) > 35:
+            self.lottoprice = int(self.data[35])
+        else:
+            self.lottoprice = 0
 
         self.autoclick2 = int(self.data[1])
         self.autoclick = self.autoclick2 * 18 * self.upgcheck1h2 + self.autoclick2 * 2 * self.upgcheck1h1 + \
@@ -50,12 +55,15 @@ class GameState:
         self.bankheist = self.bankheist2 * 2 * self.upgcheck4 + self.bankheist2
         self.bankprice = int(175000 * math.pow(1.1, self.bankheist2))
 
-        self.lottoprice = int(self.data[45])
+        # self.data[9] unused
 
         self.mps = self.autoclick2 + 15 * self.printmoney2 + 321 * self.counterfeit2 + 969 * self.sharecrash2
         self.inc = 1 + self.clickupgcheck1 * 2 + self.clickupgcheck2 * self.mps / 10
 
         self.multiplier = 1
+
+    def __str__(self):
+        return str(self.__dict__)
 
     def multiplierset(self, n):
         if n == "1":
@@ -84,15 +92,15 @@ class GameState:
 
     def get_totalspent(self):
         x = 0
-        for a in range(0, self.get_autoclick2()):
+        for a in range(0, self.autoclick2):
             x += int(20 * math.pow(1.15, self.autoclick2))
-        for b in range(0, self.get_printmoney2()):
+        for b in range(0, self.printmoney2):
             x += int(375 * math.pow(1.25, self.printmoney2))
-        for c in range(0, self.get_counterfeit2()):
+        for c in range(0, self.counterfeit2):
             x += int(9001 * math.pow(1.3, self.counterfeit2))
-        for d in range(0, self.get_sharecrash2()):
+        for d in range(0, self.sharecrash2):
             x += int(42000 * math.pow(1.4, self.sharecrash2))
-        for e in range(0, self.get_bankheist2()):
+        for e in range(0, self.bankheist2):
             x += int(175000 * math.pow(1.1, self.bankheist2))
         x += self.totalclicks
         return x
