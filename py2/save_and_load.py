@@ -3,39 +3,21 @@ import game_model
 
 
 def auto_updater(g2, un):
-    # AUTO-UPDATE
-    # lt 0.6.3 -> 0.6.3b3
-    try:
-        g2[39]
-    except IndexError:
-        g = open("savefile_" + un + ".txt", "w")
-        gtemp = ["time", int(0), "clicks", int(0)]
-        g2.extend(gtemp)
-        g.write(str("_").join(str(y) for y in g2).encode("hex"))
-        g.close()
+    wordlist = ["auto", "print", "counter", "shares", "bank", "upg1h1", "upg1h2", "upg2h1", "upg2h2", "upg3", "upg4",
+                   "upg5", "cupg1", "cupg2", "quintillion", "quadrillion", "trillion", "billion", "million", "money",
+                   "time", "clicks", "lotto"]
+    wordlist2 = []
+    for a in range(len(wordlist)):
+        for b in range(len(g2)):
+            if g2[b] == wordlist[a]:
+                wordlist2.extend([wordlist[a], g2[b]])
+            else:
+                if wordlist[a] == "lotto":
+                    wordlist2.extend(["lotto", 1])
+                else:
+                    wordlist2.extend([wordlist[a], 0])
 
-    # lt 0.6.3b3 -> 0.6.4a1
-    try:
-        g2[41]
-    except IndexError:
-        g = open("savefile_" + un + ".txt", "w")
-        gtemp = ["lotto", 100]
-        g2.extend(gtemp)
-        g.write(str("_").join(str(y) for y in g2).encode("hex"))
-        g.close()
-
-    # lt 0.6.4a1 -> 0.7.0
-    try:
-        g2[43]
-    except IndexError:
-        g = open("savefile_" + un + ".txt", "w")
-        gtemp = ["upg5", 0]
-        gtemp2 = ["bank", 0]
-        g2[7:9] = gtemp2
-        g2[23:25] = gtemp
-        g.write(str("_").join(str(y) for y in g2).encode("hex"))
-
-    return g2
+    return wordlist2
 
 
 def read_game_data(username):
