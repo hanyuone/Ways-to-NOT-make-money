@@ -1,4 +1,4 @@
-from tkinter import *
+from Tkinter import *
 from random import *
 from tkinter.messagebox import showerror
 import math
@@ -23,7 +23,7 @@ game_state = None
 
 def log(*args):
     if 'debug' in sys.argv:
-        print(args)
+        print args
 
 def savegame():
     global game_state
