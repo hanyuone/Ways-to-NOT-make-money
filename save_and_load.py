@@ -1,5 +1,9 @@
 import glob
-from base64 import a85encode, a85decode
+try:
+    from base64 import a85encode, a85decode
+except ImportError:
+    from base64 import b64encode as a85encode
+    from base64 import b64decode as a85decode
 
 def read_game_data(username):
 
