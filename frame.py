@@ -1,4 +1,7 @@
-from Tkinter import *
+try:
+    from Tkinter import *
+except:
+    from tkinter import *
 
 def f():
     return

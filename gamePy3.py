@@ -2,8 +2,7 @@ from tkinter import *
 from random import *
 from tkinter.messagebox import showerror
 import math
-import save_and_load
-import framesPy3
+import frame as frames
 import game_model
 import webbrowser
 import sys
