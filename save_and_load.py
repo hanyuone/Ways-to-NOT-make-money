@@ -5,6 +5,23 @@ try:
 except ImportError:
     from base64 import b64encode as a85encode
 	from base64 import b64decode as a85decode
+	
+def auto_updater(g2, un):
+    wordlist = ["auto", "print", "counter", "shares", "bank", "upg1h1", "upg1h2", "upg2h1", "upg2h2", "upg3", "upg4",
+                   "upg5", "cupg1", "cupg2", "quintillion", "quadrillion", "trillion", "billion", "million", "money",
+                   "time", "clicks", "lotto"]
+    wordlist2 = []
+    for a in range(len(wordlist)):
+        for b in range(len(g2)):
+            if g2[b] == wordlist[a]:
+                wordlist2.extend([wordlist[a], g2[b]])
+            else:
+                if wordlist[a] == "lotto":
+                    wordlist2.extend(["lotto", 1])
+                else:
+                    wordlist2.extend([wordlist[a], 0])
+
+    return wordlist2
 
 def read_game_data(username):
 
