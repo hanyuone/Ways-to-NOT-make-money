@@ -21,7 +21,7 @@ class GameFrame(Frame):
         bottom_frame = Frame(master, bg="red")
         bottom_frame.grid(row=2, column=0, columnspan=2, sticky=W+E+N+S)
 
-        bf = ButtonFrame(bottom_frame, {'one': lambda: print('one clicked'), 'two': lambda: print('two clicked')})
+        bf = ButtonFrame(bottom_frame, {'one': lambda: eval("print('one clicked')"), 'two': lambda: eval("print('two clicked')")})
         bf.grid(row=0, column=0)
 
         b2 = Button(left_frame, text='show others', command=lambda: bf.grid())
