@@ -1,5 +1,6 @@
 # Ways to NOT make money
-###A basic Python 2.x/3.x Cookie-Clicker style (incremental) game.
+###A basic Python 2.x/3.x Cookie-Clicker style (incremental) game
+##### patch-1 diverged from master (merging will create conflicts)
 
 For the Python 2 version, go to the py2 folder, and run `game.py`.
 
