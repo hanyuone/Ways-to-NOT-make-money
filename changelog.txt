@@ -1,5 +1,7 @@
 Changelog
- 
+ 0.7.2
+        -Merged Py2 and Py3 together
+        -
  0.7.1:
         -Added lotto system
  
