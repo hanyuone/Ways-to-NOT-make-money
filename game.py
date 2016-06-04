@@ -16,9 +16,6 @@ master.title("Ways To NOT Make Money")
 
 img1 = PhotoImage(file="img1.gif")
 gold = PhotoImage(file="gold.gif")
-Animation1 = PhotoImage(file="Animation1.gif")
-Animation2 = PhotoImage(file="Animation2.gif")
-Animation3 = PhotoImage(file="Animation3.gif")
 norequirements = "You do not meet the requirements."
 cannotafford = "You cannot afford this."
 
