@@ -1,6 +1,6 @@
 try:
     from Tkinter import *
-    import tkMessageBox import showerror
+    from tkMessageBox import showerror
 except:
     from tkinter import *
     from tkinter.messagebox import showerror
