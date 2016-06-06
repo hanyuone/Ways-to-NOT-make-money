@@ -1,9 +1,10 @@
 try:
     from Tkinter import *
+    import tkMessageBox import showerror
 except:
     from tkinter import *
+    from tkinter.messagebox import showerror
 from random import *
-from tkinter.messagebox import showerror
 import math
 import save_and_load
 import frames
