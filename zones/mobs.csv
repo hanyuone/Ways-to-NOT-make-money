@@ -1,4 +1,4 @@
-Mob name, level appearance, total health, damage inflicted min, damage inflicted max (if any), effects(if any), resistance (if any), weakness (if any),data file, biome of appearance (if any)
+Mob name, level appearance, total health, damage inflicted min, damage inflicted max (if any), effects(if any), resistance (if any), weakness (if any), biome of appearance (if any)
 Rattlesnake, 1, 10, 1, 3, P10, -, -, Desert
 Spider, 1, 20, 1, 5, -, -, Bane of Anthropods, -
 Tree spirit, 1, 10, 2, 5, C10, Water Flood, -, Rainforest
