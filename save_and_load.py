@@ -4,7 +4,7 @@ try:
     from base64 import a85encode, a85decode
 except ImportError:
     from base64 import b64encode as a85encode
-	from base64 import b64decode as a85decode
+    from base64 import b64decode as a85decode
 	
 def auto_updater(g2, un):
     wordlist = ["auto", "print", "counter", "shares", "bank", "upg1h1", "upg1h2", "upg2h1", "upg2h2", "upg3", "upg4",
