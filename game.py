@@ -260,27 +260,27 @@ def format_price(price):
 
 
 def autopricechoice():
-    incbutton1.update_vars('Auto-Clicker ($%s)' % format_price(game_state.autoprice),
+    incbutton1.update('Auto-Clicker ($%s)' % format_price(game_state.autoprice),
                            '$%d/s, %d owned' % (game_state.autoclick, game_state.autoclick2))
 
 
 def printpricechoice():
-    incbutton2.update_vars('Money Printer ($%s)' % format_price(game_state.printprice),
+    incbutton2.update('Money Printer ($%s)' % format_price(game_state.printprice),
                            '$%d/s, %d owned' % (game_state.printmoney * 15, game_state.printmoney2))
 
 
 def counterpricechoice():
-    incbutton3.update_vars('Counterfeit Company ($%s)' % format_price(game_state.counterprice),
+    incbutton3.update('Counterfeit Company ($%s)' % format_price(game_state.counterprice),
                            '$%d/s, %d owned' % (game_state.counterfeit * 221, game_state.counterfeit2))
 
 
 def sharepricechoice():
-    incbutton4.update_vars('Sharemarket Crash ($%s)' % format_price(game_state.shareprice),
+    incbutton4.update('Sharemarket Crash ($%s)' % format_price(game_state.shareprice),
                            '$%d/s, %d owned' % (game_state.sharecrash * 969, game_state.sharecrash2))
 
 
 def bankpricechoice():
-    incbutton5.update_vars('Bank Heist ($%s)' % format_price(game_state.bankprice),
+    incbutton5.update('Bank Heist ($%s)' % format_price(game_state.bankprice),
                            '$%d/s, %d owned' % (game_state.bankheist * 2015, game_state.bankheist2))
 
 
