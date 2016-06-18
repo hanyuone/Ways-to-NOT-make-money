@@ -41,7 +41,7 @@ class ItemFrame(Frame):
 
         self.update_vars(button_text, label_text)
 
-    def update_vars(self, button_text, label_text):
+    def update(self, button_text, label_text):
         self.button_string_var.set(button_text)
         self.label_string_var.set(label_text)
 
